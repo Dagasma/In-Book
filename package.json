@@ -1,0 +1,49 @@
+{
+  "name": "communityallert",
+  "version": "2.0.0",
+  "description": "Spice of Life Web Application",
+  "main": "backend/app/index.js",
+  "scripts": {
+    "start": "node backend/app/index.js",
+    "dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dagasma/CommunityAllert.git"
+  },
+  "keywords": [
+    "Spice",
+    "Life",
+    "Web",
+    "App",
+    "Application",
+    "Node",
+    "Nodejs",
+    "npm",
+    "js",
+    "html",
+    "community",
+    "allert"
+  ],
+  "author": "Dagasma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dagasma/CommunityAllert/issues"
+  },
+  "homepage": "https://github.com/Dagasma/CommunityAllert#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-rate-limit": "^6.3.0",
+    "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "ol": "^7.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.1",
+    "nodemon": "^2.0.15"
+  }
+}

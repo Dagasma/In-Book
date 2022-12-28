@@ -1,3 +1,4 @@
+/*
 const config = require("../config/config");
 const login = require("./login");
 const register = require("./register");
@@ -15,3 +16,4 @@ app.use("/", register);
 app.listen(config.PORT, () => {
   console.log("[FRONTEND] Start listening on port:" + config.PORT);
 });
+*/

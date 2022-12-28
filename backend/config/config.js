@@ -1,5 +1,6 @@
 const config = {};
 
+
 config.mysql = require("mysql2");  //mysql1 authentication protocol fail
 config.express = require("express");
 config.session = require("express-session");
@@ -8,6 +9,9 @@ config.cookieParser = require("cookie-parser");
 config.bodyParser = require("body-parser");
 config.rateLimit = require("express-rate-limit");
 config.jwt = require("jsonwebtoken");
+
+config.frontend_path = config.path.normalize(process.cwd() + "/frontend");
+
 require("dotenv").config({
   path: config.path.normalize(process.cwd() + "/backend/config/.env"),
 });
@@ -17,6 +21,7 @@ config.DB_USER = process.env.DB_USER;
 config.DB_PASSWORD = process.env.DB_PASSWORD;
 config.DB_NAME = process.env.DB_NAME;
 config.SECRET = process.env.SECRET;
+config.PORT_DB = process.env.PORT;
 config.PORT = 8080;
 config.apiLimiter = {
   windowMs: 60 * 60 * 1000, // 60 minutes
@@ -29,6 +34,7 @@ config.pool = config.mysql.createPool({
   connectionLimit: 5,
   host: config.DB_HOST,
   user: config.DB_USER,
+  port: config.PORT_DB,
   password: config.DB_PASSWORD,
   database: config.DB_NAME,
   connectTimeout: 100000

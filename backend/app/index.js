@@ -1,3 +1,4 @@
+const { frontend_path } = require("../config/config");
 const config = require("../config/config");
 const segnalazioniRouter = require("./api/segnalazioni");
 const login = require("./login");
@@ -7,6 +8,8 @@ const app = config.express();
 
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
+
+app.use(config.express.static(frontend_path)); //per rilevare i file css
 
 app.use("/api/segnalazioni", segnalazioniRouter);
 app.use("/api/login", login);

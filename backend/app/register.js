@@ -73,4 +73,9 @@ router.post("/", function (request, response) {
   );
 });
 
+router.get("/", function (request, response) {
+  // Render login template
+  response.sendFile(config.frontend_path+"/html/register.html");
+});
+
 module.exports = router;

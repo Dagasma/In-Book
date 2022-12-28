@@ -10,7 +10,7 @@ Using the library <i>dotenv</i>, we can store every useful configuration element
 Obviously the file <b>WILL NOT</b> be uploaded in the repository, thus must be created on your own with the name <i>'.env'</i> in the root folder.
 This file must define these variables:
 ```js
-PORT = NUMBER_HERE //The number used as server port
+PORT = NUMBER_HERE //The port number of the DB
 DB_HOST = STRING_HERE //Database Host IP address
 DB_USER = STRING_HERE // Database user
 DB_PASSWORD = STRING_HERE // Database password

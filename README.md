@@ -1,4 +1,4 @@
-# CommunityAllert
+# IN-BOOK
 Spice of Life Web Application
 ## Requisite
 On any linux distro download the following package using your favorite package manager:

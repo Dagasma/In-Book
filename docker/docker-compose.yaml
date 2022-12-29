@@ -1,0 +1,22 @@
+#docker compose up -d 
+
+version: "3.9"
+
+services: 
+  db:
+    image: mysql
+    restart: always
+    container_name: db_inbook
+    environment:
+      MYSQL_ROOT_PASSWORD: prova
+    ports:
+      - "4000:3306"
+    
+  phpmyadmin_gestore:
+    image: phpmyadmin
+    container_name: adminphp_pezzotto
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: prova
+    ports:
+      - "9090:80"  #per settare porte devo rifare la creazione del compose

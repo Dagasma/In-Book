@@ -1,0 +1,8 @@
+FROM mysql
+LABEL MAINTEINER="Dagasma"
+ENV MYSQL_DATABASE "DB"
+ENV MYSQL_ROOT_PASSWORD "prova"
+COPY ./create.sql /docker-entrypoint-initdb.d/1.sql
+COPY ./alter.sql /docker-entrypoint-initdb.d/2.sql
+COPY ./populate.sql /docker-entrypoint-initdb.d/3.sql
+EXPOSE 3306

@@ -1,0 +1,44 @@
+#docker compose up -d 
+
+version: "3.9"
+name: "In-Book"
+
+services: 
+  db:
+    build: ./backend/database/
+    restart: always
+    container_name: DB_inbook
+    expose:
+    - 3306
+    networks:
+      - PHPNetwork
+      - DBNetwork
+    
+  phpmyadmin_gestore:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: prova
+    ports:
+      - "9090:80"  #per settare porte devo rifare la creazione del compose
+    networks:
+      - PHPNetwork
+  
+  webserver:
+    build: ./backend/
+    container_name: backend
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=production
+    expose:
+      - 8080
+    networks:
+      - DBNetwork
+
+networks:
+    DBNetwork:
+        driver: bridge
+    PHPNetwork:
+        driver: bridge

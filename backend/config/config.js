@@ -9,8 +9,9 @@ config.cookieParser = require("cookie-parser");
 config.bodyParser = require("body-parser");
 config.rateLimit = require("express-rate-limit");
 config.jwt = require("jsonwebtoken");
+config.Sequelize = require("sequelize");
 
-config.frontend_path = config.path.normalize(process.cwd() + "/frontend");
+config.frontend_path = config.path.normalize(process.cwd() + "/frontend/Web-site-Utente-complete/"); 
 
 require("dotenv").config({
   path: config.path.normalize(process.cwd() + "/backend/config/.env"),
@@ -30,20 +31,20 @@ config.apiLimiter = {
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 };
 
-config.pool = config.mysql.createPool({
-  connectionLimit: 5,
-  host: config.DB_HOST,
-  user: config.DB_USER,
-  port: config.PORT_DB,
-  password: config.DB_PASSWORD,
-  database: config.DB_NAME,
-  connectTimeout: 100000
-});
+// config.pool = config.mysql.createPool({
+//   connectionLimit: 5,
+//   host: config.DB_HOST,
+//   user: config.DB_USER,
+//   port: config.PORT_DB,
+//   password: config.DB_PASSWORD,
+//   database: config.DB_NAME,
+//   connectTimeout: 100000
+// });
 
-config.pool.getConnection((err, connection) => {
-  if (err) throw err;
-  console.log("Database connected successfully");
-  connection.release();
-});
+// config.pool.getConnection((err, connection) => {
+//   if (err) throw err;
+//   console.log("Database connected successfully");
+//   connection.release();
+// });
 
 module.exports = config;

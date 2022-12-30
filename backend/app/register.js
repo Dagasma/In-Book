@@ -73,9 +73,14 @@ router.post("/", function (request, response) {
   );
 });
 
-router.get("/", function (request, response) {
+router.get("/Cliente", function (request, response) {
   // Render login template
-  response.sendFile(config.frontend_path+"/html/register.html");
+  response.sendFile(config.frontend_path+"Registrazione-Cliente.html");
+});
+
+router.get("/Fornitore", function (request, response) {
+  // Render login template
+  response.sendFile(config.frontend_path+"Registrazione-Fornitore.html");
 });
 
 module.exports = router;

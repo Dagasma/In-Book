@@ -1,0 +1,13 @@
+POST-> Create objects
+GET -> Read objects
+PUT -> Update objects
+DELETE -> Delete objects
+
+API Utente_visitatore
+/api/auth/login GET -> ritorna istanza relativa all'utente
+/api/auth/register_cliente POST -> invia l'istanza della registrazione cliente
+/api/auth/register_fornitore POST -> invia l'istanza della registrazione fornitore
+/api/auth/... da continuare
+
+
+

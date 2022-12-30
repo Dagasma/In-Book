@@ -1,0 +1,8 @@
+Pattern MODEL-VIEW-CONTROLLER: 
+1 Creo le table del db
+2 Sfrutto il package sequelize in JS per la gestione delle op. CRUD sul db (query ecc.)
+3 Creo i modelli in sequelize (hanno un formato specifico e rappresentano le tabelle in mysql)
+4 per creare automaticamente i modelli uso sequelize-auto (tutti i modelli ed init-models.js sono nella cartella models)
+
+comando per inizializzare modelli del db automaticamente tramite sequelize:
+sequelize-auto -o "./models" -d INBOOK -h localhost -u root -x prova -p 4000 -e mysql

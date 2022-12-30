@@ -10,7 +10,7 @@ CREATE TABLE `INBOOK`.`UTENTI_VISITATORI`(
     Data_di_nascita date,
     Telefono varchar(10) NOT NULL UNIQUE,
     Created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    Tipo ENUM('Utente Autenticato', 'Amministratore', 'Fornitore')  --se NULL sono solo utente visitatore 
+    Tipo ENUM('Cliente', 'Amministratore', 'Fornitore')  --se NULL sono solo utente visitatore (ancora non ho completato la registrazione)
 );
 
 CREATE TABLE `INBOOK`.`FORNITORI`(

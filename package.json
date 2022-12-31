@@ -1,19 +1,16 @@
 {
-  "name": "communityallert",
-  "version": "2.0.0",
-  "description": "Spice of Life Web Application",
+  "name": "inbook",
+  "version": "1.0.0",
+  "description": "Book for anything with a simple app",
   "main": "backend/app/index.js",
   "scripts": {
-    "start": "node backend/app/index.js",
-    "dev": "nodemon"
+    "start": "node backend/app/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dagasma/CommunityAllert.git"
+    "url": "git+https://github.com/Dagasma/In-Book.git"
   },
   "keywords": [
-    "Spice",
-    "Life",
     "Web",
     "App",
     "Application",
@@ -22,15 +19,16 @@
     "npm",
     "js",
     "html",
-    "community",
-    "allert"
+    "book",
+    "booking",
+    "reservation"
   ],
   "author": "Dagasma",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Dagasma/CommunityAllert/issues"
+    "url": "https://github.com/Dagasma/In-Book/issues"
   },
-  "homepage": "https://github.com/Dagasma/CommunityAllert#readme",
+  "homepage": "https://github.com/Dagasma/In-Book#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.6",

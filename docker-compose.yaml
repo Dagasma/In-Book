@@ -7,7 +7,7 @@ services:
   db:
     build: ./backend/database/
     restart: always
-    container_name: DB_inbook
+    container_name: db_inbook
     expose:
     - 3306
     networks:
@@ -26,7 +26,7 @@ services:
       - PHPNetwork
   
   webserver:
-    build: ./backend/
+    build: ./backend/ 
     container_name: backend
     depends_on:
       - db
@@ -36,6 +36,11 @@ services:
       - 8080
     networks:
       - DBNetwork
+    volumes:
+      - ./backend/:/app/backend/
+      - ./frontend/:/app/frontend/
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
 
 networks:
     DBNetwork:

@@ -1,6 +1,0 @@
-PORT = 4000 
-DB_HOST = localhost
-DB_USER = root 
-DB_PASSWORD = prova 
-DB_NAME = PROVA1
-SECRET = pippozzo 

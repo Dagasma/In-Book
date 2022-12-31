@@ -1,4 +1,4 @@
-    CREATE TABLE `INBOOK`.`UTENTI_VISITATORI`(
+    CREATE TABLE IF NOT EXISTS `INBOOK`.`UTENTI_VISITATORI`(
         ID char(16) NOT NULL PRIMARY KEY,
         Nome char(16) NOT NULL ,
         Cognome char(16) NOT NULL ,
@@ -10,7 +10,7 @@
         Tipo ENUM('Cliente', 'Amministratore', 'Fornitore')  -- se NULL sono solo utente visitatore (ancora non ho completato la registrazione)
     );
 
-    CREATE TABLE `INBOOK`.`FORNITORI`(
+    CREATE TABLE IF NOT EXISTS `INBOOK`.`FORNITORI`(
         ID_utente_fornitore char(16) NOT NULL PRIMARY KEY,
         Nome_Attivita varchar(50) NOT NULL,
         Tipo_Attivita varchar(30) NOT NULL,
@@ -18,7 +18,7 @@
         Capienza_massima int DEFAULT 1 NOT NULL
     );
 
-    CREATE TABLE `INBOOK`.`ORARI_ATTIVITA`(
+    CREATE TABLE IF NOT EXISTS `INBOOK`.`ORARI_ATTIVITA`(
         ID char(16) NOT NULL PRIMARY KEY,
         ID_fornitore char(16) NOT NULL,
         Orario_apertura TIME(0) NOT NULL,   -- modificato orario dell'attività(per gestire più orari in base all'attività es. 10:00-13:00 e 16:00-20:00)
@@ -26,7 +26,7 @@
     );
 
 
-    CREATE TABLE `INBOOK`.`SERVIZI`(
+    CREATE TABLE IF NOT EXISTS `INBOOK`.`SERVIZI`(
         ID char(16) NOT NULL PRIMARY KEY,
         ID_fornitore char(16) NOT NULL,
         Tipologia char(30) NOT NULL,
@@ -34,7 +34,7 @@
         Durata TIME(0) NOT NULL
     );
 
-    CREATE TABLE `INBOOK`.`PRENOTAZIONI`(
+    CREATE TABLE IF NOT EXISTS `INBOOK`.`PRENOTAZIONI`(
         ID char(16) NOT NULL PRIMARY KEY,
         ID_utente char(16) NOT NULL ,
         ID_servizio char(16) NOT NULL ,

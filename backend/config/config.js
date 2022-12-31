@@ -11,7 +11,7 @@ config.rateLimit = require("express-rate-limit");
 config.jwt = require("jsonwebtoken");
 config.Sequelize = require("sequelize");
 
-config.frontend_path = config.path.normalize(process.cwd() + "/frontend/Web-site-Utente-complete/"); 
+config.frontend_path = config.path.normalize(process.cwd() + "/frontend/html/"); 
 
 require("dotenv").config({
   path: config.path.normalize(process.cwd() + "/backend/config/.env"),

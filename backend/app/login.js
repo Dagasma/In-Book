@@ -75,7 +75,7 @@ router.post("/", function (request, response) {
 
 router.get("/", function (request, response) {
   // Render login template
-  response.sendFile(config.frontend_path+"Login.html");
+  response.sendFile(config.frontend_path+"login.html");
 });
 
 module.exports = router;

@@ -26,14 +26,14 @@ services:
       - PHPNetwork
   
   webserver:
-    build: ./backend/ 
+    build: ./backend/config/
     container_name: backend
     depends_on:
       - db
     environment:
       - NODE_ENV=production
-    expose:
-      - 8080
+    ports:
+      - 4000:8080
     networks:
       - DBNetwork
     volumes:

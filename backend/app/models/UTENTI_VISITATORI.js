@@ -1,7 +1,8 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('UTENTI_VISITATORI', {
     ID: {
-      type: DataTypes.CHAR(16),
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
@@ -38,18 +39,9 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'UTENTI_VISITATORI',
-    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "ID" },
-        ]
-      },
-      {
-        name: "ID",
         unique: true,
         using: "BTREE",
         fields: [

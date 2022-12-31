@@ -1,9 +1,14 @@
+
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('FORNITORI', {
     ID_utente_fornitore: {
-      type: DataTypes.CHAR(16),
+      type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      references: {
+        model: 'UTENTI_VISITATORI',
+        key: 'ID'
+      }
     },
     Nome_Attivita: {
       type: DataTypes.STRING(50),
@@ -25,7 +30,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'FORNITORI',
-    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",

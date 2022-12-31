@@ -1,13 +1,19 @@
+
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('ORARI_ATTIVITA', {
     ID: {
-      type: DataTypes.CHAR(16),
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
     ID_fornitore: {
-      type: DataTypes.CHAR(16),
-      allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'FORNITORI',
+        key: 'ID_utente_fornitore'
+      }
     },
     Orario_apertura: {
       type: DataTypes.TIME,
@@ -20,7 +26,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'ORARI_ATTIVITA',
-    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",
@@ -31,11 +36,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "ID",
-        unique: true,
+        name: "fk_orari_fornitori",
         using: "BTREE",
         fields: [
-          { name: "ID" },
+          { name: "ID_fornitore" },
         ]
       },
     ]

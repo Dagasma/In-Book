@@ -4,7 +4,8 @@
   "description": "Book for anything with a simple app",
   "main": "backend/app/index.js",
   "scripts": {
-    "start": "node backend/app/index.js"
+    "start": "node backend/app/index.js",
+    "dev": "nodemon"
   },
   "repository": {
     "type": "git",

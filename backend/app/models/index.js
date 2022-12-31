@@ -11,6 +11,9 @@ sequelize = new config.Sequelize(config.DB_NAME, config.DB_USER, config.DB_PASSW
       min: 0,
       acquire: 30000,
       idle: 10000
+    },
+    define: {
+      timestamps: true
     }
   });
 

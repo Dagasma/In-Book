@@ -1,8 +1,7 @@
 const config = require("../config/config");
-const db = require("./models/db_model")
-const segnalazioniRouter = require("./api/segnalazioni");
-const login = require("./login");
-const register = require("./register");
+const db = require("./models");
+// const login = require("./login");
+// const register = require("./register");
 
 const app = config.express();
 
@@ -20,11 +19,10 @@ db.sequelize.sync()
     console.log("Failed to sync db: " + err.message);
   });
 
+// app.use("/api/login", login);
+// app.use("/api/register", register);
 
-app.use("/api/segnalazioni", segnalazioniRouter);
-app.use("/api/login", login);
-app.use("/api/register", register);
-
+require("./api/cliente_routes")(app);
 
 
 app.listen(config.PORT, () => {

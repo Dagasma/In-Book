@@ -1,17 +1,27 @@
-module.exports = function(sequelize, DataTypes, Sequelize) {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
   return sequelize.define('PRENOTAZIONI', {
     ID: {
-      type: DataTypes.CHAR(16),
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
     ID_utente: {
-      type: DataTypes.CHAR(16),
-      allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'UTENTI_VISITATORI',
+        key: 'ID'
+      }
     },
     ID_servizio: {
-      type: DataTypes.CHAR(16),
-      allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'SERVIZI',
+        key: 'ID'
+      }
     },
     Orario_richiesta: {
       type: DataTypes.DATE,
@@ -34,7 +44,6 @@ module.exports = function(sequelize, DataTypes, Sequelize) {
   }, {
     sequelize,
     tableName: 'PRENOTAZIONI',
-    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",
@@ -45,11 +54,17 @@ module.exports = function(sequelize, DataTypes, Sequelize) {
         ]
       },
       {
-        name: "ID",
-        unique: true,
+        name: "fk_prenotazioni_servizi",
         using: "BTREE",
         fields: [
-          { name: "ID" },
+          { name: "ID_servizio" },
+        ]
+      },
+      {
+        name: "fk_prenotazioni_utenti",
+        using: "BTREE",
+        fields: [
+          { name: "ID_utente" },
         ]
       },
     ]

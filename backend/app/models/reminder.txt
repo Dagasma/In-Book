@@ -4,5 +4,6 @@ Pattern MODEL-VIEW-CONTROLLER:
 3 Creo i modelli in sequelize (hanno un formato specifico e rappresentano le tabelle in mysql)
 4 per creare automaticamente i modelli uso sequelize-auto (tutti i modelli ed init-models.js sono nella cartella models)
 
+mi sposto nella directory /app
 comando per inizializzare modelli del db automaticamente tramite sequelize:
-sequelize-auto -o "./models" -d INBOOK -h localhost -u root -x prova -p 4000 -e mysql
+sequelize-auto -o "./models" -d INBOOK -h localhost -u root -x prova -p 5000 -e mysql

@@ -37,6 +37,7 @@
     "express-rate-limit": "^6.3.0",
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
     "sequelize": "^6.28.0",
     "sequelize-auto": "^0.8.8"
   },

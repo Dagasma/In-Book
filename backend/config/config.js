@@ -1,7 +1,6 @@
 const config = {};
 
 
-config.mysql = require("mysql2");  //mysql1 authentication protocol fail
 config.express = require("express");
 config.session = require("express-session");
 config.path = require("path");
@@ -22,7 +21,7 @@ config.DB_USER = process.env.DB_USER;
 config.DB_PASSWORD = process.env.DB_PASSWORD;
 config.DB_NAME = process.env.DB_NAME;
 config.SECRET = process.env.SECRET;
-config.PORT_DB = process.env.PORT;
+config.DB_PORT = process.env.DB_PORT;
 config.PORT = 8080;
 config.apiLimiter = {
   windowMs: 60 * 60 * 1000, // 60 minutes

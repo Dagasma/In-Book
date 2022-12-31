@@ -33,7 +33,7 @@ services:
     environment:
       - NODE_ENV=production
     ports:
-      - 4000:8080
+      - "4000:8080"
     networks:
       - DBNetwork
     volumes:

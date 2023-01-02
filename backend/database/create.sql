@@ -10,7 +10,7 @@
         Password_acc varchar(20) NOT NULL,
         Data_di_nascita date,
         Telefono varchar(10) NOT NULL UNIQUE,
-        Tipo ENUM('Cliente', 'Amministratore', 'Fornitore') NOT NULL,
+        Tipo ENUM('Cliente', 'Amministratore', 'Fornitore','Bloccato') NOT NULL,
         Autenticato BOOLEAN
     );
 
@@ -57,8 +57,16 @@
     );
 
     CREATE TABLE IF NOT EXISTS `INBOOK`.`NOTIFICHE`(
+        ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
         ID_prenotazione int NOT NULL,
         ID_utente int NOT NULL,
         ID_fornitore int NOT NULL,
+        Descrizione_notifica varchar(255)
+    );
+
+    CREATE TABLE IF NOT EXISTS `INBOOK`.`BLOCCATI`(
+        ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        ID_utente int NOT NULL,
+        ID_amministratore int NOT NULL,
         Descrizione_notifica varchar(255)
     );

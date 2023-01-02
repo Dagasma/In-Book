@@ -40,6 +40,13 @@ ALTER TABLE `INBOOK`.`NOTIFICHE`
 ADD CONSTRAINT fk_notifiche_utenti FOREIGN KEY NOTIFICHE(ID_utente) REFERENCES UTENTI(ID)
 ON DELETE NO ACTION;
 
+ALTER TABLE `INBOOK`.`BLOCCATI`
+ADD CONSTRAINT fk_notifiche_utenti FOREIGN KEY BLOCCATI(ID_utente) REFERENCES UTENTI(ID)
+ON DELETE NO ACTION;
+ALTER TABLE `INBOOK`.`BLOCCATI`
+ADD CONSTRAINT fk_notifiche_amministratore FOREIGN KEY BLOCCATI(ID_amministratore) REFERENCES UTENTI(ID)
+ON DELETE NO ACTION;
+
 
 -- DOMAIN CONSTRAINTS (i piu complicati vengono gestiti nella logica di business (js))
 
@@ -60,6 +67,11 @@ ADD CONSTRAINT chk_PRENOTAZIONI_orario_prenotazione_richiesta CHECK ((TIMEDIFF(O
 ALTER TABLE `INBOOK`.`VOTAZIONI`
 ADD CONSTRAINT chk_VOTAZIONI_FORNITORE_UTENTE CHECK (ID_fornitore <> ID_utente);
 
+-- GIULIANO : vincoli in modo tale che un utente non bloca un admin 
+-- ALTER TABLE `INBOOK`.`BLOCCATI`
+-- ADD CONSTRAINT chk_Amministratori CHECK (SELECT U.Stato from `INBOOK`.`UTENTI` as U WHERE ID_utente=U.ID <> 'Amministratore');
+-- ALTER TABLE `INBOOK`.`BLOCCATI`
+-- ADD CONSTRAINT chk_Amministratori CHECK (SELECT U.Stato from `INBOOK`.`UTENTI` as U WHERE ID_amministratore=U.ID  == 'Amministratore');
 
 -- questi vincoli possono essere gestiti solo con le funzioni/trigger, altrimenti in js
 -- capienza MAX rispetto alle prenotazioni

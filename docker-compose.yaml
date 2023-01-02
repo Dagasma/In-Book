@@ -9,7 +9,7 @@ services:
     restart: always
     container_name: db_inbook
     ports:
-    - "5000:3306"   #per testare il db lo espongo all'esterno (mi rompo il cazzo di usare phpmyadmin)
+    - "3306:3306"   #per testare il db lo espongo all'esterno
     networks:
       - PHPNetwork
       - DBNetwork

@@ -22,6 +22,7 @@
     CREATE TABLE IF NOT EXISTS `INBOOK`.`ORARI_ATTIVITA`(
         ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
         ID_fornitore int NOT NULL,
+        Giorno_della_settimana ENUM('Lunedi','Martedi','Mercoledi','Giovedi','Venerdi','Sabato','Domenica') NOT NULL,
         Orario_apertura TIME(0) NOT NULL,   -- modificato orario dell'attività(per gestire più orari in base all'attività es. 10:00-13:00 e 16:00-20:00)
         Orario_chiusura TIME(0) NOT NULL    -- hh:mm:ss -> per avere in output hh:mm -> TIME_FORMAT(orario, '%k:%i')
     );

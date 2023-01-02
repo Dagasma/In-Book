@@ -6,3 +6,10 @@ DB_USER = administrator
 DB_PASSWORD = prova 
 DB_NAME = INBOOK
 SECRET = pippozzo 
+
+DB_PORT = 5000 
+DB_HOST = localhost
+DB_USER = administrator 
+DB_PASSWORD = prova 
+DB_NAME = INBOOK
+SECRET = pippozzo 

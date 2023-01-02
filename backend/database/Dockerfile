@@ -4,7 +4,5 @@ ENV MYSQL_DATABASE "INBOOK"
 ENV MYSQL_USER "administrator"
 ENV MYSQL_PASSWORD "prova"
 ENV MYSQL_ROOT_PASSWORD "prova"
-COPY ./create.sql /docker-entrypoint-initdb.d/1.sql
-COPY ./alter.sql /docker-entrypoint-initdb.d/2.sql
-COPY ./populate.sql /docker-entrypoint-initdb.d/3.sql
+COPY ./keycloak.sql /docker-entrypoint-initdb.d/1.sql
 EXPOSE 3306

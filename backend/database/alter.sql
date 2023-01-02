@@ -23,6 +23,23 @@ ALTER TABLE `INBOOK`.`SERVIZI`
 ADD CONSTRAINT fk_servizi_fornitori FOREIGN KEY SERVIZI(ID_fornitore) REFERENCES FORNITORI(ID_utente_fornitore)
 ON DELETE NO ACTION;
 
+ALTER TABLE `INBOOK`.`VOTAZIONI`
+ADD CONSTRAINT fk_votazioni_fornitori FOREIGN KEY VOTAZIONI(ID_fornitore) REFERENCES FORNITORI(ID_utente_fornitore)
+ON DELETE NO ACTION;
+
+ALTER TABLE `INBOOK`.`VOTAZIONI`
+ADD CONSTRAINT fk_votazioni_utenti FOREIGN KEY VOTAZIONI(ID_utente) REFERENCES UTENTI(ID)
+ON DELETE NO ACTION;
+
+
+ALTER TABLE `INBOOK`.`NOTIFICHE`
+ADD CONSTRAINT fk_notifiche_fornitori FOREIGN KEY NOTIFICHE(ID_fornitore) REFERENCES FORNITORI(ID_utente_fornitore)
+ON DELETE NO ACTION;
+
+ALTER TABLE `INBOOK`.`NOTIFICHE`
+ADD CONSTRAINT fk_notifiche_utenti FOREIGN KEY NOTIFICHE(ID_utente) REFERENCES UTENTI(ID)
+ON DELETE NO ACTION;
+
 
 -- DOMAIN CONSTRAINTS (i piu complicati vengono gestiti nella logica di business (js))
 
@@ -37,6 +54,12 @@ ADD CONSTRAINT chk_ORARI_ATTIVITA_apertura_chiusura CHECK (Orario_apertura<Orari
 -- vincolo su PRENOTAZIONI: orario prenotazione - Orario_richiesta > 4h
 ALTER TABLE `INBOOK`.`PRENOTAZIONI`                                                     
 ADD CONSTRAINT chk_PRENOTAZIONI_orario_prenotazione_richiesta CHECK ((TIMEDIFF(Orario_prenotazione, Orario_richiesta)) > '4:00:00');
+
+
+--vincolo FORNITORE NON PUO FARE VOTAZIONE AL SUO STESSO SERVIZIO
+ALTER TABLE `INBOOK`.`VOTAZIONI`
+ADD CONSTRAINT chk_VOTAZIONI_FORNITORE_UTENTE CHECK (ID_fornitore <> ID_utente);
+
 
 -- questi vincoli possono essere gestiti solo con le funzioni/trigger, altrimenti in js
 -- capienza MAX rispetto alle prenotazioni

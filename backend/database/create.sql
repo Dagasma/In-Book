@@ -2,7 +2,7 @@
     CREATE DATABASE KEYCLOAK;
     GRANT ALL PRIVILEGES ON KEYCLOAK.* TO 'administrator'@'%';
     
-    CREATE TABLE IF NOT EXISTS `INBOOK`.`UTENTI_VISITATORI`(
+    CREATE TABLE IF NOT EXISTS `INBOOK`.`UTENTI`(
         ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
         Nome char(16) NOT NULL ,
         Cognome char(16) NOT NULL ,
@@ -10,7 +10,8 @@
         Password_acc varchar(20) NOT NULL,
         Data_di_nascita date,
         Telefono varchar(10) NOT NULL UNIQUE,
-        Tipo ENUM('Cliente', 'Amministratore', 'Fornitore')  -- se NULL sono solo utente visitatore (ancora non ho completato la registrazione)
+        Tipo ENUM('Cliente', 'Amministratore', 'Fornitore') NOT NULL,
+        Autenticato BOOLEAN
     );
 
     CREATE TABLE IF NOT EXISTS `INBOOK`.`FORNITORI`(
@@ -48,5 +49,16 @@
         Numero_clienti int DEFAULT 1
     );
 
+    CREATE TABLE IF NOT EXISTS `INBOOK`.`VOTAZIONI`(
+        ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        ID_fornitore int NOT NULL ,
+        ID_utente int NOT NULL ,
+        Voto integer 
+    );
 
-
+    CREATE TABLE IF NOT EXISTS `INBOOK`.`NOTIFICHE`(
+        ID_prenotazione int NOT NULL,
+        ID_utente int NOT NULL,
+        ID_fornitore int NOT NULL,
+        Descrizione_notifica varchar(255)
+    );

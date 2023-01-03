@@ -7,6 +7,7 @@ const app = config.express();
 
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
+app.use( keycloak.middleware() );
 
 app.use(config.express.static(config.frontend_path)); //per rilevare i file css
 
@@ -22,7 +23,7 @@ db.sequelize.sync()
 // app.use("/api/login", login);
 // app.use("/api/register", register);
 
-require("./api/cliente_routes")(app);
+//require("./api/cliente_routes")(app);
 
 
 app.listen(config.PORT, () => {

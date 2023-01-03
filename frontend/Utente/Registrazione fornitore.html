@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>In Book (Start to 0)</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="icon.png">
+    <link href="Utente.css" rel="stylesheet" type="text/css">
+    <script src="Utente.js"></script>
+</head>
+
+<!--<logo><div class="logo"><img src="icon.png"></div></logo>-->
+<header>
+    <nav class="header">
+        <img class="logo" src="icon1.png">
+        <div class="dropdown">
+            <button class="dropdown-toggle">Menu</button>
+
+            <ul class="dropdown-menu">
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Login.html">Login</a></li>
+                <li><a href="Registrazione fornitore.html">Registrazione Fornitore</a></li>
+                <li><a href="Registrazione utente.html">Registrazione Utente</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+</body>
+
+<section>
+    <h1>Registrazione Fornitore</h1>
+    <!--Inseriamo una foto-->
+</section>
+
+</br>
+
+
+
+
+<form id="Registrazione_fornitore" name="Registrazione_fornitore">
+    <fieldset>
+        <label for="Nome">Nome</label>
+        <input type="text" name="Nome" id="Nome"><br>
+
+        <label for="Cognome">Cognome</label>
+        <input type="text" name="Cognome" id="Cognome"><br>
+
+        <label for="Data_di_nascita">Data di nascita</label>
+        <input type="date" name="Data_di_nascita" id="Data_di_nascita"><br>
+
+        <label for="Email">Email</label>
+        <input type="email" name="Email" id="Email"><br>
+
+        <label for="Password_acc">Password</label>
+        <input type="password" name="Password_acc" id="Password_acc"><br>
+
+        <label for="Telefono">Telefono</label>
+        <input type="tel" name="Telefono" id="Telefono"><br>
+
+        <label for="Nome_attivita">Nome attivita</label>
+        <input type="text" name="Nome attivita" id="Nome_attivita"><br>
+        <!--
+        <label for="Tipo_Attivita">Tipo attivita</label>
+        <select id="Tipo_Attivita" name="Tipo_Attivita">
+            <option value="">_ Seleziona _</option>
+            <option value="red">Barber Shop</option>
+            <option value="green">Centro analisi</option>
+            <option value="blue">Palestra</option>
+            <option value="red">Sala Giochi</option>
+            <option value="green">Agenzia di viaggi</option>
+            <option value="blue">Insegnamento</option>
+        </select><br>
+        
+        
+
+        <label for="Indirizzo">Indirizzo</label>
+        <input type="text" name="Indirizzo" id="Indirizzo"><br>
+
+        <label for="Capienza_massima">Capienza massima</label>
+        <input type="number" name="Capienza_massima" id="Capienza_massima"><br>
+
+    
+        <label for="Lunedi">Lunedi</label>
+        <input type="date" name="Lunedi" id="Lunedi"><br>
+        <label for="Orario_Lunedi_I">Orario di inizio:</label>
+        <input type="time" name="Orario_Lunedi_I" id="Orario_Lunedi_I">
+        <label for="Orario_Lunedi_F">Orario di fine:</label>
+        <input type="time" name="Orario_Lunedi_F" id="Orario_Lunedi_F"><br>
+        
+        <label for="Martedi">Martedi</label>
+        <input type="date" name="Martedi" id="Martedi"><br>
+        <label for="Orario_Martedi_I">Orario di inizio:</label>
+        <input type="time" name="Orario_Martedi_I" id="Orario_Martedi_I">
+        <label for="Orario_Martedi_F">Orario di fine:</label>
+        <input type="time" name="Orario_Martedi_F" id="Orario_Martedi_F"><br>
+
+        <label for="Mercoledi">Mercoledi</label>
+        <input type="date" name="Mercoledi" id="Mercoledi"><br>
+        <label for="Orario_Domenica">Orario di inizio:</label>
+        <input type="time" name="Orario_Domenica" id="Orario_Domenica">
+        <label for="Orario_Mercoledi">Orario di fine:</label>
+        <input type="time" name="Orario_Mercoledi" id="Orario_Mercoledi"><br>
+
+        <label for="Giovedi">Giovedi</label>
+        <input type="date" name="Giovedi" id="Giovedi"><br>
+        <label for="Orario_Domenica">Orario di inizio::</label>
+        <input type="time" name="Orario_Domenica" id="Orario_Domenica">
+        <label for="Orario_Giovedi">Orario di fine:</label>
+        <input type="time" name="Orario_Giovedi" id="Orario_Giovedi"><br>
+
+        <label for="Venerdi">Venerdi</label>
+        <input type="date" name="Venerdi" id="Venerdi"><br>
+        <label for="Orario_Domenica">Orario di inizio:</label>
+        <input type="time" name="Orario_Domenica" id="Orario_Domenica">
+        <label for="Orario_Venerdi">Orario di fine:</label>
+        <input type="time" name="Orario_Venerdi" id="Orario_Venerdi"><br>
+        
+        <label for="Sabato">Sabato</label>
+        <input type="date" name="Sabato" id="Sabato"><br>
+        <label for="Orario_Domenica">Orario di inizio::</label>
+        <input type="time" name="Orario_Domenica" id="Orario_Domenica">
+        <label for="Orario_Sabato">Orario di fine:</label>
+        <input type="time" name="Orario_Sabato" id="Orario_Sabato"><br>
+        
+        <label for="Domenica">Domenica</label>
+        <input type="date" name="Domenica" id="Domenica"><br>
+        <label for="Orario_Domenica">Orario di inizio:</label>
+        <input type="time" name="Orario_Domenica" id="Orario_Domenica">
+        <label for="Orario_Domenica">Orario di fine:</label>
+        <input type="time" name="Orario_Domenica" id="Orario_Domenica"><br>
+-->
+    </fieldset>
+    <input type="button" onclick="myfun()" value="submit">
+</form>
+<script>
+    function myfun() {
+        console.log("ciao")
+        document.getElementById("Registrazione_fornitore");
+        console.log(document)
+    }
+</script>
+
+
+</body>
+
+
+
+</html>

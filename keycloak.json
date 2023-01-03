@@ -1,0 +1,12 @@
+{
+  "realm": "master",
+  "auth-server-url": "http://keycloak:8080/",
+  "ssl-required": "external",
+  "resource": "nodejs",
+  "verify-token-audience": true,
+  "credentials": {
+    "secret": "PwWW1IvLKgJXO06VIzs85YZpi0BaGb5o"
+  },
+  "confidential-port": 0,
+  "policy-enforcer": {}
+}

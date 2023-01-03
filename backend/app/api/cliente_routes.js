@@ -12,21 +12,21 @@ module.exports = app => {
     // // Retrieve all Tutorials
     // router.get("/", tutorials.findAll);
   
-    // // Retrieve all published Tutorials
-    // router.get("/published", tutorials.findAllPublished);
+//     // // Retrieve all published Tutorials
+//     // router.get("/published", tutorials.findAllPublished);
   
-    // // Retrieve a single Tutorial with id
-    // router.get("/:id", tutorials.findOne);
+//     // // Retrieve a single Tutorial with id
+//     // router.get("/:id", tutorials.findOne);
   
-    // // Update a Tutorial with id
-    // router.put("/:id", tutorials.update);
+//     // // Update a Tutorial with id
+//     // router.put("/:id", tutorials.update);
   
-    // // Delete a Tutorial with id
-    // router.delete("/:id", tutorials.delete);
+//     // // Delete a Tutorial with id
+//     // router.delete("/:id", tutorials.delete);
   
-    // // Delete all Tutorials
-    // router.delete("/", tutorials.deleteAll);
+//     // // Delete all Tutorials
+//     // router.delete("/", tutorials.deleteAll);
 
 
-    app.use('/api/Users', router);
-  };
+//     app.use('/api/Users', router);
+//   };

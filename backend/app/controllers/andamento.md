@@ -53,8 +53,6 @@ controller NOTIFICHE:
 * [X] FIND ONE
 * [X] FIND ALL
 
-
-
 controller BLOCCATI:
 
 * [X] CREATE (ho creato un ID apposito nel database)

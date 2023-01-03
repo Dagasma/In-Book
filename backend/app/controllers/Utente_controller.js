@@ -4,7 +4,7 @@ const tab_fornitori = db.models.FORNITORI;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new utente
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -26,22 +26,10 @@ exports.create = (req, res) => {
     };
 
     // Save utente in the database
-    var data = {};
-
-    tab_utenti.create(utente)
-        .then(data => {
-        res.send(data);
-        })
-        .catch(err => {
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while creating the utente."
-        });
-        });
     
-    console.log(data);
     
     if(utente.Tipo == "Fornitore"){
+      const data = await tab_utenti.create(utente);
         const fornitore = {
             ID_utente_fornitore: data.ID,
             Nome_Attivita: req.body.Nome_Attivita,
@@ -50,7 +38,7 @@ exports.create = (req, res) => {
             Capienza_massima: req.body.Capienza_massima,
         };
 
-          // Save User in the database
+
         tab_fornitori.create(fornitore)
             .then(data2 => {
             res.send(data2);
@@ -62,15 +50,30 @@ exports.create = (req, res) => {
             });
             });
       }
+      else{
+
+        tab_utenti.create(utente)
+          .then(data2 => {
+          res.send(data2);
+          })
+          .catch(err => {
+          res.status(500).send({
+              message:
+              err.message || "Some error occurred while creating the User."
+          });
+          });
+
+
+
+      }
 }
 
-
-// Retrieve all Tutorials from the database.
+// Retrieve all Utenti
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+    const Tipo = req.query.Tipo;
+    var condition = Tipo ? { Tipo: { [Op.like]: `%${Tipo}%` } } : null;
 
-    Tutorial.findAll({ where: condition })
+    tab_utenti.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
@@ -85,45 +88,46 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
-    Tutorial.findByPk(id)
+    tab_utenti.findByPk(id)
         .then(data => {
             if (data) {
                 res.send(data);
             } else {
                 res.status(404).send({
-                    message: `Cannot find Tutorial with id=${id}.`
+                    message: `Cannot find Utente with id=${id}.`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error retrieving Tutorial with id=" + id
+                message: "Error retrieving Utente with id=" + id
             });
         });
 };
 
-exports.update = (req, res) => {
+exports.update = (req, res) => { //non funziona, da aggiustare
     const id = req.params.id;
 
-    Tutorial.update(req.body, {
+    tab_utenti.update(req.body, {
         where: { id: id }
     })
         .then(num => {
             if (num == 1) {
                 res.send({
-                    message: "Tutorial was updated successfully."
+                    message: "Utente was updated successfully."
                 });
             } else {
                 res.send({
-                    message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+                    message: `Cannot update Utente with id=${id}. Maybe Utente was not found or req.body is empty!`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Tutorial with id=" + id
+                message: "Error updating Utente with id=" + id
             });
         });
+        
 };
 
 

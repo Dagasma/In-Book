@@ -3,11 +3,41 @@ GET -> Read objects
 PUT -> Update objects
 DELETE -> Delete objects
 
+API home FRONTEND PUBLIC
+/home GET-> ritorna pagina html home del sito
+/home/login GET-> page html login   
+/home/register_cliente GET-> page html register_cliente   
+/home/register_fornitore GET-> page html register_fornitore
+/home/recupera_password GET-> page html register_cliente   
+
+--DOPO AVER EFFETTUATO AUTENTICAZIONE
+
+    -Cliente
+    /auth/cliente/profilo GET-> page html profilo
+    /auth/cliente/ricerca_servizio GET-> page html ricerca_servizio
+    /auth/cliente/ricerca_fornitore GET-> page html ricerca_fornitore
+    /auth/cliente/visualizza_prenotazioni GET-> page html prenotazioni_effettuate
+
+    -Fornitore
+    /auth/fornitore/profilo GET-> JSON (?)
+    /auth/fornitore/crea_servizio POST -> JSON dati servizio (?)
+    /auth/fornitore/visualizza_servizi_creati GET -> pagina html visualizza_servizi creati dal fornitore
+    /auth/fornitore/visualizza_prenotazioni_ricevute GET-> page html prenotazioni_effettuate
+
+    -Amministratore
+    /auth/amministratore/visualizza_utenti GET -> page html degli utenti
+
+
+
+
+
+
 API Utente_visitatore
 /api/auth/login GET -> ritorna istanza relativa all'utente
 /api/auth/register_cliente POST -> invia l'istanza della registrazione cliente
 /api/auth/register_fornitore POST -> invia l'istanza della registrazione fornitore
 /api/auth/... da continuare
+
 
 
 

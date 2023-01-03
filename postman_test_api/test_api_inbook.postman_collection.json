@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "9d71139d-1998-484f-8261-331ac754fb74",
+		"name": "test_api_inbook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17789680"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/api/Users/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nome\": \"wrwerwe\",\r\n    \"Cognome\": \"rclownozzo\",\r\n    \"Email\": \"werwerwe@gmie\",\r\n    \"Password_acc\": \"pere\",\r\n    \"Data_di_nascita\": \"2000-11-11\",\r\n    \"Telefono\": \"+45566565\",\r\n    \"Tipo\": \"Cliente\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/Users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"Users"
+					],
+					"query": [
+						{
+							"key": "Nome",
+							"value": "pippozzo",
+							"disabled": true
+						},
+						{
+							"key": "Cognome",
+							"value": "clownozzo",
+							"disabled": true
+						},
+						{
+							"key": "Email",
+							"value": "francamente@gm",
+							"disabled": true
+						},
+						{
+							"key": "Password_acc ",
+							"value": "bookin",
+							"disabled": true
+						},
+						{
+							"key": "Data_di_nascita",
+							"value": "2012-11-12",
+							"disabled": true
+						},
+						{
+							"key": "Telefono",
+							"value": "+39565",
+							"disabled": true
+						},
+						{
+							"key": "Tipo",
+							"value": "NULL",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/Users?Tipo=Fornitore",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/Users?Tipo=Fornitore",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"Users"
+					],
+					"query": [
+						{
+							"key": "Tipo",
+							"value": "Fornitore"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/Users/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nome\": \"erfet3\",\r\n    \"Cognome\": \"rclownozzo\",\r\n    \"Email\": \"tino@gmie\",\r\n    \"Password_acc\": \"pere\",\r\n    \"Data_di_nascita\": \"2000-11-11\",\r\n    \"Telefono\": \"+32221\",\r\n    \"Tipo\": \"Fornitore\",\r\n    \"Nome_Attivita\": \"werwerwerwe\",\r\n    \"Tipo_Attivita\": \"234232423rer\",\r\n    \"Capienza_massima\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/Users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"Users"
+					],
+					"query": [
+						{
+							"key": "Nome",
+							"value": "pippozzo",
+							"disabled": true
+						},
+						{
+							"key": "Cognome",
+							"value": "clownozzo",
+							"disabled": true
+						},
+						{
+							"key": "Email",
+							"value": "francamente@gm",
+							"disabled": true
+						},
+						{
+							"key": "Password_acc ",
+							"value": "bookin",
+							"disabled": true
+						},
+						{
+							"key": "Data_di_nascita",
+							"value": "2012-11-12",
+							"disabled": true
+						},
+						{
+							"key": "Telefono",
+							"value": "+39565",
+							"disabled": true
+						},
+						{
+							"key": "Tipo",
+							"value": "NULL",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/Users/1",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nome\": \"wrwerwe\",\r\n    \"Cognome\": \"rclownozzo\",\r\n    \"Email\": \"werwerwe@gmie\",\r\n    \"Password_acc\": \"gianmaria\",\r\n    \"Data_di_nascita\": \"2000-11-11\",\r\n    \"Telefono\": \"+45566565\",\r\n    \"Tipo\": \"Cliente\",\r\n    \"Autenticato\": null\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/Users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"Users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/Users/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/Users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"Users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

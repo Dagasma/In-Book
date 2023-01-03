@@ -2,7 +2,7 @@ const db = require("../models");
 const tab_fornitori = db.models.FORNITORI;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new User
+// // Create and Save a new User
 // exports.create = (req, res) => {
 //     // Validate request
 //     if (!req.body) {
@@ -34,7 +34,8 @@ const Op = db.Sequelize.Op;
 //         });
 // };
 
-// Retrieve all Tutorials from the database.
+
+
 exports.findAll = (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;

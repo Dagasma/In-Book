@@ -7,7 +7,7 @@ const app = config.express();
 
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
-app.use( keycloak.middleware() );
+app.use(config.keycloak.middleware() );
 
 app.use(config.express.static(config.frontend_path)); //per rilevare i file css
 

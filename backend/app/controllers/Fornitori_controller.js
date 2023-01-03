@@ -3,36 +3,36 @@ const tab_fornitori = db.models.FORNITORI;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new User
-exports.create = (req, res) => {
-    // Validate request
-    if (!req.body) {
-        res.status(400).send({
-        message: "Content can not be empty!"
-        });
-        return;
-    }
+// exports.create = (req, res) => {
+//     // Validate request
+//     if (!req.body) {
+//         res.status(400).send({
+//         message: "Content can not be empty!"
+//         });
+//         return;
+//     }
 
-    // Create a User
-    const fornitori = {
-        ID_utente_fornitore: req.body.ID_utente_fornitore,
-        Nome_Attivita: req.body.Nome_Attivita,
-        Tipo_Attivita: req.body.Tipo_Attivita,
-        Indirizzo: req.body.Indirizzo,
-        Capienza_massima: req.body.Capienza_massima,
-    };
+//     // Create a User
+//     const fornitore = {
+//         ID_utente_fornitore: req.body.ID_utente_fornitore,
+//         Nome_Attivita: req.body.Nome_Attivita,
+//         Tipo_Attivita: req.body.Tipo_Attivita,
+//         Indirizzo: req.body.Indirizzo,
+//         Capienza_massima: req.body.Capienza_massima,
+//     };
 
-    // Save User in the database
-    tab_fornitori.create(fornitori)
-        .then(data => {
-        res.send(data);
-        })
-        .catch(err => {
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while creating the User."
-        });
-        });
-};
+//     // Save User in the database
+//     tab_fornitori.create(fornitore)
+//         .then(data => {
+//         res.send(data);
+//         })
+//         .catch(err => {
+//         res.status(500).send({
+//             message:
+//             err.message || "Some error occurred while creating the User."
+//         });
+//         });
+// };
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {

@@ -8,8 +8,8 @@ services:
     build: ./backend/database/
     restart: always
     container_name: db_inbook
-    expose:
-    - 3306   #per testare il db lo espongo all'esterno
+    ports:
+    - "3306:3306"   #per testare il db lo espongo all'esterno
     networks:
       - PHPNetwork
       - DBNetwork

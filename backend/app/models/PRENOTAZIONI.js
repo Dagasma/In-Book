@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'UTENTI_VISITATORI',
+        model: 'UTENTI',
         key: 'ID'
       }
     },
@@ -44,6 +44,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'PRENOTAZIONI',
+    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",

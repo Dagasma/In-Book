@@ -1,11 +1,23 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('SERVIZI', {
+  return sequelize.define('NOTIFICHE', {
     ID: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
+    },
+    ID_prenotazione: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    ID_utente: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'UTENTI',
+        key: 'ID'
+      }
     },
     ID_fornitore: {
       type: DataTypes.INTEGER,
@@ -15,21 +27,13 @@ module.exports = function(sequelize, DataTypes) {
         key: 'ID_utente_fornitore'
       }
     },
-    Tipologia: {
-      type: DataTypes.CHAR(30),
-      allowNull: false
-    },
-    Descrizione: {
-      type: DataTypes.CHAR(30),
+    Descrizione_notifica: {
+      type: DataTypes.STRING(255),
       allowNull: true
-    },
-    Durata: {
-      type: DataTypes.TIME,
-      allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'SERVIZI',
+    tableName: 'NOTIFICHE',
     timestamps: false,
     indexes: [
       {
@@ -41,10 +45,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "fk_servizi_fornitori",
+        name: "fk_notifiche_fornitori",
         using: "BTREE",
         fields: [
           { name: "ID_fornitore" },
+        ]
+      },
+      {
+        name: "fk_notifiche_utenti",
+        using: "BTREE",
+        fields: [
+          { name: "ID_utente" },
         ]
       },
     ]

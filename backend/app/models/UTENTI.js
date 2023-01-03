@@ -1,5 +1,6 @@
+const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('UTENTI_VISITATORI', {
+  return sequelize.define('UTENTI', {
     ID: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -33,12 +34,17 @@ module.exports = function(sequelize, DataTypes) {
       unique: "Telefono"
     },
     Tipo: {
-      type: DataTypes.ENUM('Cliente','Amministratore','Fornitore'),
+      type: DataTypes.ENUM('Cliente','Amministratore','Fornitore','Bloccato'),
+      allowNull: false
+    },
+    Autenticato: {
+      type: DataTypes.BOOLEAN,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'UTENTI_VISITATORI',
+    tableName: 'UTENTI',
+    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",

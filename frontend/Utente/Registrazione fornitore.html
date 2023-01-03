@@ -40,7 +40,6 @@
 
 
 <form id="Registrazione_fornitore" name="Registrazione_fornitore">
-    <fieldset>
         <label for="Nome">Nome</label>
         <input type="text" name="Nome" id="Nome"><br>
 
@@ -131,16 +130,10 @@
         <label for="Orario_Domenica">Orario di fine:</label>
         <input type="time" name="Orario_Domenica" id="Orario_Domenica"><br>
 -->
-    </fieldset>
-    <input type="button" onclick="myfun()" value="submit">
-</form>
-<script>
-    function myfun() {
-        console.log("ciao")
-        document.getElementById("Registrazione_fornitore");
-        console.log(document)
-    }
-</script>
+    
+</form><br>
+<input class='input-bottom' type="button" onclick="readinjson('Registrazione_fornitore')" value="submit">
+
 
 
 </body>

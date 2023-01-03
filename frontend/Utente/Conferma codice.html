@@ -35,14 +35,14 @@
 
 </br>
 
-<form action="pagina.php" method="POST">
-    <fieldset >
+<form id="Conferma_codice" name="Conferma_codice">
+        <label for="Email">Email</label>
+        <input type="email" name="Email" id="Email"><br>
         <label for="Codice-di-Conferma">Codice di conferma</label>
         <input type="text" name="Codice-di-Conferma" id="Codice-di-Conferma"><br>
 
-    </fieldset>
-    <button type="button">Conferma Codice</button>
 </form>
+<input class='input-bottom' type="button" onclick="readinjson('Conferma_codice')" value="submit">
 
 </body>
 

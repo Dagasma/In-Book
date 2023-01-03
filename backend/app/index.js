@@ -5,8 +5,15 @@ const db = require("./models");
 
 const app = config.express();
 
+
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
+app.use(config.session({
+  secret: '_g1M@&TG3|%Dv=]',
+  resave: false,
+  saveUninitialized: true,
+  store: config.memoryStore
+}));
 //app.use(config.keycloak.middleware()); //commentato per testare api
 
 app.use(config.express.static(config.frontend_path)); //per rilevare i file css

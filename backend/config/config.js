@@ -11,9 +11,8 @@ config.jwt = require("jsonwebtoken");
 config.Sequelize = require("sequelize");
 config.Keycloak = require('keycloak-connect');
 
-
-const memoryStore = new config.session.MemoryStore();
-config.keycloak = new config.Keycloak({ store: memoryStore });
+config.memoryStore = new config.session.MemoryStore();
+config.keycloak = new config.Keycloak({ store: config.memoryStore });
 
 config.frontend_path = config.path.normalize(process.cwd() + "/frontend/html/"); 
 
@@ -34,21 +33,5 @@ config.apiLimiter = {
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 };
-
-// config.pool = config.mysql.createPool({
-//   connectionLimit: 5,
-//   host: config.DB_HOST,
-//   user: config.DB_USER,
-//   port: config.PORT_DB,
-//   password: config.DB_PASSWORD,
-//   database: config.DB_NAME,
-//   connectTimeout: 100000
-// });
-
-// config.pool.getConnection((err, connection) => {
-//   if (err) throw err;
-//   console.log("Database connected successfully");
-//   connection.release();
-// });
 
 module.exports = config;

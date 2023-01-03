@@ -9,6 +9,11 @@ config.bodyParser = require("body-parser");
 config.rateLimit = require("express-rate-limit");
 config.jwt = require("jsonwebtoken");
 config.Sequelize = require("sequelize");
+config.Keycloak = require('keycloak-connect');
+
+
+const memoryStore = new config.session.MemoryStore();
+config.keycloak = new config.Keycloak({ store: memoryStore });
 
 config.frontend_path = config.path.normalize(process.cwd() + "/frontend/html/"); 
 

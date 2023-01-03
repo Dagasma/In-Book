@@ -6,4 +6,4 @@ Pattern MODEL-VIEW-CONTROLLER:
 
 mi sposto nella directory /app
 comando per inizializzare modelli del db automaticamente tramite sequelize:
-sequelize-auto -o "./models" -d INBOOK -h localhost -u root -x prova -p 5000 -e mysql
+sequelize-auto -o "./models" -d INBOOK -h localhost -u administrator -x prova -p 3306 -e mysql

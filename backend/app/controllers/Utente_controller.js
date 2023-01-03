@@ -1,5 +1,6 @@
 const db = require("../models");
 const tab_utenti = db.models.UTENTI;
+const tab_fornitori = db.models.FORNITORI;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new utente
@@ -21,9 +22,12 @@ exports.create = (req, res) => {
         Data_di_nascita: req.body.Data_di_nascita,
         Telefono: req.body.Telefono,
         Tipo: req.body.Tipo
+
     };
 
     // Save utente in the database
+    var data = {};
+
     tab_utenti.create(utente)
         .then(data => {
         res.send(data);
@@ -34,7 +38,32 @@ exports.create = (req, res) => {
             err.message || "Some error occurred while creating the utente."
         });
         });
-};
+    
+    console.log(data);
+    
+    if(utente.Tipo == "Fornitore"){
+        const fornitore = {
+            ID_utente_fornitore: data.ID,
+            Nome_Attivita: req.body.Nome_Attivita,
+            Tipo_Attivita: req.body.Tipo_Attivita,
+            Indirizzo: req.body.Indirizzo,
+            Capienza_massima: req.body.Capienza_massima,
+        };
+
+          // Save User in the database
+        tab_fornitori.create(fornitore)
+            .then(data2 => {
+            res.send(data2);
+            })
+            .catch(err => {
+            res.status(500).send({
+                message:
+                err.message || "Some error occurred while creating the User."
+            });
+            });
+      }
+}
+
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {

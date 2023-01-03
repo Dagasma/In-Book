@@ -1,4 +1,4 @@
-
+const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('FORNITORI', {
     ID_utente_fornitore: {
@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'UTENTI_VISITATORI',
+        model: 'UTENTI',
         key: 'ID'
       }
     },
@@ -30,6 +30,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'FORNITORI',
+    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",

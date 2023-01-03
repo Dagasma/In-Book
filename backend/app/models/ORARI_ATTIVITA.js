@@ -1,4 +1,4 @@
-
+const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('ORARI_ATTIVITA', {
     ID: {
@@ -15,6 +15,10 @@ module.exports = function(sequelize, DataTypes) {
         key: 'ID_utente_fornitore'
       }
     },
+    Giorno_della_settimana: {
+      type: DataTypes.ENUM('Lunedi','Martedi','Mercoledi','Giovedi','Venerdi','Sabato','Domenica'),
+      allowNull: false
+    },
     Orario_apertura: {
       type: DataTypes.TIME,
       allowNull: false
@@ -26,6 +30,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'ORARI_ATTIVITA',
+    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",

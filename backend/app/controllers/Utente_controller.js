@@ -105,7 +105,7 @@ exports.findOne = (req, res) => {
         });
 };
 
-exports.update = (req, res) => {
+exports.update = (req, res) => { //non funziona, da aggiustare
     const id = req.params.id;
 
     tab_utenti.update(req.body, {
@@ -127,6 +127,7 @@ exports.update = (req, res) => {
                 message: "Error updating Utente with id=" + id
             });
         });
+        
 };
 
 

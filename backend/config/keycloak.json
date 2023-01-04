@@ -1,11 +1,11 @@
 {
-  "realm": "master",
-  "auth-server-url": "http://localhost:8080/",
+  "realm": "inbook",
+  "auth-server-url": "https://localhost:8443/",
   "ssl-required": "external",
   "resource": "nodejs",
   "verify-token-audience": true,
   "credentials": {
-    "secret": "A2TsHd4fsrQpV5VzlQq85FltsqgjsMlC"
+    "secret": "VlUUgrBUV4D3VjPM12onmhe6MuuReet6"
   },
   "use-resource-role-mappings": true,
   "confidential-port": 0,

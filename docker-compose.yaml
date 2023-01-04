@@ -25,22 +25,22 @@ services:
     networks:
       - PHPNetwork
   
-  webserver:
-    build: ./backend/config/
-    container_name: backend
-    depends_on:
-      - db
-    environment:
-      - NODE_ENV=production
-    ports:
-      - "4000:8080"
-    networks:
-      - DBNetwork
-    volumes:
-      - ./backend/:/app/backend/
-      - ./frontend/:/app/frontend/
-      - ./package.json:/app/package.json
-      - ./package-lock.json:/app/package-lock.json
+  # webserver:
+  #   build: ./backend/config/
+  #   container_name: backend
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - NODE_ENV=production
+  #   ports:
+  #     - "4000:8080"
+  #   networks:
+  #     - DBNetwork
+  #   volumes:
+  #     - ./backend/:/app/backend/
+  #     - ./frontend/:/app/frontend/
+  #     - ./package.json:/app/package.json
+  #     - ./package-lock.json:/app/package-lock.json
 
   keycloak:
     build: ./keycloak/

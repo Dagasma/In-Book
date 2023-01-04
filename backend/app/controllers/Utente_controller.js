@@ -105,29 +105,28 @@ exports.findOne = (req, res) => {
         });
 };
 
-exports.update = (req, res) => { //non funziona, da aggiustare
+exports.update = (req, res) => { 
     const id = req.params.id;
-
     tab_utenti.update(req.body, {
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Utente was updated successfully."
-                });
-            } else {
-                res.send({
-                    message: `Cannot update Utente with id=${id}. Maybe Utente was not found or req.body is empty!`
-                });
-            }
+            where: { id: id }
         })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error updating Utente with id=" + id
+        .then(num => {
+                if (num == 1) {
+                    res.send({
+                        message: "Utente was updated successfully."
+                    });
+                } else {
+                    res.send({
+                        message: `Cannot update Utente with id=${id}. Maybe Utente was not found or req.body is empty!`
+                    });
+                }
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: "Error updating Utente with id=" + id
+                });
             });
-        });
-        
+    
 };
 
 
@@ -135,45 +134,45 @@ exports.update = (req, res) => { //non funziona, da aggiustare
 exports.delete = (req, res) => {
     const id = req.params.id;
   
-    Tutorial.destroy({
+    tab_utenti.destroy({
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Tutorial was deleted successfully!"
+            message: "Utente was deleted successfully!"
           });
         } else {
           res.send({
-            message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
+            message: `Cannot delete Utente with id=${id}. Maybe Tutorial was not found!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete Tutorial with id=" + id
+          message: "Could not delete Utente with id=" + id
         });
       });
   };
 
 // Delete all Tutorials from the database.
 exports.deleteAll = (req, res) => {
-    Tutorial.destroy({
+  tab_utenti.destroy({
       where: {},
       truncate: false
     })
       .then(nums => {
-        res.send({ message: `${nums} Tutorials were deleted successfully!` });
+        res.send({ message: `${nums} Utenti were deleted successfully!` });
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while removing all tutorials."
+            err.message || "Some error occurred while removing all Utenti."
         });
       });
   };
 
-// Find all published Tutorials
-exports.findAllPublished = (req, res) => {
+// Find all authenticated users
+exports.findAllAuthenticated = (req, res) => {
   
 };

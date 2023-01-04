@@ -11,8 +11,20 @@ config.jwt = require("jsonwebtoken");
 config.Sequelize = require("sequelize");
 config.Keycloak = require('keycloak-connect');
 
+
+
+config.keycloakConfig = {
+  clientId: 'type credential',
+  bearerOnly: true,
+  serverUrl: 'our company server',
+  realm: 'the test realm',
+  grantType: "client_credentials",
+  credentials: {
+      secret: 'our secret'
+  }
+};
 config.memoryStore = new config.session.MemoryStore();
-config.keycloak = new config.Keycloak({ store: config.memoryStore });
+config.keycloak = new config.Keycloak('./keycloak.json',{ store: config.memoryStore },config.keycloakConfig);
 
 config.frontend_path = config.path.normalize(process.cwd() + "/frontend/html/"); 
 

@@ -3,9 +3,7 @@ module.exports = app => {
     
 
     var router = require("express").Router();
-
     
-
     // Create a new User/Fornitore
     router.post("/", users.create);
 
@@ -18,11 +16,11 @@ module.exports = app => {
     // Update a User with id
     router.put("/:id", users.update);
   
-//     // // Delete a Tutorial with id
-//     // router.delete("/:id", tutorials.delete);
+//     // // Delete a users with id
+    router.delete("/:id", users.delete);
   
-//     // // Delete all Tutorials
-//     // router.delete("/", tutorials.deleteAll);
+//     // // Delete all users
+    router.delete("/", users.deleteAll);
 
 
     app.use('/api/Users', router);

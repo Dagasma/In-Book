@@ -36,14 +36,14 @@
 </br>
 <p>Non hai ancora completato la registrazione giusto? per completare la registrazione inserisci il codice ricevuto </p>
 
-<form id="Conferma_codice" name="Conferma_codice">
+<form action="../../backend/app/api/" method="post" id="myForm" name="Conferma_codice">
         <label for="Email">Email</label>
         <input type="email" name="Email" id="Email"><br>
         <label for="Codice-di-Conferma">Codice di conferma</label>
         <input type="text" name="Codice-di-Conferma" id="Codice-di-Conferma"><br>
+        <button class='input-bottom' type="submit">Conferma autentificazione</button>
 
 </form>
-<input class='input-bottom' type="button" onclick="readinjson('Conferma_codice')" value="submit">
 
 </body>
 

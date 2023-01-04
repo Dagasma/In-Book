@@ -68,14 +68,14 @@ form {
 
   
   form label {
-    padding : 20px;
+    padding : 5px;
     margin-bottom: 10px;
     font-weight: bold;
   }
   
 .input-bottom {
     margin-bottom: 10px;
-    margin-right: 50px;
+    margin-right: 10px;
     padding:5px;
     border-radius: 10px;
     margin-top: 10px;
@@ -85,8 +85,8 @@ form {
   }
 
   form input {
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
     background-color: rgb(246, 194, 97);
     border: solid 1px #a35400;
     font-weight: bold;

@@ -33,15 +33,24 @@
 <!-- Inseriamo una foto-->
 </section>
 <p> Inserisci i dati del servizio che vuoi pubblicare</p>
-<form id="Crea_servizio" name="Crea_servizio">
+<form action="../../backend/app/api/" method="post" id="myForm" name="Crea_servizio">
         <label for="Tipo_di_servizio">Tipo di servizio</label>
         <input type="text" name="Tipo_di_servizio" id="Tipo_di_servizio"><br>
         <label for="Descrrizione">Descrrizione</label>
         <input type="text" name="Descrrizione" id="Descrrizione"><br>
         <label for="Durata">Durata</label>
-        <input type="time" name="Durata" id="Durata"><br>
-</form>
-<input class='input-bottom' type="button" onclick="readinjson('Crea_servizio')" value="submit">
+        <select type="time" id="Durata" name="Durata">
+            <option value=00:15>00:15</option>
+            <option value=00:30>00:30</option>
+            <option value=00:45>00:45</option>
+            <option value=01:00>01:00</option>
+            <option value=01:30>01:30</option>
+            <option value=02:00>02:00</option>
+            <option value=02:30>02:30</option>
+        </select><br>
+        <button class='input-bottom' type="submit">Crea servizio </button>
+
+    </form>
 
 </body>
 

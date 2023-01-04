@@ -33,15 +33,15 @@
 <!-- Inseriamo una foto-->
 </section>
 <p> Completa il form per effettuare la prenotazione</p>
-<form id="cerca_servizio" name="cerca_servizio">
+<form action="../../backend/app/api/" method="post" id="myForm" name="effettua_prenotazione">
         <label for="Tipo_di_servizio">Tipo di servizio</label>
         <input type="text" name="Tipo_di_servizio" id="Tipo_di_servizio"><br>
         <label for="Descrrizione">Descrrizione</label>
         <input type="text" name="Descrrizione" id="Descrrizione"><br>
         <label for="Durata">Durata</label>
         <input type="time" name="Durata" id="Durata"><br>
-</form>
-<input class='input-bottom' type="button" onclick="readinjson('effettua prenotazione')" value="submit">
+        <button class='input-bottom' type="submit">Effettua prenotazioni </button>
+    </form>
 
 </body>
 

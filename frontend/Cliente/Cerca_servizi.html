@@ -27,40 +27,48 @@
         </div>
     </nav>
 </header>
+
 <body>
-<section>
-<h1>cerca servizio</h1>
-<!-- Inseriamo una foto-->
-</section>
-<p> Inserisci i dati del servizio che vuoi cercare</p>
-<form id="cerca_servizio" name="cerca_servizio">
+    <section>
+        <h1>cerca servizio</h1>
+        <!-- Inseriamo una foto-->
+    </section>
+    <p> Inserisci i dati del servizio che vuoi cercare</p>
+    <form action="../../backend/app/api/" method="post" id="myForm" name="cerca_servizio">
 
-    <label for="Tipo_Attivita">Giorno</label>
-    <select id="Tipo_Attivita" name="Tipo_Attivita">
-        <option value="">-- Seleziona --</option>
-        <option value="Lunedi">Lunedi</option>
-        <option value="Martedi">Martedi</option>
-        <option value="Mercoledi">Mercoledi</option>
-        <option value="Giovedi">Giovedi</option>
-        <option value="Venerdi">Venerdi</option>
-        <option value="Sabato">Sabato</option>
-        <option value="Domenica">Domenica</option>
+        <label for="Tipo_Attivita">Giorno</label>
+        <select id="Tipo_Attivita" name="Tipo_Attivita">
+            <option value="">-- Seleziona --</option>
+            <option value="Lunedi">Lunedi</option>
+            <option value="Martedi">Martedi</option>
+            <option value="Mercoledi">Mercoledi</option>
+            <option value="Giovedi">Giovedi</option>
+            <option value="Venerdi">Venerdi</option>
+            <option value="Sabato">Sabato</option>
+            <option value="Domenica">Domenica</option>
 
-    </select><br>
-    <label for="Orario_I">Orario di inizio:</label>
-    <input type="time" name="Orario_I" id="Orario_I">
-    <label for="Orario_F">Orario di fine:</label>
-    <input type="time" name="Orario_F" id="Orario_F"><br>
+        </select><br>
+        <label for="Orario_I">Orario di inizio:</label>
+        <input type="time" name="Orario_I" id="Orario_I">
+        <label for="Orario_F">Orario di fine:</label>
+        <input type="time" name="Orario_F" id="Orario_F"><br>
 
-    <label for="Tipo_di_servizio">Tipo di servizio</label>
-    <input type="text" name="Tipo_di_servizio" id="Tipo_di_servizio"><br>
-    <label for="Capienza">Capienza</label>
-    <input type="text" name="Capienza" id="Capienza"><br>
-    <label for="Durata">Durata</label>
-    <input type="time" name="Durata" id="Durata"><br>
-    
-</form>
-<input class='input-bottom' type="button" onclick="readinjson('cerca_servizio')" value="submit">
+        <label for="Tipo_di_servizio">Tipo di servizio</label>
+        <input type="text" name="Tipo_di_servizio" id="Tipo_di_servizio"><br>
+        <label for="Capienza">Capienza</label>
+        <input type="text" name="Capienza" id="Capienza"><br>
+        <label for="Durata">Durata</label>
+        <select type="time" id="Durata" name="Durata">
+            <option value=00:15>00:15</option>
+            <option value=00:30>00:30</option>
+            <option value=00:45>00:45</option>
+            <option value=01:00>01:00</option>
+            <option value=01:30>01:30</option>
+            <option value=02:00>02:00</option>
+            <option value=02:30>02:30</option>
+        </select><br>
+        <button class='input-bottom' type="submit">Cerca servizi</button>
+    </form>
 
 </body>
 

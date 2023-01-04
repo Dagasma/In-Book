@@ -33,7 +33,7 @@
 <!-- Inseriamo una foto-->
 </section>
 <p> Ecco i dati inerenti al tuo profilo , modifica i dati e salva per modificare i dati</p>
-<form id="cerca_servizio" name="cerca_servizio">
+<form action="../../backend/app/api/" method="post" id="myForm" name="modifica_utente">
     <label for="Nome">Nome</label>
     <input type="text" name="Nome" id="Nome"><br>
 
@@ -51,8 +51,9 @@
 
     <label for="Telefono">Telefono</label>
     <input type="tel" name="Telefono" id="Telefono"><br>
+    <button class='input-bottom' type="submit"> Modifica profilo </button>
+
 </form>
-<input class='input-bottom' type="button" onclick="readinjson('cerca_servizio')" value="submit">
 
 </body>
 

@@ -33,13 +33,13 @@
 <!-- Inseriamo una foto-->
 </section>
 <p> Inserisci i dati del fornitore che stai cercando</p>
-<form id="cerca_fornitore" name="cerca_fornitore">
+<form action="../../backend/app/api/" method="post" id="myForm name="cerca_fornitore">
 
     <label for="Nome_attivita">Nome attivita</label>
     <input type="text" name="Nome attivita" id="Nome_attivita"><br>
     <label for="Tipo_Attivita">Tipo attivita</label>
     <select id="Tipo_Attivita" name="Tipo_Attivita">
-        <option value="">_ Seleziona _</option>
+        <option value="">Generico</option>
         <option value="Barber">Barber Shop</option>
         <option value="Analisi">Centro analisi</option>
         <option value="Palestra">Palestra</option>
@@ -53,9 +53,8 @@
 
     <label for="Capienza_massima">Capienza massima</label>
     <input type="number" name="Capienza_massima" id="Capienza_massima"><br>
-    
+    <button class='input-bottom' type="submit">Cerca Fornitore</button>
 </form>
-<input class='input-bottom' type="button" onclick="readinjson('cerca_fornitore')" value="submit">
 
 </body>
 

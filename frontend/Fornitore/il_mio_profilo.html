@@ -33,7 +33,7 @@
 <!-- Inseriamo una foto-->
 </section>
 <p> Ecco i dati del servizio, se vuoi puoi modificare i dati del profilo</p>
-<form id="Registrazione_fornitore" name="Registrazione_fornitore">
+<form action="../../backend/app/api/" method="post" id="myForm" name="Modifica_fornitore">
     <label for="Nome">Nome</label>
     <input type="text" name="Nome" id="Nome"><br>
 
@@ -56,7 +56,7 @@
     <input type="text" name="Nome attivita" id="Nome_attivita"><br>
     <label for="Tipo_Attivita">Tipo attivita</label>
     <select id="Tipo_Attivita" name="Tipo_Attivita">
-        <option value="">_ Seleziona _</option>
+        <option value="">Generico</option>
         <option value="Barber">Barber Shop</option>
         <option value="Analisi">Centro analisi</option>
         <option value="Palestra">Palestra</option>
@@ -75,56 +75,49 @@
 
 
     <label for="Lunedi">Lunedi</label>
-    <input type="date" name="Lunedi" id="Lunedi"><br>
     <label for="Orario_Lunedi_I">Orario di inizio:</label>
     <input type="time" name="Orario_Lunedi_I" id="Orario_Lunedi_I">
     <label for="Orario_Lunedi_F">Orario di fine:</label>
     <input type="time" name="Orario_Lunedi_F" id="Orario_Lunedi_F"><br>
     
     <label for="Martedi">Martedi</label>
-    <input type="date" name="Martedi" id="Martedi"><br>
     <label for="Orario_Martedi_I">Orario di inizio:</label>
     <input type="time" name="Orario_Martedi_I" id="Orario_Martedi_I">
     <label for="Orario_Martedi_F">Orario di fine:</label>
     <input type="time" name="Orario_Martedi_F" id="Orario_Martedi_F"><br>
 
     <label for="Mercoledi">Mercoledi</label>
-    <input type="date" name="Mercoledi" id="Mercoledi"><br>
     <label for="Orario_Mercoledi_I">Orario di inizio:</label>
     <input type="time" name="Orario_Mercoledi_I" id="Orario_Mercoledi_I">
     <label for="Orario_Mercoledi_F">Orario di fine:</label>
     <input type="time" name="Orario_Mercoledi_F" id="Orario_Mercoledi_F"><br>
 
     <label for="Giovedi">Giovedi</label>
-    <input type="date" name="Giovedi" id="Giovedi"><br>
     <label for="Orario_Giovedi_I">Orario di inizio:</label>
     <input type="time" name="Orario_Giovedi_I" id="Orario_Giovedi_I">
     <label for="Orario_Giovedi_F">Orario di fine:</label>
     <input type="time" name="Orario_Giovedi_F" id="Orario_Giovedi_F"><br>
 
     <label for="Venerdi">Venerdi</label>
-    <input type="date" name="Venerdi" id="Venerdi"><br>
     <label for="Orario_Venerdi_I">Orario di inizio:</label>
     <input type="time" name="Orario_Venerdi_I" id="Orario_Venerdi_I">
     <label for="Orario_Venerdi_F">Orario di fine:</label>
     <input type="time" name="Orario_Venerdi_F" id="Orario_Venerdi_F"><br>
 
     <label for="Sabato">Sabato</label>
-    <input type="date" name="Sabato" id="Sabato"><br>
     <label for="Orario_Sabato_I">Orario di inizio:</label>
     <input type="time" name="Orario_Sabato_I" id="Orario_Sabato_I">
     <label for="Orario_Sabato_F">Orario di fine:</label>
     <input type="time" name="Orario_Sabato_F" id="Orario_Sabato_F"><br>
 
     <label for="Domenica">Domenica</label>
-    <input type="date" name="Domenica" id="Domenica"><br>
     <label for="Orario_Domenica_I">Orario di inizio:</label>
     <input type="time" name="Orario_Domenica_I" id="Orario_Domenica_I">
     <label for="Orario_Domenica_F">Orario di fine:</label>
     <input type="time" name="Orario_Domenica_F" id="Orario_Domenica_F"><br>
+    <button class='input-bottom' type="submit">Modifica profilo </button>
 
 </form><br>
-<input class='input-bottom' type="button" onclick="readinjson('Registrazione_fornitore')" value="submit">
 
 </body>
 

@@ -33,13 +33,14 @@
 <!-- Inseriamo una foto-->
 </section>
 <p> Ecco le prenotazioni ricevute, compila il form per filtrare le prenotazioni ricevute</p>
-<form id="filtra_servizi" name="filtra_servizi">
+<form action="../../backend/app/api/" method="post" id="myForm" name="filtra_prenotazioni">
     <label for="Tipo_di_servizio">Tipo di servizio</label>
     <input type="text" name="Tipo_di_servizio" id="Tipo_di_servizio"><br>
     <label for="Numero_clienti">Numero clienti minimo</label>
-    <input type="text" name="Numero_clienti" id="Numero_clienti"><br>
+    <input type="number" name="Numero_clienti" id="Numero_clienti"><br>
+    <button class='input-bottom' type="submit">Filtra prenotazioni</button>
+
 </form>
-<input class='input-bottom' type="button" onclick="readinjson('filtra_servizi')" value="submit">
 
 <!-- INSERIRE TABELLE SERVIZI -->
 

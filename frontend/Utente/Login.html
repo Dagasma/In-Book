@@ -33,14 +33,14 @@
 <h1>LOGIN</h1>
 <!-- Inseriamo una foto-->
 </section>
-<form id='Login' name="Login">
+<form action="../../backend/app/api/" method="post" id='myForm' name="Login">
         <label for="Email">Email</label>
         <input type="email" name="Email" id="Email"><br>
         <label for="Password">Password</label>
         <input type="password" name="Password" id="Password"><br>
-    <div ><a class='center_pw' href="Recupera password.html">Hai dimenticato la password? </a></div><br>
+        <div ><a class='center_pw' href="Recupera password.html">Hai dimenticato la password? </a></div><br>
+    <button class='input-bottom' type="submit">Effettua il login</button>
 </form>
-<input class='input-bottom' type="button" onclick="readinjson('Login')" value="LOGIN">
 
 </body>
 

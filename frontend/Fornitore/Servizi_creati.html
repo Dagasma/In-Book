@@ -33,15 +33,24 @@
 <!-- Inseriamo una foto-->
 </section>
 <p> hai creato i seguenti servizi , vuoi filtrare i servizi? </p>
-<form id="filtra_servizi" name="filtra_servizi">
+<form action="../../backend/app/api/" method="post" id="myForm" name="filtra_servizi">
     <label for="Tipo_di_servizio">Tipo di servizio</label>
     <input type="text" name="Tipo_di_servizio" id="Tipo_di_servizio"><br>
     <label for="Descrrizione">Descrrizione</label>
     <input type="text" name="Descrrizione" id="Descrrizione"><br>
     <label for="Durata">Durata</label>
-    <input type="time" name="Durata" id="Durata"><br>
+    <select type="time" id="Durata" name="Durata">
+        <option value=00:15>00:15</option>
+        <option value=00:30>00:30</option>
+        <option value=00:45>00:45</option>
+        <option value=01:00>01:00</option>
+        <option value=01:30>01:30</option>
+        <option value=02:00>02:00</option>
+        <option value=02:30>02:30</option>
+    </select><br>
+    <button class='input-bottom' type="submit">Filtra servizi </button>
+
 </form>
-<input class='input-bottom' type="button" onclick="readinjson('filtra_servizi')" value="submit">
 
 <!-- INSERIRE TABELLE SERVIZI -->
 

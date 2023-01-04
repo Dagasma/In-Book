@@ -12,7 +12,8 @@ config.Keycloak = require('keycloak-connect');
 
 
 config.memoryStore = new config.session.MemoryStore();
-config.keycloak = new config.Keycloak({ store: config.memoryStore });
+config.keycloak = new config.Keycloak({ store: config.memoryStore,onLoad: 'login-required', checkLoginIframe: false });
+
 
 config.frontend_path = config.path.normalize(process.cwd() + "/frontend/html/"); 
 

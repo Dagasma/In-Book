@@ -16,6 +16,7 @@ API home FRONTEND PUBLIC
     /auth/cliente/profilo GET-> page html profilo
     /auth/cliente/ricerca_servizio GET-> page html ricerca_servizio
     /auth/cliente/ricerca_fornitore GET-> page html ricerca_fornitore
+    /auth/cliente/visualizza_servizio GET-> page html calendario
     /auth/cliente/visualizza_prenotazioni GET-> page html prenotazioni_effettuate
 
     -Fornitore

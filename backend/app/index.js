@@ -17,6 +17,8 @@ app.use(config.session({
 
 app.use(config.keycloak.middleware()); //commentato per testare api
 
+console.log(config.keycloak.getConfig());
+
 app.use(config.express.static(config.frontend_path)); //per rilevare i file css
 
 //connessione al db con sequelize per facilitare operazioni CRUD

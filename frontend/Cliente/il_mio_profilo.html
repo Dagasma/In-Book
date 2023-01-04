@@ -3,46 +3,37 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>In Book (Start to 0)</title>
+    <title>Il mio profilo</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="icon.png">
-    <link href="Utente.css" rel="stylesheet" type="text/css">
-    <script src="Utente.js"></script>
+    <link href="Cliente.css" rel="stylesheet" type="text/css">
+    <script src="Cliente.js"></script>
 </head>
 
 <!--<logo><div class="logo"><img src="icon.png"></div></logo>-->
-<header >
+<header>
     <nav class="header">
         <img class="logo" src="icon1.png">
         <div class="dropdown">
             <button class="dropdown-toggle">Menu</button>
-
             <ul class="dropdown-menu">
-                <li><a href="Home.html">Home</a></li>
-                <li><a href="Login.html">Login</a></li>
-                <li><a href="Registrazione fornitore.html">Registrazione Fornitore</a></li>
-                <li><a href="Registrazione utente.html">Registrazione Utente</a></li>
-         </ul>
+                <li><a href="il_mio_profilo.html">Il mio profilo</a></li>
+                <li><a href="Notifiche.html">Notifiche</a></li>
+                <li><a href="Prenotazioni_effettuate.html">Prenotazioni effettuate</a></li>
+                <li><a href="Cerca_servizi.html">Cerca servizi</a></li>
+                <li><a href="Cerca_fornitore.html">Cerca fornitore</a></li>
+            </ul>
         </div>
     </nav>
 </header>
-
-
-</body>
-
+<body>
 <section>
-<h1>Registrazione utente</h1>
+<h1>il mio profilo</h1>
 <!-- Inseriamo una foto-->
 </section>
-
-</br>
-
-
-
-
-
-<form id="Registrazione_utente" name="Registrazione_utente">
+<p> Ecco i dati inerenti al tuo profilo , modifica i dati e salva per modificare i dati</p>
+<form id="cerca_servizio" name="cerca_servizio">
     <label for="Nome">Nome</label>
     <input type="text" name="Nome" id="Nome"><br>
 
@@ -61,7 +52,7 @@
     <label for="Telefono">Telefono</label>
     <input type="tel" name="Telefono" id="Telefono"><br>
 </form>
-<input class='input-bottom' type="button" onclick="readinjson('Registrazione_utente')" value="submit">
+<input class='input-bottom' type="button" onclick="readinjson('cerca_servizio')" value="submit">
 
 </body>
 

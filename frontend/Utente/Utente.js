@@ -1,4 +1,4 @@
-
+// func modulo da definire ancora
 function Modulo() {
     var Nome = document.modulo.Nome.value;
     var Cognome = document.modulo.Cognome.value;
@@ -22,3 +22,13 @@ function Modulo() {
 }
 
 
+function readinjson(name_form) {
+  var form = document.getElementById(name_form);
+  var inputs = form.elements;
+  var formData = {};
+  formData['name_form']=name_form
+  for (var i = 0; i < inputs.length; i++) {
+    formData[inputs[i].name] = inputs[i].value;
+  }
+  console.log(formData)
+}

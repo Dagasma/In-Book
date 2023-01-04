@@ -40,7 +40,6 @@
 
 
 <form id="Registrazione_fornitore" name="Registrazione_fornitore">
-    <fieldset>
         <label for="Nome">Nome</label>
         <input type="text" name="Nome" id="Nome"><br>
 
@@ -61,16 +60,15 @@
 
         <label for="Nome_attivita">Nome attivita</label>
         <input type="text" name="Nome attivita" id="Nome_attivita"><br>
-        <!--
         <label for="Tipo_Attivita">Tipo attivita</label>
         <select id="Tipo_Attivita" name="Tipo_Attivita">
             <option value="">_ Seleziona _</option>
-            <option value="red">Barber Shop</option>
-            <option value="green">Centro analisi</option>
-            <option value="blue">Palestra</option>
-            <option value="red">Sala Giochi</option>
-            <option value="green">Agenzia di viaggi</option>
-            <option value="blue">Insegnamento</option>
+            <option value="Barber">Barber Shop</option>
+            <option value="Analisi">Centro analisi</option>
+            <option value="Palestra">Palestra</option>
+            <option value="Giochi">Sala Giochi</option>
+            <option value="Viaggi">Agenzia di viaggi</option>
+            <option value="Insegnamento">Insegnamento</option>
         </select><br>
         
         
@@ -98,49 +96,42 @@
 
         <label for="Mercoledi">Mercoledi</label>
         <input type="date" name="Mercoledi" id="Mercoledi"><br>
-        <label for="Orario_Domenica">Orario di inizio:</label>
-        <input type="time" name="Orario_Domenica" id="Orario_Domenica">
-        <label for="Orario_Mercoledi">Orario di fine:</label>
-        <input type="time" name="Orario_Mercoledi" id="Orario_Mercoledi"><br>
+        <label for="Orario_Mercoledi_I">Orario di inizio:</label>
+        <input type="time" name="Orario_Mercoledi_I" id="Orario_Mercoledi_I">
+        <label for="Orario_Mercoledi_F">Orario di fine:</label>
+        <input type="time" name="Orario_Mercoledi_F" id="Orario_Mercoledi_F"><br>
 
         <label for="Giovedi">Giovedi</label>
         <input type="date" name="Giovedi" id="Giovedi"><br>
-        <label for="Orario_Domenica">Orario di inizio::</label>
-        <input type="time" name="Orario_Domenica" id="Orario_Domenica">
-        <label for="Orario_Giovedi">Orario di fine:</label>
-        <input type="time" name="Orario_Giovedi" id="Orario_Giovedi"><br>
+        <label for="Orario_Giovedi_I">Orario di inizio:</label>
+        <input type="time" name="Orario_Giovedi_I" id="Orario_Giovedi_I">
+        <label for="Orario_Giovedi_F">Orario di fine:</label>
+        <input type="time" name="Orario_Giovedi_F" id="Orario_Giovedi_F"><br>
 
         <label for="Venerdi">Venerdi</label>
         <input type="date" name="Venerdi" id="Venerdi"><br>
-        <label for="Orario_Domenica">Orario di inizio:</label>
-        <input type="time" name="Orario_Domenica" id="Orario_Domenica">
-        <label for="Orario_Venerdi">Orario di fine:</label>
-        <input type="time" name="Orario_Venerdi" id="Orario_Venerdi"><br>
-        
+        <label for="Orario_Venerdi_I">Orario di inizio:</label>
+        <input type="time" name="Orario_Venerdi_I" id="Orario_Venerdi_I">
+        <label for="Orario_Venerdi_F">Orario di fine:</label>
+        <input type="time" name="Orario_Venerdi_F" id="Orario_Venerdi_F"><br>
+
         <label for="Sabato">Sabato</label>
         <input type="date" name="Sabato" id="Sabato"><br>
-        <label for="Orario_Domenica">Orario di inizio::</label>
-        <input type="time" name="Orario_Domenica" id="Orario_Domenica">
-        <label for="Orario_Sabato">Orario di fine:</label>
-        <input type="time" name="Orario_Sabato" id="Orario_Sabato"><br>
-        
+        <label for="Orario_Sabato_I">Orario di inizio:</label>
+        <input type="time" name="Orario_Sabato_I" id="Orario_Sabato_I">
+        <label for="Orario_Sabato_F">Orario di fine:</label>
+        <input type="time" name="Orario_Sabato_F" id="Orario_Sabato_F"><br>
+
         <label for="Domenica">Domenica</label>
         <input type="date" name="Domenica" id="Domenica"><br>
-        <label for="Orario_Domenica">Orario di inizio:</label>
-        <input type="time" name="Orario_Domenica" id="Orario_Domenica">
-        <label for="Orario_Domenica">Orario di fine:</label>
-        <input type="time" name="Orario_Domenica" id="Orario_Domenica"><br>
--->
-    </fieldset>
-    <input type="button" onclick="myfun()" value="submit">
-</form>
-<script>
-    function myfun() {
-        console.log("ciao")
-        document.getElementById("Registrazione_fornitore");
-        console.log(document)
-    }
-</script>
+        <label for="Orario_Domenica_I">Orario di inizio:</label>
+        <input type="time" name="Orario_Domenica_I" id="Orario_Domenica_I">
+        <label for="Orario_Domenica_F">Orario di fine:</label>
+        <input type="time" name="Orario_Domenica_F" id="Orario_Domenica_F"><br>
+
+</form><br>
+<input class='input-bottom' type="button" onclick="readinjson('Registrazione_fornitore')" value="submit">
+
 
 
 </body>

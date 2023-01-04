@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Effettua prenotazione</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="icon.png">
+    <link href="Cliente.css" rel="stylesheet" type="text/css">
+    <script src="Cliente.js"></script>
+</head>
+
+<!--<logo><div class="logo"><img src="icon.png"></div></logo>-->
+<header>
+    <nav class="header">
+        <img class="logo" src="icon1.png">
+        <div class="dropdown">
+            <button class="dropdown-toggle">Menu</button>
+            <ul class="dropdown-menu">
+                <li><a href="il_mio_profilo.html">Il mio profilo</a></li>
+                <li><a href="Notifiche.html">Notifiche</a></li>
+                <li><a href="Prenotazioni_effettuate.html">Prenotazioni effettuate</a></li>
+                <li><a href="Cerca_servizi.html">Cerca servizi</a></li>
+                <li><a href="Cerca_fornitore.html">Cerca fornitore</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<body>
+<section>
+<h1>Effettua prenotazione</h1>
+<!-- Inseriamo una foto-->
+</section>
+<p> Completa il form per effettuare la prenotazione</p>
+<form id="cerca_servizio" name="cerca_servizio">
+        <label for="Tipo_di_servizio">Tipo di servizio</label>
+        <input type="text" name="Tipo_di_servizio" id="Tipo_di_servizio"><br>
+        <label for="Descrrizione">Descrrizione</label>
+        <input type="text" name="Descrrizione" id="Descrrizione"><br>
+        <label for="Durata">Durata</label>
+        <input type="time" name="Durata" id="Durata"><br>
+</form>
+<input class='input-bottom' type="button" onclick="readinjson('effettua prenotazione')" value="submit">
+
+</body>
+
+</html>

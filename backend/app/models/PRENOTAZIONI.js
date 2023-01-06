@@ -15,6 +15,14 @@ module.exports = function(sequelize, DataTypes) {
         key: 'ID'
       }
     },
+    ID_fornitore: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'FORNITORI',
+        key: 'ID_utente_fornitore'
+      }
+    },
     ID_servizio: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -66,6 +74,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "ID_utente" },
+        ]
+      },
+      {
+        name: "fk_prenotazioni_fornitori",
+        using: "BTREE",
+        fields: [
+          { name: "ID_fornitore" },
         ]
       },
     ]

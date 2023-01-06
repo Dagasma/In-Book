@@ -1,6 +1,6 @@
 {
   "realm": "inbook",
-  "auth-server-url": "https://keycloak:8443/",
+  "auth-server-url": "http://keycloak.inbook.local:8080",
   "ssl-required": "none",
   "resource": "nodejs",
   "verify-token-audience": false,

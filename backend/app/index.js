@@ -30,7 +30,7 @@ db.sequelize.sync()
     console.log("Failed to sync db: " + err.message);
   });
 
-app.use("/test", login);
+app.use("/test",config.keycloak.protect('realm:amministratore'), login);
 // app.use("/api/register", register);
 
 require("./api/user_routes")(app);

@@ -31,9 +31,9 @@ db.sequelize.sync()
     console.log("Failed to sync db: " + err.message);
   });
 
-app.use("/auth/cliente",config.keycloak.protect('realm:cliente'),cliente)
-app.use("/auth/fornitore",config.keycloak.protect('realm:fornitore'),fornitore)
-app.use("/auth/amministratore",config.keycloak.protect('realm:amministratore'),amministratore)
+app.use("/cliente",config.keycloak.protect('realm:cliente'),cliente)
+app.use("/fornitore",config.keycloak.protect('realm:fornitore'),fornitore)
+app.use("/amministratore",config.keycloak.protect('realm:amministratore'),amministratore)
 
 require("./api/user_routes")(app);
 

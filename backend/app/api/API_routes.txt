@@ -15,38 +15,55 @@ API home FRONTEND PUBLIC
     -Cliente
     1 /auth/cliente/profilo GET-> page html profilo
         /cliente/api/get_profile:id(?) GET -> JSON istanza cliente   
+        /cliente/api/aggiorna_profilo:id(?) PUT(Update profilo) -> msg di ritorno 
 
     2 /auth/cliente/ricerca_fornitori_per_servizio GET-> page html ricerca_servizio
-        /api/servizi/get_fornitori_per_servizi GET(Request_body contiene filtri) -> JSON lista fornitori dei servizi ricercati (con incluso un link a visualizza_profilo_fornitore del profilo fornitore in base all'id)
+        /servizi/api/get_fornitori_per_servizi GET(Request_body contiene filtri) -> JSON lista fornitori dei servizi ricercati (con incluso un link a visualizza_profilo_fornitore del profilo fornitore in base all'id)
         
     3 /auth/cliente/ricerca_fornitore GET-> page html ricerca_fornitore
-        /api/fornitore/get_fornitori GET(Request_body contiene filtri) -> JSON lista fornitori (con incluso un link a visualizza_profilo_fornitore del profilo fornitore in base all'id)
+        /fornitore/api/get_fornitori GET(Request_body contiene filtri) -> JSON lista fornitori (con incluso un link a visualizza_profilo_fornitore del profilo fornitore in base all'id)
     
     4 (include 3) 
         /auth/cliente/visualizza_profilo_fornitore/:id_fornitore GET-> page html profilo fornitore
-            /api/fornitore/:id_fornitore GET(Request_body contiene i campi da tornare (il cliente non può vedere tutto del fornitore))-> JSON istanza fornitore + istanza utente del fornitore
-            /api/servizi/get_servizi_per_fornitore:id_fornitore GET-> JSON lista dei servizi del fornitore
-            /api/prenotazioni/get_slot_liberi:id_fornitore GET(Request_body contiene filtro STATO_prenotazione = ATTIVO, data_giorno)-> JSON lista slot temporali liberi per la settimana contente data_giorno
-            /api/prenotazioni/effettua_prenotazione POST(Request_body Id_utente, Id_servizio, Orario_prenotazione, num_clienti)-> msg di ritorno
-            /api/votazioni/ POST(Request_body id_utente, id_fornitore,voto)->  msg di ritorno
+            /fornitore/api/get_profile:id_fornitore GET(Request_body contiene i campi da tornare (il cliente non può vedere tutto del fornitore))-> JSON istanza fornitore + istanza utente del fornitore + JSON Orari Attivita
+            /servizi/api/get_servizi_per_fornitore:id_fornitore GET-> JSON lista dei servizi del fornitore
+            /prenotazioni/api/get_slot_liberi:id_fornitore GET(Request_body contiene filtro STATO_prenotazione = ATTIVO, data_giorno)-> JSON lista slot temporali liberi per la settimana contente data_giorno
+            /prenotazioni/api/effettua_prenotazione POST(Request_body Id_utente, id_fornitore, Id_servizio, Orario_prenotazione, num_clienti)-> msg di ritorno
+            /votazioni/api/effettua_votazione POST(Request_body id_utente, id_fornitore,voto)->  msg di ritorno
 
     5 /auth/cliente/visualizza_prenotazioni GET-> page html prenotazioni_effettuate
-            /api/prenotazioni/get_prenotazioni:id_utente GET-> JSON lista delle prenotazioni effettuate (ordinate per data e ora)
-            /api/prenotazioni/:id_utente DELETE (Request_body id_utente, id_prenotazione) ->  msg di ritorno
-            
+            /prenotazioni/api/get_prenotazioni:id_utente GET-> JSON lista delle prenotazioni effettuate (ordinate per data e ora)
+            /prenotazioni/api/annulla_prenotazione:id_utente DELETE (Request_body id_utente, id_prenotazione) ->  msg di ritorno
+
+    6 /auth/cliente/visualizza_notifiche GET-> page html notifiche
+        /notifiche/api/get_per_cliente:id_cliente GET() -> JSON lista notifiche
 
 
     -Fornitore
-    6  /auth/fornitore/profilo GET-> page html profilo 
-         /api/fornitore/get_profile:id(?) GET -> JSON istanza fornitore    
-    7/auth/fornitore/crea_servizio GET -> page html form crea_servizio
-    8/auth/fornitore/visualizza_servizi_creati GET -> pagina html visualizza_servizi creati dal fornitore
-    9/auth/fornitore/visualizza_prenotazioni_ricevute GET-> page html prenotazioni_effettuate
+    1   /auth/fornitore/profilo GET-> page html profilo 
+            /fornitore/api/get_profile:id GET -> JSON istanza fornitore + istanza utente del fornitore  + JSON Orari Attivita  
+            /fornitore/api/aggiorna_profilo:id  PUT(Update profilo fornitore, utente, orario attività) -> msg di ritorno
+
+    2   /auth/fornitore/visualizza_servizi_creati GET -> pagina html visualizza_servizi creati dal fornitore
+            /servizi/api/crea_servizio POST(Request_body id_fornitore,tipologia,descrizione,durata) -> JSON istanza creata
+            /servizi/api/get_servizi_per_fornitore:id_fornitore GET-> JSON lista dei servizi del fornitore
+            /servizi/api/aggiorna_servizio:id_fornitore:id_servizio PUT -> JSON lista dei servizi del fornitore
+            /servizi/api/delete_servizio:id_fornitore:id_servizio DELETE -> JSON lista dei servizi del fornitore
+
+    3    /auth/fornitore/visualizza_prenotazioni_ricevute GET-> page html prenotazioni_ricevute
+            /prenotazioni/api/get_prenotazioni:id_fornitore GET(prenotazione e cliente associato)-> JSON lista delle prenotazioni ricevute (ordinate per data e ora)
+            /cliente/api/:id_utente GET(Request_body Nome, cognome, num telefono, email)-> JSON istanza cliente ricevuta
+            /prenotazioni/api/annulla_prenotazione:id_prenotazione PUT(Request_body STATO_prenotazione = Annullato)-> msg di ritorno
+
+    4   /auth/fornitore/visualizza_notifiche GET-> page html notifiche
+        /notifiche/api/get_per_fornitore:id_fornitore GET() -> JSON lista notifiche
 
 
     -Amministratore
-    10/auth/amministratore/visualizza_utenti GET -> page html degli utenti
-
+    1  /auth/amministratore/ricerca_utenti GET -> page html di ricerca utenti
+            /cliente/api/ricerca_utente GET(Request_body variabile)-> JSON lista istanze clienti
+            /cliente/api/blocca_utente PUT(Request_body id_utente, Bloccato = True)-> msg di ritorno
+            /cliente/api/sblocca_utente PUT(Request_body id_utente, Bloccato = False)-> msg di ritorno
 
 
     

@@ -34,12 +34,13 @@ module.exports = function(sequelize, DataTypes) {
       unique: "Telefono"
     },
     Tipo: {
-      type: DataTypes.ENUM('Cliente','Amministratore','Fornitore','Bloccato'),
+      type: DataTypes.ENUM('Cliente','Amministratore','Fornitore'),
       allowNull: false
     },
-    Autenticato: {
+    Bloccato: {
       type: DataTypes.BOOLEAN,
-      allowNull: true
+      allowNull: true,
+      defaultValue: 0
     }
   }, {
     sequelize,

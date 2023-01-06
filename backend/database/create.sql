@@ -1,4 +1,4 @@
-    CREATE DATABASE INBOOK;
+--CREATE DATABASE INBOOK;
     
     CREATE TABLE IF NOT EXISTS `INBOOK`.`UTENTI`(
         ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -8,8 +8,8 @@
         Password_acc varchar(20) NOT NULL,
         Data_di_nascita date,
         Telefono varchar(10) NOT NULL UNIQUE,
-        Tipo ENUM('Cliente', 'Amministratore', 'Fornitore','Bloccato') NOT NULL,
-        Autenticato BOOLEAN
+        Tipo ENUM('Cliente', 'Amministratore', 'Fornitore') NOT NULL,
+        Bloccato BOOLEAN DEFAULT FALSE
     );
 
     CREATE TABLE IF NOT EXISTS `INBOOK`.`FORNITORI`(
@@ -40,6 +40,7 @@
     CREATE TABLE IF NOT EXISTS `INBOOK`.`PRENOTAZIONI`(
         ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
         ID_utente int NOT NULL ,
+        ID_fornitore int NOT NULL,         --inserito per accedere piu facilmente alla tabella prenotazioni evitando di passare per la tab. servizi
         ID_servizio int NOT NULL ,
         Orario_richiesta TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         Orario_prenotazione DATETIME NOT NULL,

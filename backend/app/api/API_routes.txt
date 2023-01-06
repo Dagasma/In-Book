@@ -13,31 +13,46 @@ API home FRONTEND PUBLIC
 --DOPO AVER EFFETTUATO AUTENTICAZIONE
 
     -Cliente
-    /auth/cliente/profilo GET-> page html profilo
-    /auth/cliente/ricerca_servizio GET-> page html ricerca_servizio
-    /auth/cliente/ricerca_fornitore GET-> page html ricerca_fornitore
-    /auth/cliente/visualizza_servizio GET-> page html calendario
-    /auth/cliente/visualizza_prenotazioni GET-> page html prenotazioni_effettuate
+    1 /auth/cliente/profilo GET-> page html profilo
+        /cliente/api/get_profile:id(?) GET -> JSON istanza cliente   
+
+    2 /auth/cliente/ricerca_fornitori_per_servizio GET-> page html ricerca_servizio
+        /api/servizi/get_fornitori_per_servizi GET(Request_body contiene filtri) -> JSON lista fornitori dei servizi ricercati (con incluso un link a visualizza_profilo_fornitore del profilo fornitore in base all'id)
+        
+    3 /auth/cliente/ricerca_fornitore GET-> page html ricerca_fornitore
+        /api/fornitore/get_fornitori GET(Request_body contiene filtri) -> JSON lista fornitori (con incluso un link a visualizza_profilo_fornitore del profilo fornitore in base all'id)
+    
+    4 (include 3) 
+        /auth/cliente/visualizza_profilo_fornitore/:id_fornitore GET-> page html profilo fornitore
+            /api/fornitore/:id_fornitore GET(Request_body contiene i campi da tornare (il cliente non può vedere tutto del fornitore))-> JSON istanza fornitore + istanza utente del fornitore
+            /api/servizi/get_servizi_per_fornitore:id_fornitore GET-> JSON lista dei servizi del fornitore
+            /api/prenotazioni/get_slot_liberi:id_fornitore GET(Request_body contiene filtro STATO_prenotazione = ATTIVO, data_giorno)-> JSON lista slot temporali liberi per la settimana contente data_giorno
+            /api/prenotazioni/effettua_prenotazione POST(Request_body Id_utente, Id_servizio, Orario_prenotazione, num_clienti)-> msg di ritorno
+            /api/votazioni/ POST(Request_body id_utente, id_fornitore,voto)->  msg di ritorno
+
+    5 /auth/cliente/visualizza_prenotazioni GET-> page html prenotazioni_effettuate
+            /api/prenotazioni/get_prenotazioni:id_utente GET-> JSON lista delle prenotazioni effettuate (ordinate per data e ora)
+            /api/prenotazioni/:id_utente DELETE (Request_body id_utente, id_prenotazione) ->  msg di ritorno
+            
+
 
     -Fornitore
-    /auth/fornitore/profilo GET-> JSON (?)
-    /auth/fornitore/crea_servizio POST -> JSON dati servizio (?)
-    /auth/fornitore/visualizza_servizi_creati GET -> pagina html visualizza_servizi creati dal fornitore
-    /auth/fornitore/visualizza_prenotazioni_ricevute GET-> page html prenotazioni_effettuate
+    6  /auth/fornitore/profilo GET-> page html profilo 
+         /api/fornitore/get_profile:id(?) GET -> JSON istanza fornitore    
+    7/auth/fornitore/crea_servizio GET -> page html form crea_servizio
+    8/auth/fornitore/visualizza_servizi_creati GET -> pagina html visualizza_servizi creati dal fornitore
+    9/auth/fornitore/visualizza_prenotazioni_ricevute GET-> page html prenotazioni_effettuate
+
 
     -Amministratore
-    /auth/amministratore/visualizza_utenti GET -> page html degli utenti
+    10/auth/amministratore/visualizza_utenti GET -> page html degli utenti
 
 
 
+    
 
+    
 
-
-API Utente_visitatore
-/api/auth/login GET -> ritorna istanza relativa all'utente
-/api/auth/register_cliente POST -> invia l'istanza della registrazione cliente
-/api/auth/register_fornitore POST -> invia l'istanza della registrazione fornitore
-/api/auth/... da continuare
 
 
 

@@ -73,7 +73,7 @@ const router = config.express.Router();
 //   }
 // });
 
-router.get("/",config.keycloak.protect('realm:amministratore'), function (request, response) {
+router.get("/", function (request, response) {
   // Render login template
   response.sendFile(config.frontend_path+"login.html");
 });

@@ -16,7 +16,8 @@ ENV KC_DB=mysql
 ENV KC_DB_URL=jdbc:mysql://db_inbook:3306/KEYCLOAK
 ENV KC_DB_USERNAME=administrator
 ENV KC_DB_PASSWORD=prova
-ENV KC_HOSTNAME=localhost
+ENV KC_HOSTNAME_URL=http://keycloak.inbook.local:8080
+ENV KC_HTTP_ENABLED=true
 ENV KEYCLOAK_ADMIN_PASSWORD=dagasma10@
 ENV KEYCLOAK_ADMIN=admin
 ADD ./entrypoint.sh ./wait-for-it.sh /

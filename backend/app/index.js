@@ -1,7 +1,8 @@
 const config = require("../config/config");
 const db = require("./models");
-const login = require("./login");
-// const register = require("./register");
+const cliente = require("./routes/cliente")
+const fornitore = require("./routes/fornitore")
+const amministratore = require("./routes/amministratore")
 
 const app = config.express();
 
@@ -30,8 +31,9 @@ db.sequelize.sync()
     console.log("Failed to sync db: " + err.message);
   });
 
-app.use("/test",config.keycloak.protect('realm:amministratore'), login);
-// app.use("/api/register", register);
+app.use("/auth/cliente",config.keycloak.protect('realm:cliente'),cliente)
+app.use("/auth/fornitore",config.keycloak.protect('realm:fornitore'),fornitore)
+app.use("/auth/amministratore",config.keycloak.protect('realm:amministratore'),amministratore)
 
 require("./api/user_routes")(app);
 

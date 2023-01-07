@@ -31,10 +31,18 @@ db.sequelize.sync()
     console.log("Failed to sync db: " + err.message);
   });
 
+
+// config.keycloak.authenticated = function authenticated(request){
+//     request.kauth.grant.id_token.sub 
+
+
+
+// }
+
 app.use("/cliente",config.keycloak.protect('realm:cliente'),cliente)
 app.use("/fornitore",config.keycloak.protect('realm:fornitore'),fornitore)
 app.use("/amministratore",config.keycloak.protect('realm:amministratore'),amministratore)
-
+config.keycloak
 require("./api/user_routes")(app);
 
 

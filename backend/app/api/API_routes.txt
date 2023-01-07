@@ -66,9 +66,20 @@ API home FRONTEND PUBLIC
             /cliente/api/sblocca_utente PUT(Request_body id_utente, Bloccato = False)-> msg di ritorno
 
 
-    
 
+_______________________________________________________
+--Raggruppamento richieste per controllers
     
+    --SERVIZI:
+            /servizi/api/get_fornitori_per_servizi GET(Request_body contiene filtri) -> JSON lista fornitori dei servizi ricercati (con incluso un link a visualizza_profilo_fornitore del profilo fornitore in base all'id)
+
+ \           /servizi/api/get_servizi_per_fornitore:id_fornitore GET-> JSON lista dei servizi del fornitore
+
+ \           /servizi/api/crea_servizio POST(Request_body id_fornitore,tipologia,descrizione,durata) -> JSON istanza creata 
+
+ \           /servizi/api/aggiorna_servizio:id_servizio PUT -> JSON lista dei servizi del fornitore
+
+            /servizi/api/delete_servizio:id_fornitore:id_servizio DELETE -> JSON lista dei servizi del fornitore
 
 
 

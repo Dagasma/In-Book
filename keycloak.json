@@ -1,0 +1,13 @@
+{
+  "realm": "inbook",
+  "auth-server-url": "http://keycloak.inbook.local:8080",
+  "ssl-required": "none",
+  "resource": "nodejs",
+  "verify-token-audience": false,
+  "credentials": {
+    "secret": "ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu"
+  },
+  "use-resource-role-mappings": true,
+  "confidential-port": 0,
+  "policy-enforcer": {}
+}

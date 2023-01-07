@@ -15,10 +15,6 @@ exports.create = async (req, res) => {
 
     // Create a utente
     const utente = {
-        Nome: req.body.Nome,
-        Cognome: req.body.Cognome,
-        Email: req.body.Email,
-        Password_acc: req.body.Password_acc,
         Data_di_nascita: req.body.Data_di_nascita,
         Telefono: req.body.Telefono,
         Tipo: req.body.Tipo

@@ -2,8 +2,7 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('UTENTI', {
     ID: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(36),
       allowNull: false,
       primaryKey: true
     },
@@ -19,10 +18,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(20),
       allowNull: false,
       unique: "Email"
-    },
-    Password_acc: {
-      type: DataTypes.STRING(20),
-      allowNull: false
     },
     Data_di_nascita: {
       type: DataTypes.DATEONLY,

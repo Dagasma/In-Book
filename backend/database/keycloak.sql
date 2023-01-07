@@ -1,2 +1,11 @@
 CREATE DATABASE KEYCLOAK;
 GRANT ALL PRIVILEGES ON KEYCLOAK.* TO 'administrator'@'%';
+
+delimiter //
+CREATE TRIGGER copy_keycloak_user
+AFTER INSERT
+ON 'KEYCLOAK'.'USER_ENTITY' FOR EACH ROW
+BEGIN
+  INSERT INTO 'INBOOK'.'UTENTI' (ID,Nome,Cognome,Email,)
+END;//
+delimiter ;

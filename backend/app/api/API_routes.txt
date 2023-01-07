@@ -18,7 +18,7 @@ API home FRONTEND PUBLIC
         /cliente/api/aggiorna_profilo:id(?) PUT(Update profilo) -> msg di ritorno 
 
     2 /auth/cliente/ricerca_fornitori_per_servizio GET-> page html ricerca_servizio
-        /servizi/api/get_fornitori_per_servizi GET(Request_body contiene filtri) -> JSON lista fornitori dei servizi ricercati (con incluso un link a visualizza_profilo_fornitore del profilo fornitore in base all'id)
+        /fornitore/api/get_fornitori_per_servizi GET(Request_body contiene filtri) -> JSON lista fornitori dei servizi ricercati (con incluso un link a visualizza_profilo_fornitore del profilo fornitore in base all'id)
         
     3 /auth/cliente/ricerca_fornitore GET-> page html ricerca_fornitore
         /fornitore/api/get_fornitori GET(Request_body contiene filtri) -> JSON lista fornitori (con incluso un link a visualizza_profilo_fornitore del profilo fornitore in base all'id)
@@ -47,8 +47,8 @@ API home FRONTEND PUBLIC
     2   /auth/fornitore/visualizza_servizi_creati GET -> pagina html visualizza_servizi creati dal fornitore
             /servizi/api/crea_servizio POST(Request_body id_fornitore,tipologia,descrizione,durata) -> JSON istanza creata
             /servizi/api/get_servizi_per_fornitore:id_fornitore GET-> JSON lista dei servizi del fornitore
-            /servizi/api/aggiorna_servizio:id_fornitore:id_servizio PUT -> JSON lista dei servizi del fornitore
-            /servizi/api/delete_servizio:id_fornitore:id_servizio DELETE -> JSON lista dei servizi del fornitore
+            /servizi/api/aggiorna_servizio:id_fornitore:id_servizio PUT -> msg di ritorno 
+            /servizi/api/delete_servizio:id_fornitore:id_servizio DELETE -> msg di ritorno
 
     3    /auth/fornitore/visualizza_prenotazioni_ricevute GET-> page html prenotazioni_ricevute
             /prenotazioni/api/get_prenotazioni:id_fornitore GET(prenotazione e cliente associato)-> JSON lista delle prenotazioni ricevute (ordinate per data e ora)
@@ -71,17 +71,27 @@ _______________________________________________________
 --Raggruppamento richieste per controllers
     
     --SERVIZI:
-            /servizi/api/get_fornitori_per_servizi GET(Request_body contiene filtri) -> JSON lista fornitori dei servizi ricercati (con incluso un link a visualizza_profilo_fornitore del profilo fornitore in base all'id)
 
  \           /servizi/api/get_servizi_per_fornitore:id_fornitore GET-> JSON lista dei servizi del fornitore
 
  \           /servizi/api/crea_servizio POST(Request_body id_fornitore,tipologia,descrizione,durata) -> JSON istanza creata 
 
- \           /servizi/api/aggiorna_servizio:id_servizio PUT -> JSON lista dei servizi del fornitore
+ \           /servizi/api/aggiorna_servizio:id_servizio PUT -> msg di ritorno
 
-            /servizi/api/delete_servizio:id_fornitore:id_servizio DELETE -> JSON lista dei servizi del fornitore
+ \           /servizi/api/delete_servizio:id_servizio DELETE -> msg di ritorno
+
+ \           /servizi/api/delete_all_servizi:id_servizio DELETE -> msg di ritorno
 
 
+    --PRENOTAZIONE:
 
+			/prenotazioni/api/get_slot_liberi:id_fornitore GET(Request_body contiene filtro STATO_prenotazione = ATTIVO, data_giorno)-> JSON lista slot temporali liberi per la settimana contente 
 
+            /prenotazioni/api/get_prenotazioni:id_utente GET-> JSON lista delle prenotazioni effettuate (ordinate per data e ora)
+
+            /prenotazioni/api/annulla_prenotazione:id_utente DELETE (Request_body id_utente, id_prenotazione) ->  msg di ritorno
+
+            /prenotazioni/api/get_prenotazioni:id_fornitore GET(prenotazione e cliente associato)-> JSON lista delle prenotazioni ricevute (ordinate per data e ora)
+            
+            /prenotazioni/api/annulla_prenotazione:id_prenotazione PUT(Request_body STATO_prenotazione = Annullato)-> msg di ritorno
 

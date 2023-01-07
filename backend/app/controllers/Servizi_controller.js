@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../models");    //DA TESTARE
 const tab_servizi = db.models.SERVIZI;
 const Op = db.Sequelize.Op;
 
@@ -50,7 +50,7 @@ exports.get_servizi_per_fornitore = (req, res) => {
         });
 };
 
-//aggiorna servizio
+//aggiorna servizio by id
 exports.aggiorna_servizio = (req, res) => {
     const id = req.params.id;
 
@@ -76,49 +76,44 @@ exports.aggiorna_servizio = (req, res) => {
 };
 
 
-// Delete a Tutorial with the specified id in the request
-exports.delete = (req, res) => {
+// Delete a servizio with the specified id in the request
+exports.delete_servizio = (req, res) => {
     const id = req.params.id;
   
-    Tutorial.destroy({
+    tab_servizi.destroy({
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Tutorial was deleted successfully!"
+            message: "servizio was deleted successfully!"
           });
         } else {
           res.send({
-            message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
+            message: `Cannot delete servizio with id=${id}. Maybe servizio was not found!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete Tutorial with id=" + id
+          message: "Could not delete servizio with id=" + id
         });
       });
   };
 
-// Delete all Tutorials from the database.
-exports.deleteAll = (req, res) => {
-    Tutorial.destroy({
+// Delete all servizi from the database.
+exports.delete_all_servizi = (req, res) => {
+  tab_servizi.destroy({
       where: {},
       truncate: false
     })
       .then(nums => {
-        res.send({ message: `${nums} Tutorials were deleted successfully!` });
+        res.send({ message: `${nums} servizi were deleted successfully!` });
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while removing all tutorials."
+            err.message || "Some error occurred while removing all servizi."
         });
       });
   };
-
-// Find all published Tutorials
-exports.findAllPublished = (req, res) => {
-
-};

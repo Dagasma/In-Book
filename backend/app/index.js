@@ -32,17 +32,9 @@ db.sequelize.sync()
   });
 
 
-// config.keycloak.authenticated = function authenticated(request){
-//     request.kauth.grant.id_token.sub 
-
-
-
-// }
-
 app.use("/cliente",config.keycloak.protect('realm:cliente'),cliente)
 app.use("/fornitore",config.keycloak.protect('realm:fornitore'),fornitore)
 app.use("/amministratore",config.keycloak.protect('realm:amministratore'),amministratore)
-
 require("./api/user_routes")(app);
 
 

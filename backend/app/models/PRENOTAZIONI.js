@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     ID_utente: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(36),
       allowNull: false,
       references: {
         model: 'UTENTI',
@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     ID_fornitore: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(36),
       allowNull: false,
       references: {
         model: 'FORNITORI',

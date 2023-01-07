@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     ID_utente: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(36),
       allowNull: false,
       references: {
         model: 'UTENTI',
@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     ID_fornitore: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(36),
       allowNull: false,
       references: {
         model: 'FORNITORI',

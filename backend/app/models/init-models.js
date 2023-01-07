@@ -30,10 +30,10 @@ function initModels(sequelize) {
   FORNITORI.hasMany(VOTAZIONI, { as: "VOTAZIONIs", foreignKey: "ID_fornitore"});
   PRENOTAZIONI.belongsTo(SERVIZI, { as: "ID_servizio_SERVIZI", foreignKey: "ID_servizio"});
   SERVIZI.hasMany(PRENOTAZIONI, { as: "PRENOTAZIONIs", foreignKey: "ID_servizio"});
-  BLOCCATI.belongsTo(UTENTI, { as: "ID_amministratore_UTENTI", foreignKey: "ID_amministratore"});
-  UTENTI.hasMany(BLOCCATI, { as: "BLOCCATIs", foreignKey: "ID_amministratore"});
   BLOCCATI.belongsTo(UTENTI, { as: "ID_utente_UTENTI", foreignKey: "ID_utente"});
-  UTENTI.hasMany(BLOCCATI, { as: "ID_utente_BLOCCATIs", foreignKey: "ID_utente"});
+  UTENTI.hasOne(BLOCCATI, { as: "BLOCCATI", foreignKey: "ID_utente"});
+  BLOCCATI.belongsTo(UTENTI, { as: "ID_amministratore_UTENTI", foreignKey: "ID_amministratore"});
+  UTENTI.hasMany(BLOCCATI, { as: "ID_amministratore_BLOCCATIs", foreignKey: "ID_amministratore"});
   FORNITORI.belongsTo(UTENTI, { as: "ID_utente_fornitore_UTENTI", foreignKey: "ID_utente_fornitore", onDelete: 'cascade', hooks: true});
   UTENTI.hasOne(FORNITORI, { as: "FORNITORI", foreignKey: "ID_utente_fornitore"});
   NOTIFICHE.belongsTo(UTENTI, { as: "ID_utente_UTENTI", foreignKey: "ID_utente"});

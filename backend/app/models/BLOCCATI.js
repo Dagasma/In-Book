@@ -1,22 +1,17 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('BLOCCATI', {
-    ID: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
     ID_utente: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(36),
       allowNull: false,
+      primaryKey: true,
       references: {
         model: 'UTENTI',
         key: 'ID'
       }
     },
     ID_amministratore: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(36),
       allowNull: false,
       references: {
         model: 'UTENTI',
@@ -35,13 +30,6 @@ module.exports = function(sequelize, DataTypes) {
       {
         name: "PRIMARY",
         unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "ID" },
-        ]
-      },
-      {
-        name: "fk_bloccati_utenti",
         using: "BTREE",
         fields: [
           { name: "ID_utente" },

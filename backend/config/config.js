@@ -27,7 +27,7 @@ config.DB_PASSWORD = process.env.DB_PASSWORD;
 config.DB_NAME = process.env.DB_NAME;
 config.SECRET = process.env.SECRET;
 config.DB_PORT = process.env.DB_PORT;
-config.PORT = 8080; 
+config.PORT = 4000; 
 config.apiLimiter = {
   windowMs: 60 * 60 * 1000, // 60 minutes
   max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)

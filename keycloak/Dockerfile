@@ -18,12 +18,12 @@ ENV KC_DB_USERNAME=administrator
 ENV KC_DB_PASSWORD=prova
 ENV KC_HOSTNAME_URL=http://keycloak.inbook.local:8080
 ENV KC_HTTP_ENABLED=true
-ENV KC_FEATURES=declarative-user-profile,recovery-codes 
 ENV KEYCLOAK_ADMIN_PASSWORD=dagasma10@
 ENV KEYCLOAK_ADMIN=admin
 ADD ./entrypoint.sh ./wait-for-it.sh /
 CMD mkdir /opt/keycloak/data/import
 ADD ./realm-export.json /opt/keycloak/data/import/
+ADD customTheme /opt/keycloak/themes/customTheme
 EXPOSE 8080
 EXPOSE 8443
 ENTRYPOINT ["/entrypoint.sh"]

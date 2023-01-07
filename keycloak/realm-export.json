@@ -1103,31 +1103,6 @@
             ]
           }
         ],
-        "policies": [
-          {
-            "id": "9ccc9582-f5fe-4fc8-b3fd-4ad0a40828ff",
-            "name": "Default Policy",
-            "description": "A policy that grants access only for users within this realm",
-            "type": "js",
-            "logic": "POSITIVE",
-            "decisionStrategy": "AFFIRMATIVE",
-            "config": {
-              "code": "// by default, grants any permission associated with this policy\n$evaluation.grant();\n"
-            }
-          },
-          {
-            "id": "e0a334f9-4aad-4561-9d07-1a72b486345f",
-            "name": "Default Permission",
-            "description": "A permission that applies to the default resource type",
-            "type": "resource",
-            "logic": "POSITIVE",
-            "decisionStrategy": "UNANIMOUS",
-            "config": {
-              "defaultResourceType": "urn:admin-cli:resources:default",
-              "applyPolicies": "[\"Default Policy\"]"
-            }
-          }
-        ],
         "scopes": [],
         "decisionStrategy": "UNANIMOUS"
       }
@@ -1226,7 +1201,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu",
       "redirectUris": [
         "http://keycloak.inbook.local:4000/*"
       ],

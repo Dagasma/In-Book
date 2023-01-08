@@ -8,6 +8,7 @@ var _SERVIZI = require("./SERVIZI");
 var _UTENTI = require("./UTENTI");
 var _VOTAZIONI = require("./VOTAZIONI");
 
+
 function initModels(sequelize) {
   var BLOCCATI = _BLOCCATI(sequelize, DataTypes);
   var FORNITORI = _FORNITORI(sequelize, DataTypes);

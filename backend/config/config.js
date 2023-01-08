@@ -9,13 +9,14 @@ config.rateLimit = require("express-rate-limit");
 config.jwt = require("jsonwebtoken");
 config.Sequelize = require("sequelize");
 config.Keycloak = require('keycloak-connect');
-
+config.fs = require("node:fs");
 
 config.memoryStore = new config.session.MemoryStore();
 config.keycloak = new config.Keycloak({ store: config.memoryStore,onLoad: 'login-required', checkLoginIframe: false });
 
 
 config.frontend_path = config.path.normalize(process.cwd() + "/frontend/html/"); 
+config.db_path = config.path.normalize(process.cwd() + "/backend/database/"); 
 
 require("dotenv").config({
   path: config.path.normalize(process.cwd() + "/backend/config/.env"),

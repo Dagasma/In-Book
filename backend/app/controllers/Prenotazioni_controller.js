@@ -38,28 +38,47 @@ exports.effettua_prenotazione = (req, res) => {
 exports.get_prenotazioni = (req, res) => {
     var id = null;
     var condition= null;
-
-    if(req.query.ID_utente != null){
+    if( "ID_utente" in req.query){  //se nella ricerca ho ID_utente
       id = req.query.ID_utente;
-      condition = ID_utente ? { ID_utente: { [Op.like]: `%${ID_utente}%` } } : null;
-    }
-    else{
-      id = req.query.ID_fornitore;
-      condition = ID_fornitore ? { ID_fornitore: { [Op.like]: `%${ID_fornitore}%` } } : null;
-    }
+      
+      condition = id ? { ID_utente: { [Op.like]: `%${id}%` } } : null;
+      console.log(condition)
 
-    tab_prenotazioni.findAll({ 
+      tab_prenotazioni.findAll({ 
         where: condition,
-        order: [[Orario_prenotazione, 'DESC']]})
+        order: [['Orario_prenotazione', 'DESC']]
+      }
+        )
         .then(data => {
             res.send(data);
         })
-        .catch(err => {
+        .catch(err => { 
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while retrieving Prenotazioni."
             });
         });
+
+    }
+
+    else{   //se nella ricerca ho ID_fornitore restituisco prenotazioni+clienti associati
+      id = req.query.ID_fornitore;
+      db.sequelize.query('SELECT * FROM VISTA_PRENOTAZIONI_CLIENTI_PER_FORNITORE WHERE ID_fornitore = ? ORDER BY ? ?',
+      {
+        replacements: [ id,'Orario_prenotazione', 'DESC'],
+        type: db.sequelize.QueryTypes.SELECT
+      }
+      ).then(data => {
+        res.send(data);
+      })
+      .catch(err => { 
+          res.status(500).send({
+              message:
+                  err.message || "Some error occurred while retrieving Prenotazioni."
+          });
+      });
+    }
+
 };
 
 // Retrieve all slot_liberi from the database by id fornitore  
@@ -95,8 +114,10 @@ exports.get_slot_liberi = (req, res) => {
     
 };
 
-exports.update = (req, res) => {
+exports.annulla_prenotazione = (req, res) => {
     const id = req.params.id;
+
+    //bisogna mettere che si usa solo lo stato nel body
 
     tab_prenotazioni.update(req.body, {
         where: { id: id }
@@ -144,25 +165,3 @@ exports.delete = (req, res) => {
         });
       });
   };
-
-// Delete all Prenotazioni from the database.
-exports.deleteAll = (req, res) => {
-    tab_prenotazioni.destroy({
-      where: {},
-      truncate: false
-    })
-      .then(nums => {
-        res.send({ message: `${nums} Prenotazioni were deleted successfully!` });
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while removing all Prenotazioni."
-        });
-      });
-  };
-
-// Find all published Prenotazioni
-exports.findAllPublished = (req, res) => {
-  
-};

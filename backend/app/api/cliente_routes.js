@@ -1,6 +1,7 @@
 module.exports = app => {
     const users = require("../controllers/Utente_controller.js");
     
+    //dev'essere aggiornata
 
     var router = require("express").Router();
     
@@ -23,5 +24,5 @@ module.exports = app => {
     router.delete("/", users.deleteAll);
 
 
-    app.use('/api/Users', router);
+    app.use('/cliente/api', router);
    };

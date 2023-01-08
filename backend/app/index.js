@@ -22,21 +22,25 @@ console.log(config.keycloak.getConfig());
 
 app.use(config.express.static(config.frontend_path)); //per rilevare i file css
 
+
+
+var sql_views = config.fs.readFileSync(config.db_path + 'views.sql', 'utf8');
 //connessione al db con sequelize per facilitare operazioni CRUD
 db.sequelize.sync()
   .then(() => {
     console.log("Database connected successfully");
+    db.sequelize.query(sql_views);
   })
   .catch((err) => {
     console.log("Failed to sync db: " + err.message);
   });
 
-
 app.use("/cliente",config.keycloak.protect('realm:cliente'),cliente)
 app.use("/fornitore",config.keycloak.protect('realm:fornitore'),fornitore)
 app.use("/amministratore",config.keycloak.protect('realm:amministratore'),amministratore)
-require("./api/user_routes")(app);
 
+require("./api/cliente_routes")(app);
+require("./api/prenotazioni_routes")(app);
 
 app.listen(config.PORT, () => {
   console.log("[BACKEND] Start listening on port:" + config.PORT);

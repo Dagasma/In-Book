@@ -14,6 +14,19 @@ window.onload = function () {
     }
     console.log(formData)
     // send JSON
+    fetch('/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Risposta dal server:', data);
+    });
+
+    console.log("inviato")
   });
 }
 

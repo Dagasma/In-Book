@@ -34,8 +34,10 @@
         <!-- Inseriamo una foto-->
     </section>
     <p> Inserisci i dati del servizio che vuoi cercare</p>
-    <form action="../../backend/app/api/" method="post" id="myForm" name="cerca_servizio">
+    <p>Data selezionata: <span id="picked">2/7/2022</span></p>
 
+    <form action="../../backend/app/api/" method="post" id="myForm" name="cerca_servizio">
+<!--
         <label for="Tipo_Attivita">Giorno</label>
         <select id="Tipo_Attivita" name="Tipo_Attivita">
             <option value="">-- Seleziona --</option>
@@ -52,7 +54,7 @@
         <input type="time" name="Orario_I" id="Orario_I">
         <label for="Orario_F">Orario di fine:</label>
         <input type="time" name="Orario_F" id="Orario_F"><br>
-
+-->
         <label for="Tipo_di_servizio">Tipo di servizio</label>
         <input type="text" name="Tipo_di_servizio" id="Tipo_di_servizio"><br>
         <label for="Capienza">Capienza</label>
@@ -70,6 +72,40 @@
         <button class='input-bottom' type="submit">Cerca servizi</button>
     </form>
 
-</body>
+      <div class="calendar">
+       
+        <div id="calender-header">
+          <button onclick="prevMonth()"><</button>
+          <h3 id="month"></h3>
+          <button onclick="nextMonth()">></button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Sun</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thur</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </tr>
+          </thead>
+          <tbody id="calendar">
+    
+          </tbody>
+        </table>
+    </div>
+    
+      <script src="script.js"></script>
+      
+    
 
+
+    </body>
+
+
+<!-- (A) WE WILL GENERATE THE TABLE HERE -->
+<div id="demoA"></div>
+ 
 </html>

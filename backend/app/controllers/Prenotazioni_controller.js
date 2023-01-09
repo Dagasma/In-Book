@@ -1,6 +1,52 @@
 const db = require("../models");
+const SERVIZI = require("../models/SERVIZI");
 const tab_prenotazioni = db.models.PRENOTAZIONI; //da testare
 const Op = db.Sequelize.Op;
+
+function calcolo_slot_liberi(prenotazioni_presenti,Data_giorno, ID_servizio){
+  var output = {};
+
+  const data_target = new Date(Data_giorno);
+
+  const giorni = ['Lunedi','Martedi','Mercoledi','Giovedi','Venerdi','Sabato','Domenica'];
+  var dt = new Date(prenotazioni_presenti.Data_giorno);
+  const giorno_scelto = giorni[dt.getDay()];
+
+  const data_view = db.sequelize.query('SELECT * FROM VISTA_CAPIENZA_ATTIVITA_ORARIO_ATTIVITA WHERE ID_fornitore = ? and Giorno_della_settimana = ? ORDER BY ?',
+  {
+    replacements: [ prenotazioni_presenti.ID_fornitore, giorno_scelto,'Orario_apertura', 'ASC'],
+    type: db.sequelize.QueryTypes.SELECT
+  }
+  )
+
+  const durata_servizio = db.sequelize.query('SELECT Durata FROM SERVIZI WHERE ID = ?', {replacements: [ID_servizio]});
+  const capienza = data_view.capienza;
+
+  var query_buggata = ['SELECT *',
+                        'FROM (`PRENOTAZIONI` as p INNER JOIN `SERVIZI` as s ON p.ID_servizio = s.ID) INNER JOIN ORARI_ATTIVITA as o ON o.ID_fornitore = p.ID_fornitore',
+                        'WHERE TIME(p.Orario_prenotazione) BETWEEN o.orario_apertura AND o.orario_chiusura AND TIME(Date_add(p.Orario_prenotazione) BETWEEN o.orario_apertura AND o.orario_chiusura',
+                        'AND Date(p.Orario_prenotazione) = ? and o.giorno_della_settimana = ? and p.Stato = \'Attivo\';',]
+
+  const slot_occupati = db.sequelize.query(query_buggata, {replacements: [Data_giorno,giorno_scelto]})                      
+
+  for(let slot in slot_occupati){
+    
+
+
+
+
+  } 
+
+
+
+
+
+
+
+  return output
+}
+
+
 // Create and Save a new Prenotazione
 exports.effettua_prenotazione = (req, res) => {
     // Validate request
@@ -46,7 +92,7 @@ exports.get_prenotazioni = (req, res) => {
 
       tab_prenotazioni.findAll({ 
         where: condition,
-        order: [['Orario_prenotazione', 'DESC']]
+        order: [['Orario_prenotazione', 'ASC']]
       }
         )
         .then(data => {
@@ -65,7 +111,7 @@ exports.get_prenotazioni = (req, res) => {
       id = req.query.ID_fornitore;
       db.sequelize.query('SELECT * FROM VISTA_PRENOTAZIONI_CLIENTI_PER_FORNITORE WHERE ID_fornitore = ? ORDER BY ? ?',
       {
-        replacements: [ id,'Orario_prenotazione', 'DESC'],
+        replacements: [ id,'Orario_prenotazione', 'ASC'],
         type: db.sequelize.QueryTypes.SELECT
       }
       ).then(data => {
@@ -88,19 +134,26 @@ exports.get_slot_liberi = (req, res) => {
   
   var filtro = {
     Stato : 'Attivo',
-    Data_giorno: req.body.Data_giorno
+    Data_giorno: req.body.Data_giorno,
+    ID_servizio: req.body.ID_servizio
   }
   
   var condition_time = db.sequelize.fn('date', sequelize.col('Orario_prenotazione'), Op.like, filtro.Data_giorno);
 
   lista_tab_prenotazioni.findAll({ 
+      include:[{
+        model: SERVIZI,
+        required: true
+      }],
       where: {
           condition, 
           Stato : filtro.Stato,
-          condition_time
+          condition_time,
+          order: [['Orario_prenotazione', 'ASC']]
         } })
       .then(data => {
-          res.send(data);
+          var dati_buoni = calcolo_slot_liberi(data, filtro.Data_giorno, ID_servizio);
+          res.send(dati_buoni);
       })
       .catch(err => {
           res.status(500).send({
@@ -109,9 +162,6 @@ exports.get_slot_liberi = (req, res) => {
           });
       });
   
-  var lista_occupati = data;
-  //completatre
-    
 };
 
 exports.annulla_prenotazione = (req, res) => {

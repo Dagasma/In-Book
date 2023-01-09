@@ -27,7 +27,7 @@ API home FRONTEND PUBLIC
         /auth/cliente/visualizza_profilo_fornitore/:id_fornitore GET-> page html profilo fornitore
             /fornitore/api/get_profile:id_fornitore GET(Request_body contiene i campi da tornare (il cliente non può vedere tutto del fornitore))-> JSON istanza fornitore + istanza utente del fornitore + JSON Orari Attivita
             /servizi/api/get_servizi_per_fornitore:id_fornitore GET-> JSON lista dei servizi del fornitore
-            /prenotazioni/api/get_slot_liberi:id_fornitore GET(Request_body contiene filtro STATO_prenotazione = ATTIVO, data_giorno)-> JSON lista slot temporali liberi per la settimana contente data_giorno
+            /prenotazioni/api/get_slot_liberi:id_fornitore GET(Request_body contiene filtro STATO_prenotazione = ATTIVO, data_giorno)-> JSON lista slot temporali liberi per il data_giorno
             /prenotazioni/api/effettua_prenotazione POST(Request_body Id_utente, id_fornitore, Id_servizio, Orario_prenotazione, num_clienti)-> msg di ritorno
             /votazioni/api/effettua_votazione POST(Request_body id_utente, id_fornitore,voto)->  msg di ritorno
 
@@ -87,10 +87,10 @@ _______________________________________________________
 
 \            /prenotazioni/api/get_prenotazioni:id_utente GET-> JSON lista delle prenotazioni effettuate (ordinate per data e ora)
 
--            /prenotazioni/api/get_slot_liberi:id_fornitore GET(Request_body contiene filtro STATO_prenotazione = ATTIVO, data_giorno)-> JSON lista slot temporali liberi per la settimana contente 
+-            /prenotazioni/api/get_slot_liberi:id_fornitore GET(Request_body contiene filtro STATO_prenotazione = ATTIVO, data_giorno, id_servizio)-> JSON lista slot temporali liberi per il giorno indicato
 
-\dafare su fornitore /prenotazioni/api/get_prenotazioni:id_fornitore GET(prenotazione e cliente associato)-> JSON lista delle prenotazioni ricevute (ordinate per data e ora)
+\            VIEW creata /prenotazioni/api/get_prenotazioni:id_fornitore GET(prenotazione e cliente associato)-> JSON lista delle prenotazioni ricevute (ordinate per data e ora)
             
-            /prenotazioni/api/annulla_prenotazione:id_prenotazione PUT(Request_body STATO_prenotazione = Annullato)-> msg di ritorno
+\            /prenotazioni/api/annulla_prenotazione:id_prenotazione PUT(Request_body STATO_prenotazione = Annullato)-> msg di ritorno
 
-            /prenotazioni/api/annulla_prenotazione:id_utente DELETE (Request_body id_utente, id_prenotazione) ->  msg di ritorno
+\            /prenotazioni/api/annulla_prenotazione:id_utente DELETE (Request_body id_utente, id_prenotazione) ->  msg di ritorno

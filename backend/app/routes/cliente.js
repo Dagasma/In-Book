@@ -22,3 +22,4 @@ router.get("/visualizza_notifiche", function (request, response) {
 });
 
 module.exports = router;
+

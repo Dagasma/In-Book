@@ -64,7 +64,7 @@ ADD CONSTRAINT chk_ORARI_ATTIVITA_apertura_chiusura CHECK (Orario_apertura<Orari
 
 -- vincolo su PRENOTAZIONI: orario prenotazione - Orario_richiesta > 4h
 ALTER TABLE `INBOOK`.`PRENOTAZIONI`                                                     
-ADD CONSTRAINT chk_PRENOTAZIONI_orario_prenotazione_richiesta CHECK ((TIMEDIFF(Orario_prenotazione, Orario_richiesta)) > '4:00:00');
+ADD CONSTRAINT chk_PRENOTAZIONI_orario_prenotazione_richiesta CHECK ((TIMEDIFF(Orario_prenotazione_inizio, Orario_richiesta)) < '4:00:00');
 
 
 --vincolo FORNITORE NON PUO FARE VOTAZIONE AL SUO STESSO SERVIZIO

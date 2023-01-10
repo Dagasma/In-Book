@@ -8,3 +8,24 @@ AS SELECT *
 FROM (`PRENOTAZIONI` as p INNER JOIN `SERVIZI` as s ON p.ID_servizio = s.ID) INNER JOIN ORARI_ATTIVITA as o ON o.ID_fornitore = p.ID_fornitore
 WHERE TIME(p.Orario_prenotazione) BETWEEN o.orario_apertura AND o.orario_chiusura
 AND Date(p.Orario_prenotazione) = var_data_prenotazione and o.giorno_della_settimana = var_giorno and p.Stato = 'Attivo';
+
+
+SELECT *
+FROM (`PRENOTAZIONI` as p INNER JOIN `SERVIZI` as s ON p.ID_servizio = s.ID) INNER JOIN ORARI_ATTIVITA as o ON o.ID_fornitore = p.ID_fornitore
+WHERE TIME(p.Orario_prenotazione) BETWEEN o.orario_apertura AND o.orario_chiusura
+AND Date(p.Orario_prenotazione) = var_data_prenotazione and o.giorno_della_settimana = var_giorno and p.Stato = 'Attivo';
+
+
+
+SELECT *
+FROM (`PRENOTAZIONI` as p INNER JOIN `SERVIZI` as s ON p.ID_servizio = s.ID) INNER JOIN ORARI_ATTIVITA as o ON o.ID_fornitore = p.ID_fornitore
+WHERE "4:00:00" >= TIME(p.Orario_prenotazione_inizio) AND "4:30:00" <= TIME(p.Orario_prenotazione_fine)
+AND Date(p.Orario_prenotazione_inizio) = "2020-02-20" and o.giorno_della_settimana = "lunedi" and p.Stato = 'Attivo';
+
+
+SELECT *
+FROM (`PRENOTAZIONI` as p INNER JOIN `SERVIZI` as s ON p.ID_servizio = s.ID) INNER JOIN ORARI_ATTIVITA as o ON o.ID_fornitore = p.ID_fornitore
+WHERE ? >= TIME(p.Orario_prenotazione_inizio) AND ? <= TIME(p.Orario_prenotazione_fine)
+AND Date(p.Orario_prenotazione_inizio) = ? and o.giorno_della_settimana = ? and p.Stato = 'Attivo';
+
+

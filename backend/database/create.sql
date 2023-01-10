@@ -6,7 +6,7 @@
         ID varchar(36) NOT NULL PRIMARY KEY, #mappato con keycloak
         Nome char(16) NOT NULL ,
         Cognome char(16) NOT NULL ,
-        Email varchar(20) NOT NULL UNIQUE,
+        Email varchar(30) NOT NULL UNIQUE,
         Data_di_nascita date,
         Telefono varchar(10) NOT NULL UNIQUE,
         Tipo ENUM('Cliente', 'Amministratore', 'Fornitore') NOT NULL,
@@ -34,7 +34,7 @@
         ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
         ID_fornitore varchar(36) NOT NULL,
         Tipologia char(30) NOT NULL,
-        Descrizione char(30),
+        Descrizione char(200),
         Durata TIME(0) NOT NULL
     );
 
@@ -44,7 +44,8 @@
         ID_fornitore varchar(36) NOT NULL,         #inserito per accedere piu facilmente alla tabella prenotazioni evitando di passare per la tab. servizi
         ID_servizio int NOT NULL ,
         Orario_richiesta TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        Orario_prenotazione DATETIME NOT NULL,
+        Orario_prenotazione_inizio DATETIME NOT NULL,
+        Orario_prenotazione_fine DATETIME NOT NULL,
         Stato ENUM('Attivo', 'Annullato', 'Completato'),
         Numero_clienti int DEFAULT 1
     );

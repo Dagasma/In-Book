@@ -36,7 +36,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
-    Orario_prenotazione: {
+    Orario_prenotazione_inizio: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    Orario_prenotazione_fine: {
       type: DataTypes.DATE,
       allowNull: false
     },

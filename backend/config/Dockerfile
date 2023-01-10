@@ -5,4 +5,4 @@ ENV NODE_TLS_REJECT_UNAUTHORIZED 0
 ADD ./entrypoint.sh ./wait-for-it.sh /
 ADD ./keycloak.json /app/
 ENTRYPOINT ["/entrypoint.sh"]
-EXPOSE 8080
+EXPOSE 4000

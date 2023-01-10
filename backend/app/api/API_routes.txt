@@ -14,7 +14,7 @@ API home FRONTEND PUBLIC
 
     -Cliente
     1 /auth/cliente/profilo GET-> page html profilo
-        /cliente/api/get_profile:id(?) GET -> JSON istanza cliente   
+        /cliente/api/get_profilo:id(?) GET -> JSON istanza cliente   
         /cliente/api/aggiorna_profilo:id(?) PUT(Update profilo) -> msg di ritorno 
 
     2 /auth/cliente/ricerca_fornitori_per_servizio GET-> page html ricerca_servizio
@@ -25,7 +25,7 @@ API home FRONTEND PUBLIC
     
     4 (include 3) 
         /auth/cliente/visualizza_profilo_fornitore/:id_fornitore GET-> page html profilo fornitore
-            /fornitore/api/get_profile:id_fornitore GET(Request_body contiene i campi da tornare (il cliente non può vedere tutto del fornitore))-> JSON istanza fornitore + istanza utente del fornitore + JSON Orari Attivita
+            /fornitore/api/get_profilo:id_fornitore GET(Request_body contiene i campi da tornare (il cliente non può vedere tutto del fornitore))-> JSON istanza fornitore + istanza utente del fornitore + JSON Orari Attivita
             /servizi/api/get_servizi_per_fornitore:id_fornitore GET-> JSON lista dei servizi del fornitore
             /prenotazioni/api/get_slot_liberi:id_fornitore GET(Request_body contiene filtro STATO_prenotazione = ATTIVO, data_giorno)-> JSON lista slot temporali liberi per il data_giorno
             /prenotazioni/api/effettua_prenotazione POST(Request_body Id_utente, id_fornitore, Id_servizio, Orario_prenotazione, num_clienti)-> msg di ritorno
@@ -36,12 +36,12 @@ API home FRONTEND PUBLIC
             /prenotazioni/api/annulla_prenotazione:id_utente DELETE (Request_body id_utente, id_prenotazione) ->  msg di ritorno
 
     6 /auth/cliente/visualizza_notifiche GET-> page html notifiche
-        /notifiche/api/get_per_cliente:id_cliente GET() -> JSON lista notifiche
+        /notifiche/api/get_notifiche_per_cliente:id_cliente GET() -> JSON lista notifiche
 
 
     -Fornitore
     1   /auth/fornitore/profilo GET-> page html profilo 
-            /fornitore/api/get_profile:id GET -> JSON istanza fornitore + istanza utente del fornitore  + JSON Orari Attivita  
+            /fornitore/api/get_profilo:id GET -> JSON istanza fornitore + istanza utente del fornitore  + JSON Orari Attivita  
             /fornitore/api/aggiorna_profilo:id  PUT(Update profilo fornitore, utente, orario attività) -> msg di ritorno
 
     2   /auth/fornitore/visualizza_servizi_creati GET -> pagina html visualizza_servizi creati dal fornitore
@@ -52,11 +52,11 @@ API home FRONTEND PUBLIC
 
     3    /auth/fornitore/visualizza_prenotazioni_ricevute GET-> page html prenotazioni_ricevute
             /prenotazioni/api/get_prenotazioni:id_fornitore GET(prenotazione e cliente associato)-> JSON lista delle prenotazioni ricevute (ordinate per data e ora)
-            /cliente/api/:id_utente GET(Request_body Nome, cognome, num telefono, email)-> JSON istanza cliente ricevuta
+            /cliente/api/get_profilo:id_utente GET(Request_body Nome, cognome, num telefono, email)-> JSON istanza cliente ricevuta
             /prenotazioni/api/annulla_prenotazione:id_prenotazione PUT(Request_body STATO_prenotazione = Annullato)-> msg di ritorno
 
     4   /auth/fornitore/visualizza_notifiche GET-> page html notifiche
-        /notifiche/api/get_per_fornitore:id_fornitore GET() -> JSON lista notifiche
+        /notifiche/api/get_notifiche_per_fornitore:id_fornitore GET() -> JSON lista notifiche
 
 
     -Amministratore
@@ -78,7 +78,7 @@ _______________________________________________________
 
  \           /servizi/api/delete_servizio:id_servizio DELETE -> msg di ritorno
 
- \           /servizi/api/delete_all_servizi:id_servizio DELETE -> msg di ritorno
+ \           /servizi/api/delete_all_servizi:id_fornitore DELETE -> msg di ritorno
 
 
     --PRENOTAZIONE:
@@ -93,4 +93,4 @@ _______________________________________________________
             
 \            /prenotazioni/api/annulla_prenotazione:id_prenotazione PUT(Request_body STATO_prenotazione = Annullato)-> msg di ritorno
 
-\            /prenotazioni/api/annulla_prenotazione:id_utente DELETE (Request_body id_utente, id_prenotazione) ->  msg di ritorno
+\            /prenotazioni/api/delete_prenotazione:id_utente DELETE (Request_body id_utente, id_prenotazione) ->  msg di ritorno

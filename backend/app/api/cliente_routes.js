@@ -1,28 +1,17 @@
+const config = require("../../config/config.js");
+
 module.exports = app => {
     const users = require("../controllers/Utente_controller.js");
+    var router = config.express.Router();
     
-    //dev'essere aggiornata
-
-    var router = require("express").Router();
-    
-    // Create a new User/Fornitore
+    // Create a new User
     router.post("/", users.create);
-
-    // Retrieve all User by tipo
-    router.get("/", users.findAll);
   
      //Retrieve a single User by id
-    router.get("/:id", users.findOne);
+    router.get("/get_profilo:id", users.findOne);
   
     // Update a User with id
-    router.put("/:id", users.update);
-  
-//     // // Delete a users with id
-    router.delete("/:id", users.delete);
-  
-//     // // Delete all users
-    router.delete("/", users.deleteAll);
+    router.put("/aggiorna_profilo:id", users.update);
 
-
-    app.use('/cliente/api', router);
+    app.use('/cliente/api',config.keycloak.protect('realm:cliente'), router);
    };

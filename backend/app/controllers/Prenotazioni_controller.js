@@ -3,20 +3,27 @@ const SERVIZI = require("../models/SERVIZI");
 const tab_prenotazioni = db.models.PRENOTAZIONI; //da testare
 const Op = db.Sequelize.Op;
 
-function calcolo_slot_liberi(prenotazioni_presenti,Data_giorno, ID_servizio){
-  var output = {};
+function calcolo_slot_liberi(filtro) {
+    var output = {};
 
-  const data_target = new Date(Data_giorno);
+    const data_target = new Date(filtro.Data_giorno);
 
-  const giorni = ['Lunedi','Martedi','Mercoledi','Giovedi','Venerdi','Sabato','Domenica'];
-  var dt = new Date(prenotazioni_presenti.Data_giorno);
-  const giorno_scelto = giorni[dt.getDay()];
+    const giorni = [
+        "Lunedi",
+        "Martedi",
+        "Mercoledi",
+        "Giovedi",
+        "Venerdi",
+        "Sabato",
+        "Domenica",
+    ];
+    const giorno_scelto = giorni[data_target.getDay()];
 
   console.log(giorno_scelto, data_target)
 
   const capienza = db.sequelize.query('SELECT Capienza FROM FORNITORI WHERE ID_fornitore = ?',
   {
-    replacements: [ prenotazioni_presenti.ID_fornitore],
+    replacements: [ filtro.ID_fornitore],
     type: db.sequelize.QueryTypes.SELECT
   }
   );
@@ -24,9 +31,12 @@ function calcolo_slot_liberi(prenotazioni_presenti,Data_giorno, ID_servizio){
   var query_buggata = ['SELECT *',
                         'FROM (`PRENOTAZIONI` as p INNER JOIN `SERVIZI` as s ON p.ID_servizio = s.ID) INNER JOIN ORARI_ATTIVITA as o ON o.ID_fornitore = p.ID_fornitore',
                         'WHERE ? >= TIME(p.Orario_prenotazione_inizio) AND ? <= TIME(p.Orario_prenotazione_fine)',
+                        'AND TIME(p.Orario_prenotazione_inizio) >= o.Orario_apertura AND TIME(p.Orario_prenotazione_fine) <= o.Orario_chiusura',
                         'AND Date(p.Orario_prenotazione_inizio) = ? and o.giorno_della_settimana = ? and p.Stato = \'Attivo\';',]
-
-  const slot_occupati = db.sequelize.query(query_buggata, {replacements: [Data_giorno,giorno_scelto]})                      
+  
+  var slot_orari_attivita = db.sequelize.query(query_buggata, {replacements: [inizio_slot,fine_slot,Data_giorno,giorno_scelto]})  
+  
+  var slot_occupati = db.sequelize.query(query_buggata, {replacements: [inizio_slot,fine_slot,Data_giorno,giorno_scelto]})                      
 
   //Per ogni slot di ORARI_ATTIVITA del fornitore nel giorno della settimana scelto per la prenotazione, 
     //creo un vettore A che rappresenta gli slot temporali del servizio scelto interno al range dello slot di ORARIO ATTIVITA
@@ -63,22 +73,15 @@ function calcolo_slot_liberi(prenotazioni_presenti,Data_giorno, ID_servizio){
 
   } 
 
-
-
-
-
-
-
-  return output
+    return output;
 }
-
 
 // Create and Save a new Prenotazione
 exports.effettua_prenotazione = (req, res) => {
     // Validate request
     if (!req.body) {
         res.status(400).send({
-        message: "Content can not be empty!"
+            message: "Content can not be empty!",
         });
         return;
     }
@@ -90,24 +93,26 @@ exports.effettua_prenotazione = (req, res) => {
         ID_servizio: req.body.ID_servizio,
         Orario_prenotazione_inizio: req.body.Orario_prenotazione_inzio,
         Orario_prenotazione_fine: req.body.Orario_prenotazione_fine,
-        Stato : 'Attivo',
+        Stato: "Attivo",
         Numero_clienti: req.body.Numero_clienti,
     };
 
     // Save Prenotazione in the database
-    tab_prenotazioni.create(prenotazioni)
-        .then(data => {
-        res.send(data);
+    tab_prenotazioni
+        .create(prenotazioni)
+        .then((data) => {
+            res.send(data);
         })
-        .catch(err => {
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while creating the Prenotazione."
-        });
+        .catch((err) => {
+            res.status(500).send({
+                message:
+                    err.message ||
+                    "Some error occurred while creating the Prenotazione.",
+            });
         });
 };
 
-// Retrieve all Prenotazioni from the database by id utente o id fornitore 
+// Retrieve all Prenotazioni from the database by id utente o id fornitore
 exports.get_prenotazioni = (req, res) => {
     var id = null;
     var condition= null;
@@ -151,10 +156,9 @@ exports.get_prenotazioni = (req, res) => {
           });
       });
     }
-
 };
 
-// Retrieve all slot_liberi from the database by id fornitore  
+// Retrieve all slot_liberi from the database by id fornitore
 exports.get_slot_liberi = (req, res) => {
   const ID_fornitore = req.query.ID_fornitore;    
   var condition = ID_fornitore ? { ID_fornitore: { [Op.like]: `%${ID_fornitore}%` } } : null;
@@ -162,11 +166,12 @@ exports.get_slot_liberi = (req, res) => {
   var filtro = {
     Stato : 'Attivo',
     Data_giorno: req.body.Data_giorno,
-    ID_servizio: req.body.ID_servizio
+    ID_servizio: req.body.ID_servizio,
+    ID_fornitore: ID_fornitore
   }
   
   //var condition_time = db.sequelize.fn('date', sequelize.col('Orario_prenotazione_inizio'), Op.like, filtro.Data_giorno);
-  var dati_buoni = calcolo_slot_liberi(data, filtro.Data_giorno, ID_servizio);
+  var dati_buoni = calcolo_slot_liberi(filtro);
   res.send(dati_buoni);
 
 
@@ -199,23 +204,24 @@ exports.annulla_prenotazione = (req, res) => {
 
     //bisogna mettere che si usa solo lo stato nel body
 
-    tab_prenotazioni.update(req.body, {
-        where: { id: id }
-    })
-        .then(num => {
+    tab_prenotazioni
+        .update(req.body, {
+            where: { id: id },
+        })
+        .then((num) => {
             if (num == 1) {
                 res.send({
-                    message: "Prenotazioni was updated successfully."
+                    message: "Prenotazioni was updated successfully.",
                 });
             } else {
                 res.send({
-                    message: `Cannot update Prenotazioni with id=${id}. Maybe Prenotazioni was not found or req.body is empty!`
+                    message: `Cannot update Prenotazioni with id=${id}. Maybe Prenotazioni was not found or req.body is empty!`,
                 });
             }
         })
-        .catch(err => {
+        .catch((err) => {
             res.status(500).send({
-                message: "Error updating Prenotazioni with id=" + id
+                message: "Error updating Prenotazioni with id=" + id,
             });
         });
 };
@@ -223,24 +229,25 @@ exports.annulla_prenotazione = (req, res) => {
 // Delete a tab_prenotazioni with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
-  
-    tab_prenotazioni.destroy({
-      where: { id: id }
-    })
-      .then(num => {
-        if (num == 1) {
-          res.send({
-            message: "Prenotazioni was deleted successfully!"
-          });
-        } else {
-          res.send({
-            message: `Cannot delete Prenotazioni with id=${id}. Maybe Prenotazioni was not found!`
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Could not delete Prenotazioni with id=" + id
+
+    tab_prenotazioni
+        .destroy({
+            where: { id: id },
+        })
+        .then((num) => {
+            if (num == 1) {
+                res.send({
+                    message: "Prenotazioni was deleted successfully!",
+                });
+            } else {
+                res.send({
+                    message: `Cannot delete Prenotazioni with id=${id}. Maybe Prenotazioni was not found!`,
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: "Could not delete Prenotazioni with id=" + id,
+            });
         });
-      });
-  };
+};

@@ -1,0 +1,21 @@
+
+Function prenotazioni_disponibili()
+    Trova Capienza_massima del fornitore
+
+    select sum(Persone) 
+    from ID_prenotazione 
+    WHERE ID_fornitore='ljadnsl' ang Giorno = 'Day' and servizio='tipo1'
+    GROUPBY data e durata
+
+    Trova la durata minima
+
+    Creo una tabella nelle asse delle x che vanno dall'apertura
+    con un offset pari a durata minima
+
+    Per ogni istanza della tabella
+        Se(durata minima == durata)
+            aggiungi il numero di persone di quell istanza
+    altrimenti
+        for i=0 to durata totale/durata minima
+            aggiungi il numero di persone al tempo+i*durataminima
+    

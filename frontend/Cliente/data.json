@@ -1,0 +1,17 @@
+ let data = [
+    {
+        "ID": 1,
+        "Name": "John Doe",
+        "Email": "johndoe@example.com"
+    },
+    {
+        "ID": 2,
+        "Name": "Jane Smith",
+        "Email": "janesmith@example.com"
+    },
+    {
+        "ID": 3,
+        "Name": "Bob Johnson",
+        "Email": "bobjohnson@example.com"
+    }
+]

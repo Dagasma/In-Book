@@ -3,11 +3,33 @@ const SERVIZI = require("../models/SERVIZI");
 const tab_prenotazioni = db.models.PRENOTAZIONI; //da testare
 const Op = db.Sequelize.Op;
 
-function calcolo_slot_liberi(filtro) {
+var moment = require('moment'); // require
+
+// HH:MM to sum minutes
+function minutesFromTime(duration) {
+    var parts = duration.split(':');
+    var hours = parseInt(parts[0], 10);
+    var minutes = parseInt(parts[1], 10);
+    return (hours * 60) + minutes;
+}
+
+// somma tra HH:MM e numero di minuti da sommare
+function addtime(orario, durata_minima_minutes) {
+    var momento = moment(orario, "HH:mm");
+    momento.add(durata_minima_minutes, "minutes");
+    var orario_nuovo = momento.format("HH:mm");
+    return orario_nuovo;
+}
+// // find index
+// function findIndex(function(element)) {
+//     return vettore.Orario_inizio=valore_cercato;
+// }
+
+async function calcolo_slot_liberi(filtro) {
     var output = {};
 
+    // ritorno il giorno della settimana
     const data_target = new Date(filtro.Data_giorno);
-
     const giorni = [
         "Lunedi",
         "Martedi",
@@ -19,62 +41,81 @@ function calcolo_slot_liberi(filtro) {
     ];
     const giorno_scelto = giorni[data_target.getDay()];
 
-  console.log(giorno_scelto, data_target)
+    // Determino la capienza massima
+    const Query_capienza = await db.sequelize.query('SELECT Capienza_massima FROM FORNITORI WHERE ID_utente_fornitore = ?',
+        {
+            replacements: [filtro.ID_fornitore],
+            type: db.sequelize.QueryTypes.SELECT
+        }
+    );
 
-  const capienza = db.sequelize.query('SELECT Capienza FROM FORNITORI WHERE ID_fornitore = ?',
-  {
-    replacements: [ filtro.ID_fornitore],
-    type: db.sequelize.QueryTypes.SELECT
-  }
-  );
+    // Determino l'orario in cui apre e chiude quel giorno
+    const Orari_fornitori = await db.sequelize.query('SELECT Orario_apertura , Orario_chiusura ' +
+        'FROM ORARI_ATTIVITA ' +
+        'WHERE Giorno_della_settimana=? and ID_fornitore=?',
+        {
+            replacements: [giorno_scelto, filtro.ID_fornitore],
+            type: db.sequelize.QueryTypes.SELECT
+        }
+    );
 
-  var query_buggata = ['SELECT *',
-                        'FROM (`PRENOTAZIONI` as p INNER JOIN `SERVIZI` as s ON p.ID_servizio = s.ID) INNER JOIN ORARI_ATTIVITA as o ON o.ID_fornitore = p.ID_fornitore',
-                        'WHERE ? >= TIME(p.Orario_prenotazione_inizio) AND ? <= TIME(p.Orario_prenotazione_fine)',
-                        'AND TIME(p.Orario_prenotazione_inizio) >= o.Orario_apertura AND TIME(p.Orario_prenotazione_fine) <= o.Orario_chiusura',
-                        'AND Date(p.Orario_prenotazione_inizio) = ? and o.giorno_della_settimana = ? and p.Stato = \'Attivo\';',]
-  
-  var slot_orari_attivita = db.sequelize.query(query_buggata, {replacements: [inizio_slot,fine_slot,Data_giorno,giorno_scelto]})  
-  
-  var slot_occupati = db.sequelize.query(query_buggata, {replacements: [inizio_slot,fine_slot,Data_giorno,giorno_scelto]})                      
+    // mi torna una tabella con ORARIO - DURATA - SUM(PERSONE)
+    const Query_prenotazioni = await db.sequelize.query('SELECT Orario_prenotazione_inizio ,Durata , SUM(Numero_clienti) ' +
+        'FROM `SERVIZI` INNER JOIN `PRENOTAZIONI` ON`SERVIZI`.`ID` = `PRENOTAZIONI`.`ID_servizio` ' +
+        'WHERE DATE(Orario_prenotazione_inizio) = ? ' +
+        'GROUP BY `PRENOTAZIONI`.`Orario_prenotazione_inizio` ,`SERVIZI`.`Durata` ' +
+        'ORDER BY `PRENOTAZIONI`.`Orario_prenotazione_inizio` ASC;',
+        {
+            replacements: [filtro.Data_giorno],
+            type: db.sequelize.QueryTypes.SELECT
+        }
+    );
 
-  //Per ogni slot di ORARI_ATTIVITA del fornitore nel giorno della settimana scelto per la prenotazione, 
-    //creo un vettore A che rappresenta gli slot temporali del servizio scelto interno al range dello slot di ORARIO ATTIVITA
-    // es range slot ORARI_ATTIVITA("9:00,12:00","14:00,18:00"), A = ["9,9:30", "9:30,10" ecc] con durata servizio = 00:30
-    //(la durata di ogni slot è fissata tramite il servizio scelto)
-    //per ogni slot temporale del servizio K in A
-      //verifico se esistono una o piu prenotazioni attive nello slot temporale corrente K (tali da saturare la capacità) -> valuto la somma(Numero_clienti)
-      //Se capacita_attivita - somma(num_clienti) - num_clienti_richiesti > 0
-        //aggiungi a insieme di slot temporali utilizzabili
+    //Calcolo il numero di SLOT
+    durata_minima = '00:30:00';
+    durata_minima_minutes = minutesFromTime(durata_minima);
+    var orari_00 = minutesFromTime((Orari_fornitori[0]).Orario_apertura);
+    var orari_01 = minutesFromTime((Orari_fornitori[0]).Orario_chiusura);
 
-  //in uscita ho un insieme di slot temporali usabili per il giorno della settimana scelto
-  
-  //se ad esempio ho prenotazioni "9.00:9.15" (tali da saturare capacita) e provo ad inserirmi tra le "9.00,9:30" non posso
+    var orari_10 = minutesFromTime((Orari_fornitori[1]).Orario_apertura);
+    var orari_11 = minutesFromTime((Orari_fornitori[1]).Orario_chiusura);
 
+    const Number_slot_mattina = (orari_01 - orari_00) / (durata_minima_minutes);
+    const Number_slot_pomeriggio = (orari_11 - orari_10) / (durata_minima_minutes);
+    const Number_slot = Number_slot_mattina + Number_slot_pomeriggio;
 
-  //Per ogni slot di ORARI_ATTIVITA del fornitore nel giorno della settimana scelto per la prenotazione, 
-    //creo un vettore A che rappresenta gli slot temporali del servizio scelto interno al range dello slot di ORARIO ATTIVITA
-    // es range slot ORARI_ATTIVITA("9:00,12:00","14:00,18:00"), A = ["9,9:15", "9:15,9:30",""9:30,9;45" ecc] con durata servizio = durata_servizio_minimo_fornitore
-    //per ogni K slot temporale del servizio in A
-      //verifico se esistono una o piu prenotazioni attive nello slot temporale corrente K (tali da saturare la capacità) -> valuto la somma(Numero_clienti)
-      //Se capacita_attivita - somma(num_clienti) - num_clienti_richiesti > 0
-        //aggiungi a insieme di slot temporali utilizzabili
+    Capienza_max = Query_capienza[0].Capienza_massima;
+    let Array_disponibilita = new Array();
 
-  //in uscita ho un insieme di slot temporali usabili della durata minima per il giorno della settimana scelto
-  //effettuo un check per vedere se esistono slot contigui in modo da averli pari alla durata del servizio richiesto
-  
-  //se ad esempio ho prenotazioni "9.00:9.15" (tali da saturare capacita) e provo ad inserirmi tra le "9.00,9:30" non posso
+    //Inserisco nella prima colonna l'ora di inizio mentre nella seconda la capienza massima
+    for (var i = 0; i < Number_slot; i++) {
+        if (i == 0) {
+            Array_disponibilita.push({ "Orario_inizio": addtime(Orari_fornitori[0].Orario_apertura.substring(0, 5), 0), "Posti_disponibili": Capienza_max });
+        }
+        else if (i == Number_slot_mattina) {
+            Array_disponibilita.push({ "Orario_inizio": addtime(Orari_fornitori[1].Orario_apertura.substring(0, 5), 0), "Posti_disponibili": Capienza_max });
+        }
+        else {
+            Array_disponibilita.push({ "Orario_inizio": addtime(Array_disponibilita[i - 1]['Orario_inizio'], durata_minima_minutes), "Posti_disponibili": Capienza_max })
 
-  for(let slot in slot_occupati){
-    
+        }
+    }
+    //Inserisco nella prima colonna l'ora di inizio mentre nella seconda la capienza massima
+    for (var i = 0; i < Query_prenotazioni.length; i++) {  // per ogni prenotazione
+        let orar_table = addtime(String(Query_prenotazioni[i].Orario_prenotazione_inizio).substring(16, 21), -60);
+        let index = Array_disponibilita.findIndex(function (element) { return element["Orario_inizio"] == orar_table; });
+        if (Query_prenotazioni[i].Durata == durata_minima) {
+            Array_disponibilita[index]["Posti_disponibili"] -= Query_prenotazioni[i]['SUM(Numero_clienti)'];
+        }
+        else {
+            for (var j = 0; j < minutesFromTime(Query_prenotazioni[i].Durata) / minutesFromTime(durata_minima); j++) {
+                Array_disponibilita[index + j]["Posti_disponibili"] -= Query_prenotazioni[i]['SUM(Numero_clienti)'];
+            }
+        }
+    }
+    return Array_disponibilita;
+};
 
-
-
-
-  } 
-
-    return output;
-}
 
 // Create and Save a new Prenotazione
 exports.effettua_prenotazione = (req, res) => {
@@ -115,88 +156,91 @@ exports.effettua_prenotazione = (req, res) => {
 // Retrieve all Prenotazioni from the database by id utente o id fornitore
 exports.get_prenotazioni = (req, res) => {
     var id = null;
-    var condition= null;
-    if( "ID_utente" in req.query){  //se nella ricerca ho ID_utente
-      id = req.query.ID_utente;
-      
-      condition = id ? { ID_utente: { [Op.like]: `%${id}%` } } : null;
-      console.log(condition)
+    var condition = null;
+    if ("ID_utente" in req.query) {  //se nella ricerca ho ID_utente
+        id = req.query.ID_utente;
 
-      tab_prenotazioni.findAll({ 
-        where: condition,
-        order: [['Orario_prenotazione_inizio', 'ASC']]
-      }
+        condition = id ? { ID_utente: { [Op.like]: `%${id}%` } } : null;
+        console.log(condition)
+
+        tab_prenotazioni.findAll({
+            where: condition,
+            order: [['Orario_prenotazione_inizio', 'ASC']]
+        }
         )
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => { 
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Prenotazioni."
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while retrieving Prenotazioni."
+                });
             });
-        });
 
     }
 
-    else{   //se nella ricerca ho ID_fornitore restituisco prenotazioni+clienti associati
-      id = req.query.ID_fornitore;
-      db.sequelize.query('SELECT * FROM VISTA_PRENOTAZIONI_CLIENTI_PER_FORNITORE WHERE ID_fornitore = ? ORDER BY ? ?',
-      {
-        replacements: [ id,'Orario_prenotazione_inizio', 'ASC'],
-        type: db.sequelize.QueryTypes.SELECT
-      }
-      ).then(data => {
-        res.send(data);
-      })
-      .catch(err => { 
-          res.status(500).send({
-              message:
-                  err.message || "Some error occurred while retrieving Prenotazioni."
-          });
-      });
+    else {   //se nella ricerca ho ID_fornitore restituisco prenotazioni+clienti associati
+        id = req.query.ID_fornitore;
+        db.sequelize.query('SELECT * FROM VISTA_PRENOTAZIONI_CLIENTI_PER_FORNITORE WHERE ID_fornitore = ? ORDER BY ? ?',
+            {
+                replacements: [id, 'Orario_prenotazione_inizio', 'ASC'],
+                type: db.sequelize.QueryTypes.SELECT
+            }
+        ).then(data => {
+            res.send(data);
+        })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while retrieving Prenotazioni."
+                });
+            });
     }
 };
 
 // Retrieve all slot_liberi from the database by id fornitore
 exports.get_slot_liberi = (req, res) => {
-  const ID_fornitore = req.query.ID_fornitore;    
-  var condition = ID_fornitore ? { ID_fornitore: { [Op.like]: `%${ID_fornitore}%` } } : null;
-  
-  var filtro = {
-    Stato : 'Attivo',
-    Data_giorno: req.body.Data_giorno,
-    ID_servizio: req.body.ID_servizio,
-    ID_fornitore: ID_fornitore
-  }
-  
-  //var condition_time = db.sequelize.fn('date', sequelize.col('Orario_prenotazione_inizio'), Op.like, filtro.Data_giorno);
-  var dati_buoni = calcolo_slot_liberi(filtro);
-  res.send(dati_buoni);
+    //var condition = ID_fornitore ? { ID_fornitore: { [Op.like]: `%${ID_fornitore}%` } } : null;
+    var filtro = {
+        Stato: 'Attivo',
+        Data_giorno: req.body.Data_giorno,
+        ID_servizio: req.body.ID_servizio,
+        ID_fornitore: req.body.ID_fornitore
+    };
 
+    //var condition_time = db.sequelize.fn('date', sequelize.col('Orario_prenotazione_inizio'), Op.like, filtro.Data_giorno);
+    calcolo_slot_liberi(filtro).then(data => {
+        res.send(JSON.stringify(data));})
+        .catch (err => {
+                      res.status(500).send({
+                          message:
+                              err.message || "Some error occurred while retrieving Prenotazioni."
+                      });
+                  });
+                
 
-  // lista_tab_prenotazioni.findAll({ 
-  //     include:[{
-  //       model: SERVIZI,
-  //       required: true
-  //     }],
-  //     where: {
-  //         condition, 
-  //         Stato : filtro.Stato,
-  //         condition_time,
-  //         order: [['Orario_prenotazione', 'ASC']]
-  //       } })
-  //     .then(data => {
-  //         var dati_buoni = calcolo_slot_liberi(data, filtro.Data_giorno, ID_servizio);
-  //         res.send(dati_buoni);
-  //     })
-  //     .catch(err => {
-  //         res.status(500).send({
-  //             message:
-  //                 err.message || "Some error occurred while retrieving Prenotazioni."
-  //         });
-  //     });
-  
+    //   tab_prenotazioni.findAll({ 
+    //       include:[{
+    //         model: SERVIZI,
+    //         required: true
+    //       }],
+    //       where: {
+    //           condition, 
+    //           Stato : filtro.Stato,
+    //           order: [['Orario_prenotazione', 'ASC']]
+    //         } })
+    //       .then(data => {
+    //           var dati_buoni = calcolo_slot_liberi(data, filtro.Data_giorno, ID_servizio);
+    //           res.send(dati_buoni);
+    //       })
+    //       .catch(err => {
+    //           res.status(500).send({
+    //               message:
+    //                   err.message || "Some error occurred while retrieving Prenotazioni."
+    //           });
+    //       });
+
 };
 
 exports.annulla_prenotazione = (req, res) => {

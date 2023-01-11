@@ -116,3 +116,41 @@ function buildTable(){
 
     }
 }
+
+
+let data = [
+  {
+      "ID": 1,
+      "Name": "John Doe",
+      "Email": "johndoe@example.com"
+  },
+  {
+      "ID": 2,
+      "Name": "Jane Smith",
+      "Email": "janesmith@example.com"
+  },
+  {
+      "ID": 3,
+      "Name": "Bob Johnson",
+      "Email": "bobjohnson@example.com"
+  }
+]
+
+// Get the table body element
+var tableBody = document.getElementById("table-body");
+
+// Fetch the JSON file
+fetch('data.json')
+  .then(response => response.json())
+  .then(data => {
+    // Loop through the data and add each item to the table
+    for (var i = 0; i < data.length; i++) {
+      var row = tableBody.insertRow();
+      var idCell = row.insertCell();
+      var nameCell = row.insertCell();
+      var emailCell = row.insertCell();
+      idCell.innerHTML = data[i].id;
+      nameCell.innerHTML = data[i].name;
+      emailCell.innerHTML = data[i].email;
+    }
+  });

@@ -7,15 +7,15 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     Nome: {
-      type: DataTypes.CHAR(16),
+      type: DataTypes.CHAR(255),
       allowNull: false
     },
     Cognome: {
-      type: DataTypes.CHAR(16),
+      type: DataTypes.CHAR(255),
       allowNull: false
     },
     Email: {
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING(255),
       allowNull: false,
       unique: "Email"
     },
@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     Telefono: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.STRING(30),
       allowNull: false,
       unique: "Telefono"
     },

@@ -153,11 +153,10 @@ exports.effettua_prenotazione = (req, res) => {
 exports.get_prenotazioni_utente = (req, res) => {
     var id = null;
     var condition = null;
-    if ("ID_utente" in req.query) {  //se nella ricerca ho ID_utente
+
         id = req.query.ID_utente;
 
         condition = id ? { ID_utente: { [Op.like]: `%${id}%` } } : null;
-        console.log(condition)
 
         tab_prenotazioni.findAll({
             where: condition,
@@ -174,36 +173,15 @@ exports.get_prenotazioni_utente = (req, res) => {
                 });
             });
 
-    }
-
-    else {   //se nella ricerca ho ID_fornitore restituisco prenotazioni+clienti associati
-        id = req.query.ID_fornitore;
-        db.sequelize.query('SELECT * FROM VISTA_PRENOTAZIONI_CLIENTI_PER_FORNITORE WHERE ID_fornitore = ? ORDER BY ? ?',
-            {
-                replacements: [id, 'Orario_prenotazione_inizio', 'ASC'],
-                type: db.sequelize.QueryTypes.SELECT
-            }
-        ).then(data => {
-            res.send(data);
-        })
-            .catch(err => {
-                res.status(500).send({
-                    message:
-                        err.message || "Some error occurred while retrieving Prenotazioni."
-                });
-            });
-    }
 };
 
 // Retrieve all Prenotazioni from the database by id utente o id fornitore
 exports.get_prenotazioni_fornitore = (req, res) => {
     var id = null;
     var condition = null;
-    if ("ID_fornitore" in req.query) {  //se nella ricerca ho ID_utente
         id = req.query.ID_fornitore;
 
         condition = id ? { ID_fornitore: { [Op.like]: `%${id}%` } } : null;
-        console.log(condition)
 
         tab_prenotazioni.findAll({
             where: condition,
@@ -220,25 +198,6 @@ exports.get_prenotazioni_fornitore = (req, res) => {
                 });
             });
 
-    }
-
-    else {   //se nella ricerca ho ID_fornitore restituisco prenotazioni+clienti associati
-        id = req.query.ID_fornitore;
-        db.sequelize.query('SELECT * FROM VISTA_PRENOTAZIONI_CLIENTI_PER_FORNITORE WHERE ID_fornitore = ? ORDER BY ? ?',
-            {
-                replacements: [id, 'Orario_prenotazione_inizio', 'ASC'],
-                type: db.sequelize.QueryTypes.SELECT
-            }
-        ).then(data => {
-            res.send(data);
-        })
-            .catch(err => {
-                res.status(500).send({
-                    message:
-                        err.message || "Some error occurred while retrieving Prenotazioni."
-                });
-            });
-    }
 };
 
 // Retrieve all slot_liberi from the database by id fornitore
@@ -288,7 +247,6 @@ exports.get_slot_liberi = (req, res) => {
 exports.annulla_prenotazione = (req, res) => {
     const id = req.params.id_prenotazione;
     const nuovo_Stato = req.params.nuovo_Stato;
-    console.log("ciao a tutti :" ,req.params);
  
     tab_prenotazioni
         .update(req.body, {

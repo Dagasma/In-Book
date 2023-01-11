@@ -3,7 +3,6 @@ const router = config.express.Router();
 
 router.get("/profilo", function (request, response) {
   response.sendFile(config.frontend_path+"cliente.html");
-  console.log(request.kauth.grant.access_token.content.sub)
 });
 router.get("/ricerca_fornitori_per_servizio", function (request, response) {
   response.sendFile(config.frontend_path+"cliente.html");

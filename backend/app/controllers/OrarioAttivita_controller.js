@@ -37,8 +37,8 @@ exports.create = (req, res) => {
 
 // Retrieve all hours from the database.
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+    const ID_fornitore = req.params.ID_fornitore;
+    var condition = ID_fornitore ? { ID_fornitore: { [Op.like]: `%${ID_fornitore}%` } } : null;
 
     tab_orario
         .findAll({ where: condition })

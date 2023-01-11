@@ -35,9 +35,28 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all votazioni from the database.
-exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+exports.findAll_utente = (req, res) => {
+    const ID_utente = req.params.id;
+    var condition = ID_utente ? { ID_utente: { [Op.like]: `%${ID_utente}%` } } : null;
+
+    tab_votazioni
+        .findAll({ where: condition })
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message:
+                    err.message ||
+                    "Some error occurred while retrieving votazioni.",
+            });
+        });
+};
+
+exports.findAll_fornitore = (req, res) => {
+    const ID_fornitore = req.params.id;
+    
+    var condition = ID_fornitore ? { ID_fornitore: { [Op.like]: `%${ID_fornitore}%` } } : null;
 
     tab_votazioni
         .findAll({ where: condition })

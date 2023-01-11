@@ -1,28 +1,43 @@
 Ho eliminato Cliente controller ed è diventato "Utente_Controller.js"
 
 controller UTENTE:
-OK : Create
-
+CREARE  :
+MODIFICARE  :
+TROVARE  :
 
 controller FORNITORI:
-OK : create
+CREARE  :
+MODIFICARE  :
+TROVARE  :
 
 
 controller ORARI_ATTIVITA:
-
+CREARE  :
+MODIFICARE  :
+TROVARE  :
 
 
 controller SERVIZI:
-
-
+CREARE  :
+MODIFICARE  :
+TROVARE  :
 
 
 controller PRENOTAZIONI:
-
+CREARE  : al massimo 6 mesi dopo altrimenti da errore (effettua_prenotazione)
+    Bisogna mettere il controllo sui Posti_disponibili
+MODIFICARE  : 
+TROVARE  :
+TROVA SLOT LIBERI : OK
 
 controller VOTAZIONI:
-
+CREARE  :
+MODIFICARE  :
+TROVARE  :
+DETERMINARE VOTO MEDIO:
 
 controller NOTIFICHE:
-
+CREARE  :
+MODIFICARE  :
+TROVARE  :
 

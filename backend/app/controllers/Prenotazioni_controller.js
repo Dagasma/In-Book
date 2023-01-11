@@ -20,10 +20,6 @@ function addtime(orario, durata_minima_minutes) {
     var orario_nuovo = momento.format("HH:mm");
     return orario_nuovo;
 }
-// // find index
-// function findIndex(function(element)) {
-//     return vettore.Orario_inizio=valore_cercato;
-// }
 
 async function calcolo_slot_liberi(filtro) {
     var output = {};
@@ -126,7 +122,7 @@ exports.effettua_prenotazione = (req, res) => {
         });
         return;
     }
-
+    
     // Create a Prenotazione
     const prenotazioni = {
         ID_utente: req.body.ID_utente,
@@ -154,13 +150,59 @@ exports.effettua_prenotazione = (req, res) => {
 };
 
 // Retrieve all Prenotazioni from the database by id utente o id fornitore
-exports.get_prenotazioni = (req, res) => {
+exports.get_prenotazioni_utente = (req, res) => {
     var id = null;
     var condition = null;
     if ("ID_utente" in req.query) {  //se nella ricerca ho ID_utente
         id = req.query.ID_utente;
 
         condition = id ? { ID_utente: { [Op.like]: `%${id}%` } } : null;
+        console.log(condition)
+
+        tab_prenotazioni.findAll({
+            where: condition,
+            order: [['Orario_prenotazione_inizio', 'ASC']]
+        }
+        )
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while retrieving Prenotazioni."
+                });
+            });
+
+    }
+
+    else {   //se nella ricerca ho ID_fornitore restituisco prenotazioni+clienti associati
+        id = req.query.ID_fornitore;
+        db.sequelize.query('SELECT * FROM VISTA_PRENOTAZIONI_CLIENTI_PER_FORNITORE WHERE ID_fornitore = ? ORDER BY ? ?',
+            {
+                replacements: [id, 'Orario_prenotazione_inizio', 'ASC'],
+                type: db.sequelize.QueryTypes.SELECT
+            }
+        ).then(data => {
+            res.send(data);
+        })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while retrieving Prenotazioni."
+                });
+            });
+    }
+};
+
+// Retrieve all Prenotazioni from the database by id utente o id fornitore
+exports.get_prenotazioni_fornitore = (req, res) => {
+    var id = null;
+    var condition = null;
+    if ("ID_fornitore" in req.query) {  //se nella ricerca ho ID_utente
+        id = req.query.ID_fornitore;
+
+        condition = id ? { ID_fornitore: { [Op.like]: `%${id}%` } } : null;
         console.log(condition)
 
         tab_prenotazioni.findAll({
@@ -244,10 +286,10 @@ exports.get_slot_liberi = (req, res) => {
 };
 
 exports.annulla_prenotazione = (req, res) => {
-    const id = req.params.id;
-
-    //bisogna mettere che si usa solo lo stato nel body
-
+    const id = req.params.id_prenotazione;
+    const nuovo_Stato = req.params.nuovo_Stato;
+    console.log("ciao a tutti :" ,req.params);
+ 
     tab_prenotazioni
         .update(req.body, {
             where: { id: id },
@@ -271,8 +313,8 @@ exports.annulla_prenotazione = (req, res) => {
 };
 
 // Delete a tab_prenotazioni with the specified id in the request
-exports.delete = (req, res) => {
-    const id = req.params.id;
+exports.delete_prenotazione = (req, res) => {
+    const id = req.params.id_prenotazione;
 
     tab_prenotazioni
         .destroy({

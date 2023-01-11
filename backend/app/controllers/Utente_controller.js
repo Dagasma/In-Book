@@ -14,6 +14,9 @@ exports.create = async (req, res) => {
 
     // Create a user
     const utente = {
+        Nome : req.body.nome,
+        Cognome : req.body.cognome,
+        Email: req.body.email,
         Data_di_nascita: req.body.Data_di_nascita,
         Telefono: req.body.Telefono,
         Tipo: req.body.Tipo,

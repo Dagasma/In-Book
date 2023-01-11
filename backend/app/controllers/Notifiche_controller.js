@@ -52,6 +52,7 @@ exports.findAllFornitore = (req, res) => {
             });
         });
 };
+
 exports.findAllCliente = (req, res) => {
     const id = req.query.id_cliente
     var condition = id ? { ID_cliente: { [Op.like]: `%${id}%` } } : null;

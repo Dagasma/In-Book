@@ -4,11 +4,11 @@
     
     CREATE TABLE IF NOT EXISTS `INBOOK`.`UTENTI`(
         ID varchar(36) NOT NULL PRIMARY KEY, #mappato con keycloak
-        Nome char(16) NOT NULL ,
-        Cognome char(16) NOT NULL ,
-        Email varchar(30) NOT NULL UNIQUE,
+        Nome char(255) NOT NULL ,
+        Cognome char(255) NOT NULL ,
+        Email varchar(255) NOT NULL UNIQUE,
         Data_di_nascita date,
-        Telefono varchar(10) NOT NULL UNIQUE,
+        Telefono varchar(30) NOT NULL UNIQUE,
         Tipo ENUM('Cliente', 'Amministratore', 'Fornitore') NOT NULL,
         Bloccato BOOLEAN DEFAULT FALSE
     );

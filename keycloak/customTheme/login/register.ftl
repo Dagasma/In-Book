@@ -116,7 +116,7 @@
                     </div>
                 </div>
             </#if>
-                <div class="form-group">
+                <div class="${properties.kcFormGroupClass!}">
                     <div class="${properties.kcLabelWrapperClass!}">
                         <label for="user.attributes.dob" class="${properties.kcLabelClass!}">
                         Date of birth</label>
@@ -128,13 +128,25 @@
                         value="${(register.formData['user.attributes.dob']!'')}"/>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="${properties.kcFormGroupClass!}>
                     <div class="${properties.kcLabelWrapperClass!}">
                         <label for="user.attributes.mobile" class="${properties.kcLabelClass!}">Mobile number</label>
                     </div>
 
                     <div class="${properties.kcInputWrapperClass!}">
-                        <input type="text" class="${properties.kcInputClass!}" id="user.attributes.mobile" name="user.attributes.mobile" value="${(register.formData['user.attributes.mobile']!'')}"/>
+                        <input type="tel" class="${properties.kcInputClass!}" id="user.attributes.mobile" name="user.attributes.mobile" value="${(register.formData['user.attributes.mobile']!'')}"/>
+                    </div>
+                </div>
+                <div class="${properties.kcFormGroupClass!}">
+                    <div class="${properties.kcLabelWrapperClass!}">
+                        <label for="user.attributes.isfornitore" class="${properties.kcInputClassCheckboxLabel!}">
+                        Are you a supplier?</label>
+                    </div>
+
+                    <div class="${properties.kcInputClassCheckbox!}">
+                        <input type="checkbox" class="${properties.kcInputClassCheckboxInput!}" 
+                        id="user.attributes.isfornitore" name="user.attributes.isfornitore" 
+                        value="${(register.formData['user.attributes.isfornitore']!'')}"/>
                     </div>
                 </div>
 

@@ -58,6 +58,45 @@
                 </div>
             </div>
 
+            <div class="${properties.kcFormGroupClass!}">
+                    <div class="${properties.kcLabelWrapperClass!}">
+                        <label for="user.attributes.dob" class="${properties.kcLabelClass!}">
+                        Date of birth</label>
+                    </div>
+
+                    <div class="${properties.kcInputWrapperClass!}">
+                        <input type="date" class="${properties.kcInputClass!}" 
+                        id="user.attributes.dob" name="user.attributes.dob" 
+                        value="${(register.formData['user.attributes.dob']!'')}"/>
+                    </div>
+            </div>
+            <div class="${properties.kcFormGroupClass!}>
+                    <div class="${properties.kcLabelWrapperClass!}">
+                        <label for="user.attributes.mobile" class="${properties.kcLabelClass!}">Mobile number</label>
+                    </div>
+
+                    <div class="${properties.kcInputWrapperClass!}">
+                        <input type="tel" class="${properties.kcInputClass!}" id="user.attributes.mobile" name="user.attributes.mobile" value="${(register.formData['user.attributes.mobile']!'')}"/>
+                    </div>
+            </div>
+            <div class="${properties.kcFormGroupClass!}">
+                    <div class="${properties.kcLabelWrapperClass!}">
+                        <label for="tipo" class="${properties.kcLabelClass!}">${msg("Tipo")}</label>
+                    </div>
+                    <div class="${properties.kcInputWrapperClass!}">
+                        <select
+                            id="user.attributes.tipo"
+                            class="${properties.kcInputClass!}"
+                            name="user.attributes.tipo"
+                            value="${(register.formData['user.attributes.tipo']!'')}">
+                                <option value="Fornitore" >Fornitore</option>
+                                <option value="Cliente" selected>Cliente</option>
+                        </select>
+                    </div>
+            </div>
+
+
+
             <#if !realm.registrationEmailAsUsername>
                 <div class="${properties.kcFormGroupClass!}">
                     <div class="${properties.kcLabelWrapperClass!}">
@@ -115,40 +154,11 @@
                         </#if>
                     </div>
                 </div>
+
+                
+
             </#if>
-                <div class="${properties.kcFormGroupClass!}">
-                    <div class="${properties.kcLabelWrapperClass!}">
-                        <label for="user.attributes.dob" class="${properties.kcLabelClass!}">
-                        Date of birth</label>
-                    </div>
-
-                    <div class="${properties.kcInputWrapperClass!}">
-                        <input type="date" class="${properties.kcInputClass!}" 
-                        id="user.attributes.dob" name="user.attributes.dob" 
-                        value="${(register.formData['user.attributes.dob']!'')}"/>
-                    </div>
-                </div>
-                <div class="${properties.kcFormGroupClass!}>
-                    <div class="${properties.kcLabelWrapperClass!}">
-                        <label for="user.attributes.mobile" class="${properties.kcLabelClass!}">Mobile number</label>
-                    </div>
-
-                    <div class="${properties.kcInputWrapperClass!}">
-                        <input type="tel" class="${properties.kcInputClass!}" id="user.attributes.mobile" name="user.attributes.mobile" value="${(register.formData['user.attributes.mobile']!'')}"/>
-                    </div>
-                </div>
-                <div class="${properties.kcFormGroupClass!}">
-                    <div class="${properties.kcLabelWrapperClass!}">
-                        <label for="user.attributes.isfornitore" class="${properties.kcInputClassCheckboxLabel!}">
-                        Are you a supplier?</label>
-                    </div>
-
-                    <div class="${properties.kcInputClassCheckbox!}">
-                        <input type="checkbox" class="${properties.kcInputClassCheckboxInput!}" 
-                        id="user.attributes.isfornitore" name="user.attributes.isfornitore" 
-                        value="${(register.formData['user.attributes.isfornitore']!'')}"/>
-                    </div>
-                </div>
+                
 
             <#if recaptchaRequired??>
                 <div class="form-group">

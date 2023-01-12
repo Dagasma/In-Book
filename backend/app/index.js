@@ -1,8 +1,8 @@
 const config = require("../config/config");
 const db = require("./models");
-const cliente = require("./routes/cliente")
-const fornitore = require("./routes/fornitore")
-const amministratore = require("./routes/amministratore")
+const cliente = require("./routes_web_pages/cliente")
+const fornitore = require("./routes_web_pages/fornitore")
+const amministratore = require("./routes_web_pages/amministratore")
 
 const app = config.express();
 
@@ -21,7 +21,6 @@ app.use(config.keycloak.middleware()); //commentato per testare api
 console.log(config.keycloak.getConfig());
 
 app.use(config.express.static(config.frontend_path)); //per rilevare i file css
-
 
 
 var sql_views = config.fs.readFileSync(config.db_path + 'views.sql', 'utf8');

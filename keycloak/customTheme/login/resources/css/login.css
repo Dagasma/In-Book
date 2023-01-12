@@ -487,6 +487,7 @@ ul#kc-totp-supported-apps {
     box-shadow: var(--pf-global--BoxShadow--lg);
     padding: 0 20px;
     max-width: 500px;
+    display: table;
     border-top: 4px solid;
     border-color: var(--pf-global--primary-color--100);
 }

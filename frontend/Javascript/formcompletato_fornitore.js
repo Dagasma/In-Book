@@ -8,10 +8,9 @@ var data = {
 
 //document.body.onload = create_table;
 
-var down = document.getElementById("GFG_DOWN");
-
 
 function GFG_Fun() {
+	var down = document.getElementById("GFG_DOWN");
 
 	// Create a break line element
 	var br = document.createElement("br");
@@ -93,5 +92,5 @@ function GFG_Fun() {
 	// Append the submit button to the form
 	form.appendChild(s);
 
-	document.getElementsByTagName("body")[0].appendChild(form);
+	document.getElementsByTagName("form")[0].appendChild(form);
 }

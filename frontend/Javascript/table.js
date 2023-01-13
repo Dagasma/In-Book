@@ -14,6 +14,7 @@ let ex_data= [
     }
   ]
   
+  
   function generateTableHead(table, data,columns) {
     let thead = table.createTHead();
     let row = thead.insertRow();
@@ -71,11 +72,17 @@ let ex_data= [
   function create_table() {
     //let table = document.querySelector("table");// create table
     var columns= ['ID_utente','ID_fornitore','Voto'];
+    var tbl = document.createElement("table");
     var table = document.getElementById("json-table");
     let data = Object.keys(ex_data[0]);//save the keys
     generateTableHead(table, data,columns);//create header
     generateTable(table, ex_data,columns);//print table
   }
+
+
+  
+  //document.body.onload = create_table;
+  
 
   /*
   

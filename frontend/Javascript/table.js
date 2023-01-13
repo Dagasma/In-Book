@@ -14,7 +14,6 @@ let ex_data= [
     }
   ]
   
-  
   function generateTableHead(table, data,columns) {
     let thead = table.createTHead();
     let row = thead.insertRow();

@@ -16,11 +16,11 @@ app.use(config.session({
   store: config.memoryStore
 }));
 
-app.use(config.keycloak.middleware()); //commentato per testare api
+//app.use(config.keycloak.middleware()); //commentato per testare api
 
-console.log(config.keycloak.getConfig());
+//console.log(config.keycloak.getConfig());
 
-app.use(config.express.static(config.frontend_path)); //per rilevare i file css
+app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
 
 
 var sql_views = config.fs.readFileSync(config.db_path + 'views.sql', 'utf8');
@@ -34,7 +34,7 @@ db.sequelize.sync()
     console.log("Failed to sync db: " + err.message);
   });
 
-app.use("/cliente",config.keycloak.protect('realm:cliente'),cliente)
+app.use("/cliente",cliente)
 app.use("/fornitore",config.keycloak.protect('realm:fornitore'),fornitore)
 app.use("/amministratore",config.keycloak.protect('realm:amministratore'),amministratore)
 

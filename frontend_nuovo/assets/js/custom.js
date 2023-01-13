@@ -163,7 +163,7 @@
 	});
 
 	$(document).ready(function () {
-	    $(document).on("scroll", onScroll);
+	    //$(document).on("scroll", onScroll);
 	    
 	    //smoothscroll
 	    $('.scroll-to-section a[href^="#"]').on('click', function (e) {
@@ -186,21 +186,6 @@
 	        });
 	    });
 	});
-
-	function onScroll(event){
-	    var scrollPos = $(document).scrollTop();
-	    $('.nav a').each(function () {
-	        var currLink = $(this);
-	        var refElement = $(currLink.attr("href"));
-	        if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
-	            $('.nav ul li a').removeClass("active");
-	            currLink.addClass("active");
-	        }
-	        else{
-	            currLink.removeClass("active");
-	        }
-	    });
-	}
 
 
 	// Page loading animation

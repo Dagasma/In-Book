@@ -64,9 +64,3 @@
         ID_fornitore varchar(36) NOT NULL,
         Descrizione_notifica varchar(255)
     );
-
-    CREATE TABLE IF NOT EXISTS `INBOOK`.`BLOCCATI`(
-        ID_utente varchar(36) NOT NULL PRIMARY KEY,
-        ID_amministratore varchar(36) NOT NULL,
-        Descrizione_notifica varchar(255)
-    );

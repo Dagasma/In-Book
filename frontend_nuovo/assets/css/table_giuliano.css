@@ -1,0 +1,34 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+
+table {
+    background-color: #f9f9f9;
+    border-bottom-right-radius: 23px;
+    border-bottom-left-radius: 23px;
+  border-radius: 20px;
+  border-collapse: collapse;
+  margin: 0 auto;
+  float:center;
+}
+th {
+  border-bottom: 1px solid #364043;
+  color: #614802;
+  font-size: 0.85em;
+  font-weight: large;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+td {
+  color: rgb(0, 0, 0);
+  font-weight: 400;
+  padding: 0.65em 1em;
+}
+.disabled td {
+  color: #4F5F64;
+}
+tbody tr {
+  transition: background 0.25s ease;
+}
+tbody tr:hover {
+  background: #014055;
+}

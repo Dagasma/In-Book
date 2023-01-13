@@ -10,7 +10,7 @@ var data = {
 
 
 function GFG_Fun() {
-	var down = document.getElementById("GFG_DOWN");
+	var down = document.getElementById("form_profilo_fornitore");
 
 	// Create a break line element
 	var br = document.createElement("br");

@@ -110,5 +110,7 @@
 				form.appendChild(s);
 
 				document.getElementsByTagName("body")[0].appendChild(form);
+				//document.getElementsByTagName("body").appendChild(form);
+
 			}
 

@@ -33,7 +33,7 @@ https://templatemo.com/tm-580-woox-travel
 -->
 </head>
 
-<body onload="form_profilo();form_orari()">
+<body onload="form_profilo();create_table_fornitori()">
 
     <!-- ***** Preloader Start ***** -->
     <div id="js-preloader" class="js-preloader">
@@ -62,7 +62,7 @@ https://templatemo.com/tm-580-woox-travel
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li><a href="Profilo.html" class="active">Il Mio profilo</a></li>
-                            <li><a href="Cerca_fornitore.html">Notifiche</a></li>
+                            <li><a href="Notifiche.html">Notifiche</a></li>
                             <li><a href="Visualizza_prenotazioni.html">Visualizza prenotazioni</a></li>
                             <li><a href="Visualizza_servizi.html">Visualizza servizi</a></li>
                             <li><a href="Crea_servizio.html">Crea servizio</a></li>
@@ -77,84 +77,106 @@ https://templatemo.com/tm-580-woox-travel
         </div>
     </header>
     <!-- ***** Header Area End ***** -->
-<body onload="form_profilo();form_orari()" >
-    <div class="second-page-heading">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h4>Crea i tuoi servizi</h4>
-                    <h2>Benvenuto</h2>
-                    <p>Nell sito web leader per trovare e prenotare i migliori professionisti. Siamo qui per aiutarti a supportarti nella tua impresa"</p>
-                    <div class="main-button"><a href="Crea_servizi.html">Crea il Tuo servizio Ora </a></div>
+
+    <body onload="form_profilo();form_orari()">
+        <div class="second-page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>Crea i tuoi servizi</h4>
+                        <h2>Benvenuto</h2>
+                        <p>Nell sito web leader per trovare e prenotare i migliori professionisti. Siamo qui per
+                            aiutarti a supportarti nella tua impresa"</p>
+                        <div class="main-button"><a href="Crea_servizi.html">Crea il Tuo servizio Ora </a></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="reservation-form">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <form id="reservation-form" name="gs" method="submit" role="search" action="#">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h4>Ecco <em>il tuo</em> profilo.<em> Modifica i campi</em> desiderati</h4>
+        <div class="reservation-form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form id="reservation-form" name="gs" method="submit" role="search" action="#">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h4>Ecco <em>il tuo</em> profilo.<em> Modifica i campi</em> desiderati</h4>
+                                </div>
+
+                                
+
                             </div>
-                            
-                            <section>
-                                <form >
-                            </form></section>
-                            
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="reservation-form">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <form id="reservation-form" name="gs" method="submit" role="search" action="#">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h4>Vuoi aggiungere <em>un nuovo</em> orario?.</h4>
+
+        <div class="reservation-form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form id="reservation-form" name="gs" method="submit" role="search" action="#">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h4>Aggiungi <em>un nuovo</em> orario.</h4>
+                                </div>
+                                <form>
+                                    <label for="Giorno">Giorno della settimana</label>
+                                    <select id="Giorno" name="Giorno">
+                                        <option value="Lunedi">Lunedi</option>
+                                        <option value="Martedi">Martedi</option>
+                                        <option value="Mercoledi">Mercoledi</option>
+                                        <option value="Giovedi">Giovedi</option>
+                                        <option value="Venerdi">Venerdi</option>
+                                        <option value="Sabato">Sabato</option>
+                                        <option value="Domenica">Domenica</option>
+                                    </select><br>
+                                    <label for="Orario_I">Orario di inizio:</label>
+                                    <input type="time" name="Orario_I" id="Orario_I">
+                                    <label for="Orario_F">Orario di fine:</label>
+                                    <input type="time" name="Orario_F" id="Orario_F"><br>
+
+                                    <button class='input-bottom' type="submit">Aggiungi orario</button>
+
+                                </form>
                             </div>
-                            <label for="Tipo_Attivita">Tipo attivita</label>
-                            <select id="Tipo_Attivita" name="Tipo_Attivita">
-                                <option value="">_ Seleziona _</option>
-                                <option value="Barber">Barber Shop</option>
-                                <option value="Analisi">Centro analisi</option>
-                                <option value="Palestra">Palestra</option>
-                                <option value="Giochi">Sala Giochi</option>
-                                <option value="Viaggi">Agenzia di viaggi</option>
-                                <option value="Insegnamento">Insegnamento</option>
-                            </select><br>
-                            <label for="Orario_Martedi_I">Orario di inizio:</label>
-                            <input type="time" name="Orario_Martedi_I" id="Orario_Martedi_I">
-                            <label for="Orario_Martedi_F">Orario di fine:</label>
-                            <input type="time" name="Orario_Martedi_F" id="Orario_Martedi_F"><br>
-                            <button class='input-bottom' type="submit">Modifica profilo </button>
-
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
+
+
+        <div class="reservation-form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form id="reservation-form" name="gs" method="submit" role="search" action="#">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h4>Ecco i <em>Tuoi orari</em> </h4>
+                                </div>
+                                <table id="json-table">
+                                </table>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
-
-</body>
+    </body>
 
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->
     <script src="../../vendor/jquery/jquery.min.js"></script>
     <script src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
-    
+    <script src="../../assets/js/Fornitore/Profilo.js"></script>
+
     <script src="../../assets/js/isotope.min.js"></script>
     <script src="../../assets/js/owl-carousel.js"></script>
     <script src="../../assets/js/wow.js"></script>

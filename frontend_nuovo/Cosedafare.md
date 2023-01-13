@@ -21,4 +21,7 @@ Profilo : modificare il profilo.
 * [ ] Visualizza servizi creati: elenco di servizi con (DELETE,AGGIORNA)
 
   * [ ] Modifica servizio: dice la motivazione della cancellazione
+
+  * * [ ] Modifica servizio: dice la motivazione della cancellazione
+  * 
 * [ ] Crea servizio: Form per creare il servizio

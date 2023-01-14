@@ -31,7 +31,7 @@ reset
 --------------------------------------------- 
 */
 :root{
-  --colore: #e07e0d;
+  --colore: #fc770a;
 }
 
 
@@ -335,7 +335,7 @@ Header Style
   top: 0!important;
   left: 0;
   right: 0;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.15)!important;
+  /* box-shadow: 0px 0px 10px rgba(0,0,0,0.15)!important; */
   -webkit-transition: all .5s ease 0s;
   -moz-transition: all .5s ease 0s;
   -o-transition: all .5s ease 0s;
@@ -343,9 +343,9 @@ Header Style
 }
 
 .header-area {
-  background-color: black;
+  /* background-color: rgb(0, 0, 0); */
   position: absolute;
-  height: 70px;
+  height: 60px;
   top: 0;
   left: 0;
   right: 0;
@@ -388,12 +388,12 @@ Header Style
   flex-basis: 70%;
   justify-content: flex-end;
   vertical-align: middle;
-  margin-top: 15px;
+  margin-top: 10px;
   margin-right: 0px;
-  -webkit-transition: all 0.3s ease 0s;
+  /* -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s; */
   position: relative;
   z-index: 999;
 }
@@ -1670,7 +1670,7 @@ body #user-button:hover .u-icons, body #user-button:focus-within .u-icons {
 
 @media (prefers-color-scheme: dark) {
   body:not(.light) {
-    background: #232223;
+    background: rgb(241, 172, 107);
     color: white;
   }
 }
@@ -2120,7 +2120,8 @@ Reservation Page Style
 }
 
 .reservation-form {
-  margin: 120px 0px;
+  margin: 40px 80px 40px 80px;
+  align-content: center;
 }
 
 .reservation-form #map {
@@ -2143,6 +2144,8 @@ Reservation Page Style
   background-color: #f9f9f9;
   border-bottom-right-radius: 23px;
   border-bottom-left-radius: 23px;
+  border-top-right-radius: 23px;
+  border-top-left-radius: 23px;
 }
 
 .reservation-form #reservation-form label {

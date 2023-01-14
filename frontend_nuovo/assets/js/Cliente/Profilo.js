@@ -68,9 +68,10 @@ function form_profilo() {
 	Telefono.placeholder = data.Telefono;
 
 	// create a submit button
-	var s = document.createElement("input");
+	var s = document.createElement("button");
 	s.setAttribute("type", "submit");
-	s.setAttribute("value", "Modifica profilo");
+	s.setAttribute("class",'input-bottom');
+	s.innerHTML ="Modifica profilo";
 
 	// Append the full name input to the form
 	form.appendChild(L_Nome);
@@ -94,6 +95,7 @@ function form_profilo() {
 	form.appendChild(br.cloneNode());
 
 	form.appendChild(s);
+	form.appendChild(br.cloneNode());
 
 	document.getElementsByTagName("form")[0].appendChild(form);
 }

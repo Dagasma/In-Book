@@ -52,9 +52,9 @@ function form_profilo() {
 	Durata.placeholder = data.Durata;
 
 	// create a submit button
-	var s = document.createElement("input");
+	var s = document.createElement("button");
 	s.setAttribute("type", "submit");
-	s.setAttribute("value", "Modifica s");
+	s.innerHTML ="Modifica servizi";
 
 	// Append the full name input to the form
 	form.appendChild(L_Tipologia);

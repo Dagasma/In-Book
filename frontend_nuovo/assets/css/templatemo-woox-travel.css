@@ -30,6 +30,11 @@ font & reset css
 reset
 --------------------------------------------- 
 */
+:root{
+  --colore: #e07e0d;
+}
+
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div
 pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q,
 s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
@@ -86,7 +91,7 @@ html, body {
 }
 
 a {
-	color: #22b3c1;
+	color: #db8f1d;
   text-decoration: none !important;
 }
 
@@ -124,18 +129,18 @@ body {
 }
 
 ::selection {
-  background: #22b3c1;
+  background: var(--colore);
   color: #fff;
 }
 
 ::-moz-selection {
-  background: #22b3c1;
+  background: var(--colore);
   color: #fff;
 }
 
 .text-button a {
   font-size: 14px;
-  color: #22b3c1;
+  color: var(--colore);
   font-weight: 500;
   transition: all .3s;
 }
@@ -151,9 +156,9 @@ body {
 
 .border-button a {
   font-size: 14px;
-  color: #22b3c1;
+  color: var(--colore);
   background-color: transparent;
-  border: 1px solid #22b3c1;
+  border: 1px solid var(--colore);
   padding: 12px 30px;
   display: inline-block;
   border-radius: 25px;
@@ -166,15 +171,15 @@ body {
 }
 
 .border-button a:hover {
-  background-color: #22b3c1;
+  background-color: var(--colore);
   color: #fff;
 }
 
 .main-button a {
   font-size: 14px;
   color: #fff;
-  background-color: #22b3c1;
-  border: 1px solid #22b3c1;
+  background-color: var(--colore);
+  border: 1px solid var(--colore);
   padding: 12px 30px;
   display: inline-block;
   border-radius: 25px;
@@ -188,7 +193,7 @@ body {
 
 .main-button a:hover {
   background-color: #fff;
-  color: #22b3c1;
+  color: var(--colore);
   border: 1px solid #fff;
 }
 
@@ -287,7 +292,7 @@ Pre-loader Style
   height: 16px;
   top: 12px;
   left: 15px;
-  background: #22b3c1;
+  background: var(--colore);
   border-radius: 50%;
   -webkit-transform: translateX(0);
   transform: translateX(0);
@@ -310,7 +315,7 @@ Pre-loader Style
   width: 16px;
   height: 16px;
   margin-left: 16px;
-  background: #22b3c1;
+  background: var(--colore);
   border-radius: 50%;
 }
 
@@ -323,9 +328,9 @@ Header Style
 */
 
 .background-header {
-  /* background-color: #22b3c1 !important; */
+  /* background-color: var(--colore) !important; */
   height: 70px!important;
-  opacity: 0.4;
+  opacity: 0.8;
   position: fixed!important;
   top: 0!important;
   left: 0;
@@ -608,14 +613,14 @@ Header Style
   }
   .header-area.header-sticky .nav li a:hover,
   .header-area.header-sticky .nav li a.active {
-    color: #22b3c1!important;
+    color: var(--colore)!important;
     opacity: 1;
   }
   .header-area.header-sticky .nav li.search-icon a {
     width: 100%;
   }
   .header-area {
-    background-color: #22b3c1;
+    background-color: var(--colore);
     padding: 0px 15px;
     height: 100px;
     box-shadow: none;
@@ -669,7 +674,7 @@ Header Style
   }
   .header-area .main-nav .nav li a:hover {
     background: #f7f7f7 !important;
-    color: #22b3c1!important;
+    color: var(--colore)!important;
   }
   .header-area .main-nav .nav li.has-sub ul.sub-menu {
     position: relative;
@@ -757,14 +762,14 @@ Banner Style
   display: inline-block;
 }
 #section-1 .more-info i {
-  color: #22b3c1;
+  color: var(--colore);
   font-size: 24px;
   width: 60px;
   height: 60px;
   display: inline-block;
   text-align: center;
   line-height: 58px;
-  border: 1px solid #22b3c1;
+  border: 1px solid var(--colore);
   border-radius: 50%;
   float: left;
   margin-right: 20px;
@@ -772,7 +777,7 @@ Banner Style
 #section-1 .more-info h4 {
   text-align: left;
   font-size: 20px;
-  color: #22b3c1;
+  color: var(--colore);
   font-weight: 700;
   line-height: 28px;
 }
@@ -786,8 +791,8 @@ Banner Style
   text-align: right;
 }
 #section-1 .main-button a:hover {
-  background-color: #22b3c1;
-  border-color: #22b3c1;
+  background-color: var(--colore);
+  border-color: var(--colore);
   color: #fff;
   opacity: 0.8;
 }
@@ -814,8 +819,8 @@ Banner Style
   margin-bottom: 30px;
 }
 #section-1 .content-slider .slider .banner .banner-inner-wrapper .learn-more-button a:hover {
-  color: #22b3c1;
-  border-color: #22b3c1;
+  color: var(--colore);
+  border-color: var(--colore);
   transition: 0.3s;
 }
 #section-1 .content-slider .slider #top-banner-1 {
@@ -879,7 +884,7 @@ Banner Style
   width: inherit;
   height: inherit;
   margin-left: -100%;
-  background: #22b3c1;
+  background: var(--colore);
 }
 #section-1 .content-slider nav .controls label span.text {
   font-size: 20px;
@@ -889,7 +894,7 @@ Banner Style
   width: 100%;
 }
 #section-1 .content-slider nav .controls label:hover {
-  color: #22b3c1;
+  color: var(--colore);
 }
 #section-1 .content-slider #banner1:checked ~ .slider #top-banner-1,
 #section-1 .content-slider #banner2:checked ~ .slider #top-banner-2,
@@ -976,8 +981,8 @@ Visit Country Style
 }
 
 .visit-country .item .right-content .main-button a:hover {
-  background-color: #22b3c1;
-  border-color: #22b3c1;
+  background-color: var(--colore);
+  border-color: var(--colore);
   color: #fff;
   opacity: 0.8;
 }
@@ -1029,9 +1034,9 @@ Visit Country Style
   display: inline-block;
   width: 46px;
   height: 46px;
-  border: 1px solid #22b3c1;
+  border: 1px solid var(--colore);
   line-height: 44px;
-  color: #22b3c1;
+  color: var(--colore);
   text-align: center;
   font-size: 18px;
   font-weight: 500;
@@ -1040,12 +1045,12 @@ Visit Country Style
 }
 
 .visit-country ul.page-numbers li a:hover {
-  background-color: #22b3c1;
+  background-color: var(--colore);
   color: #fff;
 }
 
 .visit-country ul.page-numbers li.active a {
-  background-color: #22b3c1;
+  background-color: var(--colore);
   color: #fff;
 }
 
@@ -1097,7 +1102,7 @@ Call To Action Style
 
 .call-to-action .border-button a:hover {
   background-color: #fff;
-  color: #22b3c1;
+  color: var(--colore);
 }
 
 
@@ -1108,7 +1113,7 @@ Footer Style
 */
 
 footer {
-  background-color: #22b3c1;
+  background-color: var(--colore);
   text-align: center;
   padding: 25px 0px;
 }
@@ -1207,7 +1212,7 @@ About Page Style
 
 .about-main-content .content .main-button a {
   background-color: #fff;
-  color: #22b3c1;
+  color: var(--colore);
   border-color: #fff;
 }
 
@@ -1233,7 +1238,7 @@ About Page Style
 
 .cities-town .slider-content h2 em {
   font-style: normal;
-  color: #22b3c1;
+  color: var(--colore);
 }
 
 .cities-town .slider-content .item .thumb {
@@ -1283,7 +1288,7 @@ About Page Style
 
 .cities-town .owl-nav .owl-prev:hover::after,
 .cities-town .owl-nav .owl-next:hover::after {
-  color: #22b3c1;
+  color: var(--colore);
 }
 
 .weekly-offers {
@@ -1328,7 +1333,7 @@ About Page Style
   float: right;
   text-align: right;
   font-size: 20px;
-  color: #22b3c1;
+  color: var(--colore);
 }
 
 .weekly-offers .item .thumb .text h4 span,
@@ -1360,8 +1365,8 @@ About Page Style
 }
 
 .weekly-offers .item .thumb .text .main-button a:hover {
-  background-color: #22b3c1;
-  border-color: #22b3c1;
+  background-color: var(--colore);
+  border-color: var(--colore);
   color: #fff;
   opacity: 0.85;
 }
@@ -1378,12 +1383,12 @@ About Page Style
 .weekly-offers .owl-nav .owl-next::after {
   font-family: "FontAwesome";
   content: '\f061'; 
-  color: #22b3c1;
+  color: var(--colore);
   font-size: 20px;
   width: 46px;
   height: 46px;
   text-align: center;
-  border: 1px solid #22b3c1;
+  border: 1px solid var(--colore);
   display: inline-block;
   line-height: 44px;
   border-radius: 50%;
@@ -1398,12 +1403,12 @@ About Page Style
 .weekly-offers .owl-nav .owl-prev::after {
   font-family: "FontAwesome";
   content: '\f060'; 
-  color: #22b3c1;
+  color: var(--colore);
   font-size: 20px;
   width: 46px;
   height: 46px;
   text-align: center;
-  border: 1px solid #22b3c1;
+  border: 1px solid var(--colore);
   display: inline-block;
   line-height: 44px;
   border-radius: 50%;
@@ -1414,7 +1419,7 @@ About Page Style
 .weekly-offers .owl-nav .owl-prev:hover::after,
 .weekly-offers .owl-nav .owl-next:hover::after {
   color: #fff;
-  background-color: #22b3c1;
+  background-color: var(--colore);
 }
 
 .more-about {
@@ -1443,7 +1448,7 @@ About Page Style
 }
 
 .more-about .info-item span {
-  color: #22b3c1;
+  color: var(--colore);
   font-size: 15px;
 }
 
@@ -1452,8 +1457,8 @@ About Page Style
 }
 
 .more-about .main-button a:hover {
-  background-color: #22b3c1;
-  border-color: #22b3c1;
+  background-color: var(--colore);
+  border-color: var(--colore);
   color: #fff;
   opacity: 0.85;
 }
@@ -1732,7 +1737,7 @@ body .options .option {
   transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
 }
 body .options .option {
-  --defaultBackground:#22b3c1;
+  --defaultBackground:var(--colore);
 }
 body .options .option.active {
   flex-grow: 10000;
@@ -1826,9 +1831,9 @@ body .options .option .label .info .sub {
 }
 
 .best-locations .main-button a:hover {
-  background-color: #22b3c1;
+  background-color: var(--colore);
   color: #fff;
-  border-color: #22b3c1;
+  border-color: var(--colore);
   opacity: 0.85;
 }
 
@@ -1870,11 +1875,11 @@ Deals Page Style
 }
 
 .page-heading .border-button a:hover {
-  border-color: #22b3c1;
+  border-color: var(--colore);
 }
 
 .search-form #search-form {
-  background-color: #22b3c1;
+  background-color: var(--colore);
   border-bottom-left-radius: 23px;
   border-bottom-right-radius: 23px;
   padding: 35px 60px;
@@ -1925,7 +1930,7 @@ Deals Page Style
 
 .search-form #search-form button:hover {
   background-color: #fff;
-  color: #22b3c1;
+  color: var(--colore);
 }
 
 .amazing-deals {
@@ -1946,7 +1951,7 @@ Deals Page Style
 }
 
 .amazing-deals .item span.info {
-  color: #22b3c1;
+  color: var(--colore);
   font-size: 15px;
   margin-bottom: 20px;
   display: block;
@@ -1996,9 +2001,9 @@ Deals Page Style
   display: inline-block;
   width: 46px;
   height: 46px;
-  border: 1px solid #22b3c1;
+  border: 1px solid var(--colore);
   line-height: 44px;
-  color: #22b3c1;
+  color: var(--colore);
   text-align: center;
   font-size: 18px;
   font-weight: 500;
@@ -2008,7 +2013,7 @@ Deals Page Style
 
 .amazing-deals ul.page-numbers li.active a,
 .amazing-deals ul.page-numbers li a:hover {
-  background-color: #22b3c1;
+  background-color: var(--colore);
   color: #fff;
 }
 
@@ -2068,13 +2073,13 @@ Reservation Page Style
 
 .second-page-heading .main-button a {
   border-color: #fff;
-  color: #22b3c1;
+  color: var(--colore);
   background-color: #fff;
 }
 
 .second-page-heading .main-button a:hover {
-  border-color: #22b3c1;
-  background-color: #22b3c1;
+  border-color: var(--colore);
+  background-color: var(--colore);
   color: #fff;
 }
 
@@ -2098,7 +2103,7 @@ Reservation Page Style
   text-align: center;
   line-height: 60px;
   border-radius: 50px;
-  color: #22b3c1;
+  color: var(--colore);
   font-size: 20px;
   margin-bottom: 20px;
 }
@@ -2111,7 +2116,7 @@ Reservation Page Style
 
 .more-info .info-item a {
   font-size: 15px;
-  color: #22b3c1;
+  color: var(--colore);
 }
 
 .reservation-form {
@@ -2130,7 +2135,7 @@ Reservation Page Style
 
 .reservation-form #reservation-form h4 em {
   font-style: normal;
-  color: #22b3c1;
+  color: var(--colore);
 }
 
 .reservation-form #reservation-form {
@@ -2164,8 +2169,8 @@ Reservation Page Style
 .reservation-form #reservation-form button {
   font-size: 14px;
   color: #fff;
-  background-color: #22b3c1;
-  border: 1px solid #22b3c1;
+  background-color: var(--colore);
+  border: 1px solid var(--colore);
   padding: 12px 30px;
   width: 100%;
   text-align: center;

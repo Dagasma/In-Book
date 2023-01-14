@@ -49,6 +49,8 @@ db.sequelize.sync()
     console.log("Failed to sync db: " + err.message);
   });
 
+
+
 app.use("/cliente",cliente)
 app.use("/fornitore",config.keycloak.protect('realm:fornitore'),fornitore)
 app.use("/amministratore",config.keycloak.protect('realm:amministratore'),amministratore)

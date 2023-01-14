@@ -16,7 +16,22 @@ app.use(config.session({
   store: config.memoryStore
 }));
 
-//app.use(config.keycloak.middleware()); //commentato per testare api
+app.use(config.keycloak.middleware()); //commentato per testare api
+
+
+
+(async () => {
+  await config.kcAdminClient.auth({
+  username: 'admin',
+  password: 'dagasma10@',
+  grantType: 'password',
+  clientId: 'admin-cli'
+  });
+  const users = await config.kcAdminClient.users.find();
+  console.log(users);
+}) ();
+
+
 
 //console.log(config.keycloak.getConfig());
 

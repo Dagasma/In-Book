@@ -323,8 +323,9 @@ Header Style
 */
 
 .background-header {
-  background-color: #22b3c1 !important;
+  /* background-color: #22b3c1 !important; */
   height: 70px!important;
+  opacity: 0.4;
   position: fixed!important;
   top: 0!important;
   left: 0;
@@ -337,7 +338,7 @@ Header Style
 }
 
 .header-area {
-  background-color: #22b3c1;
+  background-color: black;
   position: absolute;
   height: 70px;
   top: 0;

@@ -1,5 +1,6 @@
-const config = {};
 
+const config = {};
+require("fix-esm").register();
 config.express = require("express");
 config.session = require("express-session");
 config.path = require("path");
@@ -10,10 +11,11 @@ config.jwt = require("jsonwebtoken");
 config.Sequelize = require("sequelize");
 config.Keycloak = require('keycloak-connect');
 config.fs = require("node:fs");
+config.KcAdminClient= require("@keycloak/keycloak-admin-client").default;
+config.kcAdminClient = new config.KcAdminClient();
 
 config.memoryStore = new config.session.MemoryStore();
 config.keycloak = new config.Keycloak({ store: config.memoryStore,onLoad: 'login-required', checkLoginIframe: false });
-
 
 config.frontend_path = config.path.normalize(process.cwd() + "/frontend_nuovo/"); 
 config.db_path = config.path.normalize(process.cwd() + "/backend/database/"); 

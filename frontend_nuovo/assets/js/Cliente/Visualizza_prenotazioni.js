@@ -81,3 +81,5 @@ function generateTableHead(table, data,columns) {
     generateTableHead(table, data,columns);//create header
     generateTable(table, ex_data,keys);//print table
   }
+
+  

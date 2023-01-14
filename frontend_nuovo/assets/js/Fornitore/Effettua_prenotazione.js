@@ -101,27 +101,28 @@ function GFG_Fun() {
 // JSON
  let ex_data =[
     {
-        "ID": 4,
-        "ID_fornitore": "5",
-        "Tipologia": "Piscina",
-        "Descrizione": "2:00 in piscina",
-        "Durata": "02:00:00"
+        "ID": 2,
+        "ID_utente": "2",
+        "ID_fornitore": "6",
+        "ID_servizio": 5,
+        "Orario_richiesta": "2022-01-01T00:00:00.000Z",
+        "Orario_prenotazione_inizio": "2022-01-16T10:00:00.000Z",
+        "Orario_prenotazione_fine": "2022-01-16T10:30:00.000Z",
+        "Stato": "Attivo",
+        "Numero_clienti": 2
     },
     {
-        "ID": 9,
-        "ID_fornitore": "5",
-        "Tipologia": "Controllo peso",
-        "Descrizione": "Controllo da",
-        "Durata": "00:30:00"
-    },
-    {
-        "ID": 10,
-        "ID_fornitore": "5",
-        "Tipologia": "Prova",
-        "Descrizione": "primo tipo",
-        "Durata": "10:00:00"
+        "ID": 3,
+        "ID_utente": "2",
+        "ID_fornitore": "6",
+        "ID_servizio": 5,
+        "Orario_richiesta": "2022-01-01T00:00:00.000Z",
+        "Orario_prenotazione_inizio": "2022-01-16T10:00:00.000Z",
+        "Orario_prenotazione_fine": "2022-01-16T10:30:00.000Z",
+        "Stato": "Attivo",
+        "Numero_clienti": 2
     }
-];
+]
   
 function generateTableHead(table, data,columns) {
     let thead = table.createTHead();
@@ -151,25 +152,15 @@ function generateTableHead(table, data,columns) {
         let text = document.createTextNode(element[key]);
         cell.appendChild(text);
       }
-	  let buttonCell = row.insertCell();
-	  // Crea un bottone e aggiungilo alla cella
-	  let button = document.createElement("button");
-	  button.innerHTML = "Modifica";
-	  button.setAttribute("data-id", element["ID"]);
-	  button.setAttribute("data-column", "Modifica");
-	  button.onclick = function exe_botton(){stampa(element["ID"],button.getAttribute("data-column"));}
-	  buttonCell.appendChild(button);
-
-	  // Aggiungi una nuova cella alla fine della riga
-	  buttonCell = row.insertCell();
-	  // Crea un bottone e aggiungilo alla cella
-	  button1 = document.createElement("button");
-	  button1.innerHTML = "Elimina";
-	  button1.setAttribute("data-id", element["name"]);
-	  button1.setAttribute("data-column", "Elimina");
-	  button1.onclick = function exe_botton(){stampa(element["ID"],button1.getAttribute("data-column"));}
-	  buttonCell.appendChild(button1);
-
+          // Aggiungi una nuova cella alla fine della riga
+          let buttonCell = row.insertCell();
+          // Crea un bottone e aggiungilo alla cella
+          let button = document.createElement("button");
+          button.innerHTML = "Elimina";
+          button.setAttribute("data-id", element["ID"]);
+          button.setAttribute("data-column", "Elimina");
+          button.onclick = function exe_botton(){stampa(element["ID"],button.getAttribute("data-column"));}
+          buttonCell.appendChild(button);
     }
   }
   
@@ -180,11 +171,14 @@ function generateTableHead(table, data,columns) {
 
 
   function create_table_prenotazioni() {
+	
     //let table = document.querySelector("table");// create table
-	let keys=["Tipologia", "Descrizione", "Durata"];
-	console.log("sono entrato");
+	let columns= ["Orario richiesta","Orario d'inizio","Servizio",
+		"Numero clienti"];
+	let keys=["Orario_richiesta", "Orario_prenotazione_inizio", "ID_servizio", 
+			"Numero_clienti"];
     var table = document.getElementById("json-table");
     let data = Object.keys(ex_data[0]);//save the keys
-    generateTableHead(table, data,keys);//create header
+    generateTableHead(table, data,columns);//create header
     generateTable(table, ex_data,keys);//print table
   }

@@ -15,403 +15,28 @@
     <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="../../assets/css/fontawesome.css">
-    <link rel="stylesheet" href="../../assets/css/templatemo-woox-travel.css">
-    <link rel="stylesheet" href="../../assets/css/owl.css">
-    <link rel="stylesheet" href="../../assets/css/animate.css">
-    <link rel="stylesheet" href="../../assets/css/animate.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-
-    <script src="../../assets/js/Js-Giuliano/Profilo.js"></script>
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-woox-travel.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <script>
-        jQuery(document).ready(function($){
-	var transitionEnd = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
-	var transitionsSupported = ( $('.csstransitions').length > 0 );
-	//if browser does not support transitions - use a different event to trigger them
-	if( !transitionsSupported ) transitionEnd = 'noTransition';
-	
-	//should add a loding while the events are organized 
+      var pippozzo = new XMLHttpRequest();
+      pippozzo.open("GET", "/cliente/api/get_profilo/63d062d9-7bf2-4690-97f3-60d25decdcf4", true);
+      pippozzo.setRequestHeader('Content-Type', 'application/json');
+      pippozzo.send();
 
-	function SchedulePlan( element ) {
-		this.element = element;
-		this.timeline = this.element.find('.timeline');
-		this.timelineItems = this.timeline.find('li');
-		this.timelineItemsNumber = this.timelineItems.length;
-		this.timelineStart = getScheduleTimestamp(this.timelineItems.eq(0).text());
-		//need to store delta (in our case half hour) timestamp
-		this.timelineUnitDuration = getScheduleTimestamp(this.timelineItems.eq(1).text()) - getScheduleTimestamp(this.timelineItems.eq(0).text());
-
-		this.eventsWrapper = this.element.find('.events');
-		this.eventsGroup = this.eventsWrapper.find('.events-group');
-		this.singleEvents = this.eventsGroup.find('.single-event');
-		this.eventSlotHeight = this.eventsGroup.eq(0).children('.top-info').outerHeight();
-
-		this.modal = this.element.find('.event-modal');
-		this.modalHeader = this.modal.find('.header');
-		this.modalHeaderBg = this.modal.find('.header-bg');
-		this.modalBody = this.modal.find('.body'); 
-		this.modalBodyBg = this.modal.find('.body-bg'); 
-		this.modalMaxWidth = 800;
-		this.modalMaxHeight = 480;
-
-		this.animating = false;
-
-		this.initSchedule();
-	}
-
-	SchedulePlan.prototype.initSchedule = function() {
-		this.scheduleReset();
-		this.initEvents();
-	};
-
-	SchedulePlan.prototype.scheduleReset = function() {
-		var mq = this.mq();
-		if( mq == 'desktop' && !this.element.hasClass('js-full') ) {
-			//in this case you are on a desktop version (first load or resize from mobile)
-			this.eventSlotHeight = this.eventsGroup.eq(0).children('.top-info').outerHeight();
-			this.element.addClass('js-full');
-			this.placeEvents();
-			this.element.hasClass('modal-is-open') && this.checkEventModal();
-		} else if(  mq == 'mobile' && this.element.hasClass('js-full') ) {
-			//in this case you are on a mobile version (first load or resize from desktop)
-			this.element.removeClass('js-full loading');
-			this.eventsGroup.children('ul').add(this.singleEvents).removeAttr('style');
-			this.eventsWrapper.children('.grid-line').remove();
-			this.element.hasClass('modal-is-open') && this.checkEventModal();
-		} else if( mq == 'desktop' && this.element.hasClass('modal-is-open')){
-			//on a mobile version with modal open - need to resize/move modal window
-			this.checkEventModal('desktop');
-			this.element.removeClass('loading');
-		} else {
-			this.element.removeClass('loading');
-		}
-	};
-
-	SchedulePlan.prototype.initEvents = function() {
-		var self = this;
-
-		this.singleEvents.each(function(){
-			//create the .event-date element for each event
-			var durationLabel = '<span class="event-date">'+$(this).data('start')+' - '+$(this).data('end')+'</span>';
-			$(this).children('a').prepend($(durationLabel));
-
-			//detect click on the event and open the modal
-			$(this).on('click', 'a', function(event){
-				event.preventDefault();
-				if( !self.animating ) self.openModal($(this));
-			});
-		});
-
-		//close modal window
-		this.modal.on('click', '.close', function(event){
-			event.preventDefault();
-			if( !self.animating ) self.closeModal(self.eventsGroup.find('.selected-event'));
-		});
-		this.element.on('click', '.cover-layer', function(event){
-			if( !self.animating && self.element.hasClass('modal-is-open') ) self.closeModal(self.eventsGroup.find('.selected-event'));
-		});
-	};
-
-	SchedulePlan.prototype.placeEvents = function() {
-		var self = this;
-		this.singleEvents.each(function(){
-			//place each event in the grid -> need to set top position and height
-			var start = getScheduleTimestamp($(this).attr('data-start')),
-				duration = getScheduleTimestamp($(this).attr('data-end')) - start;
-
-			var eventTop = self.eventSlotHeight*(start - self.timelineStart)/self.timelineUnitDuration,
-				eventHeight = self.eventSlotHeight*duration/self.timelineUnitDuration;
-			
-			$(this).css({
-				top: (eventTop -1) +'px',
-				height: (eventHeight+1)+'px'
-			});
-		});
-
-		this.element.removeClass('loading');
-	};
-
-	SchedulePlan.prototype.openModal = function(event) {
-		var self = this;
-		var mq = self.mq();
-		this.animating = true;
-
-		//update event name and time
-		this.modalHeader.find('.event-name').text(event.find('.event-name').text());
-		this.modalHeader.find('.event-date').text(event.find('.event-date').text());
-		this.modal.attr('data-event', event.parent().attr('data-event'));
-
-		//update event content
-		this.modalBody.find('.event-info').load(event.parent().attr('data-content')+'.html .event-info > *', function(data){
-			//once the event content has been loaded
-			self.element.addClass('content-loaded');
-		});
-
-		this.element.addClass('modal-is-open');
-
-		setTimeout(function(){
-			//fixes a flash when an event is selected - desktop version only
-			event.parent('li').addClass('selected-event');
-		}, 10);
-
-		if( mq == 'mobile' ) {
-			self.modal.one(transitionEnd, function(){
-				self.modal.off(transitionEnd);
-				self.animating = false;
-			});
-		} else {
-			var eventTop = event.offset().top - $(window).scrollTop(),
-				eventLeft = event.offset().left,
-				eventHeight = event.innerHeight(),
-				eventWidth = event.innerWidth();
-
-			var windowWidth = $(window).width(),
-				windowHeight = $(window).height();
-
-			var modalWidth = ( windowWidth*.8 > self.modalMaxWidth ) ? self.modalMaxWidth : windowWidth*.8,
-				modalHeight = ( windowHeight*.8 > self.modalMaxHeight ) ? self.modalMaxHeight : windowHeight*.8;
-
-			var modalTranslateX = parseInt((windowWidth - modalWidth)/2 - eventLeft),
-				modalTranslateY = parseInt((windowHeight - modalHeight)/2 - eventTop);
-			
-			var HeaderBgScaleY = modalHeight/eventHeight,
-				BodyBgScaleX = (modalWidth - eventWidth);
-
-			//change modal height/width and translate it
-			self.modal.css({
-				top: eventTop+'px',
-				left: eventLeft+'px',
-				height: modalHeight+'px',
-				width: modalWidth+'px',
-			});
-			transformElement(self.modal, 'translateY('+modalTranslateY+'px) translateX('+modalTranslateX+'px)');
-
-			//set modalHeader width
-			self.modalHeader.css({
-				width: eventWidth+'px',
-			});
-			//set modalBody left margin
-			self.modalBody.css({
-				marginLeft: eventWidth+'px',
-			});
-
-			//change modalBodyBg height/width ans scale it
-			self.modalBodyBg.css({
-				height: eventHeight+'px',
-				width: '1px',
-			});
-			transformElement(self.modalBodyBg, 'scaleY('+HeaderBgScaleY+') scaleX('+BodyBgScaleX+')');
-
-			//change modal modalHeaderBg height/width and scale it
-			self.modalHeaderBg.css({
-				height: eventHeight+'px',
-				width: eventWidth+'px',
-			});
-			transformElement(self.modalHeaderBg, 'scaleY('+HeaderBgScaleY+')');
-			
-			self.modalHeaderBg.one(transitionEnd, function(){
-				//wait for the  end of the modalHeaderBg transformation and show the modal content
-				self.modalHeaderBg.off(transitionEnd);
-				self.animating = false;
-				self.element.addClass('animation-completed');
-			});
-		}
-
-		//if browser do not support transitions -> no need to wait for the end of it
-		if( !transitionsSupported ) self.modal.add(self.modalHeaderBg).trigger(transitionEnd);
-	};
-
-	SchedulePlan.prototype.closeModal = function(event) {
-		var self = this;
-		var mq = self.mq();
-
-		this.animating = true;
-
-		if( mq == 'mobile' ) {
-			this.element.removeClass('modal-is-open');
-			this.modal.one(transitionEnd, function(){
-				self.modal.off(transitionEnd);
-				self.animating = false;
-				self.element.removeClass('content-loaded');
-				event.removeClass('selected-event');
-			});
-		} else {
-			var eventTop = event.offset().top - $(window).scrollTop(),
-				eventLeft = event.offset().left,
-				eventHeight = event.innerHeight(),
-				eventWidth = event.innerWidth();
-
-			var modalTop = Number(self.modal.css('top').replace('px', '')),
-				modalLeft = Number(self.modal.css('left').replace('px', ''));
-
-			var modalTranslateX = eventLeft - modalLeft,
-				modalTranslateY = eventTop - modalTop;
-
-			self.element.removeClass('animation-completed modal-is-open');
-
-			//change modal width/height and translate it
-			this.modal.css({
-				width: eventWidth+'px',
-				height: eventHeight+'px'
-			});
-			transformElement(self.modal, 'translateX('+modalTranslateX+'px) translateY('+modalTranslateY+'px)');
-			
-			//scale down modalBodyBg element
-			transformElement(self.modalBodyBg, 'scaleX(0) scaleY(1)');
-			//scale down modalHeaderBg element
-			transformElement(self.modalHeaderBg, 'scaleY(1)');
-
-			this.modalHeaderBg.one(transitionEnd, function(){
-				//wait for the  end of the modalHeaderBg transformation and reset modal style
-				self.modalHeaderBg.off(transitionEnd);
-				self.modal.addClass('no-transition');
-				setTimeout(function(){
-					self.modal.add(self.modalHeader).add(self.modalBody).add(self.modalHeaderBg).add(self.modalBodyBg).attr('style', '');
-				}, 10);
-				setTimeout(function(){
-					self.modal.removeClass('no-transition');
-				}, 20);
-
-				self.animating = false;
-				self.element.removeClass('content-loaded');
-				event.removeClass('selected-event');
-			});
-		}
-
-		//browser do not support transitions -> no need to wait for the end of it
-		if( !transitionsSupported ) self.modal.add(self.modalHeaderBg).trigger(transitionEnd);
-	}
-
-	SchedulePlan.prototype.mq = function(){
-		//get MQ value ('desktop' or 'mobile') 
-		var self = this;
-		return window.getComputedStyle(this.element.get(0), '::before').getPropertyValue('content').replace(/["']/g, '');
-	};
-
-	SchedulePlan.prototype.checkEventModal = function(device) {
-		this.animating = true;
-		var self = this;
-		var mq = this.mq();
-
-		if( mq == 'mobile' ) {
-			//reset modal style on mobile
-			self.modal.add(self.modalHeader).add(self.modalHeaderBg).add(self.modalBody).add(self.modalBodyBg).attr('style', '');
-			self.modal.removeClass('no-transition');	
-			self.animating = false;	
-		} else if( mq == 'desktop' && self.element.hasClass('modal-is-open') ) {
-			self.modal.addClass('no-transition');
-			self.element.addClass('animation-completed');
-			var event = self.eventsGroup.find('.selected-event');
-
-			var eventTop = event.offset().top - $(window).scrollTop(),
-				eventLeft = event.offset().left,
-				eventHeight = event.innerHeight(),
-				eventWidth = event.innerWidth();
-
-			var windowWidth = $(window).width(),
-				windowHeight = $(window).height();
-
-			var modalWidth = ( windowWidth*.8 > self.modalMaxWidth ) ? self.modalMaxWidth : windowWidth*.8,
-				modalHeight = ( windowHeight*.8 > self.modalMaxHeight ) ? self.modalMaxHeight : windowHeight*.8;
-
-			var HeaderBgScaleY = modalHeight/eventHeight,
-				BodyBgScaleX = (modalWidth - eventWidth);
-
-			setTimeout(function(){
-				self.modal.css({
-					width: modalWidth+'px',
-					height: modalHeight+'px',
-					top: (windowHeight/2 - modalHeight/2)+'px',
-					left: (windowWidth/2 - modalWidth/2)+'px',
-				});
-				transformElement(self.modal, 'translateY(0) translateX(0)');
-				//change modal modalBodyBg height/width
-				self.modalBodyBg.css({
-					height: modalHeight+'px',
-					width: '1px',
-				});
-				transformElement(self.modalBodyBg, 'scaleX('+BodyBgScaleX+')');
-				//set modalHeader width
-				self.modalHeader.css({
-					width: eventWidth+'px',
-				});
-				//set modalBody left margin
-				self.modalBody.css({
-					marginLeft: eventWidth+'px',
-				});
-				//change modal modalHeaderBg height/width and scale it
-				self.modalHeaderBg.css({
-					height: eventHeight+'px',
-					width: eventWidth+'px',
-				});
-				transformElement(self.modalHeaderBg, 'scaleY('+HeaderBgScaleY+')');
-			}, 10);
-
-			setTimeout(function(){
-				self.modal.removeClass('no-transition');
-				self.animating = false;	
-			}, 20);
-		}
-	};
-
-	var schedules = $('.cd-schedule');
-	var objSchedulesPlan = [],
-		windowResize = false;
-	
-	if( schedules.length > 0 ) {
-		schedules.each(function(){
-			//create SchedulePlan objects
-			objSchedulesPlan.push(new SchedulePlan($(this)));
-		});
-	}
-
-	$(window).on('resize', function(){
-		if( !windowResize ) {
-			windowResize = true;
-			(!window.requestAnimationFrame) ? setTimeout(checkResize) : window.requestAnimationFrame(checkResize);
-		}
-	});
-
-	$(window).keyup(function(event) {
-		if (event.keyCode == 27) {
-			objSchedulesPlan.forEach(function(element){
-				element.closeModal(element.eventsGroup.find('.selected-event'));
-			});
-		}
-	});
-
-	function checkResize(){
-		objSchedulesPlan.forEach(function(element){
-			element.scheduleReset();
-		});
-		windowResize = false;
-	}
-
-	function getScheduleTimestamp(time) {
-		//accepts hh:mm format - convert hh:mm to timestamp
-		time = time.replace(/ /g,'');
-		var timeArray = time.split(':');
-		var timeStamp = parseInt(timeArray[0])*60 + parseInt(timeArray[1]);
-		return timeStamp;
-	}
-
-	function transformElement(element, value) {
-		element.css({
-		    '-moz-transform': value,
-		    '-webkit-transform': value,
-			'-ms-transform': value,
-			'-o-transform': value,
-			'transform': value
-		});
-	}
-});
-
-
+      pippozzo.onreadystatechange = function() {
+          if (pippozzo.readyState == XMLHttpRequest.DONE) {
+              console.log(pippozzo.responseText);
+              var jsonResponse = JSON.parse(pippozzo.responseText);
+              
+          }
+      }
     </script>
+  </head>
 
-</head>
-
-<body onload="form_profilo();form_orari()">
+<body>
 
     <!-- ***** Preloader Start ***** -->
     <div id="js-preloader" class="js-preloader">
@@ -426,265 +51,428 @@
     </div>
     <!-- ***** Preloader End ***** -->
 
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
-                            <img src="icon1.png" alt="">
-                        </a>
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li><a href="Profilo.html" class="active">Il Mio profilo</a></li>
-                            <li><a href="Cerca_fornitore.html">Notifiche</a></li>
-                            <li><a href="Visualizza_prenotazioni.html">Visualizza prenotazioni</a></li>
-                            <li><a href="Visualizza_servizi.html">Ricerca</a></li>
-                            <li><a href="Crea_servizio.html">Crea servizio</a></li>
-                        </ul>
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                        <!-- ***** Menu End ***** -->
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
-<body onload="form_profilo();form_orari()" >
-    <div class="second-page-heading">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h4>Crea i tuoi servizi</h4>
-                    <h2>Benvenuto</h2>
-                    <p>Nell sito web leader per trovare e prenotare i migliori professionisti. Siamo qui per aiutarti a supportarti nella tua impresa"</p>
-                    <div class="main-button"><a href="Crea_servizi.html">Crea il Tuo servizio Ora </a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="reservation-form">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <form id="reservation-form" name="gs" method="submit" role="search" action="#">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h4>Ecco <em>il tuo</em> profilo.<em> Modifica i campi</em> desiderati</h4>
-                            </div>
-                            
-                            <section>
-                              <form >
-                                <label for="Nome">Nome:</label>
-                                <input type="text" name="Nome" id="Nome">
-                                <label for="Cognome">Cognome:</label>
-                                <input type="text" name="Cognome" id="Cognome">
-                                <label for="Data">Data di nascita:</label>
-                                <input type="date" name="Data" id="Data">
-                                <label for="Telefono">Numero di telefono:</label>
-                                <input type="text" name="Telefono" id="Telefono">
-                              </form>
-                            </section>
-                            
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="reservation-form">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <form id="reservation-form" name="gs" method="submit" role="search" action="#">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h4>Vuoi aggiungere <em>un nuovo</em> orario?.</h4>
-                            </div>
-                            <label for="Tipo_Attivita">Tipo attivita</label>
-                            <select id="Tipo_Attivita" name="Tipo_Attivita">
-                                <option value="">_ Seleziona _</option>
-                                <option value="Barber">Barber Shop</option>
-                                <option value="Analisi">Centro analisi</option>
-                                <option value="Palestra">Palestra</option>
-                                <option value="Giochi">Sala Giochi</option>
-                                <option value="Viaggi">Agenzia di viaggi</option>
-                                <option value="Insegnamento">Insegnamento</option>
-                            </select><br>
-                            <label for="Orario_Martedi_I">Orario di inizio:</label>
-                            <input type="time" name="Orario_Martedi_I" id="Orario_Martedi_I">
-                            <label for="Orario_Martedi_F">Orario di fine:</label>
-                            <input type="time" name="Orario_Martedi_F" id="Orario_Martedi_F"><br>
-                            <button class='input-bottom' type="submit">Modifica profilo </button>
-
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="tabella_prenotazioni">
-      <div class="schedule content-block">
-          <div class="container">
-              <h2 data-aos="zoom-in-up" class="aos-init aos-animate">Schedule</h2>
-          
-              <div class="timetable">
-          
-                <!-- Schedule Top Navigation -->
-                <nav class="nav nav-tabs">
-                  <a class="nav-link active">Lun</a>
-                  <a class="nav-link">Mar</a>
-                  <a class="nav-link">Mer</a>
-                  <a class="nav-link">Gio</a>
-                  <a class="nav-link">Ven</a>
-                  <a class="nav-link">Sab</a>
-                  <a class="nav-link">Dom</a>
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/index.html" class="logo">
+                        <img src="/assets/images/logo.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="profilo.html" class="active">Profilo</a></li>
+                        <li><a href="visualizza_prenotazioni.html">Prenotazioni</a></li>
+                        <li><a href="ricerca.html">Ricerca</a></li>
+                        <li><a href="/html/cliente/notifiche.html">Notifiche</a></li>
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
                 </nav>
-          
-                <div class="tab-content">
-                  <div class="tab-pane show active">
-                    <div class="row">
-          
-                      <!-- Schedule Item 1 -->
-                      <div class="col-md-6">
-                        <div class="timetable-item">
-                          <div class="timetable-item-main">
-                            <div class="timetable-item-time">4:00pm - 5:00pm</div>
-                            <div class="timetable-item-name">Contemporary Dance</div>
-                            <a href="#" class="btn btn-primary btn-book">Book</a>
-                            <div class="timetable-item-like">
-                              <i class="fa fa-heart-o" aria-hidden="true"></i>
-                              <i class="fa fa-heart" aria-hidden="true"></i>
-                              <div class="timetable-item-like-count">11</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-          
-                      <!-- Schedule Item 2 -->
-                      <div class="col-md-6">
-                        <div class="timetable-item">
-                          <div class="timetable-item-img">
-                            <img src="https://www.bootdey.com/image/100x80/00FFFF/000000" alt="Break Dance">
-                          </div>
-                          <div class="timetable-item-main">
-                            <div class="timetable-item-time">5:00pm - 6:00pm</div>
-                            <div class="timetable-item-name">Break Dance</div>
-                            <a href="#" class="btn btn-primary btn-book">Book</a>
-                            <div class="timetable-item-like">
-                              <i class="fa fa-heart-o" aria-hidden="true"></i>
-                              <i class="fa fa-heart" aria-hidden="true"></i>
-                              <div class="timetable-item-like-count">28</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-          
-                      <!-- Schedule Item 3 -->
-                      <div class="col-md-6">
-                        <div class="timetable-item">
-                          <div class="timetable-item-img">
-                            <img src="https://www.bootdey.com/image/100x80/8A2BE2/000000" alt="Street Dance">
-                          </div>
-                          <div class="timetable-item-main">
-                            <div class="timetable-item-time">5:00pm - 6:00pm</div>
-                            <div class="timetable-item-name">Street Dance</div>
-                            <a href="#" class="btn btn-primary btn-book">Book</a>
-                            <div class="timetable-item-like">
-                              <i class="fa fa-heart-o" aria-hidden="true"></i>
-                              <i class="fa fa-heart" aria-hidden="true"></i>
-                              <div class="timetable-item-like-count">28</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-          
-                      <!-- Schedule Item 4 -->
-                      <div class="col-md-6">
-                        <div class="timetable-item">
-                          <div class="timetable-item-img">
-                            <img src="https://www.bootdey.com/image/100x80/6495ED/000000" alt="Yoga">
-                          </div>
-                          <div class="timetable-item-main">
-                            <div class="timetable-item-time">7:00pm - 8:00pm</div>
-                            <div class="timetable-item-name">Yoga</div>
-                            <a href="#" class="btn btn-primary btn-book">Book</a>
-                            <div class="timetable-item-like">
-                              <i class="fa fa-heart-o" aria-hidden="true"></i>
-                              <i class="fa fa-heart" aria-hidden="true"></i>
-                              <div class="timetable-item-like-count">23</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-          
-                      <!-- Schedule Item 5 -->
-                      <div class="col-md-6">
-                        <div class="timetable-item">
-                          <div class="timetable-item-img">
-                            <img src="https://www.bootdey.com/image/100x80/00FFFF/000000" alt="Stretching">
-                          </div>
-                          <div class="timetable-item-main">
-                            <div class="timetable-item-time">6:00pm - 7:00pm</div>
-                            <div class="timetable-item-name">Stretching</div>
-                            <a href="#" class="btn btn-primary btn-book">Book</a>
-                            <div class="timetable-item-like">
-                              <i class="fa fa-heart-o" aria-hidden="true"></i>
-                              <i class="fa fa-heart" aria-hidden="true"></i>
-                              <div class="timetable-item-like-count">14</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-          
-                      <!-- Schedule Item 6 -->
-                      <div class="col-md-6">
-                        <div class="timetable-item">
-                          <div class="timetable-item-img">
-                            <img src="https://www.bootdey.com/image/100x80/008B8B/000000" alt="Street Dance">
-                          </div>
-                          <div class="timetable-item-main">
-                            <div class="timetable-item-time">8:00pm - 9:00pm</div>
-                            <div class="timetable-item-name">Street Dance</div>
-                            <a href="#" class="btn btn-primary btn-book">Book</a>
-                            <div class="timetable-item-like">
-                              <i class="fa fa-heart-o" aria-hidden="true"></i>
-                              <i class="fa fa-heart" aria-hidden="true"></i>
-                              <div class="timetable-item-like-count">9</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Banner Area Start ***** -->
+  <div class="about-main-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="content">
+            <div class="blur-bg"></div>
+            <h4>EXPLORE OUR COUNTRY</h4>
+            <div class="line-dec"></div>
+            <h2>Welcome To Caribbean</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt uttersi labore et dolore magna aliqua is ipsum suspendisse ultrices gravida</p>
+            <div class="main-button">
+              <a href="reservation.html">Discover More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Main Banner Area End ***** -->
+  
+  <div class="cities-town">
+    <div class="container">
+      <div class="row">
+        <div class="slider-content">
+          <div class="row">
+            <div class="col-lg-12">
+              <h2>Caribbean’s <em>Cities &amp; Towns</em></h2>
+            </div>
+            <div class="col-lg-12">
+              <div class="owl-cites-town owl-carousel">
+                <div class="item">
+                  <div class="thumb">
+                    <img src="/assets/images/cities-01.jpg" alt="">
+                    <h4>Havana</h4>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="thumb">
+                    <img src="/assets/images/cities-02.jpg" alt="">
+                    <h4>Kingston</h4>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="thumb">
+                    <img src="/assets/images/cities-03.jpg" alt="">
+                    <h4>George Town</h4>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="thumb">
+                    <img src="/assets/images/cities-04.jpg" alt="">
+                    <h4>Santo Domingo</h4>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="thumb">
+                    <img src="/assets/images/cities-01.jpg" alt="">
+                    <h4>Havana</h4>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="thumb">
+                    <img src="/assets/images/cities-02.jpg" alt="">
+                    <h4>Kingston</h4>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="thumb">
+                    <img src="/assets/images/cities-03.jpg" alt="">
+                    <h4>George Town</h4>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="thumb">
+                    <img src="/assets/images/cities-04.jpg" alt="">
+                    <h4>Santo Domingo</h4>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-</body>
+  <div class="weekly-offers">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading text-center">
+            <h2>Best Weekly Offers In Each City</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="owl-weekly-offers owl-carousel">
+            <div class="item">
+              <div class="thumb">
+                <img src="/assets/images/offers-01.jpg" alt="">
+                <div class="text">
+                  <h4>Havana<br><span><i class="fa fa-users"></i> 234 Check Ins</span></h4>
+                  <h6>$420<br><span>/person</span></h6>
+                  <div class="line-dec"></div>
+                  <ul>
+                    <li>Deal Includes:</li>
+                    <li><i class="fa fa-taxi"></i> 5 Days Trip > Hotel Included</li>
+                    <li><i class="fa fa-plane"></i> Airplane Bill Included</li>
+                    <li><i class="fa fa-building"></i> Daily Places Visit</li>
+                  </ul>
+                  <div class="main-button">
+                    <a href="reservation.html">Make a Reservation</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="thumb">
+                <img src="/assets/images/offers-02.jpg" alt="">
+                <div class="text">
+                  <h4>Kingston<br><span><i class="fa fa-users"></i> 234 Check Ins</span></h4>
+                  <h6>$420<br><span>/person</span></h6>
+                  <div class="line-dec"></div>
+                  <ul>
+                    <li>Deal Includes:</li>
+                    <li><i class="fa fa-taxi"></i> 5 Days Trip > Hotel Included</li>
+                    <li><i class="fa fa-plane"></i> Airplane Bill Included</li>
+                    <li><i class="fa fa-building"></i> Daily Places Visit</li>
+                  </ul>
+                  <div class="main-button">
+                    <a href="reservation.html">Make a Reservation</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="thumb">
+                <img src="/assets/images/offers-03.jpg" alt="">
+                <div class="text">
+                  <h4>George Town<br><span><i class="fa fa-users"></i> 234 Check Ins</span></h4>
+                  <h6>$420<br><span>/person</span></h6>
+                  <div class="line-dec"></div>
+                  <ul>
+                    <li>Deal Includes:</li>
+                    <li><i class="fa fa-taxi"></i> 5 Days Trip > Hotel Included</li>
+                    <li><i class="fa fa-plane"></i> Airplane Bill Included</li>
+                    <li><i class="fa fa-building"></i> Daily Places Visit</li>
+                  </ul>
+                  <div class="main-button">
+                    <a href="reservation.html">Make a Reservation</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="thumb">
+                <img src="/assets/images/offers-01.jpg" alt="">
+                <div class="text">
+                  <h4>Havana<br><span><i class="fa fa-users"></i> 234 Check Ins</span></h4>
+                  <h6>$420<br><span>/person</span></h6>
+                  <div class="line-dec"></div>
+                  <ul>
+                    <li>Deal Includes:</li>
+                    <li><i class="fa fa-taxi"></i> 5 Days Trip > Hotel Included</li>
+                    <li><i class="fa fa-plane"></i> Airplane Bill Included</li>
+                    <li><i class="fa fa-building"></i> Daily Places Visit</li>
+                  </ul>
+                  <div class="main-button">
+                    <a href="reservation.html">Make a Reservation</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="thumb">
+                <img src="/assets/images/offers-02.jpg" alt="">
+                <div class="text">
+                  <h4>Kingston<br><span><i class="fa fa-users"></i> 234 Check Ins</span></h4>
+                  <h6>$420<br><span>/person</span></h6>
+                  <div class="line-dec"></div>
+                  <ul>
+                    <li>Deal Includes:</li>
+                    <li><i class="fa fa-taxi"></i> 5 Days Trip > Hotel Included</li>
+                    <li><i class="fa fa-plane"></i> Airplane Bill Included</li>
+                    <li><i class="fa fa-building"></i> Daily Places Visit</li>
+                  </ul>
+                  <div class="main-button">
+                    <a href="reservation.html">Make a Reservation</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="thumb">
+                <img src="/assets/images/offers-03.jpg" alt="">
+                <div class="text">
+                  <h4>George Town<br><span><i class="fa fa-users"></i> 234 Check Ins</span></h4>
+                  <h6>$420<br><span>/person</span></h6>
+                  <div class="line-dec"></div>
+                  <ul>
+                    <li>Deal Includes:</li>
+                    <li><i class="fa fa-taxi"></i> 5 Days Trip > Hotel Included</li>
+                    <li><i class="fa fa-plane"></i> Airplane Bill Included</li>
+                    <li><i class="fa fa-building"></i> Daily Places Visit</li>
+                  </ul>
+                  <div class="main-button">
+                    <a href="reservation.html">Make a Reservation</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Scripts -->
-    <!-- Bootstrap core JavaScript -->
-    <script src="../../vendor/jquery/jquery.min.js"></script>
-    <script src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
-    
-    <script src="../../assets/js/isotope.min.js"></script>
-    <script src="../../assets/js/owl-carousel.js"></script>
-    <script src="../../assets/js/wow.js"></script>
-    <script src="../../assets/js/tabs.js"></script>
-    <script src="../../assets/js/popup.js"></script>
-    <script src="../../assets/js/custom.js"></script>
+  <div class="more-about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 align-self-center">
+          <div class="left-image">
+            <img src="/assets/images/about-left-image.jpg" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="section-heading">
+            <h2>Discover More About Our Country</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="info-item">
+                <h4>150.640 +</h4>
+                <span>Total Guests Yearly</span>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="info-item">
+                <h4>175.000+</h4>
+                <span>Amazing Accomoditations</span>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="info-item">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <h4>12.560+</h4>
+                    <span>Amazing Places</span>
+                  </div>
+                  <div class="col-lg-6">
+                    <h4>240.580+</h4>
+                    <span>Different Check-ins Yearly</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+          <div class="main-button">
+            <a href="reservation.html">Discover More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="best-locations">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading text-center">
+            <h2>Best Locations In Caribbeans</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+          </div>
+        </div>
+        <div class="col-lg-8 offset-lg-2">
+          <div class="options">
+            <div class="option active">
+               <div class="shadow"></div>
+               <div class="label">
+                  <div class="icon">
+                     <i class="fas fa-expand"></i>
+                  </div>
+                  <div class="info">
+                     <div class="main">Havana</div>
+                     <div class="sub">Population: 2M</div>
+                  </div>
+               </div>
+            </div>
+            <div class="option">
+               <div class="shadow"></div>
+               <div class="label">
+                  <div class="icon">
+                    <i class="fas fa-expand"></i>
+                  </div>
+                  <div class="info">
+                     <div class="main">Kingston</div>
+                     <div class="sub">Population: 3.5M</div>
+                  </div>
+               </div>
+            </div>
+            <div class="option">
+               <div class="shadow"></div>
+               <div class="label">
+                  <div class="icon">
+                    <i class="fas fa-expand"></i>
+                  </div>
+                  <div class="info">
+                     <div class="main">London</div>
+                     <div class="sub">Population: 4.1M</div>
+                  </div>
+               </div>
+            </div>
+            <div class="option">
+               <div class="shadow"></div>
+               <div class="label">
+                  <div class="icon">
+                    <i class="fas fa-expand"></i>
+                  </div>
+                  <div class="info">
+                     <div class="main">Pristina</div>
+                     <div class="sub">Population: 520K</div>
+                  </div>
+               </div>
+            </div>
+            <div class="option">
+               <div class="shadow"></div>
+               <div class="label">
+                  <div class="icon">
+                    <i class="fas fa-expand"></i>
+                  </div>
+                  <div class="info">
+                     <div class="main">Paris</div>
+                     <div class="sub">Population: 3M</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="main-button text-center">
+            <a href="deals.html">Discover All Places</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="call-to-action">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <h2>Are You Looking To Travel ?</h2>
+          <h4>Make A Reservation By Clicking The Button</h4>
+        </div>
+        <div class="col-lg-4">
+          <div class="border-button">
+            <a href="reservation.html">Book Yours Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2036 <a href="#">WoOx Travel</a> Company. All rights reserved. 
+          <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="/assets/js/isotope.min.js"></script>
+  <script src="/assets/js/owl-carousel.js"></script>
+  <script src="/assets/js/tabs.js"></script>
+  <script src="/assets/js/popup.js"></script>
+  <script src="/assets/js/custom.js"></script>
 
     <script>
         $(".option").click(function () {

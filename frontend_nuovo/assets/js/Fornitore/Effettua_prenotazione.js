@@ -171,12 +171,12 @@ function generateTableHead(table, data,columns) {
 
 
   function create_table_prenotazioni() {
+	
     //let table = document.querySelector("table");// create table
 	let columns= ["Orario richiesta","Orario d'inizio","Servizio",
 		"Numero clienti"];
 	let keys=["Orario_richiesta", "Orario_prenotazione_inizio", "ID_servizio", 
 			"Numero_clienti"];
-	console.log("sono entrato");
     var table = document.getElementById("json-table");
     let data = Object.keys(ex_data[0]);//save the keys
     generateTableHead(table, data,columns);//create header

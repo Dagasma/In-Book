@@ -9,19 +9,25 @@ Index :  presentazione piattaforma  con login e registrazione
 
 # Cliente
 
-Profilo : modificare il profilo.
+* [X] Profilo : modificare il profilo.
+* [X] Notifiche:  (SCEGLIERE Quali dati mostrare)
+* [X] Ricerca_servizio: (stile)
+  * [ ] Visualizza fornitore: mostro una tabella con le
+  * [X] Effettua prenotazione : (mostra_fornitore() , Inserisci_data_persone() ,mostra_orario() , seleziona_orario() )
+  * [ ] Valuta servizio: ????
+* [X] Ricerca_fornitore
+* [X] Visualizza_prenotazioni_effettuate:
+  * [ ] Annulla prenotazioni: pop-up
 
 # Fornitore
 
-* [ ] profilo: modificare profilo, data e ora di apertura ( DELETE , AGGIORNA, AGGIUNGI) **gli orari non so come gestirli graficamente(???)**
-* [ ] notifiche : identico all'cliente
-* [ ] Visualizza_prenotazioni: filtro + elenco di prenotazioni dal giorno attuale.
+* [ ] profilo:
+* [X] notifiche : identico all'cliente
+* [ ] Visualizza_prenotazioni: modificare lo stile del filtro
 
-  * [ ] Annulla prenotazione:
-* [ ] Visualizza servizi creati: elenco di servizi con (DELETE,AGGIORNA)
+  * [X] Annulla prenotazione:
+* [X] Visualizza servizi creati: elenco di servizi con (DELETE,AGGIORNA)
 
-  * [ ] Modifica servizio: dice la motivazione della cancellazione
-
-  * * [ ] Modifica servizio: dice la motivazione della cancellazione
-  * 
-* [ ] Crea servizio: Form per creare il servizio
+  * [X] Modifica servizio: modifica i campi
+  * [ ] Elimina servizio:  pop-up di eliminazione
+* [X] Crea servizio: Form per creare il servizio

@@ -2,7 +2,12 @@ var data = {
 	"Nome_Attivita": "Tutto a 0,09cent",
 	"Tipo_Attivita": "Tozza bancone",
 	"Indirizzo": "Casa tua , 66666, SO",
-	"Capienza_massima": "2022"
+	"Capienza_massima": "2022",
+  "Nome": "pepp",
+	"Cognome": "de coglio",
+	"Email": "Casa sua , 66666, SO",
+	"Telefono": "42342342",
+  "Data_di_nascita":"2000-10-01"
 };
 
 
@@ -16,8 +21,60 @@ function form_profilo() {
 
 	// Create a form dynamically
 	var form = document.createElement("form");
-	form.setAttribute("method", "post");
+	form.setAttribute("method", "get");
 	form.setAttribute("action", "/");
+
+	// Create an input element for Full Name
+	var L_Nome = document.createElement("label");
+	L_Nome.setAttribute("for", "Nome");
+	L_Nome.innerHTML = "Nome: "
+
+	var Nome = document.createElement("input");
+	Nome.type = "text";
+	Nome.id = "Nome";
+	Nome.value = data.Nome;
+	Nome.placeholder = data.Nome;
+
+
+	// Create an input element for Full Name
+	var L_Cognome = document.createElement("label");
+	L_Cognome.setAttribute("value", "Cognome");
+	L_Cognome.innerHTML = "Cognome: ";
+	var Cognome = document.createElement("input");
+	Cognome.type = "text";
+	Cognome.id = "Cognome";
+	Cognome.value = data.Cognome;
+	Cognome.placeholder = data.Cognome;
+
+  // Create an input element for Full Name
+	var L_Email = document.createElement("label");
+	L_Email.setAttribute("value", "Email");
+	L_Email.innerHTML = "Email: ";
+	var Email = document.createElement("input");
+	Email.type = "email";
+	Email.id = "Email";
+	Email.value = data.Email;
+	Email.placeholder = data.Email;
+
+  	// Create an input element for Full Name
+	var L_Data_di_nascita = document.createElement("label");
+	L_Data_di_nascita.setAttribute("value", "Data_di_nascita");
+	L_Data_di_nascita.innerHTML = "Data di nascita: ";
+	var Data_di_nascita = document.createElement("input");
+	Data_di_nascita.type = "date";
+	Data_di_nascita.id = "Data_di_nascita";
+	Data_di_nascita.value = data.Data_di_nascita;
+	Data_di_nascita.placeholder = data.Data_di_nascita;
+
+  	// Create an input element for Full Name
+	var L_Telefono = document.createElement("label");
+	L_Telefono.setAttribute("value", "Telefono");
+	L_Telefono.innerHTML = "Telefono: ";
+	var Telefono = document.createElement("input");
+	Telefono.type = "tel";
+	Telefono.id = "Telefono";
+	Telefono.value = data.Telefono;
+	Telefono.placeholder = data.Telefono;
 
 	// Create an input element for Full Name
 	var L_Nome_Attivita = document.createElement("label");
@@ -66,6 +123,32 @@ function form_profilo() {
 	var s = document.createElement("input");
 	s.setAttribute("type", "submit");
 	s.setAttribute("value", "Modifica profilo");
+	// Append the full name input to the form
+	form.appendChild(L_Nome);
+	form.appendChild(Nome);
+	// Inserting a line break
+	form.appendChild(br.cloneNode());
+
+	// Append the DOB to the form
+	form.appendChild(L_Cognome);
+	form.appendChild(Cognome);
+	form.appendChild(br.cloneNode());
+
+	// Append the emailID to the form
+	form.appendChild(L_Email);
+	form.appendChild(Email);
+	form.appendChild(br.cloneNode());
+
+	// Append the emailID to the form
+	form.appendChild(L_Data_di_nascita);
+	form.appendChild(Data_di_nascita);
+	form.appendChild(br.cloneNode());
+
+	// Append the Password to the form
+	form.appendChild(L_Telefono);
+	form.appendChild(Telefono);
+	form.appendChild(br.cloneNode());
+
 
 	// Append the full name input to the form
 	form.appendChild(L_Nome_Attivita);

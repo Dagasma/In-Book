@@ -181,7 +181,6 @@ function generateTableHead(table, data,columns) {
 
   function create_table_prenotazioni() {
     //let table = document.querySelector("table");// create table
-
 	let keys=["Tipologia", "Descrizione", "Durata"];
 	console.log("sono entrato");
     var table = document.getElementById("json-table");

@@ -4,6 +4,7 @@ const cliente = require("./routes_web_pages/cliente");
 const fornitore = require("./routes_web_pages/fornitore");
 const amministratore = require("./routes_web_pages/amministratore");
 const middleware = require("./middleware");
+const { credentials } = require("../config/config");
 const app = config.express();
 
 app.use(config.rateLimit(config.apiLimiter));
@@ -18,8 +19,11 @@ app.use(
 );
 
 app.use(config.keycloak.middleware()); //commentato per testare api
-
-setInterval(async () => await config.kcAdminClient.auth(config.credentials), 58*1000);
+async () => await config.kcAdminClient.auth(config.credentials);
+setInterval(
+    async () => await config.kcAdminClient.auth(credentials),
+    58 * 1000
+);
 
 //console.log(config.keycloak.getConfig());
 
@@ -48,11 +52,11 @@ app.use(
 require("./api/cliente_routes")(app);
 require("./api/prenotazioni_routes")(app);
 app.get("/test", config.keycloak.protect(), function (request, response) {
-    middleware.Assign_Roles_to_users(request.kauth.grant.access_token.content.sub).catch(
-        (err) => {
+    middleware
+        .Assign_Roles_to_users(request.kauth.grant.access_token.content.sub)
+        .catch((err) => {
             console.log(err.message);
-        }
-    );
+        });
 });
 
 app.listen(config.PORT, () => {

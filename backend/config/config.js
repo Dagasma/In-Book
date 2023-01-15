@@ -38,16 +38,10 @@ config.apiLimiter = {
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 };
-
-config.client = {
-        clientId: "admin-cli",
-        token_endpoint_auth_method: 'none',
+config.credentials = {
+  grantType: 'client_credentials',
+  clientId:'admin-cli',
+  clientSecret: 'ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu'
 };
-
-config.grant = {
-  grant_type: 'password',
-  username: 'admin',
-  password: 'dagasma10@',
-}
 
 module.exports = config;

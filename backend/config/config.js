@@ -39,9 +39,12 @@ config.apiLimiter = {
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 };
 config.credentials = {
-  grantType: 'client_credentials',
+  username: "admin",
+  password: "dagasma10@",
+  grantType: 'password',
   clientId:'admin-cli',
-  clientSecret: 'ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu'
+  // clientSecret: 'ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu',
+  offlineToken: true
 };
 
 module.exports = config;

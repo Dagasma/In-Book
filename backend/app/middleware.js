@@ -1,7 +1,6 @@
 const config = require("../config/config");
 
 async function Assign_Roles_to_users(token_sub) {
-    
         const roles = await config.kcAdminClient.users.listRealmRoleMappings({id: token_sub});
         var lista_roles = ['fornitore','cliente','amministratore'];
 

@@ -59,6 +59,7 @@
 
     CREATE TABLE IF NOT EXISTS `INBOOK`.`NOTIFICHE`(
         ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        Orario TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         ID_prenotazione int NOT NULL,
         ID_utente varchar(36) NOT NULL,
         ID_fornitore varchar(36) NOT NULL,

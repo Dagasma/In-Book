@@ -13,6 +13,7 @@ config.Keycloak = require('keycloak-connect');
 config.fs = require("node:fs");
 config.KcAdminClient= require("@keycloak/keycloak-admin-client").default;
 config.kcAdminClient = new config.KcAdminClient();
+config.kcAdminClient.setConfig({ realmName: "inbook" });
 
 config.memoryStore = new config.session.MemoryStore();
 config.keycloak = new config.Keycloak({ store: config.memoryStore,onLoad: 'login-required', checkLoginIframe: false });
@@ -36,6 +37,11 @@ config.apiLimiter = {
   max: 500, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+};
+config.credentials = {
+  grantType: 'client_credentials',
+  clientId:'admin-cli',
+  clientSecret: 'ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu'
 };
 
 module.exports = config;

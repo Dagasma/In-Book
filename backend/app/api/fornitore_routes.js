@@ -8,10 +8,10 @@ module.exports = app => {
     router.post("/", fornitori.create);
   
      //Retrieve a single User by id
-    router.get("/get_profio:id", fornitori.findOne);
+    router.get("/get_profilo/:id", fornitori.findOne);
   
     // Update a User with id
-    router.put("/aggiorna_profilo:id", fornitori.update);
+    router.put("/aggiorna_profilo/:id", fornitori.update);
 
     app.use('/fornitori/api', config.keycloak.protect('realm:fornitore'),router);
    };

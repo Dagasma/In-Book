@@ -164,3 +164,36 @@ exports.deleteAll = (req, res) => {
             });
         });
 };
+
+
+async function Media_voto(filtro) {
+    
+    // Determino la capienza massima
+    const media = await db.sequelize.query('SELECT AVG(VOTO) as media FROM VOTAZIONI WHERE ID_fornitore = ?',
+        {
+            replacements: [filtro],
+            type: db.sequelize.QueryTypes.SELECT
+        }
+    );
+
+    return media;
+};
+
+
+// Retrieve all slot_liberi from the database by id fornitore
+exports.get_media_fornitore = (req, res) => {
+    //var condition = ID_fornitore ? { ID_fornitore: { [Op.like]: `%${ID_fornitore}%` } } : null;
+    var filtro = req.params.id;
+
+    console.log("Media ", req.params.id)
+    //var condition_time = db.sequelize.fn('date', sequelize.col('Orario_prenotazione_inizio'), Op.like, filtro.Data_giorno);
+    Media_voto(filtro).then(data => {
+        res.send(JSON.stringify(data));})
+        .catch (err => {
+                      res.status(500).send({
+                          message:
+                              err.message || "Some error occurred while retrieving Prenotazioni."
+                      });
+                  });
+                
+};

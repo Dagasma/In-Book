@@ -11,7 +11,7 @@ module.exports = app => {
     router.get("/get_profilo/:id", users.findOne);
   
     // Update a User with id
-    router.put("/aggiorna_profilo:id", users.update);
+    router.put("/aggiorna_profilo/:id", users.update);
 
     app.use('/cliente/api', router);
    };

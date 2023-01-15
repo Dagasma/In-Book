@@ -99,6 +99,7 @@ https://templatemo.com/tm-580-woox-travel
                                 <input type="number" name="Capienza_massima" id="Capienza_massima"><br>
                                 <label for="Durata">Durata :</label>
                                 <select type="time" id="Durata" name="Durata">
+                                    <option value=""></option>
                                     <option value=00:15>00:15</option>
                                     <option value=00:30>00:30</option>
                                     <option value=00:45>00:45</option>
@@ -108,7 +109,7 @@ https://templatemo.com/tm-580-woox-travel
                                     <option value=02:30>02:30</option>
                                 </select><br>
 
-                                <button class='input-bottom' type="submit">Cerca servizio</button>
+                                <button id="filtra" class='input-bottom' type="submit">Cerca servizio</button>
                             </form>
 
                         </div>
@@ -119,7 +120,25 @@ https://templatemo.com/tm-580-woox-travel
     </div>
     
 
+<!-- Mostra il fornitore -->
+<div class="reservation-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form id="reservation-form" name="gs" method="submit" role="search" action="#">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4>Ecco i fornitori<em> trovati</em> </h4>
+                        </div>
+                        <table id="json-table">
+                        </table>
 
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </body>

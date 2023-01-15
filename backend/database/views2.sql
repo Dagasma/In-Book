@@ -16,11 +16,7 @@ WHERE TIME(p.Orario_prenotazione) BETWEEN o.orario_apertura AND o.orario_chiusur
 AND Date(p.Orario_prenotazione) = var_data_prenotazione and o.giorno_della_settimana = var_giorno and p.Stato = 'Attivo';
 
 
-
-
 #chest è a bon
-
-
 
 SELECT *
 FROM (`PRENOTAZIONI` as p INNER JOIN `SERVIZI` as s ON p.ID_servizio = s.ID) INNER JOIN ORARI_ATTIVITA as o ON o.ID_fornitore = p.ID_fornitore

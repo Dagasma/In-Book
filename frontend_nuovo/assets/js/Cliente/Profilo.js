@@ -2,14 +2,14 @@ function richiedi_utente(){
     // Dati fornitore
 	var data = {
 		"Nome": "pepp",
-		"Cognome": "de coglio",
-		"Email": "Casa sua , 66666, SO",
+		"Cognome": "due coglio",
+		"Email": "ad@sda.it",
 		"Telefono": "42342342",
 		"Data_di_nascita": "2000-10-01"
 	};
 	
     /* DONE */
-    // const response = await fetch('cliente/api/get_profilo/6' + id_utente, {
+    // const response = await fetch('cliente/api/get_profilo/' + id_utente, {
     //     method: 'GET',
     //     headers: {
     //         "Access-Control-Request-Method": "GET",
@@ -89,8 +89,7 @@ function form_profilo() {
 
 	// create a submit button
 	var s = document.createElement("button");
-	s.setAttribute("type", "submit");
-	s.setAttribute("class",'input-bottom');
+	s.setAttribute("id",'btn_modifica_profilo');
 	s.innerHTML ="Modifica profilo";
 
 	// Append the full name input to the form
@@ -119,3 +118,40 @@ function form_profilo() {
 
 	document.getElementsByTagName("form")[0].appendChild(form);
 }
+
+//listener bottone prenotazione
+document.addEventListener("DOMContentLoaded", function() {
+	document.getElementById("btn_modifica_profilo").addEventListener("click",function (e){
+		e.preventDefault();
+	
+
+		console.log("FINE : " )
+		// document.getElementById("myForm").style.display = "none";
+
+		const Nome = document.getElementById("Nome").value;
+		const Cognome = document.getElementById("Cognome").value;
+		const Email = document.getElementById("Email").value;
+		const Data_di_nascita = document.getElementById("Data_di_nascita").value;
+		const Telefono = document.getElementById("Telefono").value;
+
+		/*DONE*/
+		// fetch('/cliente/api/aggiorna_profilo' + id_cliente, {
+		//     method: 'PUT',
+		//     headers: {
+		//         'Content-Type': 'application/json'
+		//     },
+		//     body: JSON.stringify({
+			// "Nome": Nome,
+			// "Cognome": Cognome,
+			// "Email": Email,
+			// "Data_di_nascita": Data_di_nascita,
+			// "Telefono": Telefono
+		//     })
+		// })
+		//     .then(response => response.json())
+		//     .then(data => { console.log(data); })
+		//     .catch(error => console.error(error));
+		//      esempio_slot = response;
+		
+	});
+	});

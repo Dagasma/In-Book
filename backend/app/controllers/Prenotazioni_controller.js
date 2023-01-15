@@ -295,3 +295,61 @@ exports.delete_prenotazione = (req, res) => {
             });
         });
 };
+
+
+
+exports.prenotazioni_filtrate = (req, res) => {
+    id = req.params.ID_utente;
+    ID_utente = req.body.ID_utente;
+    Tipologia = req.body.Tipologia;
+    Capienza_massima = req.body.Capienza_massima;
+    Durata = req.body.Durata;
+    Orario_prenotazione_inizio=req.body.Orario_prenotazione_inizio;
+
+    var condition1 = ID_utente ? { ID_utente: { [Op.like]: `%${ID_utente}%` } }   : null;
+
+    
+    var condition2 = Tipologia ? { Tipologia: { [Op.like]: `%${Tipologia}%` } }   : null;
+    var condition3 = Durata ? { Durata: { [Op.like]: `%${Durata}%` } }   : null;
+    var condition4 = Capienza_massima ? { Capienza_massima: { [Op.like]: `%${Capienza_massima}%` } }   : null;
+    var condition5 = Orario_prenotazione_inizio ? { Orario_prenotazione_inizio: { [Op.like]: `%${Orario_prenotazione_inizio}%` } }   : null;
+
+    console.log(req.body);
+    condfinale=condition2 && condition3;
+
+    const table_merge = db.sequelize.query('SELECT p.ID ,p.Orario_prenotazione_inizio ,p.ID_utente,p.Numero_clienti , p.Stato ,p.ID_fornitore,p.ID_servizio, s.Tipologia ,s.Durata ,s.Descrizione ,f.Nome_Attivita ,' +
+        'f.Tipo_Attivita  FROM (`PRENOTAZIONI` as p INNER JOIN `SERVIZI` as s ON p.ID_servizio = s.ID) ' +
+        'INNER JOIN FORNITORI as f ON s.ID_fornitore = f.ID_utente_fornitore',
+        {
+            type: db.sequelize.QueryTypes.SELECT
+        }
+    );
+
+    console.log("variabile", req.body);
+
+    tab_prenotazioni
+        .findAll({
+            include: [{
+                model: tab_servizi,
+                as: 'ID_servizio_SERVIZI',
+                required: true,
+                where: condfinale
+            }, {
+                model: tab_fornitori,
+                as: 'ID_fornitore_FORNITORI',
+                required: true
+            
+            }],
+            where: condition1
+        })
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message:
+                    err.message ||
+                    "Some error occurred while retrieving prenttab_prenotazioni.",
+            });
+        });
+};

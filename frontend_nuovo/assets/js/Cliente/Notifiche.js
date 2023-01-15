@@ -1,5 +1,7 @@
-// JSON
- let ex_data =[
+
+function richiedi_notifiche(){
+  // Dati fornitore
+  let ex_data =[
     {
         "ID": 4,
         "ID_fornitore": "5",
@@ -22,7 +24,22 @@
         "Durata": "10:00:00"
     }
 ];
-  
+
+  /* TODO */
+  // const response = await fetch('notifiche/api/get_notifiche_per_cliente/' + id_cliente, {
+  //     method: 'GET',
+  //     headers: {
+  //         "Access-Control-Request-Method": "GET",
+  //         "Accept": "application/json",
+  //         'Content-Type': 'application/json;charset-UTF-8'
+  //     }
+  // });
+  // const dati_fornitore = await response.json(); //extract JSON from the http response
+  // // do something with myJson
+
+  return ex_data;
+}
+
 function generateTableHead(table, data,columns) {
     let thead = table.createTHead();
     let row = thead.insertRow();
@@ -56,9 +73,9 @@ function generateTableHead(table, data,columns) {
   
   function create_table_prenotazioni() {
     //let table = document.querySelector("table");// create table
-	let columns=["Servizio", "Descrizione" , "Durata","Giorno","Descrizione"];
-	let keys=["Tipologia", "Descrizione", "Durata"];
-	
+	  let columns=["Servizio", "Descrizione" , "Durata","Giorno","Descrizione"];
+	  let keys=["Tipologia", "Descrizione", "Durata"];
+    ex_data=richiedi_notifiche();
     var table = document.getElementById("json-table");
     let data = Object.keys(ex_data[0]);//save the keys
     generateTableHead(table, data,columns);//create header

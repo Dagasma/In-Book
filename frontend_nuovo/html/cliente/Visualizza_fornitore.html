@@ -33,7 +33,7 @@ https://templatemo.com/tm-580-woox-travel
 -->
 </head>
 
-<body onload="create_table_prenotazioni()"></body>>
+<body onload="Aggiorna_Table()"></body>>
 
 <!-- ***** Preloader Start ***** -->
 <div id="js-preloader" class="js-preloader">
@@ -87,7 +87,7 @@ https://templatemo.com/tm-580-woox-travel
                         <div class="col-lg-12">
                             <h4>Ecco le <em>informazione del fornitore</em> </h4>
                         </div>
-                        <table id="json-table">
+                        <table id="table-fornitori">
                         </table>
 
                     </div>
@@ -96,6 +96,74 @@ https://templatemo.com/tm-580-woox-travel
         </div>
     </div>
 </div>
+
+<!-- Seleziona la data -->
+<div class="reservation-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form id="reservation-form" name="form_vota">
+                    <h4>Vota il <em> fornitore </em> </h4>
+                    <label for="Voto">Voto</label>
+                    <select type="number" id="Voto" name="Voto">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option></select>
+                    <button id="btn_voto" class='input-bottom' type="submit">effettua votazione</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Seleziona la data -->
+<div class="reservation-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form id="reservation-form" name="form_effettua_prenotazione">
+                    <h4>Verifica la<em> Disponilità </em> </h4>
+                    <label for="servizio">Servizio</label>
+                    <select id="Select_Servizio"></select>
+                    <label for="Data">Data</label>
+                    <input type="date" name="Data" id="Data"><br>
+                    <label for="Numero_persone">Numero di persone:</label>
+                    <input type="number" name="Numero_persone" id="Numero_persone"><br>
+                    <button id="btn_disponibilita" class='input-bottom' type="submit">Visualizza dispobilità</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Mostra gli orari disponibili -->
+
+
+<!-- Form orario e capienza-->
+<div class="reservation-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form id="reservation-form" name="form_effettua_prenotazione">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4>Completa la tua<em> prenotazione </em> </h4>
+                            <label for="Orario">Orario</label>
+                            <select id="Select_orario"></select>
+                            <button class='input-bottom' id="btn_prenota" type="submit">Effettua prenotazione</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
 
 
 

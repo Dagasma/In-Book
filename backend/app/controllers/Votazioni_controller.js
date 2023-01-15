@@ -164,3 +164,39 @@ exports.deleteAll = (req, res) => {
             });
         });
 };
+
+async function Media_voto(filtro) {
+    
+    // Determino la capienza massima
+    const media = await db.sequelize.query('SELECT AVG(VOTO) as media FROM VOTAZIONI WHERE ID_fornitore = ?',
+        {
+            replacements: [filtro],
+            type: db.sequelize.QueryTypes.SELECT
+        }
+    );
+
+    return media;
+};
+
+// Retrieve all Prenotazioni from the database by id utente o id fornitore
+exports.media_fornitore= (req, res) => {
+    var id = null;
+    var condition = null;
+
+        id = req.body.ID_fornitore;
+        db.sequelize.query('SELECT AVG(VOTO) FROM INBOOK.VOTAZIONI  WHERE ID_FORNITORE=6',
+            {
+                replacements: [id, 'Orario_prenotazione_inizio', 'ASC'],
+                type: db.sequelize.QueryTypes.SELECT
+            }
+        ).then(data => {
+            res.send(data);
+        })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while retrieving Prenotazioni."
+                });
+            });
+
+};

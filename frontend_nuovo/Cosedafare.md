@@ -11,13 +11,12 @@ Index :  presentazione piattaforma  con login e registrazione
 
 * [X] Profilo : modificare il profilo.
 * [X] Notifiche:  (SCEGLIERE Quali dati mostrare)
-* [X] Ricerca_servizio: (stile)
-  * [ ] Visualizza fornitore: tengo i dati ma devo vedere
-  * [X] Effettua prenotazione : (mostra_fornitore() , Inserisci_data_persone() ,mostra_orario() , seleziona_orario() )
-  * [ ] Valuta servizio: ????
-* [X] Ricerca_fornitore
-* [X] Visualizza_prenotazioni_effettuate:
-  * [X] Annulla prenotazioni:
+* [ ] Ricerca_servizio: (aggiungere tabella)
+
+  * [X] Visualizza fornitore:
+    * [X] Effettua prenotazione : (mostra_fornitore() , Inserisci_data_persone() ,mostra_orario() , seleziona_orario() )
+    * [X] Valuta servizio: ????
+* [ ] Visualizza prenotazioni:
 
 # Fornitore
 

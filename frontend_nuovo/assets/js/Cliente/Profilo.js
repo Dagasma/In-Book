@@ -1,14 +1,34 @@
-var data = {
-	"Nome": "pepp",
-	"Cognome": "de coglio",
-	"Email": "Casa sua , 66666, SO",
-	"Telefono": "42342342",
-	"Data_di_nascita": "2000-10-01"
-};
+function richiedi_utente(){
+    // Dati fornitore
+	var data = {
+		"Nome": "pepp",
+		"Cognome": "de coglio",
+		"Email": "Casa sua , 66666, SO",
+		"Telefono": "42342342",
+		"Data_di_nascita": "2000-10-01"
+	};
+	
+    /* DONE */
+    // const response = await fetch('cliente/api/get_profilo/6' + id_utente, {
+    //     method: 'GET',
+    //     headers: {
+    //         "Access-Control-Request-Method": "GET",
+    //         "Accept": "application/json",
+    //         'Content-Type': 'application/json;charset-UTF-8'
+    //     }
+    // });
+    // const dati_fornitore = await response.json(); //extract JSON from the http response
+    // // do something with myJson
 
+    return data;
+}
 
 
 function form_profilo() {
+
+	let data =richiedi_utente();
+	console.log(data);
+
 	// Create a break line element
 	var br = document.createElement("br");
 

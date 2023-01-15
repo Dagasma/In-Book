@@ -11,6 +11,7 @@ module.exports = app => {
     router.get("/findAll_utente/:id", Votazioni.findAll_utente);
     router.get("/findAll_fornitore/:id", Votazioni.findAll_fornitore);
 
+    router.get("/get_media_fornitore/:id", Votazioni.get_media_fornitore);
 
     // Update a User with id
     router.put("/cambia_voto/:id", Votazioni.update);

@@ -59,6 +59,7 @@ function generateTableHead(table, data,columns) {
     row.appendChild(th);
   }
   
+  
   function generateTable(table, data,index) {
     for (let element of data) {
       let row = table.insertRow();
@@ -71,7 +72,8 @@ function generateTableHead(table, data,columns) {
     }
   }
   
-  function create_table_prenotazioni() {
+
+  function create_table_prenotazioni(ex_data) {
     //let table = document.querySelector("table");// create table
 	  let columns=["Servizio", "Descrizione" , "Durata","Giorno","Descrizione"];
 	  let keys=["Tipologia", "Descrizione", "Durata"];

@@ -95,9 +95,9 @@ function create_table_prenotazioni(ex_data, en_page = 0) {
     "Durata"];
   if (en_page == 0) {
     console.log("per la prima volta")
-    //ex_data = richiedi_fornitori();
+    ex_data = richiedi_fornitori();
   }
-  else { ex_data }
+  else { ex_data= richiedi_fornitori(); }
 
   var table = document.getElementById("json-table");
   table.innerHTML = "";
@@ -111,7 +111,6 @@ function create_table_prenotazioni(ex_data, en_page = 0) {
 
 }
 
-create_table_prenotazioni(richiedi_fornitori(), en_page = 0);
 
 //listener bottone prenotazione
 document.addEventListener("DOMContentLoaded", function () {

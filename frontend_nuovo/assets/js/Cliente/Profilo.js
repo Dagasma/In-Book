@@ -90,6 +90,7 @@ function form_profilo() {
 	// create a submit button
 	var s = document.createElement("button");
 	s.setAttribute("id",'btn_modifica_profilo');
+	s.setAttribute("type",'submit');
 	s.innerHTML ="Modifica profilo";
 
 	// Append the full name input to the form

@@ -2,6 +2,11 @@ Pagine
 
 Index :  presentazione piattaforma  con login e registrazione
 
+Profilo: decidere come gestire i bottoni
+Notifiche : creare dataset , decidere cosa stampare;
+Visualizza_fornitore : FILTRI+nomi
+Visualizza_prenotazione : FILTRI+nomi
+
 # Pagine in comune
 
 * [ ] Mostra profilo: Fornitore ha anche i campi dei giorni e gli orari.
@@ -22,7 +27,7 @@ Index :  presentazione piattaforma  con login e registrazione
 
 * [X] profilo: fatto
 * [X] notifiche : identico all'cliente
-* [ ] Visualizza_prenotazioni: modificare lo stile del filtro
+* [X] Visualizza_prenotazioni: modificare lo stile del filtro
 
   * [X] Annulla prenotazione:
 * [X] Visualizza servizi creati: elenco di servizi con (DELETE,AGGIORNA)

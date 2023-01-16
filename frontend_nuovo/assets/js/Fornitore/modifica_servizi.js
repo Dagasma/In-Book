@@ -1,19 +1,24 @@
-var data = {
-	"Tipologia": "Tutto a 0,09cent",
-	"Descrizione": "Tozza bancone",
-	"Durata": "20:00",
-	"Capienza_massima": "2022"
-};
+function richiedi_servizi(){
+	var data = {
+		"Tipologia": "Tutto a 0,09cent",
+		"Descrizione": "Tozza bancone",
+		"Durata": "20:00",
+		"Capienza_massima": "2022"
+	};
 
+	return data;
+}
 
 //document.body.onload = create_table;
 
-function form_profilo() {
+function form_modifica() {
 	var down = document.getElementById("GFG_DOWN");
 
 	// Create a break line element
 	var br = document.createElement("br");
 
+	data = richiedi_servizi();
+	console.log(data);
 	// Create a form dynamically
 	var form = document.createElement("form");
 	form.setAttribute("method", "post");
@@ -54,7 +59,8 @@ function form_profilo() {
 	// create a submit button
 	var s = document.createElement("button");
 	s.setAttribute("type", "submit");
-	s.innerHTML ="Modifica servizi";
+	s.onclick = function exe_botton() { annulla_prenotazione(Durata.value); }
+	s.innerHTML = "Modifica servizi";
 
 	// Append the full name input to the form
 	form.appendChild(L_Tipologia);
@@ -73,7 +79,7 @@ function form_profilo() {
 	form.appendChild(br.cloneNode());
 
 	// Append the Password to the form
-	
+
 
 	// Append the submit button to the form
 	form.appendChild(s);
@@ -83,3 +89,27 @@ function form_profilo() {
 
 }
 
+
+function annulla_prenotazione(id) {
+	console.log(id);
+  
+	  /*DONE*/
+	  // fetch('/servizi/api/effettua_prenotazione/', {
+	  //     method: 'POST',
+	  //     headers: {
+	  //         'Content-Type': 'application/json'
+	  //     },
+	  //     body: JSON.stringify({
+	  // "ID_utente": id_cliente,
+	  // "ID_fornitore": servizi_fornitore_ex.ID_fornitore,
+	  // "ID_servizio": id_servizio,
+	  // "Orario_prenotazione_inizio": Data_disponibilita,
+	  // "Numero_clienti": numero_persone
+	  //     })
+	  // })
+	  //     .then(response => response.json())
+	  //     .then(data => { console.log(data); })
+	  //     .catch(error => console.error(error));
+	  //      esempio_slot = response;
+  
+  }

@@ -1,16 +1,21 @@
 const config = require("../config/config");
 
 async function Assign_Roles_to_users(token_sub) {
-        const roles = await config.kcAdminClient.users.listRealmRoleMappings({id: token_sub});
+        await config.kcAdminClient.auth(config.credentials);        //401
+
+        const roles = await config.kcAdminClient.users.listRealmRoleMappings({id: token_sub}); //403
         var lista_roles = ['fornitore','cliente','amministratore'];
+
 
         console.log(roles);
         roles.forEach((element) => 
         {
             if(lista_roles.includes(element.name)){ 
+                console.log("c stamm");
                 return;
             }
         });
+
 
         const user = await config.kcAdminClient.users.findOne({ id: token_sub });
         const drm = await config.kcAdminClient.roles.findOneByName({name:"default-roles-master"})
@@ -28,9 +33,6 @@ async function Assign_Roles_to_users(token_sub) {
         await config.kcAdminClient.users.addRealmRoleMappings({id:token_sub,roles:payload}).catch((err) => {
             console.log(err.message)
         })
-        await config.kcAdminClient.users.listRealmRoleMappings({
-                id: token_sub,
-            });
     
 
 }

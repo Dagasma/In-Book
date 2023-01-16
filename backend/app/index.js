@@ -7,6 +7,8 @@ const middleware = require("./middleware");
 const { credentials } = require("../config/config");
 const app = config.express();
 
+
+
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
 app.use(
@@ -18,14 +20,10 @@ app.use(
     })
 );
 
-app.use(config.keycloak.middleware()); //commentato per testare api
-async () => await config.kcAdminClient.auth(config.credentials);
-setInterval(
-    async () => await config.kcAdminClient.auth(credentials),
-    58 * 1000
-);
 
-//console.log(config.keycloak.getConfig());
+app.use(config.keycloak.middleware()); //commentato per testare api
+
+
 
 app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
 

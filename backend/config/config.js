@@ -13,7 +13,8 @@ config.Keycloak = require('keycloak-connect');
 config.fs = require("node:fs");
 config.KcAdminClient= require("@keycloak/keycloak-admin-client").default;
 config.kcAdminClient = new config.KcAdminClient();
-config.kcAdminClient.setConfig({ realmName: "inbook" });
+config.kcAdminClient.setConfig({ realmName: "inbook",
+                                 baseUrl: "http://keycloak.inbook.local:8080"});
 
 config.memoryStore = new config.session.MemoryStore();
 config.keycloak = new config.Keycloak({ store: config.memoryStore,onLoad: 'login-required', checkLoginIframe: false });
@@ -39,11 +40,9 @@ config.apiLimiter = {
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 };
 config.credentials = {
-  username: "admin",
-  password: "dagasma10@",
-  grantType: 'password',
-  clientId:'admin-cli',
-  // clientSecret: 'ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu',
+  grantType: 'client_credentials',
+  clientId:'nodejs',
+  clientSecret: 'ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu',
   offlineToken: true
 };
 

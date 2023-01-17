@@ -57,6 +57,7 @@ app.get("/test", config.keycloak.protect(), function (request, response) {
         });
 });
 
+
 app.listen(config.PORT, () => {
     console.log("[BACKEND] Start listening on port:" + config.PORT);
 });

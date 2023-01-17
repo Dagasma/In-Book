@@ -157,7 +157,6 @@ function Aggiorna_Table() {
     inserisci_servizi_form();
 }
 
-
 /*calcolo orarario disponibili in base al json di orario e capacita
 restituisce gli orari con posti>capacita*/
 function Calc_slot_liberi(slot, capacita){
@@ -175,12 +174,10 @@ function Calc_slot_liberi(slot, capacita){
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("btn_voto").addEventListener("click",function (e){
         e.preventDefault();
-    
-        console.log("Voto : ",servizi_fornitore_ex )
-        // document.getElementById("myForm").style.display = "none";
+  
 
-        // const voto = document.getElementById("Voto").value;
-
+       const voto = document.getElementById("Voto").value;
+        console.log(voto);
         /*DONE*/
         // fetch('/Votazioni/api/', {
         //     method: 'POST',
@@ -210,8 +207,12 @@ document.getElementById("btn_disponibilita").addEventListener("click", function 
     //json slot
     esempio_slot = [{ "Orario_inizio": "09:00", "Posti_disponibili": 5 }, { "Orario_inizio": "09:30", "Posti_disponibili": 6 }, { "Orario_inizio": "10:00", "Posti_disponibili": 4 }, { "Orario_inizio": "10:30", "Posti_disponibili": 10 }, { "Orario_inizio": "11:00", "Posti_disponibili": 10 }, { "Orario_inizio": "11:30", "Posti_disponibili": 9 }, { "Orario_inizio": "12:00", "Posti_disponibili": 8 }]
     
-    // const Data_disponibilita = document.getElementById("Data").value;
     const numero_persone = document.getElementById("Numero_persone").value;
+    let form1_prenotazione={}
+    // const Data_disponibilita = document.getElementById("Data").value;
+    form1_prenotazione.numero_persone = document.getElementById("Numero_persone").value;
+    form1_prenotazione.Data_disponibilita = document.getElementById("Data").value;
+    form1_prenotazione.id_servizio = document.getElementById("Select_Servizio").value;
 
     /* DONE */
     // fetch('/servizi/api/get_slot_liberi/', {
@@ -235,6 +236,7 @@ document.getElementById("btn_disponibilita").addEventListener("click", function 
     //         }
     //     })
     //     .catch(error => console.error(error));
+
     const select = document.getElementById("Select_orario");
     list_orari=Calc_slot_liberi(esempio_slot,numero_persone)
     select.innerHTML = "";
@@ -244,6 +246,7 @@ document.getElementById("btn_disponibilita").addEventListener("click", function 
         optionElement.text = option;
         select.appendChild(optionElement);
     });
+    select.setAttribute("dati",form1_prenotazione);
 });});
 
 //listener bottone prenotazione
@@ -252,10 +255,11 @@ document.getElementById("btn_prenota").addEventListener("click",function (e){
     e.preventDefault();
 
     console.log("FINE : ",servizi_fornitore_ex )
-    // document.getElementById("myForm").style.display = "none";
-    // const Data_disponibilita = document.getElementById("Data").value;
-    // const numero_persone = document.getElementById("Numero_persone").value;
-    // const id_servizio = document.getElementById("Select_Servizio").value;
+   
+    const orario = document.getElementById("Select_orario").value;
+    const num_persone = document.getElementById("Numero_persone").value;
+    console.log(num_persone);
+
     /*DONE*/
     // fetch('/servizi/api/effettua_prenotazione/', {
     //     method: 'POST',

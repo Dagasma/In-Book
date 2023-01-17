@@ -191,11 +191,10 @@ function generateTable(table, data, index) {
     let buttonCell = row.insertCell();
     // Crea un bottone e aggiungilo alla cella
     let button = document.createElement("button");
-    button.innerHTML = "Visualizza";
-    button.setAttribute("data-id", element["ID"]);
-    button.setAttribute("data-column", "Visualizza");
-    button.setAttribute("id", "Annulla");
-    button.onclick = function exe_botton() { stampa(element["ID"], button.getAttribute("data-column")); }
+    button.innerHTML = "Visualizza Fornitore";
+    button.setAttribute("data-id", element["id"]);
+    button.setAttribute("id",  element["id"]);
+    button.onclick = function exe_botton() { stampa(element["id"]); }
     buttonCell.appendChild(button);
   }
 }
@@ -208,7 +207,7 @@ let en_page = 0;
 function create_table_prenotazioni(ex_data, en_page = 0) {
   console.log("creo la tab:");
   //let table = document.querySelector("table");// create table
-  let columns = ["Nome_Attivita", "Tipologia",
+  let columns = ["Nome Attivita", "Tipologia",
     "Durata", "Descrizione", "indirizzo",];
   let keys = ["Nome_Attivita", "Tipologia",
     "Durata", "Descrizione", "indirizzo",];
@@ -220,8 +219,6 @@ function create_table_prenotazioni(ex_data, en_page = 0) {
       "Durata": ""    };
     ex_data = richiedi_fornitori(filtro);
   }
-
-
 
   var table = document.getElementById("json-table");
   table.innerHTML = "";

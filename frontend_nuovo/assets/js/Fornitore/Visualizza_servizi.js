@@ -25,7 +25,7 @@ function richiedi_servizi() {
 	];
   
 	/* DONE */
-	// const response = await fetch('cliente/api/get_profilo/' + id_utente, {
+	// const response = await fetch('/servizi/api/get_servizi_per_fornitore' + id_fornitore, {
 	//     method: 'GET',
 	//     headers: {
 	//         "Access-Control-Request-Method": "GET",
@@ -95,7 +95,23 @@ function generateTableHead(table, data,columns) {
 
   function Elimina_func(ID){
     console.log(ID);
-  }
+
+// 	fetch('/servizi/api/delete_servizio/'+ID, {
+//   method: 'DELETE',
+//   body: JSON.stringify({
+//     key1: 'value1',
+//     key2: 'value2'
+//   }),
+//   headers: {
+//     'Content-Type': 'application/json'
+//   }
+// })
+// .then(response => response.json())
+// .then(data => console.log(data))
+// .catch(error => console.error(error))
+
+//   
+}
 
 
 let en_page = 0

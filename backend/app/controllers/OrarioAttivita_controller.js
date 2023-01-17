@@ -144,3 +144,30 @@ exports.deleteAll = (req, res) => {
             });
         });
 };
+
+
+// Delete a tab_prenotazioni with the specified id in the request
+exports.delete_orario = (req, res) => {
+    const id = req.params.id_orario;
+
+    tab_orario
+        .destroy({
+            where: { id: id },
+        })
+        .then((num) => {
+            if (num == 1) {
+                res.send({
+                    message: "Prenotazioni was deleted successfully!",
+                });
+            } else {
+                res.send({
+                    message: `Cannot delete Prenotazioni with id=${id}. Maybe Prenotazioni was not found!`,
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: "Could not delete Prenotazioni with id=" + id,
+            });
+        });
+};

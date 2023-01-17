@@ -56,6 +56,26 @@ exports.get_servizi_per_fornitore = (req, res) => {
         });
 };
 
+// Retrieve all Servizi
+exports.get_servizio = (req, res) => {
+    const id_servizio = req.params.id_servizio;
+    console.log(req.query)
+    var condition = id_servizio    ? { ID: { [Op.like]: `%${id_servizio}%` } }       : null;
+
+    tab_servizi
+        .findAll({ where: condition })
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message:
+                    err.message ||
+                    "Some error occurred while retrieving Servizi.",
+            });
+        });
+};
+
 //aggiorna servizio by id
 exports.aggiorna_servizio = (req, res) => {
     const id = req.params.id;

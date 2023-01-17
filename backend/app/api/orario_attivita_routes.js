@@ -12,6 +12,7 @@ module.exports = app => {
   
     // Update a User with id
     router.put("/cambia_ora/:id", OrarioAttivita.update);
+    router.delete("/delete_orario/:id_orario", OrarioAttivita.delete_orario);
 
     app.use('/OrarioAttivita/api',router);
    };

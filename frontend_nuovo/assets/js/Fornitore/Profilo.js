@@ -235,7 +235,7 @@ function richiedi_orario() {
 	console.log("entrato in orario");
 
 	/* DONE */
-	// const response = await fetch('cliente/api/get_profilo/' + id_utente, {
+	// const response = await fetch('/OrarioAttivita/api/Orario_fornitore/' + id_utente, {
 	//     method: 'GET',
 	//     headers: {
 	//         "Access-Control-Request-Method": "GET",
@@ -284,7 +284,7 @@ function generateTable(table, data, index) {
 		button.innerHTML = "Elimina";
 		button.setAttribute("type", "submit");
 		button.setAttribute("data_id", element["ID"]);
-		button.setAttribute("data_column", "Elimina");
+	
 		button.setAttribute("id", "btn_elimina");
 		button.onclick = function exe_botton() { elimina_orario(element["ID"]); }
 		buttonCell.appendChild(button);
@@ -295,7 +295,7 @@ function stampa(a, b) {
 	console.log(a, b);
 }
 
-function create_table_fornitori() {
+function create_table_orari() {
 	//let table = document.querySelector("table");// create table
 	let columns = ["Giorno della settimana",
 		"Orario Apertura",
@@ -331,11 +331,10 @@ document.addEventListener("DOMContentLoaded", function () {
 		//         'Content-Type': 'application/json'
 		//     },
 		//     body: JSON.stringify({
-		// "Nome": Nome,
-		// "Cognome": Cognome,
-		// "Email": Email,
-		// "Data_di_nascita": Data_di_nascita,
-		// "Telefono": Telefono
+			// "ID_fornitore": ? ,
+			// "Giorno_della_settimana": Giorno,
+			// "Orario_apertura": Orario_I,
+			// "Orario_chiusura": Orario_F
 		//     })
 		// })
 		//     .then(response => response.json())
@@ -346,14 +345,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 });
 
-function elimina_orario (ID ){
+function elimina_orario (ID){
 	console.log(ID);
 
 		/*  */
-	// const response = await fetch('cliente/api/get_profilo/' + id_utente, {
-	//     method: 'GET',
+	// const response = await fetch('OrarioAttivita/api/delete_orario/'+ ID, {
+	//     method: 'DELETE',
 	//     headers: {
-	//         "Access-Control-Request-Method": "GET",
 	//         "Accept": "application/json",
 	//         'Content-Type': 'application/json;charset-UTF-8'
 	//     }
@@ -379,7 +377,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		const Telefono = document.getElementById("Telefono").value;
 
 		/*DONE*/
-		// fetch('/cliente/api/aggiorna_profilo' + id_cliente, {
+		// fetch('/cliente/api/aggiorna_profilo/' + id_cliente, {
 		//     method: 'PUT',
 		//     headers: {
 		//         'Content-Type': 'application/json'

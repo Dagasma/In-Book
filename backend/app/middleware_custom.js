@@ -6,12 +6,9 @@ async function Assign_Roles_to_users(token_sub) {
         const roles = await config.kcAdminClient.users.listRealmRoleMappings({id: token_sub}); //403
         var lista_roles = ['fornitore','cliente','amministratore'];
 
-
-        console.log(roles);
         roles.forEach((element) => 
         {
             if(lista_roles.includes(element.name)){ 
-                console.log("c stamm");
                 return;
             }
         });
@@ -33,8 +30,15 @@ async function Assign_Roles_to_users(token_sub) {
         await config.kcAdminClient.users.addRealmRoleMappings({id:token_sub,roles:payload}).catch((err) => {
             console.log(err.message)
         })
-    
 
 }
-    
+
+delete config.keycloak['authenticated'];
+ 
+config.keycloak.authenticated = function(req){
+    Assign_Roles_to_users(req.kauth.grant.access_token.content.sub);
+}
+ 
+module.exports = config.keycloak;
+
 module.exports.Assign_Roles_to_users = Assign_Roles_to_users;

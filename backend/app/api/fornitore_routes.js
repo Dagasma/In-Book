@@ -1,6 +1,7 @@
 const config = require("../../config/config.js");
 
 module.exports = app => {
+    const middleware_check = require("../middleware_check");
     const fornitori = require("../controllers/Fornitori_controller.js");
     var router = config.express.Router();
     

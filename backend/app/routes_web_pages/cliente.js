@@ -6,6 +6,8 @@ router.get("/", function (request, response) {
 });
 
 router.get("/profilo", function (request, response) {
+  //response che invia anche l'id dell'utente
+  response.cookie("id",request.kauth.grant.access_token.content.sub);
   response.sendFile(config.frontend_path+"html/cliente/profilo.html");
 });
 router.get("/ricerca_fornitori_per_servizio", function (request, response) {

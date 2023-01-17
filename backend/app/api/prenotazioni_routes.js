@@ -4,6 +4,8 @@ module.exports = app => {
     const prenotazioni = require("../controllers/Prenotazioni_controller.js");
     var router = config.express.Router();
     
+    //se richiesta che arriva ha req.kauth.grant.access_token.content.sub uguale a l'id che sto cercando allora puoi fare la ricerca
+
     // Create a new Prenotazione
     router.post("/effettua_prenotazione", prenotazioni.effettua_prenotazione);
 

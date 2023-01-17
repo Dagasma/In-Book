@@ -1,5 +1,6 @@
-exports.check_id_param = (req,res,next) => {
-    if(req.kauth.grant.access_token.content.sub == req.params.id){
+exports.check_id_param = (id_name = "id") => (req,res,next) => {
+
+    if(req.kauth.grant.access_token.content.sub == req.params[id_name]){
         next();
     }
     else{
@@ -9,8 +10,9 @@ exports.check_id_param = (req,res,next) => {
     }
 }
 
-exports.check_id_body = (req,res,next) => {
-    if(req.kauth.grant.access_token.content.sub == req.body.id){
+exports.check_id_body = (id_name = "id") => (req,res,next) => {
+
+    if(req.kauth.grant.access_token.content.sub == req.body[id_name]){
         next();
     }
     else{

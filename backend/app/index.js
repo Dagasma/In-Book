@@ -42,6 +42,8 @@ app.use("/amministratore",config.keycloak.protect("realm:amministratore"),ammini
 
 require("./api/cliente_routes")(app);
 require("./api/prenotazioni_routes")(app);
+require("./api/fornitore_routes")(app);
+require("./api/notifiche_routes")(app);
 
 app.listen(config.PORT, () => {
     console.log("[BACKEND] Start listening on port:" + config.PORT);

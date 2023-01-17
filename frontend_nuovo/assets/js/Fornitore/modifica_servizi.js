@@ -6,13 +6,14 @@ function richiedi_servizi(){
 		"Capienza_massima": "2022"
 	};
 
+
+
 	return data;
 }
 
 //document.body.onload = create_table;
 
 function form_modifica() {
-	var down = document.getElementById("GFG_DOWN");
 
 	// Create a break line element
 	var br = document.createElement("br");
@@ -21,8 +22,7 @@ function form_modifica() {
 	console.log(data);
 	// Create a form dynamically
 	var form = document.createElement("form");
-	form.setAttribute("method", "post");
-	form.setAttribute("action", "/");
+
 
 	// Create an input element for Full Name
 	var L_Tipologia = document.createElement("label");
@@ -59,7 +59,7 @@ function form_modifica() {
 	// create a submit button
 	var s = document.createElement("button");
 	s.setAttribute("type", "submit");
-	s.onclick = function exe_botton() { annulla_prenotazione(Durata.value); }
+	s.onclick = function exe_botton() { Modifica_servizio("ID","ID_Fornitore",Durata.value ,Descrizione.value,Tipologia.value ); }
 	s.innerHTML = "Modifica servizi";
 
 	// Append the full name input to the form
@@ -90,21 +90,20 @@ function form_modifica() {
 }
 
 
-function annulla_prenotazione(id) {
-	console.log(id);
+function Modifica_servizio(ID_servizio,ID_Fornitore,Durata ,Descrizione,Tipologia ) {
+		console.log(Durata ,Descrizione,Tipologia );
   
 	  /*DONE*/
-	  // fetch('/servizi/api/effettua_prenotazione/', {
+	  // fetch('/servizi/api/aggiorna_servizio/'+ID_servizio, {
 	  //     method: 'POST',
 	  //     headers: {
 	  //         'Content-Type': 'application/json'
 	  //     },
 	  //     body: JSON.stringify({
-	  // "ID_utente": id_cliente,
-	  // "ID_fornitore": servizi_fornitore_ex.ID_fornitore,
-	  // "ID_servizio": id_servizio,
-	  // "Orario_prenotazione_inizio": Data_disponibilita,
-	  // "Numero_clienti": numero_persone
+        // "ID_fornitore": ID_fornitore,
+        // "Tipologia": Tipologia,
+        // "Descrizione": Descrizione,
+        // "Durata": "Descrizione
 	  //     })
 	  // })
 	  //     .then(response => response.json())

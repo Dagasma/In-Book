@@ -151,10 +151,10 @@ exports.effettua_prenotazione = (req, res) => {
 
 // Retrieve all Prenotazioni from the database by id utente o id fornitore
 exports.get_prenotazioni_utente = (req, res) => {
-    var id = null;
-    var condition = null;
+        var id = null;
+        var condition = null;
 
-        id = req.query.ID_utente;
+        id = req.params.ID_utente;
 
         condition = id ? { ID_utente: { [Op.like]: `%${id}%` } } : null;
 
@@ -179,7 +179,7 @@ exports.get_prenotazioni_utente = (req, res) => {
 exports.get_prenotazioni_fornitore = (req, res) => {
     var id = null;
     var condition = null;
-        id = req.query.ID_fornitore;
+        id = req.params.ID_fornitore;
 
         condition = id ? { ID_fornitore: { [Op.like]: `%${id}%` } } : null;
 
@@ -246,7 +246,6 @@ exports.get_slot_liberi = (req, res) => {
 
 exports.annulla_prenotazione = (req, res) => {
     const id = req.params.id_prenotazione;
-    const nuovo_Stato = req.params.nuovo_Stato;
  
     tab_prenotazioni
         .update(req.body, {
@@ -331,7 +330,7 @@ exports.prenotazioni_filtrate_utente = (req, res) => {
 
 exports.prenotazioni_filtrate_fornitore = (req, res) => {
     //id = req.params.ID_utente;
-    id = req.params.fornitore;
+    id = req.params.ID_fornitore;
     var condition1 = id ? { ID_fornitore: { [Op.like]: `%${id}%` } }   : null;
     
     //sequelize.and([condition1, condition2,condition3])

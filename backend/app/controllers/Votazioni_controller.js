@@ -95,10 +95,12 @@ exports.findOne = (req, res) => {
 
 exports.update = (req, res) => {
     const id = req.params.id;
+    const ID_utente = req.params.ID_utente;
+
 
     tab_votazioni
         .update(req.body, {
-            where: { id: id },
+            where: { id: id, ID_utente: ID_utente},
         })
         .then((num) => {
             if (num == 1) {

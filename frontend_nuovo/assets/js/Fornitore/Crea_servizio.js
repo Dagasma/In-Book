@@ -6,18 +6,17 @@ function salva_servizio(){
 
     
     console.log(Tipologia)
-	  /* TODO */
-	  // fetch('/servizi/api/effettua_prenotazione/', {
+
+	  // fetch('/servizi/api/crea_servizio', {
 	  //     method: 'POST',
 	  //     headers: {
 	  //         'Content-Type': 'application/json'
 	  //     },
 	  //     body: JSON.stringify({
-	  // "ID_utente": id_cliente,
-	  // "ID_fornitore": servizi_fornitore_ex.ID_fornitore,
-	  // "ID_servizio": id_servizio,
-	  // "Orario_prenotazione_inizio": Data_disponibilita,
-	  // "Numero_clienti": numero_persone
+        // "ID_fornitore": "id_fornitore",
+        // "Tipologia": Tipologia,
+        // "Descrizione": Descrizione,
+        // "Durata": Durata
 	  //     })
 	  // })
 	  //     .then(response => response.json())

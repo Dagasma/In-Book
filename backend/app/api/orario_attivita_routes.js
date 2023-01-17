@@ -5,14 +5,16 @@ module.exports = app => {
     const OrarioAttivita = require("../controllers/OrarioAttivita_controller.js");
     var router = config.express.Router();
     
-    // Create a new Fornitore
-    router.post("/",middleware_check.check_id_body, OrarioAttivita.create);
-  
-     //Retrieve a single User by id
-    router.get("/Orario_fornitore/:ID_fornitore",middleware_check.check_id_param, OrarioAttivita.findAll);
-  
-    // Update a User with id
-    router.put("/cambia_ora/:id",middleware_check.check_id_param, OrarioAttivita.update);
 
-    app.use('/OrarioAttivita/api', config.keycloak.protect("realm:Fornitore"),router);
+    //Creazione dell'orario
+    router.post("/",config.keycloak.protect("realm:Fornitore"),middleware_check.check_id_body("ID_fornitore"), OrarioAttivita.create);
+  
+
+    //Lista orari del fornitore
+    router.get("/Orario_fornitore/:ID_fornitore", OrarioAttivita.findAll);
+
+    //Delete (NEL BODY PASSO ANCHE ID_FORNITORE)
+    router.delete("/delete_orario/:id_orario",config.keycloak.protect("realm:Fornitore"),middleware_check.check_id_body("ID_fornitore"), OrarioAttivita.delete_orario);
+
+    app.use('/OrarioAttivita/api',router);
    };

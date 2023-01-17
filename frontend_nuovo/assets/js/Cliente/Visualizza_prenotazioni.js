@@ -695,10 +695,23 @@ function generateTable(table, data, index) {
   }
 }
 
-function Annulla_prenotazione(a) {
+function Annulla_prenotazione(ID) {
   
+console.log(ID)
+  
+// fetch('/prenotazioni/api/annulla_prenotazione/'+ID, {
+//   method: 'PUT',
+//   body: JSON.stringify({
+//     "Stato" : "Annullato"
+//   }),
+//   headers: {
+//     'Content-Type': 'application/json'
+//   }
+// })
+// .then(response => response.json())
+// .then(data => console.log(data))
+// .catch(error => console.error(error))
 
-  
 }
 
 let en_page = 0;
@@ -712,14 +725,7 @@ function create_table_prenotazioni(ex_data, en_page = 0) {
 
   if (en_page == 0) {
     console.log("entro")
-    let filtro = {
-      "id_utente": "",
-      "Giorno": "",
-      "Tipo_Attivita": "",
-      "Persone_max": "",
-      "Durata": ""
-    };
-    ex_data = richiedi_prenotazioni(filtro);
+    Tipo_Attivita
   }
   else { ex_data }
   var table = document.getElementById("json-table");

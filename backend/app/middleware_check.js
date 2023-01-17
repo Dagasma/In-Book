@@ -21,3 +21,8 @@ exports.check_id_body = (id_name = "id") => (req,res,next) => {
         });
     }
 }
+
+exports.send_cookie = (req,res,next) => {
+    res.cookie("id",req.kauth.grant.access_token.content.sub);
+    next();
+}

@@ -14,7 +14,7 @@ exports.crea_servizio = (req, res) => {
 
     // Create a Servizio
     const servizi = {
-        ID_fornitore: req.kauth.grant.access_token.content.sub,
+        ID_fornitore:  req.body.ID_fornitore,
         Tipologia: req.body.Tipologia,
         Descrizione: req.body.Descrizione,
         Durata: req.body.Durata,
@@ -37,7 +37,7 @@ exports.crea_servizio = (req, res) => {
 
 // Retrieve all Servizi
 exports.get_servizi_per_fornitore = (req, res) => {
-    const id_fornitore = req.query.id_fornitore;
+    const id_fornitore = req.params.ID_fornitore;
     var condition = id_fornitore
         ? { ID_fornitore: { [Op.like]: `%${id_fornitore}%` } }
         : null;
@@ -56,13 +56,33 @@ exports.get_servizi_per_fornitore = (req, res) => {
         });
 };
 
+// Retrieve all Servizi
+exports.get_servizio = (req, res) => {
+    const id_servizio = req.params.id_servizio;
+    var condition = id_servizio    ? { ID: { [Op.like]: `%${id_servizio}%` } }       : null;
+
+    tab_servizi
+        .findAll({ where: condition })
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message:
+                    err.message ||
+                    "Some error occurred while retrieving Servizi.",
+            });
+        });
+};
+
 //aggiorna servizio by id
 exports.aggiorna_servizio = (req, res) => {
-    const id = req.params.id;
+    const id_servizio = req.params.id_servizio;
+    const id_fornitore = req.params.ID_fornitore;
 
     tab_servizi
         .update(req.body, {
-            where: { id: id },
+            where: { id: id_servizio, ID_fornitore: id_fornitore},
         })
         .then((num) => {
             if (num == 1) {
@@ -84,11 +104,12 @@ exports.aggiorna_servizio = (req, res) => {
 
 // Delete a servizio with the specified id in the request
 exports.delete_servizio = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_servizio;
+    const id_fornitore = req.params.ID_fornitore;
 
     tab_servizi
         .destroy({
-            where: { id: id },
+            where: { id: id, ID_fornitore: id_fornitore},
         })
         .then((num) => {
             if (num == 1) {
@@ -110,7 +131,7 @@ exports.delete_servizio = (req, res) => {
 
 // Delete all servizi with that id_fornitore from the database.
 exports.delete_all_servizi = (req, res) => {
-    const id_fornitore = req.query.id_fornitore;
+    const id_fornitore = req.params.ID_fornitore;
     var condition = id_fornitore
         ? { ID_fornitore: { [Op.like]: `%${id_fornitore}%` } }
         : null;

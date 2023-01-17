@@ -17,8 +17,7 @@ function GFG_Fun() {
 
 	// Create a form dynamically
 	var form = document.createElement("form");
-	form.setAttribute("method", "post");
-	form.setAttribute("action", "/");
+
 
 	// Create an input element for Full Name
 	var L_Nome_Attivita = document.createElement("label");

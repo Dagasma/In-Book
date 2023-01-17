@@ -6,6 +6,7 @@ module.exports = app => {
     
     // Retrive all servizi from a id_fornitore
     router.get("get_servizi_per_fornitore:id_fornitore",servizi.get_servizi_per_fornitore)
+    router.get("/get_Servizi_e_fornitori",servizi.get_Servizi_e_fornitori)
 
     // Create a new servizio
     router.post("/crea_servizio",config.keycloak.protect('realm:fornitore'), servizi.crea_servizio);

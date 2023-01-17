@@ -17,7 +17,9 @@ module.exports = app => {
     //get slot liberi
     router.get("/get_slot_liberi",prenotazioni.get_slot_liberi)
 
-    router.get("/prenotazioni_filtrate/:id", prenotazioni.prenotazioni_filtrate);
+    router.get("/prenotazioni_filtrate_fornitore/:ID_fornitore", prenotazioni.prenotazioni_filtrate_fornitore);
+    router.get("/prenotazioni_filtrate_utente/:ID_utente", prenotazioni.prenotazioni_filtrate_utente);
+
 
     //aggiorna stato prenotazione (o aggiorna prenotazione in generale)
     router.put("/annulla_prenotazione/:id_prenotazione", prenotazioni.annulla_prenotazione);

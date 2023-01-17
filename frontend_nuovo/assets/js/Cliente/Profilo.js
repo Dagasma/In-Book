@@ -8,6 +8,8 @@ function richiedi_utente(){
 		"Data_di_nascita": "2000-10-01"
 	};
 	
+	var id_utente= 3;
+
     /* DONE */
     // const response = await fetch('cliente/api/get_profilo/' + id_utente, {
     //     method: 'GET',
@@ -17,8 +19,7 @@ function richiedi_utente(){
     //         'Content-Type': 'application/json;charset-UTF-8'
     //     }
     // });
-    // const dati_fornitore = await response.json(); //extract JSON from the http response
-    // // do something with myJson
+    // const data = await response.json(); //extract JSON from the http response
 
     return data;
 }
@@ -34,9 +35,7 @@ function form_profilo() {
 
 	// Create a form dynamically
 	var form = document.createElement("form");
-	form.id="form_profilo"
-	form.setAttribute("method", "post");
-	form.setAttribute("action", "/");
+	form.id="form_profilo";
 
 	// Create an input element for Full Name
 	var L_Nome = document.createElement("label");
@@ -89,8 +88,9 @@ function form_profilo() {
 
 	// create a submit button
 	var s = document.createElement("button");
-	s.setAttribute("id",'btn_modifica_profilo');
-	s.setAttribute("type",'submit');
+	s.id='btn_modifica_profilo';
+	s.type='submit';
+	s.onlclick="aggiorna_profilo()"
 	s.innerHTML ="Modifica profilo";
 
 	// Append the full name input to the form
@@ -121,19 +121,17 @@ function form_profilo() {
 }
 
 //listener bottone prenotazione
-document.addEventListener("DOMContentLoaded", function() {
-	document.getElementById("btn_modifica_profilo").addEventListener("click",function (e){
-		e.preventDefault();
-	
-
+function aggiorna_profilo(){
 		console.log("FINE : " )
 		// document.getElementById("myForm").style.display = "none";
+		let profilo_up={}
+		profilo_up.Nome = document.getElementById("Nome").value;
+		profilo_up.Cognome = document.getElementById("Cognome").value;
+		profilo_up.Email = document.getElementById("Email").value;
+		profilo_up.Data_di_nascita = document.getElementById("Data_di_nascita").value;
+		profilo_up.Telefono = document.getElementById("Telefono").value;
 
-		const Nome = document.getElementById("Nome").value;
-		const Cognome = document.getElementById("Cognome").value;
-		const Email = document.getElementById("Email").value;
-		const Data_di_nascita = document.getElementById("Data_di_nascita").value;
-		const Telefono = document.getElementById("Telefono").value;
+		console.log(profilo_up);
 
 		/*DONE*/
 		// fetch('/cliente/api/aggiorna_profilo' + id_cliente, {
@@ -142,17 +140,17 @@ document.addEventListener("DOMContentLoaded", function() {
 		//         'Content-Type': 'application/json'
 		//     },
 		//     body: JSON.stringify({
-			// "Nome": Nome,
-			// "Cognome": Cognome,
-			// "Email": Email,
-			// "Data_di_nascita": Data_di_nascita,
-			// "Telefono": Telefono
+			// profilo_up
 		//     })
 		// })
 		//     .then(response => response.json())
 		//     .then(data => { console.log(data); })
 		//     .catch(error => console.error(error));
-		//      esempio_slot = response;
 		
-	});
-	});
+
+
+
+
+		// aggiorna pagina
+		//window.location.reload()
+	}

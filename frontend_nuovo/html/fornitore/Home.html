@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
-    <title>In Book - Crea servizio</title>
+    <title>In Book - Homepage Fornitore</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,8 +22,7 @@
     <link rel="stylesheet" href="../../assets/css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
-     <!--<script src="../../assets/js/Js-Giuliano/Profilo.js"></script>
-   
+    <!--
 
         
 TemplateMo 580 Woox Travel
@@ -33,7 +32,7 @@ https://templatemo.com/tm-580-woox-travel
 -->
 </head>
 
-<body >
+<body>
 
     <!-- ***** Preloader Start ***** -->
     <div id="js-preloader" class="js-preloader">
@@ -64,7 +63,8 @@ https://templatemo.com/tm-580-woox-travel
                             <li><a href="Profilo.html" >Il Mio profilo</a></li>
                             <li><a href="Notifiche.html">Notifiche</a></li>
                             <li><a href="Visualizza_prenotazioni.html">Visualizza prenotazioni</a></li>
-                            <li><a href="Cerca.html" class="active">Cerca </a></li>
+                            <li><a href="Visualizza_servizi.html">Visualizza servizi</a></li>
+                            <li><a href="Crea_servizio.html" class="active">Crea servizio</a></li>
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -76,85 +76,49 @@ https://templatemo.com/tm-580-woox-travel
         </div>
     </header>
     <!-- ***** Header Area End ***** -->
-<body  >
 
-    <div class="reservation-form">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <form id="reservation-form" name="gs" method="submit" role="search" action="#">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h4>Cerca un <em> fornitore </em> </h4>
-                                
+    <body>
+        <div class="second-page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4></h4>
+                        <h2>Benvenuto in "In Book"</h2>
+                        <p>Benvenuti su In BOOK, la piattaforma di prenotazioni online dove puoi offrire i tuoi servizi
+                            a migliaia di clienti in cerca di esperienze uniche.
 
-                                <label for="Tipologia">Tipologia</label>
-                                <input type="text" name="Tipologia" id="Tipologia"><br>
-            
-                                <label for="Indirizzo">Indirizzo</label>
-                                <input type="text" name="Indirizzo" id="Indirizzo"><br>
-                            
-                                <label for="Capienza_massima">Capienza massima</label>
-                                <input type="number" name="Capienza_massima" id="Capienza_massima"><br>
-                                <label for="Durata">Durata :</label>
-                                <select type="time" id="Durata" name="Durata">
-                                    <option value=""></option>
-                                    <option value=00:15>00:15</option>
-                                    <option value=00:30>00:30</option>
-                                    <option value=00:45>00:45</option>
-                                    <option value=01:00>01:00</option>
-                                    <option value=01:30>01:30</option>
-                                    <option value=02:00>02:00</option>
-                                    <option value=02:30>02:30</option>
-                                </select><br>
+                            Con In BOOK, puoi creare il tuo profilo di fornitore di servizi e inserire tutte le
+                            informazioni relative alle tue attività, come descrizione, orari, prezzi e foto. In questo
+                            modo, i clienti potranno scoprire e prenotare i tuoi servizi in modo semplice e veloce.
 
-                                <button id="btn_cerca" class='input-bottom' type="submit">Cerca</button>
-                            </form>
+                            La nostra piattaforma ti offre anche un sistema di gestione delle prenotazioni, in modo da
+                            poter gestire facilmente le tue prenotazioni e i pagamenti. Inoltre, offriamo un supporto
+                            costante per aiutarti a ottimizzare la tua presenza sulla piattaforma e aumentare la tua
+                            visibilità.
 
-                        </div>
-                    </form>
+                            Diventa un fornitore di servizi su In BOOK e aumenta la tua visibilità, aumenta le tue
+                            entrate e offri esperienze uniche ai tuoi clienti. </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-
-<!-- Mostra il fornitore -->
-<div class="reservation-form">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <form id="reservation-form" name="gs" method="submit" role="search" action="#">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h4>Ecco i fornitori<em> trovati</em> </h4>
-                        </div>
-                        <table id="json-table">
-                        </table>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 
-</body>
+
+
+    </body>
 
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->
     <script src="../../vendor/jquery/jquery.min.js"></script>
     <script src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
-    
+
     <script src="../../assets/js/isotope.min.js"></script>
     <script src="../../assets/js/owl-carousel.js"></script>
     <script src="../../assets/js/wow.js"></script>
     <script src="../../assets/js/tabs.js"></script>
     <script src="../../assets/js/popup.js"></script>
     <script src="../../assets/js/custom.js"></script>
-
-    <script src="../../assets/js/Cliente/Cerca.js"></script>
 
     <script>
         $(".option").click(function () {

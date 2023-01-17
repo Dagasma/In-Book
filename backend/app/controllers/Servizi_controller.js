@@ -130,3 +130,24 @@ exports.delete_all_servizi = (req, res) => {
             });
         });
 };
+
+exports.get_Servizi_e_fornitori = (req, res) => {
+    tab_servizi
+        .findAll({
+            include: [{
+                model: tab_fornitori,
+                as: 'ID_fornitore_FORNITORI',
+                required: true
+            }]
+        })
+        .then((data) => {
+             res.send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message:
+                    err.message ||
+                    "Some error occurred while retrieving prenttab_prenotazioni.",
+            });
+        });
+};

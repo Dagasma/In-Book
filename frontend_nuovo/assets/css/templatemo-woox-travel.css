@@ -1662,12 +1662,12 @@ body #user-button:hover .u-icons, body #user-button:focus-within .u-icons {
   height: 300% !important;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   body:not(.light) {
     background: #232223;
     color: white;
   }
-}
+} */
 body .credit {
   position: absolute;
   bottom: 20px;
@@ -2134,7 +2134,7 @@ Reservation Page Style
 
 .reservation-form #reservation-form {
   padding: 60px 120px;
-  background-color: #f9f9f9;
+  background-color: #ececec;
   border-bottom-right-radius: 23px;
   border-bottom-left-radius: 23px;
 }

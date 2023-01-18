@@ -233,7 +233,7 @@ function create_table_prenotazioni(ex_data, en_page = 0) {
 
 //listener bottone prenotazione
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("btn_cerca").addEventListener("click", function (e) {
+  document.getElementById("btn_cerca").addEventListener("click", async function (e) {
     e.preventDefault();
     en_page = 1
     console.log("il bottone cerca è stato premuto : ")
@@ -247,7 +247,7 @@ document.addEventListener("DOMContentLoaded", function () {
     filtro.Capienza_massima = document.getElementById("Capienza_massima").value;
     filtro.Durata = document.getElementById("Durata").value;
 
-    ex_data = richiedi_fornitori(filtro);
+    ex_data = await richiedi_fornitori(filtro);
 
     create_table_prenotazioni(ex_data, 1);
 

@@ -1,3 +1,4 @@
+const { request } = require("express");
 const config = require("../config/config");
 
 async function Assign_Roles_to_users(token_sub) {
@@ -9,7 +10,7 @@ async function Assign_Roles_to_users(token_sub) {
         roles.forEach((element) => 
         {
             if(lista_roles.includes(element.name)){ 
-                return;
+                return false;
             }
         });
 
@@ -30,13 +31,14 @@ async function Assign_Roles_to_users(token_sub) {
         await config.kcAdminClient.users.addRealmRoleMappings({id:token_sub,roles:payload}).catch((err) => {
             console.log(err.message)
         })
-
+        
+        return true;
 }
 
 delete config.keycloak['authenticated'];
  
 config.keycloak.authenticated = function(req){
-    Assign_Roles_to_users(req.kauth.grant.access_token.content.sub);
+    Assign_Roles_to_users(req.kauth.grant.access_token.content.sub)
 }
  
 module.exports = config.keycloak;

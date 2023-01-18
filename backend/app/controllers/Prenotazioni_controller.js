@@ -244,12 +244,12 @@ exports.get_slot_liberi = (req, res) => {
 
 };
 
-exports.annulla_prenotazione = (req, res) => {
+exports.annulla_prenotazione_cliente = (req, res) => {
     const id = req.params.id_prenotazione;
- 
+    const ID_utente = req.params.ID_utente;
     tab_prenotazioni
         .update(req.body, {
-            where: { id: id },
+            where: { id: id, ID_utente: ID_utente},
         })
         .then((num) => {
             if (num == 1) {
@@ -268,6 +268,35 @@ exports.annulla_prenotazione = (req, res) => {
             });
         });
 };
+
+exports.annulla_prenotazione_fornitore = (req, res) => {
+    const id = req.params.id_prenotazione;
+    const ID_fornitore = req.params.ID_fornitore;
+
+
+    tab_prenotazioni
+        .update(req.body, {
+            where: { id: id, ID_fornitore: ID_fornitore },
+        })
+        .then((num) => {
+            if (num == 1) {
+                res.send({
+                    message: "Prenotazioni was updated successfully.",
+                });
+            } else {
+                res.send({
+                    message: `Cannot update Prenotazioni with id=${id}. Maybe Prenotazioni was not found or req.body is empty!`,
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: "Error updating Prenotazioni with id=" + id,
+            });
+        });
+};
+
+
 
 // Delete a tab_prenotazioni with the specified id in the request
 exports.delete_prenotazione = (req, res) => {

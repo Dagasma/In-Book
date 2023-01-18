@@ -24,10 +24,12 @@ module.exports = app => {
 
     //DA RIVEDERE CHI PUO FARE COSA; altro problema -> UN UTENTE DIFFERENTE POTREBBE FARE ANNULLA PRENOTAZIONE SE SFRUTTO SOLO id_prenotazione
     //aggiorna stato prenotazione (o aggiorna prenotazione in generale) 
-    router.put("/annulla_prenotazione/:id_prenotazione", config.keycloak.protect(), prenotazioni.annulla_prenotazione);
+    router.put("/annulla_prenotazione_cliente/:id_prenotazione/:ID_utente", config.keycloak.protect("realm:cliente"), middleware_check.check_id_param('ID_utente'), prenotazioni.annulla_prenotazione_cliente);
+
+    router.put("/annulla_prenotazione_fornitore/:id_prenotazione/:ID_fornitore", config.keycloak.protect("realm:fornitore"),middleware_check.check_id_param('ID_fornitore'), prenotazioni.annulla_prenotazione_fornitore);
 
     //elimina prenotazione
-    router.delete("/delete_prenotazione/:id_prenotazione", config.keycloak.protect(), prenotazioni.delete_prenotazione);
+    //router.delete("/delete_prenotazione/:id_prenotazione", config.keycloak.protect(), prenotazioni.delete_prenotazione);
   
 
     app.use('/prenotazioni/api',router);

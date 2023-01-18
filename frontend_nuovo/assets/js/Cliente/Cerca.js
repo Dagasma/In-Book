@@ -1,121 +1,6 @@
 
 async function richiedi_fornitori(filtro) {
-  // Dati fornitore
-  /*let ex_data = [
-    {
-      "ID": 2,
-      "ID_fornitore": "5",
-      "Tipologia": "Controllo peso",
-      "Descrizione": "Controllo da",
-      "Durata": "00:30:00",
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "5",
-        "Nome_Attivita": "Gym",
-        "Tipologia": "GymLuca",
-        "Indirizzo": "Via marina , 42011",
-        "Capienza_massima": 70
-      }
-    },
-    {
-      "ID": 3,
-      "ID_fornitore": "5",
-      "Tipologia": "Consulenza",
-      "Descrizione": "Scelta di un piano",
-      "Durata": "01:00:00",
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "5",
-        "Nome_Attivita": "Gym",
-        "Tipologia": "GymLuca",
-        "Indirizzo": "Via marina , 42011",
-        "Capienza_massima": 70
-      }
-    },
-    {
-      "ID": 4,
-      "ID_fornitore": "5",
-      "Tipologia": "Piscina",
-      "Descrizione": "2:00 in piscina",
-      "Durata": "02:00:00",
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "5",
-        "Nome_Attivita": "Gym",
-        "Tipologia": "GymLuca",
-        "Indirizzo": "Via marina , 42011",
-        "Capienza_massima": 70
-      }
-    },
-    {
-      "ID": 9,
-      "ID_fornitore": "5",
-      "Tipologia": "Controllo peso",
-      "Descrizione": "Controllo da",
-      "Durata": "00:30:00",
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "5",
-        "Nome_Attivita": "Gym",
-        "Tipologia": "GymLuca",
-        "Indirizzo": "Via marina , 42011",
-        "Capienza_massima": 70
-      }
-    },
-    {
-      "ID": 10,
-      "ID_fornitore": "5",
-      "Tipologia": "Prova",
-      "Descrizione": "primo tipo",
-      "Durata": "10:00:00",
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "5",
-        "Nome_Attivita": "Gym",
-        "Tipologia": "GymLuca",
-        "Indirizzo": "Via marina , 42011",
-        "Capienza_massima": 70
-      }
-    },
-    {
-      "ID": 5,
-      "ID_fornitore": "6",
-      "Tipologia": "Barba",
-      "Descrizione": "Taglio della barba con musica",
-      "Durata": "00:30:00",
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipologia": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 6,
-      "ID_fornitore": "6",
-      "Tipologia": "Capelli",
-      "Descrizione": "Taglio capelli",
-      "Durata": "01:00:00",
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipologia": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 8,
-      "ID_fornitore": "6",
-      "Tipologia": "Pulizia dentale",
-      "Descrizione": "Pulizia dei",
-      "Durata": "01:00:00",
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipologia": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    }
-  ] */
-
+  
   const response = await fetch('/servizi/api/get_Servizi_e_fornitori', {
       method: 'GET',
       headers: {
@@ -190,15 +75,17 @@ function generateTable(table, data, index) {
     // Crea un bottone e aggiungilo alla cella
     let button = document.createElement("button");
     button.innerHTML = "Visualizza Fornitore";
-    button.setAttribute("data-id", element["id"]);
-    button.setAttribute("id",  element["id"]);
-    button.onclick = function exe_botton() { stampa(element["id"]); }
+    button.setAttribute("data-id", element["ID_fornitore"]);
+    button.setAttribute("id",  element["ID_fornitore"]);
+    button.onclick = function exe_botton() { vai_dal_fornitore(element["ID_fornitore"]); }
     buttonCell.appendChild(button);
   }
 }
 
-function stampa(a, b) {
+function vai_dal_fornitore(a, b) {
   console.log(a, b);
+
+  window.alert("ok");
 }
 
 let en_page = 0;

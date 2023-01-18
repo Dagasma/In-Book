@@ -206,12 +206,11 @@ exports.get_prenotazioni_fornitore = (req, res) => {
 exports.get_slot_liberi = (req, res) => {
     //var condition = ID_fornitore ? { ID_fornitore: { [Op.like]: `%${ID_fornitore}%` } } : null;
     var filtro = {
-        Stato: 'Attivo',
+
         Data_giorno: req.body.Data_giorno,
-        ID_servizio: req.body.ID_servizio,
         ID_fornitore: req.body.ID_fornitore
     };
-
+    console.log(filtro);
     //var condition_time = db.sequelize.fn('date', sequelize.col('Orario_prenotazione_inizio'), Op.like, filtro.Data_giorno);
     calcolo_slot_liberi(filtro).then(data => {
         res.send(JSON.stringify(data));})
@@ -222,36 +221,15 @@ exports.get_slot_liberi = (req, res) => {
                       });
                   });
                 
-
-    //   tab_prenotazioni.findAll({ 
-    //       include:[{
-    //         model: SERVIZI,
-    //         required: true
-    //       }],
-    //       where: {
-    //           condition, 
-    //           Stato : filtro.Stato,
-    //           order: [['Orario_prenotazione', 'ASC']]
-    //         } })
-    //       .then(data => {
-    //           var dati_buoni = calcolo_slot_liberi(data, filtro.Data_giorno, ID_servizio);
-    //           res.send(dati_buoni);
-    //       })
-    //       .catch(err => {
-    //           res.status(500).send({
-    //               message:
-    //                   err.message || "Some error occurred while retrieving Prenotazioni."
-    //           });
-    //       });
-
 };
 
 exports.annulla_prenotazione_cliente = (req, res) => {
     const id = req.params.id_prenotazione;
     const ID_utente = req.params.ID_utente;
+    console.log(req.body);
     tab_prenotazioni
         .update(req.body, {
-            where: { id: id, ID_utente: ID_utente},
+            where: { id: id},
         })
         .then((num) => {
             if (num == 1) {

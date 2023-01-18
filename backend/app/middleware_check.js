@@ -1,5 +1,4 @@
 exports.check_id_param = (id_name = "id") => (req,res,next) => {
-
     if(req.kauth.grant.access_token.content.sub == req.params[id_name]){
         next();
     }

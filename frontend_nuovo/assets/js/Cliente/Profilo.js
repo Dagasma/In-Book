@@ -1,41 +1,33 @@
-function richiedi_utente(){
-    // Dati fornitore
-	var data = {
-		"Nome": "pepp",
-		"Cognome": "due coglio",
-		"Email": "ad@sda.it",
-		"Telefono": "42342342",
-		"Data_di_nascita": "2000-10-01"
-	};
-	
-	var id_utente= 3;
+let id_cliente = document.cookie.substring(3, 40);
 
-    /* DONE */
-    // const response = await fetch('cliente/api/get_profilo/' + id_utente, {
-    //     method: 'GET',
-    //     headers: {
-    //         "Access-Control-Request-Method": "GET",
-    //         "Accept": "application/json",
-    //         'Content-Type': 'application/json;charset-UTF-8'
-    //     }
-    // });
-    // const data = await response.json(); //extract JSON from the http response
-
-    return data;
+async function richiedi_utente() {
+	console.log(id_cliente)
+	/* DONE */
+	const response = await fetch('/cliente/api/get_profilo/' + id_cliente, {
+		method: 'GET',
+		headers: {
+			"Access-Control-Request-Method": "GET",
+			"Accept": "application/json",
+			'Content-Type': 'application/json;charset-UTF-8'
+		}
+	});
+	let data = await response.json(); //extract JSON from the http response
+	console.log(data);
+	return data;
 }
 
 
-function form_profilo() {
+async function form_profilo() {
 
-	let data =richiedi_utente();
-	console.log(data);
+	let data =  await richiedi_utente();
+	console.log("form_Data", data);
 
 	// Create a break line element
 	var br = document.createElement("br");
 
 	// Create a form dynamically
 	var form = document.createElement("form");
-	form.id="form_profilo";
+	form.id = "form_profilo";
 
 	// Create an input element for Full Name
 	var L_Nome = document.createElement("label");
@@ -46,7 +38,7 @@ function form_profilo() {
 	Nome.id = "Nome";
 	Nome.value = data.Nome;
 	Nome.placeholder = data.Nome;
-	
+
 	var L_Cognome = document.createElement("label");
 	L_Cognome.setAttribute("value", "Cognome");
 	L_Cognome.innerHTML = "Cognome: ";
@@ -56,7 +48,7 @@ function form_profilo() {
 	Cognome.value = data.Cognome;
 	Cognome.placeholder = data.Cognome;
 
-	
+
 	var L_Email = document.createElement("label");
 	L_Email.setAttribute("value", "Email");
 	L_Email.innerHTML = "Email: ";
@@ -66,7 +58,7 @@ function form_profilo() {
 	Email.value = data.Email;
 	Email.placeholder = data.Email;
 
-	
+
 	var L_Data_di_nascita = document.createElement("label");
 	L_Data_di_nascita.setAttribute("value", "Data_di_nascita");
 	L_Data_di_nascita.innerHTML = "Data di nascita: ";
@@ -76,7 +68,7 @@ function form_profilo() {
 	Data_di_nascita.value = data.Data_di_nascita;
 	Data_di_nascita.placeholder = data.Data_di_nascita;
 
-	
+
 	var L_Telefono = document.createElement("label");
 	L_Telefono.setAttribute("value", "Telefono");
 	L_Telefono.innerHTML = "Telefono: ";
@@ -86,12 +78,13 @@ function form_profilo() {
 	Telefono.value = data.Telefono;
 	Telefono.placeholder = data.Telefono;
 
-	// create a submit button
+	// create a submit 
 	var s = document.createElement("button");
-	s.id='btn_modifica_profilo';
-	s.type='submit';
-	s.onlclick="aggiorna_profilo()"
-	s.innerHTML ="Modifica profilo";
+	s.setAttribute("type","submit");
+	s.setAttribute("class","input-buttom");
+	s.id = 'btn_modifica_profilo';
+	s.onlclick= function exe_botton() { aggiorna_profilo(); }
+	s.innerHTML = "Modifica profilo";
 
 	// Append the full name input to the form
 	form.appendChild(L_Nome);
@@ -121,10 +114,14 @@ function form_profilo() {
 }
 
 //listener bottone prenotazione
-function aggiorna_profilo(){
-		console.log("FINE : " )
+
+document.addEventListener("DOMContentLoaded", function () {
+	document.getElementById("btn_modifica_profilo").addEventListener("click",  async function () {
+
+		window.alert("ciao")
+		console.log("FINE : ")
 		// document.getElementById("myForm").style.display = "none";
-		let profilo_up={}
+		let profilo_up = {}
 		profilo_up.Nome = document.getElementById("Nome").value;
 		profilo_up.Cognome = document.getElementById("Cognome").value;
 		profilo_up.Email = document.getElementById("Email").value;
@@ -134,23 +131,18 @@ function aggiorna_profilo(){
 		console.log(profilo_up);
 
 		/*DONE*/
-		// fetch('/cliente/api/aggiorna_profilo' + id_cliente, {
-		//     method: 'PUT',
-		//     headers: {
-		//         'Content-Type': 'application/json'
-		//     },
-		//     body: JSON.stringify({
-			// profilo_up
-		//     })
-		// })
-		//     .then(response => response.json())
-		//     .then(data => { console.log(data); })
-		//     .catch(error => console.error(error));
-		
+		const response = await fetch('/cliente/api/aggiorna_profilo' + id_cliente, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ profilo_up })
+		})
+			.then(response => response.json())
+			.then(data => { console.log(data); })
+			.catch(error => console.error(error));
 
 
-
-
-		// aggiorna pagina
-		//window.location.reload()
-	}
+		window.alert("Aggiornato");
+	});
+});

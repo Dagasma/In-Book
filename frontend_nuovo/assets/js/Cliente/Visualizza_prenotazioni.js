@@ -1,610 +1,9 @@
+let id_cliente=document.cookie.substring(3,40);
 
 async function richiedi_prenotazioni(filtro) {
   // Dati fornitore
-  let ex_data = [
-    {
-      "ID": 26,
-      "ID_utente": "2",
-      "ID_fornitore": "6",
-      "ID_servizio": 6,
-      "Orario_richiesta": "2023-01-11T14:36:15.000Z",
-      "Orario_prenotazione_inizio": "2023-01-17T14:00:00.000Z",
-      "Orario_prenotazione_fine": "2023-01-17T15:00:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 4,
-      "ID_servizio_SERVIZI": {
-        "ID": 6,
-        "ID_fornitore": "6",
-        "Tipologia": "Capelli",
-        "Descrizione": "Taglio capelli",
-        "Durata": "01:00:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 25,
-      "ID_utente": "2",
-      "ID_fornitore": "6",
-      "ID_servizio": 6,
-      "Orario_richiesta": "2023-01-11T14:33:49.000Z",
-      "Orario_prenotazione_inizio": "2023-01-17T14:00:00.000Z",
-      "Orario_prenotazione_fine": "2023-01-17T15:00:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 4,
-      "ID_servizio_SERVIZI": {
-        "ID": 6,
-        "ID_fornitore": "6",
-        "Tipologia": "Capelli",
-        "Descrizione": "Taglio capelli",
-        "Durata": "01:00:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 24,
-      "ID_utente": "2",
-      "ID_fornitore": "6",
-      "ID_servizio": 6,
-      "Orario_richiesta": "2023-01-11T12:25:43.000Z",
-      "Orario_prenotazione_inizio": "2023-01-16T14:00:00.000Z",
-      "Orario_prenotazione_fine": "2023-01-16T15:00:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 4,
-      "ID_servizio_SERVIZI": {
-        "ID": 6,
-        "ID_fornitore": "6",
-        "Tipologia": "Capelli",
-        "Descrizione": "Taglio capelli",
-        "Durata": "01:00:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 23,
-      "ID_utente": "7",
-      "ID_fornitore": "6",
-      "ID_servizio": 6,
-      "Orario_richiesta": "2024-01-11T12:23:53.000Z",
-      "Orario_prenotazione_inizio": "2024-01-16T12:00:00.000Z",
-      "Orario_prenotazione_fine": "2024-01-16T15:00:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 2,
-      "ID_servizio_SERVIZI": {
-        "ID": 6,
-        "ID_fornitore": "6",
-        "Tipologia": "Capelli",
-        "Descrizione": "Taglio capelli",
-        "Durata": "01:00:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 22,
-      "ID_utente": "2",
-      "ID_fornitore": "6",
-      "ID_servizio": 5,
-      "Orario_richiesta": "2022-01-02T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-17T10:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-17T10:30:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 1,
-      "ID_servizio_SERVIZI": {
-        "ID": 5,
-        "ID_fornitore": "6",
-        "Tipologia": "Barba",
-        "Descrizione": "Taglio della barba con musica",
-        "Durata": "00:30:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 21,
-      "ID_utente": "7",
-      "ID_fornitore": "6",
-      "ID_servizio": 6,
-      "Orario_richiesta": "2022-01-02T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-17T16:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-17T17:00:00.000Z",
-      "Stato": "Annullato",
-      "Numero_clienti": 2,
-      "ID_servizio_SERVIZI": {
-        "ID": 6,
-        "ID_fornitore": "6",
-        "Tipologia": "Capelli",
-        "Descrizione": "Taglio capelli",
-        "Durata": "01:00:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 20,
-      "ID_utente": "4",
-      "ID_fornitore": "6",
-      "ID_servizio": 5,
-      "Orario_richiesta": "2022-01-01T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-17T10:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-17T10:30:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 1,
-      "ID_servizio_SERVIZI": {
-        "ID": 5,
-        "ID_fornitore": "6",
-        "Tipologia": "Barba",
-        "Descrizione": "Taglio della barba con musica",
-        "Durata": "00:30:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 19,
-      "ID_utente": "3",
-      "ID_fornitore": "6",
-      "ID_servizio": 6,
-      "Orario_richiesta": "2022-01-02T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-17T11:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-17T12:00:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 1,
-      "ID_servizio_SERVIZI": {
-        "ID": 6,
-        "ID_fornitore": "6",
-        "Tipologia": "Capelli",
-        "Descrizione": "Taglio capelli",
-        "Durata": "01:00:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 18,
-      "ID_utente": "2",
-      "ID_fornitore": "6",
-      "ID_servizio": 5,
-      "Orario_richiesta": "2022-01-02T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-17T10:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-17T10:30:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 2,
-      "ID_servizio_SERVIZI": {
-        "ID": 5,
-        "ID_fornitore": "6",
-        "Tipologia": "Barba",
-        "Descrizione": "Taglio della barba con musica",
-        "Durata": "00:30:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 17,
-      "ID_utente": "7",
-      "ID_fornitore": "6",
-      "ID_servizio": 6,
-      "Orario_richiesta": "2022-01-01T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-17T10:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-17T11:00:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 1,
-      "ID_servizio_SERVIZI": {
-        "ID": 6,
-        "ID_fornitore": "6",
-        "Tipologia": "Capelli",
-        "Descrizione": "Taglio capelli",
-        "Durata": "01:00:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 16,
-      "ID_utente": "4",
-      "ID_fornitore": "6",
-      "ID_servizio": 5,
-      "Orario_richiesta": "2022-01-01T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-16T16:30:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-16T17:00:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 3,
-      "ID_servizio_SERVIZI": {
-        "ID": 5,
-        "ID_fornitore": "6",
-        "Tipologia": "Barba",
-        "Descrizione": "Taglio della barba con musica",
-        "Durata": "00:30:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 15,
-      "ID_utente": "3",
-      "ID_fornitore": "6",
-      "ID_servizio": 6,
-      "Orario_richiesta": "2022-01-02T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-16T16:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-16T17:00:00.000Z",
-      "Stato": "Annullato",
-      "Numero_clienti": 1,
-      "ID_servizio_SERVIZI": {
-        "ID": 6,
-        "ID_fornitore": "6",
-        "Tipologia": "Capelli",
-        "Descrizione": "Taglio capelli",
-        "Durata": "01:00:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 14,
-      "ID_utente": "2",
-      "ID_fornitore": "6",
-      "ID_servizio": 5,
-      "Orario_richiesta": "2022-01-02T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-16T16:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-16T16:30:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 1,
-      "ID_servizio_SERVIZI": {
-        "ID": 5,
-        "ID_fornitore": "6",
-        "Tipologia": "Barba",
-        "Descrizione": "Taglio della barba con musica",
-        "Durata": "00:30:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 12,
-      "ID_utente": "2",
-      "ID_fornitore": "6",
-      "ID_servizio": 5,
-      "Orario_richiesta": "2022-01-02T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-17T10:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-17T10:30:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 1,
-      "ID_servizio_SERVIZI": {
-        "ID": 5,
-        "ID_fornitore": "6",
-        "Tipologia": "Barba",
-        "Descrizione": "Taglio della barba con musica",
-        "Durata": "00:30:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 11,
-      "ID_utente": "7",
-      "ID_fornitore": "6",
-      "ID_servizio": 6,
-      "Orario_richiesta": "2022-01-02T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-17T16:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-17T17:00:00.000Z",
-      "Stato": "Annullato",
-      "Numero_clienti": 2,
-      "ID_servizio_SERVIZI": {
-        "ID": 6,
-        "ID_fornitore": "6",
-        "Tipologia": "Capelli",
-        "Descrizione": "Taglio capelli",
-        "Durata": "01:00:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 10,
-      "ID_utente": "4",
-      "ID_fornitore": "6",
-      "ID_servizio": 5,
-      "Orario_richiesta": "2022-01-01T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-17T10:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-17T10:30:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 1,
-      "ID_servizio_SERVIZI": {
-        "ID": 5,
-        "ID_fornitore": "6",
-        "Tipologia": "Barba",
-        "Descrizione": "Taglio della barba con musica",
-        "Durata": "00:30:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 8,
-      "ID_utente": "2",
-      "ID_fornitore": "6",
-      "ID_servizio": 5,
-      "Orario_richiesta": "2022-01-02T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-17T10:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-17T10:30:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 2,
-      "ID_servizio_SERVIZI": {
-        "ID": 5,
-        "ID_fornitore": "6",
-        "Tipologia": "Barba",
-        "Descrizione": "Taglio della barba con musica",
-        "Durata": "00:30:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 7,
-      "ID_utente": "7",
-      "ID_fornitore": "6",
-      "ID_servizio": 6,
-      "Orario_richiesta": "2022-01-01T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-17T10:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-17T11:00:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 1,
-      "ID_servizio_SERVIZI": {
-        "ID": 6,
-        "ID_fornitore": "6",
-        "Tipologia": "Capelli",
-        "Descrizione": "Taglio capelli",
-        "Durata": "01:00:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 6,
-      "ID_utente": "4",
-      "ID_fornitore": "6",
-      "ID_servizio": 5,
-      "Orario_richiesta": "2022-01-01T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-16T16:30:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-16T17:00:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 3,
-      "ID_servizio_SERVIZI": {
-        "ID": 5,
-        "ID_fornitore": "6",
-        "Tipologia": "Barba",
-        "Descrizione": "Taglio della barba con musica",
-        "Durata": "00:30:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 5,
-      "ID_utente": "3",
-      "ID_fornitore": "6",
-      "ID_servizio": 6,
-      "Orario_richiesta": "2022-01-02T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-16T16:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-16T17:00:00.000Z",
-      "Stato": "Annullato",
-      "Numero_clienti": 1,
-      "ID_servizio_SERVIZI": {
-        "ID": 6,
-        "ID_fornitore": "6",
-        "Tipologia": "Capelli",
-        "Descrizione": "Taglio capelli",
-        "Durata": "01:00:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 4,
-      "ID_utente": "2",
-      "ID_fornitore": "6",
-      "ID_servizio": 5,
-      "Orario_richiesta": "2022-01-02T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-16T16:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-16T16:30:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 1,
-      "ID_servizio_SERVIZI": {
-        "ID": 5,
-        "ID_fornitore": "6",
-        "Tipologia": "Barba",
-        "Descrizione": "Taglio della barba con musica",
-        "Durata": "00:30:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 3,
-      "ID_utente": "2",
-      "ID_fornitore": "6",
-      "ID_servizio": 5,
-      "Orario_richiesta": "2022-01-01T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-16T10:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-16T10:30:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 2,
-      "ID_servizio_SERVIZI": {
-        "ID": 5,
-        "ID_fornitore": "6",
-        "Tipologia": "Barba",
-        "Descrizione": "Taglio della barba con musica",
-        "Durata": "00:30:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 2,
-      "ID_utente": "2",
-      "ID_fornitore": "6",
-      "ID_servizio": 5,
-      "Orario_richiesta": "2022-01-01T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-16T10:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-16T10:30:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 2,
-      "ID_servizio_SERVIZI": {
-        "ID": 5,
-        "ID_fornitore": "6",
-        "Tipologia": "Barba",
-        "Descrizione": "Taglio della barba con musica",
-        "Durata": "00:30:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    },
-    {
-      "ID": 1,
-      "ID_utente": "2",
-      "ID_fornitore": "6",
-      "ID_servizio": 5,
-      "Orario_richiesta": "2022-01-01T00:00:00.000Z",
-      "Orario_prenotazione_inizio": "2022-01-16T10:00:00.000Z",
-      "Orario_prenotazione_fine": "2022-01-16T10:30:00.000Z",
-      "Stato": "Attivo",
-      "Numero_clienti": 2,
-      "ID_servizio_SERVIZI": {
-        "ID": 5,
-        "ID_fornitore": "6",
-        "Tipologia": "Barba",
-        "Descrizione": "Taglio della barba con musica",
-        "Durata": "00:30:00"
-      },
-      "ID_fornitore_FORNITORI": {
-        "ID_utente_fornitore": "6",
-        "Nome_Attivita": "Barbiere",
-        "Tipo_Attivita": "BarbiereLuca",
-        "Indirizzo": "via enrico , 12084",
-        "Capienza_massima": 10
-      }
-    }
-  ]
-
-  const response = await fetch('/prenotazioni/api/prenotazioni_filtrate_merge_utente/3458c3d8-5d12-44a6-b4cc-52e8359666ed', {
+  console.log(id_cliente);
+  const response = await fetch('/prenotazioni/api/prenotazioni_filtrate_merge_utente/'+id_cliente, {
       method: 'GET',
       headers: {
           "Access-Control-Request-Method": "GET",
@@ -613,13 +12,9 @@ async function richiedi_prenotazioni(filtro) {
       }
   });
   ex_data = await response.json(); //extract JSON from the http response
- 
-
   let dati_filtrati = []
   for (let i = ex_data.length - 1; i >= 0; i--) {
-    console.log(filtro.Numero_clienti);
     if (ex_data[i].Orario_prenotazione_inizio.substring(0, 10) != filtro.Giorno && filtro.Giorno != "") {
-
     }
     else if ((ex_data[i].Numero_clienti < filtro.Numero_clienti) && (filtro.Numero_clienti != "")) {
       
@@ -646,9 +41,8 @@ async function richiedi_prenotazioni(filtro) {
     }
   }
 
-  console.log("dati filtrati ",dati_filtrati);
-     
   create_table_prenotazioni(dati_filtrati, 1);
+
 }
 
 function generateTableHead(table, data, columns) {
@@ -691,31 +85,46 @@ function generateTable(table, data, index) {
   }
 }
 
-function Annulla_prenotazione(ID) {
-  
-console.log(ID)
+async function Annulla_prenotazione(id_prenotazione) {
+  let body_value = { Stato: "Annullato"};
+  console.log(id_prenotazione ,id_cliente )
+  const response = await fetch('/prenotazioni/api/annulla_prenotazione_cliente/' + id_prenotazione +'/'+ id_cliente,  {
+        method: 'PUT',
+        headers: {
+          "Accept": "application/json",
+          'Content-Type': 'application/json;charset-UTF-8'
+      },
+      body: JSON.stringify(body_value),
+
+    })
+    let update =await response.json();
+
+    console.log(update);
+
+
+window.alert("Annullata",id_prenotazione,id_cliente);
 
 }
 
 let en_page = 0;
 
-function create_table_prenotazioni(ex_data, en_page = 0) {
+async function create_table_prenotazioni(ex_data, en_page = 0) {
 
   //let table = document.querySelector("table");// create table
   let columns = ["Giorno", "Durata", "Descrizione", "Nome_Attivita", "Numero_clienti", "Tipologia", "indirizzo"];
   let keys = ["Giorno", "Durata", "Descrizione", "Nome_Attivita", "Numero_clienti", "Tipologia", "indirizzo"];
-
-
+  
   if (en_page == 0) {
-    console.log("entro")
-    Tipo_Attivita
+    
+    filtro={"Giorno":"","Tipo_Attivita":"","Durata":",","Numero_clienti":""};
+    let ex_data = await richiedi_prenotazioni(filtro); console.log(ex_data);
   }
-  else { ex_data }
+  
+
   var table = document.getElementById("json-table");
   table.innerHTML = "";
-  console.log("dati ricevuti" ,ex_data)
 
-  if (ex_data.length > 0) {
+  if (ex_data.length > 0 ) {
     let data = Object.keys(ex_data[0]);//save the keys
     generateTableHead(table, data, columns);//create header
     generateTable(table, ex_data, keys);
@@ -725,7 +134,7 @@ function create_table_prenotazioni(ex_data, en_page = 0) {
 
 //listener bottone prenotazione
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("btn_prenotazioni_filtro").addEventListener("click", function (e) {
+  document.getElementById("btn_prenotazioni_filtro").addEventListener("click",async function (e) {
     e.preventDefault();
     en_page = 1
     console.log("premuto btn : ")
@@ -737,13 +146,6 @@ document.addEventListener("DOMContentLoaded", function () {
     filtro.Durata = document.getElementById("Durata").value;
     filtro.Numero_clienti = document.getElementById("Persone_max").value;
 
-    console.log("filtro", filtro)
-
-    // DA CANCELLARE
-    
-    let ex_data = [];
-    richiedi_prenotazioni(filtro);
-    //ex_data = await response.json()
-
+    ex_data = await richiedi_prenotazioni(filtro);
   });
 });

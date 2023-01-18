@@ -131,7 +131,6 @@ async function richiedi_fornitori(filtro) {
   console.log("filtro è: ", filtro);
   let dati_filtrati = [];
   for (let i = ex_data.length - 1; i >= 0; i--) {
-    console.log((ex_data[i].ID_fornitore_FORNITORI.Nome_Attivita != filtro.Nome_Attivita), (filtro.Nome_Attivita != ''))
     if ((ex_data[i].Durata.substring(0, 5)) != filtro.Durata && filtro.Durata != "") {
     }
     else if ((ex_data[i].ID_fornitore_FORNITORI.Capienza_massima <= filtro.Capienza_massima) && (filtro.Capienza_massima != "")) {

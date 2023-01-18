@@ -1,5 +1,5 @@
 
-function richiedi_prenotazioni(filtro) {
+async function richiedi_prenotazioni(filtro) {
   // Dati fornitore
   let ex_data = [
     {
@@ -603,31 +603,25 @@ function richiedi_prenotazioni(filtro) {
       }
     }
   ]
-  console.log(ex_data)
-  /* DONE */
-  // const response = await fetch('/prenotazioni/api/prenotazioni_filtrate_utente/' + id_utente, {
-  //     method: 'GET',
-  //     headers: {
-  //         "Access-Control-Request-Method": "GET",
-  //         "Accept": "application/json",
-  //         'Content-Type': 'application/json;charset-UTF-8'
-  //     }
-  // });
-  // const dati_fornitore = await response.json(); //extract JSON from the http response
 
-
-
-  
+  const response = await fetch('/prenotazioni/api/prenotazioni_filtrate_merge_utente/3458c3d8-5d12-44a6-b4cc-52e8359666ed', {
+      method: 'GET',
+      headers: {
+          "Access-Control-Request-Method": "GET",
+          "Accept": "application/json",
+          'Content-Type': 'application/json;charset-UTF-8'
+      }
+  });
+  ex_data = await response.json(); //extract JSON from the http response
+ 
 
   let dati_filtrati = []
-  var cont = 0;
-  console.log(filtro)
   for (let i = ex_data.length - 1; i >= 0; i--) {
     console.log(filtro.Numero_clienti);
     if (ex_data[i].Orario_prenotazione_inizio.substring(0, 10) != filtro.Giorno && filtro.Giorno != "") {
 
     }
-    else if (ex_data[i].Numero_clienti > filtro.Numero_clienti && filtro.Numero_clienti != "") {
+    else if ((ex_data[i].Numero_clienti < filtro.Numero_clienti) && (filtro.Numero_clienti != "")) {
       
     }
     else if (ex_data[i].ID_servizio_SERVIZI.Durata.substring(0, 5) != filtro.Durata && filtro.Durata != "") {
@@ -651,8 +645,10 @@ function richiedi_prenotazioni(filtro) {
       dati_filtrati.push(istance)
     }
   }
-  console.log(dati_filtrati)
-  return dati_filtrati;
+
+  console.log("dati filtrati ",dati_filtrati);
+     
+  create_table_prenotazioni(dati_filtrati, 1);
 }
 
 function generateTableHead(table, data, columns) {
@@ -698,19 +694,6 @@ function generateTable(table, data, index) {
 function Annulla_prenotazione(ID) {
   
 console.log(ID)
-  
-// fetch('/prenotazioni/api/annulla_prenotazione/'+ID, {
-//   method: 'PUT',
-//   body: JSON.stringify({
-//     "Stato" : "Annullato"
-//   }),
-//   headers: {
-//     'Content-Type': 'application/json'
-//   }
-// })
-// .then(response => response.json())
-// .then(data => console.log(data))
-// .catch(error => console.error(error))
 
 }
 
@@ -730,6 +713,7 @@ function create_table_prenotazioni(ex_data, en_page = 0) {
   else { ex_data }
   var table = document.getElementById("json-table");
   table.innerHTML = "";
+  console.log("dati ricevuti" ,ex_data)
 
   if (ex_data.length > 0) {
     let data = Object.keys(ex_data[0]);//save the keys
@@ -757,9 +741,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // DA CANCELLARE
     
-    ex_data = richiedi_prenotazioni(filtro);
+    let ex_data = [];
+    richiedi_prenotazioni(filtro);
+    //ex_data = await response.json()
 
-    console.log(ex_data)
-    create_table_prenotazioni(ex_data, 1);
   });
 });

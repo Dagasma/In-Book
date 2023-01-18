@@ -2,6 +2,8 @@ const db = require("../models");
 const SERVIZI = require("../models/SERVIZI");
 const tab_prenotazioni = db.models.PRENOTAZIONI; //da testare
 const Op = db.Sequelize.Op;
+const tab_servizi = db.models.SERVIZI;
+const tab_fornitori = db.models.FORNITORI;
 
 var moment = require('moment'); // require
 

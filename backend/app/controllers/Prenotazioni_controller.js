@@ -151,10 +151,10 @@ exports.effettua_prenotazione = (req, res) => {
 
 // Retrieve all Prenotazioni from the database by id utente o id fornitore
 exports.get_prenotazioni_utente = (req, res) => {
-    var id = null;
-    var condition = null;
+        var id = null;
+        var condition = null;
 
-        id = req.query.ID_utente;
+        id = req.params.ID_utente;
 
         condition = id ? { ID_utente: { [Op.like]: `%${id}%` } } : null;
 
@@ -179,7 +179,7 @@ exports.get_prenotazioni_utente = (req, res) => {
 exports.get_prenotazioni_fornitore = (req, res) => {
     var id = null;
     var condition = null;
-        id = req.query.ID_fornitore;
+        id = req.params.ID_fornitore;
 
         condition = id ? { ID_fornitore: { [Op.like]: `%${id}%` } } : null;
 
@@ -244,13 +244,12 @@ exports.get_slot_liberi = (req, res) => {
 
 };
 
-exports.annulla_prenotazione = (req, res) => {
+exports.annulla_prenotazione_cliente = (req, res) => {
     const id = req.params.id_prenotazione;
-    const nuovo_Stato = req.params.nuovo_Stato;
- 
+    const ID_utente = req.params.ID_utente;
     tab_prenotazioni
         .update(req.body, {
-            where: { id: id },
+            where: { id: id, ID_utente: ID_utente},
         })
         .then((num) => {
             if (num == 1) {
@@ -269,6 +268,35 @@ exports.annulla_prenotazione = (req, res) => {
             });
         });
 };
+
+exports.annulla_prenotazione_fornitore = (req, res) => {
+    const id = req.params.id_prenotazione;
+    const ID_fornitore = req.params.ID_fornitore;
+
+
+    tab_prenotazioni
+        .update(req.body, {
+            where: { id: id, ID_fornitore: ID_fornitore },
+        })
+        .then((num) => {
+            if (num == 1) {
+                res.send({
+                    message: "Prenotazioni was updated successfully.",
+                });
+            } else {
+                res.send({
+                    message: `Cannot update Prenotazioni with id=${id}. Maybe Prenotazioni was not found or req.body is empty!`,
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: "Error updating Prenotazioni with id=" + id,
+            });
+        });
+};
+
+
 
 // Delete a tab_prenotazioni with the specified id in the request
 exports.delete_prenotazione = (req, res) => {
@@ -331,7 +359,7 @@ exports.prenotazioni_filtrate_utente = (req, res) => {
 
 exports.prenotazioni_filtrate_fornitore = (req, res) => {
     //id = req.params.ID_utente;
-    id = req.params.fornitore;
+    id = req.params.ID_fornitore;
     var condition1 = id ? { ID_fornitore: { [Op.like]: `%${id}%` } }   : null;
     
     //sequelize.and([condition1, condition2,condition3])

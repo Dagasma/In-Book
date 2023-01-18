@@ -1,5 +1,6 @@
 const db = require("../models");
 const tab_fornitori = db.models.FORNITORI;
+const tab_utenti = db.models.UTENTI;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new fornitore
@@ -74,6 +75,37 @@ exports.findOne = (req, res) => {
             });
         });
 };
+
+exports.findFornitorebyCliente = (req, res) => {
+    const id = req.params.id;
+
+    tab_fornitori
+        .findOne( {
+            where: {ID_utente_fornitore: id},
+            include: [{
+                model: tab_utenti,
+                as: "ID_utente_fornitore_UTENTI",
+                attributes: [ "Email", "Telefono"],
+                required : true,
+            }]
+        })
+        .then((data) => {
+            if (data) {
+                res.send(data);
+            } else {
+                res.status(404).send({
+                    message: `Cannot find fornitore with id=${id}.`,
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: "Error retrieving fornitore with id=" + id,
+            });
+        });
+};
+
+
 
 exports.update = (req, res) => {
     const id = req.params.id;

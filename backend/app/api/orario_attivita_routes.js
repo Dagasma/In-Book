@@ -1,18 +1,20 @@
 const config = require("../../config/config.js");
 
 module.exports = app => {
+    const middleware_check = require("../middleware_check");
     const OrarioAttivita = require("../controllers/OrarioAttivita_controller.js");
     var router = config.express.Router();
     
-    // Create a new Fornitore
-    router.post("/", OrarioAttivita.create);
+
+    //Creazione dell'orario
+    router.post("/",config.keycloak.protect("realm:Fornitore"),middleware_check.check_id_body("ID_fornitore"), OrarioAttivita.create);
   
-     //Retrieve a single User by id
+
+    //Lista orari del fornitore
     router.get("/Orario_fornitore/:ID_fornitore", OrarioAttivita.findAll);
-  
-    // Update a User with id
-    router.put("/cambia_ora/:id", OrarioAttivita.update);
-    router.delete("/delete_orario/:id_orario", OrarioAttivita.delete_orario);
+
+    //Delete (NEL BODY PASSO ANCHE ID_FORNITORE)
+    router.delete("/delete_orario/:id_orario",config.keycloak.protect("realm:Fornitore"),middleware_check.check_id_body("ID_fornitore"), OrarioAttivita.delete_orario);
 
     app.use('/OrarioAttivita/api',router);
    };

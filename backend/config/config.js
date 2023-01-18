@@ -1,6 +1,7 @@
 
 const config = {};
 require("fix-esm").register();
+config.baseUrl = "http://keycloak.inbook.local:8080";
 config.express = require("express");
 config.session = require("express-session");
 config.path = require("path");
@@ -14,7 +15,7 @@ config.fs = require("node:fs");
 config.KcAdminClient= require("@keycloak/keycloak-admin-client").default;
 config.kcAdminClient = new config.KcAdminClient();
 config.kcAdminClient.setConfig({ realmName: "inbook",
-                                 baseUrl: "http://keycloak.inbook.local:8080"});
+                                 baseUrl: config.baseUrl});
 
 config.memoryStore = new config.session.MemoryStore();
 config.keycloak = new config.Keycloak({ store: config.memoryStore,onLoad: 'login-required', checkLoginIframe: false });

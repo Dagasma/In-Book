@@ -146,28 +146,30 @@ exports.deleteAll = (req, res) => {
 };
 
 
-// Delete a tab_prenotazioni with the specified id in the request
+// Delete a Orario with the specified id in the request
 exports.delete_orario = (req, res) => {
     const id = req.params.id_orario;
+    const ID_fornitore = req.body.ID_fornitore;
+
 
     tab_orario
         .destroy({
-            where: { id: id },
+            where: { id: id, ID_fornitore: ID_fornitore},
         })
         .then((num) => {
             if (num == 1) {
                 res.send({
-                    message: "Prenotazioni was deleted successfully!",
+                    message: "Orario was deleted successfully!",
                 });
             } else {
                 res.send({
-                    message: `Cannot delete Prenotazioni with id=${id}. Maybe Prenotazioni was not found!`,
+                    message: `Cannot delete Orario with id=${id}. Maybe Orario was not found!`,
                 });
             }
         })
         .catch((err) => {
             res.status(500).send({
-                message: "Could not delete Prenotazioni with id=" + id,
+                message: "Could not delete Orario with id=" + id,
             });
         });
 };

@@ -1,7 +1,7 @@
 
-function richiedi_fornitori(filtro) {
+async function richiedi_fornitori(filtro) {
   // Dati fornitore
-  let ex_data = [
+  /*let ex_data = [
     {
       "ID": 2,
       "ID_fornitore": "5",
@@ -114,19 +114,18 @@ function richiedi_fornitori(filtro) {
         "Capienza_massima": 10
       }
     }
-  ]
-  console.log(ex_data)
-  /* TODO */
-  // const response = await fetch('prenotazioni/api/Servizi_e_prenotazioni', {
-  //     method: 'GET',
-  //     headers: {
-  //         "Access-Control-Request-Method": "GET",
-  //         "Accept": "application/json",
-  //         'Content-Type': 'application/json;charset-UTF-8'
-  //     }
-  // });
-  // const dati_fornitore = await response.json(); //extract JSON from the http response
-  // // do something with myJson
+  ] */
+
+  const response = await fetch('/servizi/api/get_Servizi_e_fornitori', {
+      method: 'GET',
+      headers: {
+          "Access-Control-Request-Method": "GET",
+          "Accept": "application/json",
+          'Content-Type': 'application/json;charset-UTF-8'
+      }
+  });
+  const ex_data = await response.json(); //extract JSON from the http response
+  console.log(ex_data);
 
   var cont = 0;
   console.log("filtro è: ", filtro);
@@ -248,22 +247,6 @@ document.addEventListener("DOMContentLoaded", function () {
     filtro.Indirizzo = document.getElementById("Indirizzo").value;
     filtro.Capienza_massima = document.getElementById("Capienza_massima").value;
     filtro.Durata = document.getElementById("Durata").value;
-
-
-
-
-    /*DONE*/
-    // fetch('prenotazioni/api/prenotazioni_filtrate_fornitore/'+id_cliente, {
-    //     method: 'GET',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     }
-    // })
-    //     .then(response => response.json())
-    //     .then(data => { console.log(data); })
-    //     .catch(error => console.error(error));
-
-    //      const ex_data = await response.json();
 
     ex_data = richiedi_fornitori(filtro);
 

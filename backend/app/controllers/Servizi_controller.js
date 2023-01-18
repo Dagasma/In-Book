@@ -156,7 +156,7 @@ exports.get_Servizi_e_fornitori = (req, res) => {
     tab_servizi
         .findAll({
             include: [{
-                model: tab_fornitori,
+                model: db.models.FORNITORI,
                 as: 'ID_fornitore_FORNITORI',
                 required: true
             }]

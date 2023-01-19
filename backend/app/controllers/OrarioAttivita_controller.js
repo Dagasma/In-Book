@@ -103,7 +103,7 @@ exports.update = (req, res) => {
 // Delete a hour with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
-
+    console.log(id)
     tab_orario
         .destroy({
             where: { id: id },

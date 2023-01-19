@@ -59,7 +59,15 @@ exports.findOne = (req, res) => {
     const id = req.params.id;
 
     tab_fornitori
-        .findByPk(id)
+    .findOne( {
+        where: {ID_utente_fornitore: id},
+        include: [{
+            model: tab_utenti,
+            as: "ID_utente_fornitore_UTENTI",
+            
+            required : true,
+        }]
+    })
         .then((data) => {
             if (data) {
                 res.send(data);
@@ -112,7 +120,7 @@ exports.update = (req, res) => {
 
     tab_fornitori
         .update(req.body, {
-            where: { id: ID_utente_fornitore },
+            where: { ID_utente_fornitore: id },
         })
         .then((num) => {
             if (num == 1) {

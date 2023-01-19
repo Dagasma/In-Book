@@ -133,11 +133,16 @@ document.addEventListener("DOMContentLoaded", function () {
 			'Data_di_nascita' : document.getElementById("Data_di_nascita").value,
 			'Telefono' : document.getElementById("Telefono").value})
 		})
-			.then(response => response.json())
-			.then(data => { console.log(data); })
-			.catch(error => console.error(error));
-			
-		window.alert("Aggiornato");
+		
+		const risposta =await response.json();
+		console.log(risposta.message);
+		if(risposta.message=='User was updated successfully.')
+		{
+			window.alert("Aggiornato");
+		}
+		else{
+			window.alert("Errore, I campi inseriti non sono validi oppure non hai modificato nessun dato");
+		}
 		location.reload();
 
 	});

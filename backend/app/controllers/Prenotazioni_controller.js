@@ -130,12 +130,12 @@ exports.effettua_prenotazione = (req, res) => {
         ID_utente: req.body.ID_utente,
         ID_fornitore: req.body.ID_fornitore,
         ID_servizio: req.body.ID_servizio,
-        Orario_prenotazione_inizio: req.body.Orario_prenotazione_inzio,
+        Orario_prenotazione_inizio: req.body.Orario_prenotazione_inizio,
         Orario_prenotazione_fine: req.body.Orario_prenotazione_fine,
         Stato: "Attivo",
         Numero_clienti: req.body.Numero_clienti,
     };
-
+    console.log(prenotazioni)
     // Save Prenotazione in the database
     tab_prenotazioni
         .create(prenotazioni)
@@ -209,6 +209,7 @@ exports.get_slot_liberi = (req, res) => {
         Data_giorno: req.params.Data_giorno,
         ID_fornitore: req.params.ID_fornitore
     };
+    
     console.log(filtro);
     //var condition_time = db.sequelize.fn('date', sequelize.col('Orario_prenotazione_inizio'), Op.like, filtro.Data_giorno);
     calcolo_slot_liberi(filtro).then(data => {

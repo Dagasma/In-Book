@@ -2,8 +2,8 @@ let id_fornitore = document.cookie.substring(3, 40);
 
 async function richiedi_prenotazioni(filtro) {
   // Dati fornitore
-  console.log(id_cliente);
-  const response = await fetch('/prenotazioni/api/prenotazioni_filtrate_merge_utente/' + id_fornitore, {
+  console.log(id_fornitore);
+  const response = await fetch('/prenotazioni/api/prenotazioni_filtrate_merge_fornitore/' + id_fornitore, {
     method: 'GET',
     headers: {
       "Access-Control-Request-Method": "GET",
@@ -20,17 +20,17 @@ async function richiedi_prenotazioni(filtro) {
     else if ((ex_data[i].Numero_clienti < filtro.Numero_clienti) && (filtro.Numero_clienti != "")) {
 
     }
-    else if (ex_data[i].ID_servizio_SERVIZI.Durata.substring(0, 5) != filtro.Durata && filtro.Durata != '' && filtro.Durata != ',' ) {
-  
+    else if (ex_data[i].ID_servizio_SERVIZI.Durata.substring(0, 5) != filtro.Durata && filtro.Durata != '' && filtro.Durata != ',') {
+      console.log("qui");
     }
-    else if (ex_data[i].ID_fornitore_FORNITORI.Tipo_Attivita != filtro.Tipo_Attivita && filtro.Tipo_Attivita != "") {
+    else if (ex_data[i].ID_servizio_SERVIZI.Tipologia != filtro.Tipologia && filtro.Tipologia != "") {
 
     }
     else {
       let istance = {}
       istance.id = ex_data[i].ID;;
       istance.id_utente = ex_data[i].ID_utente;;
-      istance.Giorno = ex_data[i].Orario_prenotazione_inizio.substring(0, 10);
+      istance.Giorno = ex_data[i].Orario_prenotazione_inizio.substring(0, 10) +' '+ ex_data[i].Orario_prenotazione_inizio.substring(11, 16) ;
       istance.Numero_clienti = ex_data[i].Numero_clienti;
       istance.Tipologia = ex_data[i].ID_servizio_SERVIZI.Tipologia;
       istance.Descrizione = ex_data[i].ID_servizio_SERVIZI.Descrizione;
@@ -90,7 +90,7 @@ function generateTable(table, data, index) {
 }
 
 async function Annulla_prenotazione(id_prenotazione) {
-  console.log(id_prenotazione, id_cliente)
+  console.log(id_prenotazione, id_fornitore)
   var Annulato = "Annullato"
   const response = await fetch('/prenotazioni/api/annulla_prenotazione_fornitore/' + id_prenotazione + '/' + id_fornitore, {
     method: 'PUT',
@@ -112,19 +112,15 @@ let en_page = 0;
 async function create_table_prenotazioni(ex_data, en_page = 0) {
 
   //let table = document.querySelector("table");// create table
-  let columns = ["Giorno", "Durata", "Descrizione", "Nome Attivita", "Numeroclienti", "Tipologia", "indirizzo","Stato"];
-  let keys = ["Giorno", "Durata", "Descrizione", "Nome_Attivita", "Numero_clienti", "Tipologia", "indirizzo","Stato"];
+  let columns = ["Giorno", "Durata", "Descrizione", "Nome Attivita", "Numeroclienti", "Tipologia", "indirizzo", "Stato"];
+  let keys = ["Giorno", "Durata", "Descrizione", "Nome_Attivita", "Numero_clienti", "Tipologia", "indirizzo", "Stato"];
   var table = document.getElementById("json-table");
   table.innerHTML = "";
 
   if (en_page == 0) {
-
-    filtro = { "Giorno": "", "Tipo_Attivita": "", "Durata": ",", "Numero_clienti": "" };
+    filtro = { "Giorno": "", "Tipologia": "", "Durata": ",", "Numero_clienti": "" };
     let ex_data = await richiedi_prenotazioni(filtro);
   }
-
-
-
 
   if (ex_data.length > 0) {
     let data = Object.keys(ex_data[0]);//save the keys
@@ -144,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let filtro = {}
     filtro.Giorno = document.getElementById("Giorno").value;
-    filtro.Tipo_Attivita = document.getElementById("Tipo_Attivita").value;
+    filtro.Tipologia = document.getElementById("Tipologia").value;
     filtro.Durata = document.getElementById("Durata").value;
     filtro.Numero_clienti = document.getElementById("Persone_max").value;
 

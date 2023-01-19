@@ -2,7 +2,8 @@ let id_fornitore = document.cookie.substring(3, 40);
 
 async function richiedi_servizi() {
 	/* DONE */
-	const response = await fetch('/servizi/api/get_servizi_per_fornitore/' + id_fornitore, {
+	console.log("richiedi servizio")
+	const response = await fetch('/servizi/api/get_servizi_by_fornitore/' + id_fornitore, {
 		method: 'GET',
 		headers: {
 			"Access-Control-Request-Method": "GET",
@@ -12,7 +13,7 @@ async function richiedi_servizi() {
 	});
 	const servizi = await response.json(); //extract JSON from the http response
 	// // do something with myJson
-
+	console.log(servizi)
 	return servizi;
 }
 
@@ -69,33 +70,39 @@ function generateTable(table, data, index) {
 function Modifica_func(ID) {
 	console.log(ID);
 	//href
+	window.alert('Sblocca href')
 }
 
 async function Elimina_func(id_servizio) {
 	console.log(id_servizio);
 
-	fetch('/servizi/api/delete_servizio/' + id_servizio+'/'+id_fornitore, {
+	const response = await fetch('/servizi/api/delete_servizio/' + id_servizio+'/'+id_fornitore, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json'
 		}
 	})
-		.then(response => response.json())
-		.then(data => console.log(data))
-		.catch(error => console.error(error))
+
+	const risposta= await response;
+	if(response.status==200){
+		window.alert('Eliminata con successo');
+	}
+	else{
+		window.alert('C e un errore');
+	}
 
 	window.alert("eliminato");
 }
 
 
 let en_page = 0
-function create_table_prenotazioni(ex_data, en_page = 0) {
+async function create_table_prenotazioni(ex_data, en_page = 0) {
 	//let table = document.querySelector("table");// create table
 	let keys = ["Tipologia", "Descrizione", "Durata"];
 
 	if (en_page == 0) {
 		console.log("entro")
-		ex_data = richiedi_servizi();
+		ex_data = await richiedi_servizi();
 	}
 	else { ex_data }
 

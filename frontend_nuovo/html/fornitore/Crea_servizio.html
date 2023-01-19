@@ -25,7 +25,7 @@
 
 </head>
 
-<body >
+<body>
 
     <!-- ***** Preloader Start ***** -->
     <div id="js-preloader" class="js-preloader">
@@ -53,11 +53,12 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="/fornitore/profilo" >Il Mio profilo</a></li>
+                            <li><a href="/fornitore/profilo">Il Mio profilo</a></li>
                             <li><a href="/fornitore/notifiche">Notifiche</a></li>
                             <li><a href="/fornitore/visualizza_prenotazioni">Visualizza prenotazioni</a></li>
                             <li><a href="/fornitore/visualizza_servizi">Visualizza servizi</a></li>
                             <li><a href="/fornitore/crea_servizio" class="active">Crea servizio</a></li>
+                            <li><a href="/logout">Logout</a></li>
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -80,7 +81,7 @@
                             <div class="col-lg-12">
                                 <h4>Crea <em>il tuo</em> servizio.<em> Completa tutti</em> i campi</h4>
                             </div>
-                            
+
                             <label for="Tipologia">Tipologia</label>
                             <input type="text" name="Tipologia" id="Tipologia"><br>
                             <label for="Descrizione">Descrizione</label>
@@ -95,17 +96,18 @@
                                 <option value=02:00>02:00</option>
                                 <option value=02:30>02:30</option>
                             </select><br>
-                            <button class='input-bottom' type="submit" onclick="salva_servizio()">Cerca servizi</button>
-                        </form>
-                            
-                        </div>
+                            <button id="btn_salva">Cerca servizi</button>
+
                     </form>
+
                 </div>
+
             </div>
         </div>
     </div>
-    
-    
+    </div>
+
+
 
 
 
@@ -115,7 +117,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="../../vendor/jquery/jquery.min.js"></script>
     <script src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
-    
+
     <script src="../../assets/js/isotope.min.js"></script>
     <script src="../../assets/js/owl-carousel.js"></script>
     <script src="../../assets/js/wow.js"></script>

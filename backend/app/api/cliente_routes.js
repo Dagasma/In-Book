@@ -15,5 +15,8 @@ module.exports = app => {
     // Update a User with id
     router.put("/aggiorna_profilo/:id", middleware_check.check_id_param("id"),users.update);
 
+    // Update a User with id
+    router.put("/aggiorna_profilo_fornitore/:id",users.update);
+
     app.use('/cliente/api', config.keycloak.protect("realm:cliente"), router);
    };

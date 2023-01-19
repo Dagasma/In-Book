@@ -1,13 +1,13 @@
 
 async function richiedi_fornitori(filtro) {
-  
+
   const response = await fetch('/servizi/api/get_Servizi_e_fornitori', {
-      method: 'GET',
-      headers: {
-          "Access-Control-Request-Method": "GET",
-          "Accept": "application/json",
-          'Content-Type': 'application/json;charset-UTF-8'
-      }
+    method: 'GET',
+    headers: {
+      "Access-Control-Request-Method": "GET",
+      "Accept": "application/json",
+      'Content-Type': 'application/json;charset-UTF-8'
+    }
   });
   const ex_data = await response.json(); //extract JSON from the http response
   console.log(ex_data);
@@ -76,7 +76,7 @@ function generateTable(table, data, index) {
     let button = document.createElement("button");
     button.innerHTML = "Visualizza Fornitore";
     button.setAttribute("data-id", element["ID_fornitore"]);
-    button.setAttribute("id",  element["ID_fornitore"]);
+    button.setAttribute("id", element["ID_fornitore"]);
     button.onclick = function exe_botton() { vai_dal_fornitore(element["ID_fornitore"]); }
     buttonCell.appendChild(button);
   }
@@ -85,11 +85,14 @@ function generateTable(table, data, index) {
 function vai_dal_fornitore(ID_fornitore) {
   console.log(ID_fornitore);
   window.alert("Vuoi andare alla pagina del fornitore?");
+  let url = "/visualizza_fornitore?id=" + ID_fornitore;
+  window.location.href = url;
+  window.alert("Vuoi andare alla pagina del fornitore?");
   // window.location.href = `/visualizza_forntiore?id=${ID_fornitore}`;
 }
 
 let en_page = 0;
-function create_table_prenotazioni(ex_data, en_page = 0) {
+async function create_table_prenotazioni(ex_data, en_page = 0) {
   console.log("creo la tab:");
   //let table = document.querySelector("table");// create table
   let columns = ["Nome Attivita", "Tipologia",
@@ -101,12 +104,14 @@ function create_table_prenotazioni(ex_data, en_page = 0) {
       "Tipologia": "",
       "Indirizzo": "",
       "Capienza_massima": "",
-      "Durata": ""    };
-    ex_data = richiedi_fornitori(filtro);
+      "Durata": ""
+    };
+    ex_data = await richiedi_fornitori(filtro);
+
   }
 
   var table = document.getElementById("json-table");
-  table.innerHTML = "";
+  table.innerHTML = " ";
 
   if (ex_data.length > 0) {
     let data = Object.keys(ex_data[0]);//save the keys

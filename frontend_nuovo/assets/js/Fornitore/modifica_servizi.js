@@ -1,29 +1,29 @@
-let id_servizio =2;
+let id_servizio = 12;
 let id_fornitore = document.cookie.substring(3, 40);
 
-async function richiedi_servizi(){
+async function richiedi_servizi() {
 	const response = await fetch('/servizi/api/get_servizio/' + id_servizio, {
 		method: 'GET',
 		headers: {
-		  "Access-Control-Request-Method": "GET",
-		  "Accept": "application/json",
-		  'Content-Type': 'application/json;charset-UTF-8'
+			"Access-Control-Request-Method": "GET",
+			"Accept": "application/json",
+			'Content-Type': 'application/json;charset-UTF-8'
 		}
-	  });
-	  ex_data = await response.json(); //extract JSON from the http response
+	});
+	ex_data = await response.json(); //extract JSON from the http response
 
 	return ex_data;
 }
 
 //document.body.onload = create_table;
 
-function form_modifica() {
+async function form_modifica() {
 
 	// Create a break line element
 	var br = document.createElement("br");
 
-	data = richiedi_servizi();
-	console.log(data);
+	let data = await richiedi_servizi();
+	console.log(data[0].ID);
 	// Create a form dynamically
 	var form = document.createElement("form");
 
@@ -36,8 +36,8 @@ function form_modifica() {
 	var Tipologia = document.createElement("input");
 	Tipologia.type = "text";
 	Tipologia.id = "Tipologia";
-	Tipologia.value = data.Tipologia;
-	Tipologia.placeholder = data.Tipologia;
+	Tipologia.value = data[0].Tipologia;
+	Tipologia.placeholder = data[0].Tipologia;
 
 
 	// Create an input element for Full Name
@@ -47,8 +47,8 @@ function form_modifica() {
 	var Descrizione = document.createElement("input");
 	Descrizione.type = "text";
 	Descrizione.id = "Descrizione";
-	Descrizione.value = data.Descrizione;
-	Descrizione.placeholder = data.Descrizione;
+	Descrizione.value = data[0].Descrizione;
+	Descrizione.placeholder = data[0].Descrizione;
 
 
 	var L_Durata = document.createElement("label");
@@ -57,8 +57,8 @@ function form_modifica() {
 	var Durata = document.createElement("input");
 	Durata.type = "time";
 	Durata.id = "Durata";
-	Durata.value = data.Durata;
-	Durata.placeholder = data.Durata;
+	Durata.value = data[0].Durata;
+	Durata.placeholder = data[0].Durata;
 
 	// Append the full name input to the form
 	form.appendChild(L_Tipologia);
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		const Durata = document.getElementById("Durata").value;
 
 		/*DONE*/
-		fetch('/servizi/api/aggiorna_servizio/'+id_servizio+'/'+id_fornitore , {
+		const response = await fetch('/servizi/api/aggiorna_servizio/' + id_servizio + '/' + id_fornitore, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
@@ -104,13 +104,16 @@ document.addEventListener("DOMContentLoaded", function () {
 				"Durata": Durata
 			})
 		})
-			.then(response => response.json())
-			.then(data => { console.log(data); })
-			.catch(error => console.error(error));
+		const risposta = await response;
 
 
-		window.alert("Aggiornato");
-		location.reload();
+		if (risposta.status == 200) {
+			window.alert("Aggiornato");
+			location.reload();
+		}
+		else {
+			window.alert("Errore");
+		}
 
 	});
 });

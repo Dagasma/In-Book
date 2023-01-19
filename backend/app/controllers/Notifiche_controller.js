@@ -40,7 +40,18 @@ exports.findAllFornitore = (req, res) => {
     const id = req.params.id_fornitore
     var condition = id ? { ID_fornitore: { [Op.like]: `%${id}%` } } : null;
     tab_notifiche
-        .findAll({ where: condition })
+    .findAll({
+        include: [{
+            model: db.models.FORNITORI,
+            as: 'ID_fornitore_FORNITORI',
+            required: true
+        },
+    {
+        model: db.models.FORNITORI,
+        as: 'ID_fornitore_FORNITORI',
+        required: true
+    }]
+    })
         .then((data) => {
             res.send(data);
         })
@@ -161,4 +172,54 @@ exports.deleteAll = (req, res) => {
                     "Some error occurred while removing all notifiche.",
             });
         });
+};
+
+
+// Retrieve all notifiche from the database.
+exports.findAllFornitore_unione = (req, res) => {
+    const id = req.params.id_fornitore
+    var condition = id ? { ID_fornitore: { [Op.like]: `%${id}%` } } : null;
+
+        // mi torna una tabella con ORARIO - DURATA - SUM(PERSONE)
+        const tab_notifiche_unione =  db.sequelize.query('SELECT  `FORNITORI`.`ID_utente_fornitore` ,`FORNITORI`.`Nome_Attivita` ,`FORNITORI`.`Tipo_attivita`,`FORNITORI`.`Indirizzo` ,`SERVIZI`.`Tipologia`,`SERVIZI`.`Descrizione`,`PRENOTAZIONI`.`Stato`,`PRENOTAZIONI`.`ID`, `NOTIFICHE`.`Descrizione_notifica`,' +
+        '  `NOTIFICHE`.`Orario` AS Orario_notifica  FROM `PRENOTAZIONI`  RIGHT JOIN `NOTIFICHE` ON `PRENOTAZIONI`.`ID`= `NOTIFICHE`.`ID_prenotazione` LEFT JOIN `SERVIZI` ON`PRENOTAZIONI`.`ID_servizio` = `SERVIZI`.`ID` LEFT JOIN '+
+        ' `FORNITORI` ON`FORNITORI`.`ID_utente_fornitore` = `SERVIZI`.`ID_fornitore`     WHERE `FORNITORI`.`ID_utente_fornitore` = ?',
+        {
+            replacements: [id],
+            type: db.sequelize.QueryTypes.SELECT
+        }
+    );
+        console.log(tab_notifiche_unione)
+        tab_notifiche_unione.then(data => {
+            res.send(JSON.stringify(data));})
+            .catch (err => {
+                          res.status(500).send({
+                              message:
+                                  err.message || "Some error occurred while retrieving Prenotazioni."
+                          });
+                      });   
+};
+
+
+exports.findAllcliente_unione = (req, res) => {
+    const id = req.params.id_cliente
+
+        // mi torna una tabella con ORARIO - DURATA - SUM(PERSONE)
+        const tab_notifiche_unione =  db.sequelize.query('SELECT  `FORNITORI`.`ID_utente_fornitore` ,`FORNITORI`.`Nome_Attivita` ,`FORNITORI`.`Tipo_attivita`,`FORNITORI`.`Indirizzo` ,`SERVIZI`.`Tipologia`,`SERVIZI`.`Descrizione`,`PRENOTAZIONI`.`Stato`,`PRENOTAZIONI`.`ID`, `NOTIFICHE`.`Descrizione_notifica`,' +
+        '  `PRENOTAZIONI`.`ID_utente`, `PRENOTAZIONI`.`Orario_prenotazione_inizio`,`NOTIFICHE`.`Orario` AS Orario_notifica  FROM `PRENOTAZIONI`  RIGHT JOIN `NOTIFICHE` ON `PRENOTAZIONI`.`ID`= `NOTIFICHE`.`ID_prenotazione` LEFT JOIN `SERVIZI` ON`PRENOTAZIONI`.`ID_servizio` = `SERVIZI`.`ID` LEFT JOIN '+
+        ' `FORNITORI` ON`FORNITORI`.`ID_utente_fornitore` = `SERVIZI`.`ID_fornitore`     WHERE `PRENOTAZIONI`.`ID_utente` = ?',
+        {
+            replacements: [id],
+            type: db.sequelize.QueryTypes.SELECT
+        }
+    );
+        console.log(tab_notifiche_unione)
+        tab_notifiche_unione.then(data => {
+            res.send(JSON.stringify(data));})
+            .catch (err => {
+                          res.status(500).send({
+                              message:
+                                  err.message || "Some error occurred while retrieving Prenotazioni."
+                          });
+                      });   
 };

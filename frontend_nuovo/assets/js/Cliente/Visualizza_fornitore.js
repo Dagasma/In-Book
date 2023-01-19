@@ -2,7 +2,7 @@ let id_fornitore = 6;
 let id_cliente = document.cookie.substring(3, 40);
 let Durata_servizio = '';
 
-function diffTime(time1, time2) {
+function diff_time_hhmm(time1, time2) {
     const [hours1, minutes1] = time1.split(':').map(Number);
     const [hours2, minutes2] = time2.split(':').map(Number);
 
@@ -139,17 +139,18 @@ function Calc_slot_liberi(slot, capacita, durata) {
     let orari_disponibili = []
     console.log(durata, slot)
 
-    let slot_durata = diffTime(slot[1].Orario_inizio, slot[0].Orario_inizio)
+    let slot_durata = diff_time_hhmm(slot[1].Orario_inizio, slot[0].Orario_inizio)
     let rapporto = Rapporto_time(durata, slot_durata)
 
     console.log(rapporto, slot_durata, slot);
 
     let cnt = 0; // conteggio slot
-    for (let i = 0; i < slot.length - rapporto + 1; i++) { // scorro tutti gli slot
+    for (let i = 0; i < slot.length - rapporto; i++) { // scorro tutti gli slot
         for (let j = 0; j < rapporto; j++) { // scorro gli slot successivi
-            if (slot[i + j].Posti_disponibili >= capacita) {
-                cnt++;
-                if (cnt == rapporto - 1) {
+            if (slot[i + j].Posti_disponibili >= capacita && (diff_time_hhmm(slot[i + j+1].Orario_inizio,slot[i + j].Orario_inizio)==slot_durata || i+j==slot.length-1) ) {
+                cnt++; 
+                if (cnt == rapporto ) {
+                    //console.log(slot[i + j].Posti_disponibili >= capacita, diff_time_hhmm(slot[i + j+1].Orario_inizio,slot[i + j].Orario_inizio)==slot_durata);
                     orari_disponibili.push(slot[i].Orario_inizio);
                 }
             }
@@ -164,7 +165,6 @@ function Calc_slot_liberi(slot, capacita, durata) {
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("btn_voto").addEventListener("click", async function (e) {
         e.preventDefault();
-
 
         const voto = document.getElementById("Voto").value;
         console.log(voto);
@@ -181,11 +181,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Voto": voto
             })
         })
-            .then(response => response.json())
-            .then(data => { console.log(data); })
-            .catch(error => console.error(error));
 
-        window.alert("voto salvato");
+        const risposta = await response1.status;
+        console.log(risposta);
+
+        if (risposta == 200) {
+            window.alert("voto salvato");
+        }
+        else {
+            window.alert("Hai gia votato questo fornitore");
+        }
     });
 });
 
@@ -243,18 +248,18 @@ document.addEventListener("DOMContentLoaded", function () {
         form1_prenotazione.orario = document.getElementById("Select_orario").value;
         console.log(form1_prenotazione);
 
-        Valori_inviati={
+        Valori_inviati = {
             "ID_utente": id_cliente,
             "ID_fornitore": id_fornitore,
             "ID_servizio": form1_prenotazione.id_servizio,
             "Orario_prenotazione_inizio": form1_prenotazione.Data_disponibilita + ' ' + form1_prenotazione.orario,
-            "Orario_prenotazione_fine": form1_prenotazione.Data_disponibilita+ ' ' + sumTime(form1_prenotazione.orario,Durata_servizio),
+            "Orario_prenotazione_fine": form1_prenotazione.Data_disponibilita + ' ' + sumTime(form1_prenotazione.orario, Durata_servizio),
             "Numero_clienti": form1_prenotazione.numero_persone
         };
         console.log(Valori_inviati);
 
         /*DONE*/
-        const response = fetch('/servizi/api/effettua_prenotazione', {
+        const response = fetch('/prenotazioni/api/effettua_prenotazione', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -264,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "ID_fornitore": id_fornitore,
                 "ID_servizio": form1_prenotazione.id_servizio,
                 "Orario_prenotazione_inizio": form1_prenotazione.Data_disponibilita + ' ' + form1_prenotazione.orario,
-                "Orario_prenotazione_fine": form1_prenotazione.Data_disponibilita+ ' ' + sumTime(form1_prenotazione.orario,Durata_servizio),
+                "Orario_prenotazione_fine": form1_prenotazione.Data_disponibilita + ' ' + sumTime(form1_prenotazione.orario, Durata_servizio),
                 "Numero_clienti": form1_prenotazione.numero_persone
             })
         })

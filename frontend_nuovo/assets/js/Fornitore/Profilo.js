@@ -1,8 +1,11 @@
 let id_fornitore = document.cookie.substring(3, 40);
 
 async function richiedi_fornitore() {
+	console.log(id_fornitore);
+	console.log(id_fornitore)
+	/* DONE */
 
-	const response = await fetch('/fornitori/api/cliente_get_profilo_fornitore/' + id_fornitore, {
+	const response = await fetch('/fornitori/api/get_profilo/' + id_fornitore, {
 		method: 'GET',
 		headers: {
 			"Access-Control-Request-Method": "GET",
@@ -10,32 +13,18 @@ async function richiedi_fornitore() {
 			'Content-Type': 'application/json;charset-UTF-8'
 		}
 	});
-	const dati_fornitore = await response.json(); //extract JSON from the http response
-	console.log(dati_fornitore);
-
-	const response1 = await fetch('/cliente/api/get_profilo/' + id_cliente, {
-		method: 'GET',
-		headers: {
-			"Access-Control-Request-Method": "GET",
-			"Accept": "application/json",
-			'Content-Type': 'application/json;charset-UTF-8'
-		}
-	});
-	let dati_cliente = await response1.json();
-	console.log(dati_cliente);
-
-	dati_cliente.Email = dati_fornitore.ID_utente_fornitore_UTENTI.Email
-	dati_cliente.Telefono = dati_fornitore.ID_utente_fornitore_UTENTI.Telefono
-
-	let dati_totali = { ...dati_cliente, ...dati_fornitore }
-
-	return dati_totali;
+	let data = await response.json(); //extract JSON from the http response
+	console.log(data);
+	return data;
 }
+
 
 //document.body.onload = create_table
 async function form_profilo() {
-
+	console.log("chiamo la funzione")
 	let data = await richiedi_fornitore();
+	console.log("la funzione mi ritorna", data)
+
 	// Create a break line element
 	var br = document.createElement("br");
 
@@ -50,8 +39,8 @@ async function form_profilo() {
 	var Nome = document.createElement("input");
 	Nome.type = "text";
 	Nome.id = "Nome";
-	Nome.value = data.Nome;
-	Nome.placeholder = data.Nome;
+	Nome.value = data.ID_utente_fornitore_UTENTI.Nome;
+	Nome.placeholder = data.ID_utente_fornitore_UTENTI.Nome;
 
 
 	// Create an input element for Full Name
@@ -61,8 +50,8 @@ async function form_profilo() {
 	var Cognome = document.createElement("input");
 	Cognome.type = "text";
 	Cognome.id = "Cognome";
-	Cognome.value = data.Cognome;
-	Cognome.placeholder = data.Cognome;
+	Cognome.value = data.ID_utente_fornitore_UTENTI.Cognome;
+	Cognome.placeholder = data.ID_utente_fornitore_UTENTI.Cognome;
 
 	// Create an input element for Full Name
 	var L_Email = document.createElement("label");
@@ -71,8 +60,8 @@ async function form_profilo() {
 	var Email = document.createElement("input");
 	Email.type = "email";
 	Email.id = "Email";
-	Email.value = data.Email;
-	Email.placeholder = data.Email;
+	Email.value = data.ID_utente_fornitore_UTENTI.Email;
+	Email.placeholder = data.ID_utente_fornitore_UTENTI.Email;
 
 	// Create an input element for Full Name
 	var L_Data_di_nascita = document.createElement("label");
@@ -81,8 +70,8 @@ async function form_profilo() {
 	var Data_di_nascita = document.createElement("input");
 	Data_di_nascita.type = "date";
 	Data_di_nascita.id = "Data_di_nascita";
-	Data_di_nascita.value = data.Data_di_nascita;
-	Data_di_nascita.placeholder = data.Data_di_nascita;
+	Data_di_nascita.value = data.ID_utente_fornitore_UTENTI.Data_di_nascita;
+	Data_di_nascita.placeholder = data.ID_utente_fornitore_UTENTI.Data_di_nascita;
 
 	// Create an input element for Full Name
 	var L_Telefono = document.createElement("label");
@@ -91,8 +80,8 @@ async function form_profilo() {
 	var Telefono = document.createElement("input");
 	Telefono.type = "tel";
 	Telefono.id = "Telefono";
-	Telefono.value = data.Telefono;
-	Telefono.placeholder = data.Telefono;
+	Telefono.value = data.ID_utente_fornitore_UTENTI.Telefono;
+	Telefono.placeholder = data.ID_utente_fornitore_UTENTI.Telefono;
 
 	// Create an input element for Full Name
 	var L_Nome_Attivita = document.createElement("label");
@@ -122,7 +111,7 @@ async function form_profilo() {
 	L_indirizzo.innerHTML = "indirizzo: ";
 	var indirizzo = document.createElement("input");
 	indirizzo.type = "text";
-	indirizzo.id = "Tipo_Attivita";
+	indirizzo.id = "Indirizzo";
 	indirizzo.value = data.Indirizzo;
 	indirizzo.placeholder = data.Indirizzo;
 
@@ -135,9 +124,6 @@ async function form_profilo() {
 	Capienza_massima.id = "Capienza_massima";
 	Capienza_massima.value = data.Capienza_massima;
 	Capienza_massima.placeholder = data.Capienza_massima;
-
-
-	// create a submit button
 
 	// Append the full name input to the form
 	form.appendChild(L_Nome);
@@ -187,30 +173,122 @@ async function form_profilo() {
 	form.appendChild(Capienza_massima);
 	form.appendChild(br.cloneNode());
 
-
 	document.getElementsByTagName("form")[0].appendChild(form);
 	//document.getElementsByTagName("form").appendChild(form);
 
 }
 
-async function richiedi_orario() {
-	// Dati fornitore
+let profilo_aggiornato = {}
 
-	console.log("entrato in orario");
+//listener bottone modifica
+document.addEventListener("DOMContentLoaded", function () {
+	document.getElementById("btn_modifica").addEventListener("click", async function (e) {
+		e.preventDefault();
 
-	/* DONE */
-	const response = await fetch('/OrarioAttivita/api/Orario_fornitore/' + id_fornitore, {
-		method: 'GET',
-		headers: {
-			"Access-Control-Request-Method": "GET",
-			"Accept": "application/json",
-			'Content-Type': 'application/json;charset-UTF-8'
+		console.log("FINE : ")
+		// document.getElementById("myForm").style.display = "none";
+
+		profilo_aggiornato.Nome = document.getElementById("Nome").value;
+		profilo_aggiornato.Cognome = document.getElementById("Cognome").value;
+		profilo_aggiornato.Email = document.getElementById("Email").value;
+		profilo_aggiornato.Data_di_nascita = document.getElementById("Data_di_nascita").value;
+		profilo_aggiornato.Telefono = document.getElementById("Telefono").value;
+		profilo_aggiornato.Nome_Attivita = document.getElementById("Nome_Attivita").value;
+		profilo_aggiornato.Tipo_Attivita = document.getElementById("Tipo_Attivita").value;
+		profilo_aggiornato.indirizzo = document.getElementById("Indirizzo").value;
+		profilo_aggiornato.Capienza_massima = document.getElementById("Capienza_massima").value;
+
+		console.log(profilo_aggiornato);
+
+		/*DONE*/
+		const response = await fetch('/fornitori/api/aggiorna_profilo/' + id_fornitore, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				"Nome_Attivita": profilo_aggiornato.Nome_Attivita,
+				"Tipo_Attivita": profilo_aggiornato.Tipo_Attivita,
+				"Indirizzo": profilo_aggiornato.Indirizzo,
+				"Capienza_massima": profilo_aggiornato.Capienza_massima
+			})
+		})
+
+		let risposta_fornitore = await response; //extract JSON from the http response
+		console.log(risposta_fornitore)
+		if (risposta_fornitore.status == 200) {
+			window.alert(" Dati inseriti correttamente");
 		}
+		else {
+			window.alert(" Uno dei seguenti dati non è stato inserito correttamente oppure non hai modificato : Nome_Attivita ,Tipo_Attivita ,Indirizzo ,Capienza_massima");
+		}
+
+		/*DONE*/
+		const response1 = await fetch('/cliente/api/aggiorna_profilo_fornitore/' + id_fornitore, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				"Nome": profilo_aggiornato.Nome,
+				'Cognome': profilo_aggiornato.Cognome,
+				'Email': profilo_aggiornato.Email,
+				'Data_di_nascita': profilo_aggiornato.Data_di_nascita,
+				'Telefono': profilo_aggiornato.Telefono
+			})
+		})
+
+		const risposta1 = await response1;
+		console.log(risposta1.message);
+		if (risposta1.status == 200) {
+			window.alert("Aggiornato dati");
+		}
+		else {
+			window.alert("Uno dei seguenti dati non è stato inserito correttamente oppure non hai modificato : Nome , Cognome, email, data_di_nascita,Telefono");
+		}
+
+
+
+
 	});
-	const orario_fornitore = await response.json(); //extract JSON from the http response
-	// do something with myJson
-	return orario_fornitore;
-}
+});
+
+//listener bottone orario
+document.addEventListener("DOMContentLoaded", function () {
+	document.getElementById("btn_new_orario").addEventListener("click", async function (e) {
+		e.preventDefault();
+
+		const Giorno = document.getElementById("Giorno").value;
+		const Orario_I = document.getElementById("Orario_I").value;
+		const Orario_F = document.getElementById("Orario_F").value;
+		console.log("btn_new_orario : ", Giorno, Orario_I, Orario_F);
+
+		/**/
+		const response = await fetch('/OrarioAttivita/api/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				"ID_fornitore": id_fornitore,
+				"Giorno_della_settimana": Giorno,
+				"Orario_apertura": Orario_I,
+				"Orario_chiusura": Orario_F
+			})
+		})
+		const risposta = await response;
+		console.log(risposta.status)
+
+		if (risposta.status == 200) {
+			window.alert('Orario creato');
+		}
+		else {
+			window.alert('Dati inseriti non validi');
+		}
+
+	});
+});
+
 
 function generateTableHead(table, data, columns) {
 	let thead = table.createTHead();
@@ -230,6 +308,24 @@ function generateTableHead(table, data, columns) {
 	th.appendChild(text);
 	row.appendChild(th);
 }
+
+
+async function richiedi_orario() {
+	/* DONE */
+	const response = await fetch('/OrarioAttivita/api/Orario_fornitore/' + id_fornitore, {
+		method: 'GET',
+		headers: {
+			"Access-Control-Request-Method": "GET",
+			"Accept": "application/json",
+			'Content-Type': 'application/json;charset-UTF-8'
+		}
+	});
+	const orari_tornati = await response.json(); //extract JSON from the http response
+	// // do something with myJson
+	console.log("orari: ", orari_tornati);
+	return orari_tornati;
+}
+
 
 function generateTable(table, data, index) {
 	for (let element of data) {
@@ -255,125 +351,47 @@ function generateTable(table, data, index) {
 }
 
 
-function create_table_orari() {
+async function elimina_orario (ID){
+	console.log(ID);
+
+		/*  */
+	const response = await fetch('/OrarioAttivita/api/delete_orario/'+ ID, {
+	    method: 'DELETE',
+	    headers: {
+	        "Accept": "application/json",
+	        'Content-Type': 'application/json;charset-UTF-8'
+	    },
+		body: { ID_fornitore :id_fornitore }
+	});
+	const risposta = await response; //extract JSON from the http response
+	// // do something with myJson
+	console.log(risposta)
+	if(risposta.status=200)
+	{
+		window.alert("eliminato correttamente");
+	}
+	else{
+		window.alert("Errore");
+	}
+	location.reload();
+}
+
+async function create_table_orari() {
 	//let table = document.querySelector("table");// create table
 	let columns = ["Giorno della settimana",
 		"Orario Apertura",
 		"Orario Chiusura"];
 	let keys = ["Giorno_della_settimana",
 		"Orario_apertura", "Orario_chiusura"];
-	var data_ora = richiedi_orario();
-	console.log(data_ora);
-	var table = document.getElementById("json-table");
-	let data = Object.keys(data_ora[0]);//save the keys
-	console.log(data)
-	generateTableHead(table, data, columns);//create header
-	generateTable(table, data_ora, keys);//print table
+
+	console.log("entro in crea tabella")
+	var data_ora = await richiedi_orario();
+	if (data_ora.length > 0) {
+		var table = document.getElementById("json-table");
+		let data = Object.keys(data_ora[0]); //save the keys
+		console.log(data)
+		generateTableHead(table, data, columns); //create header
+		generateTable(table, data_ora, keys); //print table
+	}
+	else { table.innerHTML = "Non è presente nessuna prenotazione..."; }
 }
-
-//listener bottone orario
-document.addEventListener("DOMContentLoaded", function () {
-	document.getElementById("btn_new_orario").addEventListener("click", async function (e) {
-		e.preventDefault();
-		// document.getElementById("myForm").style.display = "none";
-
-		const Giorno = document.getElementById("Giorno").value;
-		const Orario_I = document.getElementById("Orario_I").value;
-		const Orario_F = document.getElementById("Orario_F").value;
-		console.log("btn_new_orario : ", Giorno, Orario_I);
-
-		/**/
-		const response = await fetch('/OrarioAttivita/api/' + id_cliente, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				"ID_fornitore": id_fornitore,
-				"Giorno_della_settimana": Giorno,
-				"Orario_apertura": Orario_I,
-				"Orario_chiusura": Orario_F
-			})
-		})
-			.then(response => response.json())
-			.then(data => { console.log(data); })
-			.catch(error => console.error(error));
-
-		window.alert("Aggiornato");
-
-	});
-});
-
-async function elimina_orario(ID) {
-	console.log(ID);
-
-	/*  */
-	const response = await fetch('/OrarioAttivita/api/delete_orario/' + ID, {
-		method: 'DELETE',
-		headers: {
-			"Accept": "application/json",
-			'Content-Type': 'application/json;charset-UTF-8'
-		}
-	});
-	const dati_fornitore = await response.json(); //extract JSON from the http response
-	// // do something with myJson
-	window.alert("eliminato");
-
-}
-
-//listener bottone prenotazione
-document.addEventListener("DOMContentLoaded", function () {
-	document.getElementById("btn_modifica").addEventListener("click", async function (e) {
-		e.preventDefault();
-
-
-		console.log("FINE : ")
-		// document.getElementById("myForm").style.display = "none";
-
-		const Nome = document.getElementById("Nome").value;
-		const Cognome = document.getElementById("Cognome").value;
-		const Email = document.getElementById("Email").value;
-		const Data_di_nascita = document.getElementById("Data_di_nascita").value;
-		const Telefono = document.getElementById("Telefono").value;
-
-		/*DONE*/
-		fetch('/cliente/api/aggiorna_profilo/' + id_fornitore, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				"Nome": Nome,
-				"Cognome": Cognome,
-				"Email": Email,
-				"Data_di_nascita": Data_di_nascita,
-				"Telefono": Telefono
-			})
-		})
-			.then(response => response.json())
-			.then(data => { console.log(data); })
-			.catch(error => console.error(error));
-
-		/*DONE*/
-		fetch('/fornitori/api/aggiorna_profilo/' + id_fornitore, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				"Nome": Nome,
-				"Cognome": Cognome,
-				"Email": Email,
-				"Data_di_nascita": Data_di_nascita,
-				"Telefono": Telefono
-			})
-		})
-			.then(response => response.json())
-			.then(data => { console.log(data); })
-			.catch(error => console.error(error));
-
-		window.alert("Aggiornato");
-		location.reload();
-
-	});
-});

@@ -37,10 +37,10 @@ services:
         networks:
             - DBNetwork
         volumes:
-            - ./backend/:/app/backend/
-            - ./frontend/:/app/frontend/
-            - ./package.json:/app/package.json
-            - ./package-lock.json:/app/package-lock.json
+            - ./backend/:/server/backend/
+            - ./frontend_nuovo/:/server/frontend_nuovo/
+            - ./package.json:/server/package.json
+            - ./package-lock.json:/server/package-lock.json
 
     keycloak:
         build: ./keycloak/
@@ -51,13 +51,11 @@ services:
             - 8080
             - 8443
         networks:
-            DBNetwork:
-                aliases:
-                    - keycloak.inbook.local
+           - DBNetwork
 
     reverseproxy:
         container_name: nginx
-        hostname: keycloak.inbook.local
+        hostname: inbook.local
         image: nginx
         depends_on:
           - db

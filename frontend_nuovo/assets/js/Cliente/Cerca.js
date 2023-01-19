@@ -84,11 +84,17 @@ function generateTable(table, data, index) {
 
 function vai_dal_fornitore(ID_fornitore) {
   console.log(ID_fornitore);
+<<<<<<< HEAD
   window.alert("Vuoi andare alla pagina del fornitore?");
   let url = "/visualizza_fornitore?id=" + ID_fornitore;
   window.location.href = url;
   window.alert("Vuoi andare alla pagina del fornitore?");
   // window.location.href = `/visualizza_forntiore?id=${ID_fornitore}`;
+=======
+  if(window.confirm("Vuoi andare alla pagina del fornitore?"))
+    window.location = "/cliente/visualizza_fornitore?id="+ID_fornitore;   //DA AGGIUSTARE, non effettua il redirect
+  console.log(window.location.href);
+>>>>>>> 7095003ad12aaa8a9df14b22eddd446d297e6e61
 }
 
 let en_page = 0;

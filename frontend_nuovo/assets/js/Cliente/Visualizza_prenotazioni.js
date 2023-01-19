@@ -1,29 +1,30 @@
-let id_cliente=document.cookie.substring(3,40);
+let id_cliente = document.cookie.substring(3, 40);
 
 async function richiedi_prenotazioni(filtro) {
   // Dati fornitore
   console.log(id_cliente);
-  const response = await fetch('/prenotazioni/api/prenotazioni_filtrate_merge_utente/'+id_cliente, {
-      method: 'GET',
-      headers: {
-          "Access-Control-Request-Method": "GET",
-          "Accept": "application/json",
-          'Content-Type': 'application/json;charset-UTF-8'
-      }
+  const response = await fetch('/prenotazioni/api/prenotazioni_filtrate_merge_utente/' + id_cliente, {
+    method: 'GET',
+    headers: {
+      "Access-Control-Request-Method": "GET",
+      "Accept": "application/json",
+      'Content-Type': 'application/json;charset-UTF-8'
+    }
   });
   ex_data = await response.json(); //extract JSON from the http response
+
   let dati_filtrati = []
   for (let i = ex_data.length - 1; i >= 0; i--) {
     if (ex_data[i].Orario_prenotazione_inizio.substring(0, 10) != filtro.Giorno && filtro.Giorno != "") {
     }
     else if ((ex_data[i].Numero_clienti < filtro.Numero_clienti) && (filtro.Numero_clienti != "")) {
-      
+
     }
-    else if (ex_data[i].ID_servizio_SERVIZI.Durata.substring(0, 5) != filtro.Durata && filtro.Durata != "") {
-      
+    else if (ex_data[i].ID_servizio_SERVIZI.Durata.substring(0, 5) != filtro.Durata && filtro.Durata != '' && filtro.Durata != ',' ) {
+    console.log("qui");
     }
     else if (ex_data[i].ID_fornitore_FORNITORI.Tipo_Attivita != filtro.Tipo_Attivita && filtro.Tipo_Attivita != "") {
-      
+
     }
     else {
       let istance = {}
@@ -37,10 +38,11 @@ async function richiedi_prenotazioni(filtro) {
       istance.Nome_Attivita = ex_data[i].ID_fornitore_FORNITORI.Nome_Attivita;
       istance.Tipo_Attivita = ex_data[i].ID_fornitore_FORNITORI.Tipo_Attivita;
       istance.indirizzo = ex_data[i].ID_fornitore_FORNITORI.Indirizzo;
+      istance.Stato = ex_data[i].Stato;
       dati_filtrati.push(istance)
     }
   }
-
+  console.log(dati_filtrati);
   create_table_prenotazioni(dati_filtrati, 1);
 
 }
@@ -73,36 +75,35 @@ function generateTable(table, data, index) {
       let text = document.createTextNode(element[key]);
       cell.appendChild(text);
     }
-    // Aggiungi una nuova cella alla fine della riga
-    let buttonCell = row.insertCell();
-    // Crea un bottone e aggiungilo alla cella
-    let button = document.createElement("button");
-    button.innerHTML = "Annulla";
-    button.type= 'submit';
-    button.value= element.id;
-    button.onclick = function exe_botton() { Annulla_prenotazione(button.value); }
-    buttonCell.appendChild(button);
+    if (element.Stato == 'Attivo') {
+      // Aggiungi una nuova cella alla fine della riga
+      let buttonCell = row.insertCell();
+      // Crea un bottone e aggiungilo alla cella
+      let button = document.createElement("button");
+      button.innerHTML = "Annulla";
+      button.type = 'submit';
+      button.value = element.id;
+      button.onclick = function exe_botton() { Annulla_prenotazione(button.value); }
+      buttonCell.appendChild(button);
+    }
   }
 }
 
 async function Annulla_prenotazione(id_prenotazione) {
-  let body_value = { Stato: "Annullato"};
-  console.log(id_prenotazione ,id_cliente )
-  const response = await fetch('/prenotazioni/api/annulla_prenotazione_cliente/' + id_prenotazione +'/'+ id_cliente,  {
-        method: 'PUT',
-        headers: {
-          "Accept": "application/json",
-          'Content-Type': 'application/json;charset-UTF-8'
-      },
-      body: JSON.stringify(body_value),
+  console.log(id_prenotazione, id_cliente)
+  var Annulato = "Annullato"
+  const response = await fetch('/prenotazioni/api/annulla_prenotazione_cliente/' + id_prenotazione + '/' + id_cliente, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ "Stato": Annulato })
+  })
+    .then(response => response.json())
+    .then(data => { console.log(data); })
+    .catch(error => console.error(error));
 
-    })
-    let update =await response.json();
-
-    console.log(update);
-
-
-window.alert("Annullata",id_prenotazione,id_cliente);
+  window.alert("Annullata");
 
 }
 
@@ -111,20 +112,21 @@ let en_page = 0;
 async function create_table_prenotazioni(ex_data, en_page = 0) {
 
   //let table = document.querySelector("table");// create table
-  let columns = ["Giorno", "Durata", "Descrizione", "Nome_Attivita", "Numero_clienti", "Tipologia", "indirizzo"];
-  let keys = ["Giorno", "Durata", "Descrizione", "Nome_Attivita", "Numero_clienti", "Tipologia", "indirizzo"];
-  
-  if (en_page == 0) {
-    
-    filtro={"Giorno":"","Tipo_Attivita":"","Durata":",","Numero_clienti":""};
-    let ex_data = await richiedi_prenotazioni(filtro); console.log(ex_data);
-  }
-  
-
+  let columns = ["Giorno", "Durata", "Descrizione", "Nome Attivita", "Numeroclienti", "Tipologia", "indirizzo","Stato"];
+  let keys = ["Giorno", "Durata", "Descrizione", "Nome_Attivita", "Numero_clienti", "Tipologia", "indirizzo","Stato"];
   var table = document.getElementById("json-table");
   table.innerHTML = "";
 
-  if (ex_data.length > 0 ) {
+  if (en_page == 0) {
+
+    filtro = { "Giorno": "", "Tipo_Attivita": "", "Durata": ",", "Numero_clienti": "" };
+    let ex_data = await richiedi_prenotazioni(filtro);
+  }
+
+
+
+
+  if (ex_data.length > 0) {
     let data = Object.keys(ex_data[0]);//save the keys
     generateTableHead(table, data, columns);//create header
     generateTable(table, ex_data, keys);
@@ -134,7 +136,7 @@ async function create_table_prenotazioni(ex_data, en_page = 0) {
 
 //listener bottone prenotazione
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("btn_prenotazioni_filtro").addEventListener("click",async function (e) {
+  document.getElementById("btn_prenotazioni_filtro").addEventListener("click", async function (e) {
     e.preventDefault();
     en_page = 1
     console.log("premuto btn : ")

@@ -78,13 +78,6 @@ async function form_profilo() {
 	Telefono.value = data.Telefono;
 	Telefono.placeholder = data.Telefono;
 
-	// create a submit 
-	var s = document.createElement("button");
-	s.setAttribute("type","submit");
-	s.setAttribute("class","input-buttom");
-	s.id = 'btn_modifica_profilo';
-	s.onlclick= function exe_botton() { aggiorna_profilo(); }
-	s.innerHTML = "Modifica profilo";
 
 	// Append the full name input to the form
 	form.appendChild(L_Nome);
@@ -105,22 +98,20 @@ async function form_profilo() {
 
 	form.appendChild(L_Telefono);
 	form.appendChild(Telefono);
-	form.appendChild(br.cloneNode());
 
-	form.appendChild(s);
-	form.appendChild(br.cloneNode());
+	// form.appendChild(s);
+	// form.appendChild(br.cloneNode());
 
 	document.getElementsByTagName("form")[0].appendChild(form);
 }
 
 //listener bottone prenotazione
-
 document.addEventListener("DOMContentLoaded", function () {
-	document.getElementById("btn_modifica_profilo").addEventListener("click",  async function () {
-
-		window.alert("ciao")
+	document.getElementById("btn_modifica").addEventListener("click",  async function (e) {
+		e.preventDefault();
+		
 		console.log("FINE : ")
-		// document.getElementById("myForm").style.display = "none";
+
 		let profilo_up = {}
 		profilo_up.Nome = document.getElementById("Nome").value;
 		profilo_up.Cognome = document.getElementById("Cognome").value;
@@ -131,18 +122,23 @@ document.addEventListener("DOMContentLoaded", function () {
 		console.log(profilo_up);
 
 		/*DONE*/
-		const response = await fetch('/cliente/api/aggiorna_profilo' + id_cliente, {
+		const response = await fetch('/cliente/api/aggiorna_profilo/' + id_cliente, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ profilo_up })
+			body: JSON.stringify({ "Nome": document.getElementById("Nome").value,
+			'Cognome' : document.getElementById("Cognome").value,
+			'Email' : document.getElementById("Email").value,
+			'Data_di_nascita' : document.getElementById("Data_di_nascita").value,
+			'Telefono' : document.getElementById("Telefono").value})
 		})
 			.then(response => response.json())
 			.then(data => { console.log(data); })
 			.catch(error => console.error(error));
-
-
+			
 		window.alert("Aggiornato");
+		location.reload();
+
 	});
-});
+	});

@@ -1,14 +1,18 @@
-function richiedi_servizi(){
-	var data = {
-		"Tipologia": "Tutto a 0,09cent",
-		"Descrizione": "Tozza bancone",
-		"Durata": "20:00",
-		"Capienza_massima": "2022"
-	};
+let id_servizio =2;
+let id_fornitore = document.cookie.substring(3, 40);
 
+async function richiedi_servizi(){
+	const response = await fetch('/servizi/api/get_servizio/' + id_servizio, {
+		method: 'GET',
+		headers: {
+		  "Access-Control-Request-Method": "GET",
+		  "Accept": "application/json",
+		  'Content-Type': 'application/json;charset-UTF-8'
+		}
+	  });
+	  ex_data = await response.json(); //extract JSON from the http response
 
-
-	return data;
+	return ex_data;
 }
 
 //document.body.onload = create_table;
@@ -56,12 +60,6 @@ function form_modifica() {
 	Durata.value = data.Durata;
 	Durata.placeholder = data.Durata;
 
-	// create a submit button
-	var s = document.createElement("button");
-	s.setAttribute("type", "submit");
-	s.onclick = function exe_botton() { Modifica_servizio("ID","ID_Fornitore",Durata.value ,Descrizione.value,Tipologia.value ); }
-	s.innerHTML = "Modifica servizi";
-
 	// Append the full name input to the form
 	form.appendChild(L_Tipologia);
 	form.appendChild(Tipologia);
@@ -78,37 +76,41 @@ function form_modifica() {
 	form.appendChild(Durata);
 	form.appendChild(br.cloneNode());
 
-	// Append the Password to the form
-
-
-	// Append the submit button to the form
-	form.appendChild(s);
 
 	document.getElementsByTagName("form")[0].appendChild(form);
-	//document.getElementsByTagName("form").appendChild(form);
 
 }
 
 
-function Modifica_servizio(ID_servizio,ID_Fornitore,Durata ,Descrizione,Tipologia ) {
-		console.log(Durata ,Descrizione,Tipologia );
-  
-	  /*DONE*/
-	  // fetch('/servizi/api/aggiorna_servizio/'+ID_servizio, {
-	  //     method: 'POST',
-	  //     headers: {
-	  //         'Content-Type': 'application/json'
-	  //     },
-	  //     body: JSON.stringify({
-        // "ID_fornitore": ID_fornitore,
-        // "Tipologia": Tipologia,
-        // "Descrizione": Descrizione,
-        // "Durata": "Descrizione
-	  //     })
-	  // })
-	  //     .then(response => response.json())
-	  //     .then(data => { console.log(data); })
-	  //     .catch(error => console.error(error));
-	  //      esempio_slot = response;
-  
-  }
+document.addEventListener("DOMContentLoaded", function () {
+	document.getElementById("btn_modifica_servizi").addEventListener("click", async function (e) {
+		e.preventDefault();
+
+		console.log("FINE : ")
+
+		const Tipologia = document.getElementById("Tipologia").value;
+		const Descrizione = document.getElementById("Descrizione").value;
+		const Durata = document.getElementById("Durata").value;
+
+		/*DONE*/
+		fetch('/servizi/api/aggiorna_servizio/'+id_servizio+'/'+id_fornitore , {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				"Tipologia": Tipologia,
+				"Descrizione": Descrizione,
+				"Durata": Durata
+			})
+		})
+			.then(response => response.json())
+			.then(data => { console.log(data); })
+			.catch(error => console.error(error));
+
+
+		window.alert("Aggiornato");
+		location.reload();
+
+	});
+});

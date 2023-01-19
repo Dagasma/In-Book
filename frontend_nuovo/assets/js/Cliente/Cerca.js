@@ -82,10 +82,10 @@ function generateTable(table, data, index) {
   }
 }
 
-function vai_dal_fornitore(a, b) {
-  console.log(a, b);
-
-  window.alert("ok");
+function vai_dal_fornitore(ID_fornitore) {
+  console.log(ID_fornitore);
+  window.alert("Vuoi andare alla pagina del fornitore?");
+  // window.location.href = `/visualizza_forntiore?id=${ID_fornitore}`;
 }
 
 let en_page = 0;

@@ -70,7 +70,7 @@ async function calcolo_slot_liberi(filtro) {
     );
 
     //Calcolo il numero di SLOT
-    durata_minima = '00:30:00';
+    durata_minima = '00:15:00';
     durata_minima_minutes = minutesFromTime(durata_minima);
     var orari_00 = minutesFromTime((Orari_fornitori[0]).Orario_apertura);
     var orari_01 = minutesFromTime((Orari_fornitori[0]).Orario_chiusura);
@@ -206,9 +206,8 @@ exports.get_prenotazioni_fornitore = (req, res) => {
 exports.get_slot_liberi = (req, res) => {
     //var condition = ID_fornitore ? { ID_fornitore: { [Op.like]: `%${ID_fornitore}%` } } : null;
     var filtro = {
-
-        Data_giorno: req.body.Data_giorno,
-        ID_fornitore: req.body.ID_fornitore
+        Data_giorno: req.params.Data_giorno,
+        ID_fornitore: req.params.ID_fornitore
     };
     console.log(filtro);
     //var condition_time = db.sequelize.fn('date', sequelize.col('Orario_prenotazione_inizio'), Op.like, filtro.Data_giorno);
@@ -225,8 +224,8 @@ exports.get_slot_liberi = (req, res) => {
 
 exports.annulla_prenotazione_cliente = (req, res) => {
     const id = req.params.id_prenotazione;
-    const ID_utente = req.params.ID_utente;
-    console.log(req.body);
+    //const ID_utente = req.params.ID_utente;
+    console.log("ciao" , req.body);
     tab_prenotazioni
         .update(req.body, {
             where: { id: id},

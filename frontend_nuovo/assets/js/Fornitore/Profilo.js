@@ -1,44 +1,46 @@
+let id_fornitore = document.cookie.substring(3, 40);
 
-function richiedi_fornitore() {
-	// Dati fornitore
-	var data = {
-		"Nome_Attivita": "Tutto a 0,09cent",
-		"Tipo_Attivita": "Tozza bancone",
-		"Indirizzo": "Casa tua , 66666, SO",
-		"Capienza_massima": "2022",
-		"Nome": "pepp",
-		"Cognome": "de coglio",
-		"Email": "Casa sua , 66666, SO",
-		"Telefono": "42342342",
-		"Data_di_nascita": "2000-10-01"
-	};
-	console.log("entrato in richiedi");
+async function richiedi_fornitore() {
 
-	/* DONE */
-	// const response = await fetch('cliente/api/get_profilo/' + id_utente, {
-	//     method: 'GET',
-	//     headers: {
-	//         "Access-Control-Request-Method": "GET",
-	//         "Accept": "application/json",
-	//         'Content-Type': 'application/json;charset-UTF-8'
-	//     }
-	// });
-	// const dati_fornitore = await response.json(); //extract JSON from the http response
-	// // do something with myJson
-	return data;
+	const response = await fetch('/fornitori/api/cliente_get_profilo_fornitore/' + id_fornitore, {
+		method: 'GET',
+		headers: {
+			"Access-Control-Request-Method": "GET",
+			"Accept": "application/json",
+			'Content-Type': 'application/json;charset-UTF-8'
+		}
+	});
+	const dati_fornitore = await response.json(); //extract JSON from the http response
+	console.log(dati_fornitore);
+
+	const response1 = await fetch('/cliente/api/get_profilo/' + id_cliente, {
+		method: 'GET',
+		headers: {
+			"Access-Control-Request-Method": "GET",
+			"Accept": "application/json",
+			'Content-Type': 'application/json;charset-UTF-8'
+		}
+	});
+	let dati_cliente = await response1.json();
+	console.log(dati_cliente);
+
+	dati_cliente.Email = dati_fornitore.ID_utente_fornitore_UTENTI.Email
+	dati_cliente.Telefono = dati_fornitore.ID_utente_fornitore_UTENTI.Telefono
+
+	let dati_totali = { ...dati_cliente, ...dati_fornitore }
+
+	return dati_totali;
 }
 
 //document.body.onload = create_table
-function form_profilo() {
-	var down = document.getElementById("GFG_DOWN");
-	let data = richiedi_fornitore();
+async function form_profilo() {
+
+	let data = await richiedi_fornitore();
 	// Create a break line element
 	var br = document.createElement("br");
 
 	// Create a form dynamically
 	var form = document.createElement("form");
-	form.setAttribute("method", "get");
-	form.setAttribute("action", "/");
 
 	// Create an input element for Full Name
 	var L_Nome = document.createElement("label");
@@ -136,11 +138,7 @@ function form_profilo() {
 
 
 	// create a submit button
-	var s = document.createElement("button");
-	s.setAttribute("type", "submit");
-	s.setAttribute("value", "Modifica profilo");
-	s.setAttribute("id", "btn_modifica_profilo");
-	s.innerHTML = "Modifica profilo";
+
 	// Append the full name input to the form
 	form.appendChild(L_Nome);
 	form.appendChild(Nome);
@@ -190,64 +188,29 @@ function form_profilo() {
 	form.appendChild(br.cloneNode());
 
 
-	// Append the submit button to the form
-	form.appendChild(s);
-
 	document.getElementsByTagName("form")[0].appendChild(form);
 	//document.getElementsByTagName("form").appendChild(form);
 
 }
 
-
-function richiedi_orario() {
+async function richiedi_orario() {
 	// Dati fornitore
-	let ex_data = [
-		{
-			"ID": 1,
-			"ID_fornitore": "5",
-			"Giorno_della_settimana": "Lunedi",
-			"Orario_apertura": "08:00:00",
-			"Orario_chiusura": "13:00:00"
-		},
-		{
-			"ID": 2,
-			"ID_fornitore": "5",
-			"Giorno_della_settimana": "Mercoledi",
-			"Orario_apertura": "08:00:00",
-			"Orario_chiusura": "13:00:00"
-		},
-		{
-			"ID": 3,
-			"ID_fornitore": "5",
-			"Giorno_della_settimana": "Giovedi",
-			"Orario_apertura": "08:00:00",
-			"Orario_chiusura": "13:00:00"
-		},
-		{
-			"ID": 4,
-			"ID_fornitore": "5",
-			"Giorno_della_settimana": "Venerdi",
-			"Orario_apertura": "08:00:00",
-			"Orario_chiusura": "13:00:00"
-		}
-	];
 
 	console.log("entrato in orario");
 
 	/* DONE */
-	// const response = await fetch('/OrarioAttivita/api/Orario_fornitore/' + id_utente, {
-	//     method: 'GET',
-	//     headers: {
-	//         "Access-Control-Request-Method": "GET",
-	//         "Accept": "application/json",
-	//         'Content-Type': 'application/json;charset-UTF-8'
-	//     }
-	// });
-	// const dati_fornitore = await response.json(); //extract JSON from the http response
-	// // do something with myJson
-	return ex_data;
+	const response = await fetch('/OrarioAttivita/api/Orario_fornitore/' + id_fornitore, {
+		method: 'GET',
+		headers: {
+			"Access-Control-Request-Method": "GET",
+			"Accept": "application/json",
+			'Content-Type': 'application/json;charset-UTF-8'
+		}
+	});
+	const orario_fornitore = await response.json(); //extract JSON from the http response
+	// do something with myJson
+	return orario_fornitore;
 }
-
 
 function generateTableHead(table, data, columns) {
 	let thead = table.createTHead();
@@ -284,16 +247,13 @@ function generateTable(table, data, index) {
 		button.innerHTML = "Elimina";
 		button.setAttribute("type", "submit");
 		button.setAttribute("data_id", element["ID"]);
-	
+
 		button.setAttribute("id", "btn_elimina");
 		button.onclick = function exe_botton() { elimina_orario(element["ID"]); }
 		buttonCell.appendChild(button);
 	}
 }
 
-function stampa(a, b) {
-	console.log(a, b);
-}
 
 function create_table_orari() {
 	//let table = document.querySelector("table");// create table
@@ -313,61 +273,61 @@ function create_table_orari() {
 
 //listener bottone orario
 document.addEventListener("DOMContentLoaded", function () {
-	document.getElementById("btn_new_orario").addEventListener("click", function (e) {
+	document.getElementById("btn_new_orario").addEventListener("click", async function (e) {
 		e.preventDefault();
-
-
 		// document.getElementById("myForm").style.display = "none";
 
 		const Giorno = document.getElementById("Giorno").value;
 		const Orario_I = document.getElementById("Orario_I").value;
 		const Orario_F = document.getElementById("Orario_F").value;
-		console.log("btn_new_orario : ", Giorno ,Orario_I);
+		console.log("btn_new_orario : ", Giorno, Orario_I);
 
 		/**/
-		// fetch('/cliente/api/aggiorna_profilo' + id_cliente, {
-		//     method: 'PUT',
-		//     headers: {
-		//         'Content-Type': 'application/json'
-		//     },
-		//     body: JSON.stringify({
-			// "ID_fornitore": ? ,
-			// "Giorno_della_settimana": Giorno,
-			// "Orario_apertura": Orario_I,
-			// "Orario_chiusura": Orario_F
-		//     })
-		// })
-		//     .then(response => response.json())
-		//     .then(data => { console.log(data); })
-		//     .catch(error => console.error(error));
-		//      esempio_slot = response;
+		const response = await fetch('/OrarioAttivita/api/' + id_cliente, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				"ID_fornitore": id_fornitore,
+				"Giorno_della_settimana": Giorno,
+				"Orario_apertura": Orario_I,
+				"Orario_chiusura": Orario_F
+			})
+		})
+			.then(response => response.json())
+			.then(data => { console.log(data); })
+			.catch(error => console.error(error));
+
+		window.alert("Aggiornato");
 
 	});
 });
 
-function elimina_orario (ID){
+async function elimina_orario(ID) {
 	console.log(ID);
 
-		/*  */
-	// const response = await fetch('OrarioAttivita/api/delete_orario/'+ ID, {
-	//     method: 'DELETE',
-	//     headers: {
-	//         "Accept": "application/json",
-	//         'Content-Type': 'application/json;charset-UTF-8'
-	//     }
-	// });
-	// const dati_fornitore = await response.json(); //extract JSON from the http response
+	/*  */
+	const response = await fetch('/OrarioAttivita/api/delete_orario/' + ID, {
+		method: 'DELETE',
+		headers: {
+			"Accept": "application/json",
+			'Content-Type': 'application/json;charset-UTF-8'
+		}
+	});
+	const dati_fornitore = await response.json(); //extract JSON from the http response
 	// // do something with myJson
+	window.alert("eliminato");
 
 }
 
 //listener bottone prenotazione
-document.addEventListener("DOMContentLoaded", function() {
-	document.getElementById("btn_modifica_profilo").addEventListener("click",function (e){
+document.addEventListener("DOMContentLoaded", function () {
+	document.getElementById("btn_modifica").addEventListener("click", async function (e) {
 		e.preventDefault();
-	
 
-		console.log("FINE : " )
+
+		console.log("FINE : ")
 		// document.getElementById("myForm").style.display = "none";
 
 		const Nome = document.getElementById("Nome").value;
@@ -377,23 +337,43 @@ document.addEventListener("DOMContentLoaded", function() {
 		const Telefono = document.getElementById("Telefono").value;
 
 		/*DONE*/
-		// fetch('/cliente/api/aggiorna_profilo/' + id_cliente, {
-		//     method: 'PUT',
-		//     headers: {
-		//         'Content-Type': 'application/json'
-		//     },
-		//     body: JSON.stringify({
-			// "Nome": Nome,
-			// "Cognome": Cognome,
-			// "Email": Email,
-			// "Data_di_nascita": Data_di_nascita,
-			// "Telefono": Telefono
-		//     })
-		// })
-		//     .then(response => response.json())
-		//     .then(data => { console.log(data); })
-		//     .catch(error => console.error(error));
-		//      esempio_slot = response;
-		
+		fetch('/cliente/api/aggiorna_profilo/' + id_fornitore, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				"Nome": Nome,
+				"Cognome": Cognome,
+				"Email": Email,
+				"Data_di_nascita": Data_di_nascita,
+				"Telefono": Telefono
+			})
+		})
+			.then(response => response.json())
+			.then(data => { console.log(data); })
+			.catch(error => console.error(error));
+
+		/*DONE*/
+		fetch('/fornitori/api/aggiorna_profilo/' + id_fornitore, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				"Nome": Nome,
+				"Cognome": Cognome,
+				"Email": Email,
+				"Data_di_nascita": Data_di_nascita,
+				"Telefono": Telefono
+			})
+		})
+			.then(response => response.json())
+			.then(data => { console.log(data); })
+			.catch(error => console.error(error));
+
+		window.alert("Aggiornato");
+		location.reload();
+
 	});
-	});
+});

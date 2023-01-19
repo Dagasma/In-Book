@@ -16,7 +16,7 @@ module.exports = app => {
     router.get("/get_prenotazioni_fornitore/:ID_fornitore", config.keycloak.protect("realm:fornitore"), middleware_check.check_id_param('ID_fornitore'),prenotazioni.get_prenotazioni_fornitore);
 
     //get slot liberi
-    router.get("/get_slot_liberi",config.keycloak.protect("realm:cliente"),prenotazioni.get_slot_liberi);
+    router.get("/get_slot_liberi/:Data_giorno/:ID_fornitore",config.keycloak.protect("realm:cliente"),prenotazioni.get_slot_liberi);
 
     router.get("/prenotazioni_filtrate_merge_fornitore/:ID_fornitore",config.keycloak.protect("realm:fornitore"), middleware_check.check_id_param('ID_fornitore'), prenotazioni.prenotazioni_filtrate_fornitore);
     

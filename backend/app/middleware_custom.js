@@ -2,6 +2,7 @@ const { request } = require("express");
 const config = require("../config/config");
 
 async function Assign_Roles_to_users(token_sub) {
+
         await config.kcAdminClient.auth(config.credentials);        //401
 
         const roles = await config.kcAdminClient.users.listRealmRoleMappings({id: token_sub}); //403
@@ -13,7 +14,6 @@ async function Assign_Roles_to_users(token_sub) {
                 return false;
             }
         });
-
 
         const user = await config.kcAdminClient.users.findOne({ id: token_sub });
         const drm = await config.kcAdminClient.roles.findOneByName({name:"default-roles-master"})
@@ -40,7 +40,13 @@ delete config.keycloak['authenticated'];
 config.keycloak.authenticated = function(req){
     Assign_Roles_to_users(req.kauth.grant.access_token.content.sub)
 }
- 
+
+delete config.keycloak['accessDenied'];
+config.keycloak.accessDenied = function(req,res){
+    res.redirect("/?Accesso_non_consentito_rieffettua_login");
+}
+
+
 module.exports = config.keycloak;
 
 module.exports.Assign_Roles_to_users = Assign_Roles_to_users;

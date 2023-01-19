@@ -19,7 +19,7 @@ app.use(
     })
 );
 
-
+app.use(config.flash());
 app.use(config.keycloak.middleware()); //commentato per testare api
 
 app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend

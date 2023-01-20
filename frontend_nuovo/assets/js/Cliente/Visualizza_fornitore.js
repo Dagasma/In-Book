@@ -2,14 +2,14 @@
 // TAKE ID_FORNITORE AND ID_CLIENTE
 const url = new URL(window.location.href);
 const searchParams = new URLSearchParams(url.search);
-console.log(searchParams.get('id'))
 const id_fornitore = searchParams.get('id');
-console.log(id_fornitore); // Outputs "5"}
 let id_cliente = document.cookie.substring(3, 40);
 
 // GLOBAL VARIABLE 
-let Durata_servizi = {}
-let form1_prenotazione = {}
+let Durata_servizi = {};
+let form1_prenotazione = {};
+let en_voto_fatto = 1;
+let id_voto = 0;
 
 // DIFF TIME
 function diff_time_hhmm(time1, time2) {
@@ -118,7 +118,7 @@ async function inserisci_servizi_form() {
         const optionElement = document.createElement("option");
         optionElement.value = servizi_fornitore_ex[i].ID;
         Durata_servizi[servizi_fornitore_ex[i].ID] = servizi_fornitore_ex[i].Durata;
-        optionElement.text = servizi_fornitore_ex[i].Tipologia;
+        optionElement.text = servizi_fornitore_ex[i].Tipologia + " - "+ servizi_fornitore_ex[i].Durata.substring(0,5);
         select.appendChild(optionElement);
     }
 
@@ -155,20 +155,20 @@ function Calc_slot_liberi(slot, capacita, durata) {
     console.log(rapporto, slot_durata, slot);
 
     let cnt = 0; // conteggio slot
-    for (let i = 0; i < slot.length - rapporto; i++) { // scorro tutti gli slot
+    for (let i = 0; i < slot.length - rapporto+1; i++) { // scorro tutti gli slot
         console.log("slot ", i, "orario :", slot[i].Orario_inizio, "slot durata :", slot_durata);
         for (let j = 0; j < rapporto; j++) { // scorro gli slot successivi che copre la prenotazione
-            if(j==rapporto-1 && slot[i + j].Posti_disponibili >= capacita){
+            console.log(i+j ,slot[i + j].Posti_disponibili)
+            if ((j == rapporto-1 && slot[i + j].Posti_disponibili >= capacita)||(i+j>=slot.length)) {
                 cnt++;
                 if (cnt == rapporto) {
-                    //console.log(slot[i + j].Posti_disponibili >= capacita, diff_time_hhmm(slot[i + j+1].Orario_inizio,slot[i + j].Orario_inizio)==slot_durata);
                     orari_disponibili.push(slot[i].Orario_inizio);
                 }
             }
             else if (slot[i + j].Posti_disponibili >= capacita && (diff_time_hhmm(slot[i + j + 1].Orario_inizio, slot[i + j].Orario_inizio) == slot_durata || i + j == slot.length - 1)) {
                 cnt++;
             }
-            else{}
+            else { }
         }
         cnt = 0;
     }
@@ -176,29 +176,73 @@ function Calc_slot_liberi(slot, capacita, durata) {
     return orari_disponibili;
 }
 
+// CHECK VOTO
+async function get_voto() {
+    const response = await fetch('/Votazioni/api/get_voto/' + id_cliente + '/' + id_fornitore, {
+        method: 'GET',
+        headers: {
+            "Access-Control-Request-Method": "GET",
+            "Accept": "application/json",
+            'Content-Type': 'application/json;charset-UTF-8'
+        }
+    });
+    const servizi_fornitore_ex = await response.json(); //extract JSON from the http response
+
+    var h4Element = document.getElementById("Testo_Voto");
+    var btn_voto = document.getElementById("btn_voto");
+    if (servizi_fornitore_ex.length >= 1) {
+        h4Element.innerHTML = "Hai gia effettuato la votazione : " + servizi_fornitore_ex[0].Voto + ". Completa il form per modificare il voto.";
+        en_voto_fatto = 1;
+        btn_voto.innerHTML = "Aggiorna Voto";
+        id_voto=servizi_fornitore_ex[0].ID
+    }
+    else {
+        //h4Element.innerHTML = "Vota il fornitore";
+        en_voto_fatto = 0;
+    }
+
+    console.log("voto", servizi_fornitore_ex[0].Voto);
+}
+
+get_voto();
+
 //POST VOTO 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("btn_voto").addEventListener("click", async function (e) {
         e.preventDefault();
 
         const voto = document.getElementById("Voto").value;
-        console.log(voto);
+        let risposta;
 
-        /*DONE*/
-        const response1 = await fetch('/Votazioni/api/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "ID_fornitore": id_fornitore,
-                "ID_utente": id_cliente,
-                "Voto": voto
+        if (en_voto_fatto != 1) {
+            /*DONE*/
+            const response1 = await fetch('/Votazioni/api/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "ID_fornitore": id_fornitore,
+                    "ID_utente": id_cliente,
+                    "Voto": voto
+                })
             })
-        })
-
-        const risposta = await response1.status;
-        console.log(risposta);
+            risposta = await response1.status;
+            console.log(risposta);
+        }
+        else {
+            const response1 = await fetch('/Votazioni/api/cambia_voto/'+id_voto+'/'+id_cliente, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "Voto": voto
+                })
+            })
+            risposta = await response1.status;
+            console.log(risposta);
+        }
 
         if (risposta == 200) {
             window.alert("voto salvato");
@@ -211,10 +255,10 @@ document.addEventListener("DOMContentLoaded", function () {
         searchParams.set("newparam", voto);
         window.history.pushState({}, "", `${url.pathname}?${searchParams.toString()}`);
 
+        location.reload()
+
     });
 });
-
-
 
 //GET DISPONIBILITA
 document.addEventListener("DOMContentLoaded", function () { // aspetta il caricamento della pagina
@@ -299,7 +343,6 @@ document.addEventListener("DOMContentLoaded", function () {
         })
 
         window.alert("prenotato");
-        window.alert("Vuoi andare alla pagina del fornitore?");
         let url = "/cliente/visualizza_prenotazioni";
         window.location.href = url;
     });

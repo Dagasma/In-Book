@@ -91,8 +91,6 @@ function vai_dal_fornitore(ID_fornitore) {
   window.alert("Vuoi andare alla pagina del fornitore?");
   let url = "/cliente/visualizza_fornitore?id=" + ID_fornitore;
   window.location.href = url;
-  window.alert("Vuoi andare alla pagina del fornitore?");
-
   // window.location.href = `/visualizza_forntiore?id=${ID_fornitore}`;
 }
 

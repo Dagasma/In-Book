@@ -39,7 +39,7 @@ exports.crea_servizio = (req, res) => {
 exports.get_servizi_per_fornitore = (req, res) => {
     const id_fornitore = req.params.ID_fornitore;
     var condition = id_fornitore
-        ? { ID_fornitore: { [Op.like]: `%${id_fornitore}%` } }
+        ? { ID_fornitore: { [Op.like]: `${id_fornitore}` } }
         : null;
 
     tab_servizi
@@ -59,7 +59,7 @@ exports.get_servizi_per_fornitore = (req, res) => {
 // Retrieve all Servizi
 exports.get_servizio = (req, res) => {
     const id_servizio = req.params.id_servizio;
-    var condition = id_servizio ? { ID: { [Op.like]: `%${id_servizio}%` } } : null;
+    var condition = id_servizio ? { ID: { [Op.like]: `${id_servizio}` } } : null;
 
     tab_servizi
         .findAll({ where: condition })
@@ -133,7 +133,7 @@ exports.delete_servizio = (req, res) => {
 exports.delete_all_servizi = (req, res) => {
     const id_fornitore = req.params.ID_fornitore;
     var condition = id_fornitore
-        ? { ID_fornitore: { [Op.like]: `%${id_fornitore}%` } }
+        ? { ID_fornitore: { [Op.like]: `${id_fornitore}` } }
         : null;
     tab_servizi
         .destroy({

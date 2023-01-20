@@ -32,7 +32,7 @@
 -->
 </head>
 
-<body onload="Aggiorna_Table()"></body>>
+<body onload="Aggiorna_Table();get_voto();"></body>>
 
 <!-- ***** Preloader Start ***** -->
 <div id="js-preloader" class="js-preloader">
@@ -102,7 +102,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <form id="reservation-form" name="form_vota">
-                    <h4>Vota il <em> fornitore </em> </h4>
+                    <h4 id="Testo_Voto">Vota il <em> fornitore </em> </h4>
                     <label for="Voto">Voto</label>
                     <select type="number" id="Voto" name="Voto">
                     <option value=1>1</option>

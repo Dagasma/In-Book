@@ -68,7 +68,7 @@ async function calcolo_slot_liberi(filtro) {
             type: db.sequelize.QueryTypes.SELECT
         }
     );
-
+    console.log(Query_prenotazioni)
     //Calcolo il numero di SLOT
     durata_minima = '00:15:00';
     durata_minima_minutes = minutesFromTime(durata_minima);
@@ -98,19 +98,30 @@ async function calcolo_slot_liberi(filtro) {
 
         }
     }
+    console.log(Array_disponibilita)
     //Inserisco nella prima colonna l'ora di inizio mentre nella seconda la capienza massima
     for (var i = 0; i < Query_prenotazioni.length; i++) {  // per ogni prenotazione
         let orar_table = addtime(String(Query_prenotazioni[i].Orario_prenotazione_inizio).substring(16, 21), -60);
-        let index = Array_disponibilita.findIndex(function (element) { return element["Orario_inizio"] == orar_table; });
-        if (Query_prenotazioni[i].Durata == durata_minima) {
-            Array_disponibilita[index]["Posti_disponibili"] -= Query_prenotazioni[i]['SUM(Numero_clienti)'];
-        }
-        else {
-            for (var j = 0; j < minutesFromTime(Query_prenotazioni[i].Durata) / minutesFromTime(durata_minima); j++) {
-                Array_disponibilita[index + j]["Posti_disponibili"] -= Query_prenotazioni[i]['SUM(Numero_clienti)'];
+        let index = Array_disponibilita.findIndex(function (element) { return element.Orario_inizio == orar_table; });
+        if (index != -1) {
+            console.log("entro");
+            console.log(Query_prenotazioni[i].Durata, orar_table);
+            console.log(Array_disponibilita[index], i, index, Array_disponibilita[index + j]);
+            if (Query_prenotazioni[i].Durata == durata_minima) {
+                console.log("entro1");
+                Array_disponibilita[index].Posti_disponibili -= Query_prenotazioni[i]['SUM(Numero_clienti)'];
+
+            }
+            else {
+                for (var j = 0; j < minutesFromTime(Query_prenotazioni[i].Durata) / minutesFromTime(durata_minima); j++) {
+                    Array_disponibilita[index + j].Posti_disponibili -= Query_prenotazioni[i]['SUM(Numero_clienti)'];
+
+                }
             }
         }
     }
+    console.log("array 2: ", Array_disponibilita);
+
     return Array_disponibilita;
 };
 
@@ -124,7 +135,7 @@ exports.effettua_prenotazione = (req, res) => {
         });
         return;
     }
-    
+
     // Create a Prenotazione
     const prenotazioni = {
         ID_utente: req.body.ID_utente,
@@ -153,27 +164,27 @@ exports.effettua_prenotazione = (req, res) => {
 
 // Retrieve all Prenotazioni from the database by id utente o id fornitore
 exports.get_prenotazioni_utente = (req, res) => {
-        var id = null;
-        var condition = null;
+    var id = null;
+    var condition = null;
 
-        id = req.params.ID_utente;
+    id = req.params.ID_utente;
 
-        condition = id ? { ID_utente: { [Op.like]: `%${id}%` } } : null;
+    condition = id ? { ID_utente: { [Op.like]: `%${id}%` } } : null;
 
-        tab_prenotazioni.findAll({
-            where: condition,
-            order: [['Orario_prenotazione_inizio', 'ASC']]
-        }
-        )
-            .then(data => {
-                res.send(data);
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message:
-                        err.message || "Some error occurred while retrieving Prenotazioni."
-                });
+    tab_prenotazioni.findAll({
+        where: condition,
+        order: [['Orario_prenotazione_inizio', 'ASC']]
+    }
+    )
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Prenotazioni."
             });
+        });
 
 };
 
@@ -181,24 +192,24 @@ exports.get_prenotazioni_utente = (req, res) => {
 exports.get_prenotazioni_fornitore = (req, res) => {
     var id = null;
     var condition = null;
-        id = req.params.ID_fornitore;
+    id = req.params.ID_fornitore;
 
-        condition = id ? { ID_fornitore: { [Op.like]: `%${id}%` } } : null;
+    condition = id ? { ID_fornitore: { [Op.like]: `%${id}%` } } : null;
 
-        tab_prenotazioni.findAll({
-            where: condition,
-            order: [['Orario_prenotazione_inizio', 'ASC']]
-        }
-        )
-            .then(data => {
-                res.send(data);
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message:
-                        err.message || "Some error occurred while retrieving Prenotazioni."
-                });
+    tab_prenotazioni.findAll({
+        where: condition,
+        order: [['Orario_prenotazione_inizio', 'ASC']]
+    }
+    )
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Prenotazioni."
             });
+        });
 
 };
 
@@ -209,27 +220,28 @@ exports.get_slot_liberi = (req, res) => {
         Data_giorno: req.params.Data_giorno,
         ID_fornitore: req.params.ID_fornitore
     };
-    
+
     console.log(filtro);
     //var condition_time = db.sequelize.fn('date', sequelize.col('Orario_prenotazione_inizio'), Op.like, filtro.Data_giorno);
     calcolo_slot_liberi(filtro).then(data => {
-        res.send(JSON.stringify(data));})
-        .catch (err => {
-                      res.status(500).send({
-                          message:
-                              err.message || "Some error occurred while retrieving Prenotazioni."
-                      });
-                  });
-                
+        res.send(JSON.stringify(data));
+    })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Prenotazioni."
+            });
+        });
+
 };
 
 exports.annulla_prenotazione_cliente = (req, res) => {
     const id = req.params.id_prenotazione;
     //const ID_utente = req.params.ID_utente;
-    console.log("ciao" , req.body);
+    console.log("ciao", req.body);
     tab_prenotazioni
         .update(req.body, {
-            where: { id: id},
+            where: { id: id },
         })
         .then((num) => {
             if (num == 1) {
@@ -307,8 +319,8 @@ exports.delete_prenotazione = (req, res) => {
 exports.prenotazioni_filtrate_utente = (req, res) => {
     //id = req.params.ID_utente;
     id = req.params.ID_utente;
-    var condition1 = id ? { ID_utente: { [Op.like]: `%${id}%` } }   : null;
-    
+    var condition1 = id ? { ID_utente: { [Op.like]: `%${id}%` } } : null;
+
     //sequelize.and([condition1, condition2,condition3])
     tab_prenotazioni
         .findAll({
@@ -316,17 +328,17 @@ exports.prenotazioni_filtrate_utente = (req, res) => {
                 model: tab_servizi,
                 as: 'ID_servizio_SERVIZI',
                 required: true
-  
+
             }, {
                 model: tab_fornitori,
                 as: 'ID_fornitore_FORNITORI',
                 required: true
-            
+
             }],
             where: condition1,
         })
         .then((data) => {
-             res.send(data);
+            res.send(data);
         })
         .catch((err) => {
             res.status(500).send({
@@ -340,8 +352,8 @@ exports.prenotazioni_filtrate_utente = (req, res) => {
 exports.prenotazioni_filtrate_fornitore = (req, res) => {
     //id = req.params.ID_utente;
     id = req.params.ID_fornitore;
-    var condition1 = id ? { ID_fornitore: { [Op.like]: `%${id}%` } }   : null;
-    
+    var condition1 = id ? { ID_fornitore: { [Op.like]: `%${id}%` } } : null;
+
     //sequelize.and([condition1, condition2,condition3])
     tab_prenotazioni
         .findAll({
@@ -349,17 +361,17 @@ exports.prenotazioni_filtrate_fornitore = (req, res) => {
                 model: tab_servizi,
                 as: 'ID_servizio_SERVIZI',
                 required: true
-  
+
             }, {
                 model: tab_fornitori,
                 as: 'ID_fornitore_FORNITORI',
                 required: true
-            
+
             }],
             where: condition1,
         })
         .then((data) => {
-             res.send(data);
+            res.send(data);
         })
         .catch((err) => {
             res.status(500).send({

@@ -13,7 +13,7 @@ module.exports = app => {
     router.get("/Orario_fornitore/:ID_fornitore", OrarioAttivita.findAll);
 
     //Delete (NEL BODY PASSO ANCHE ID_FORNITORE)
-    router.delete("/delete_orario/:id_orario",config.keycloak.protect("realm:fornitore"),middleware_check.check_id_body("ID_fornitore"), OrarioAttivita.delete_orario);
+    router.delete("/delete_orario/:id_orario", OrarioAttivita.delete_orario);
 
     app.use('/OrarioAttivita/api',router);
    };

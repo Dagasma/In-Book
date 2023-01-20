@@ -52,8 +52,8 @@ function generateTable(table, data, index) {
 
 async function create_table_notifiche() {
 	//let table = document.querySelector("table");// create table
-	let columns = ["Descrizione notifica", "Orario prenotazione inizio", "Tipologia", "Indirizzo", "Nome Attivita"];
-	let keys = ["Descrizione_notifica", "Orario_prenotazione_inizio", "Tipologia", "Indirizzo", "Nome_Attivita"];
+	let columns = ["Descrizione notifica", "Orario prenotazione inizio", "Tipologia", "Indirizzo", "Nome Attivita","Stato"];
+	let keys = ["Descrizione_notifica", "Orario_prenotazione_inizio", "Tipologia", "Indirizzo", "Nome_Attivita","Stato"];
 	let ex_data = await richiedi_notifiche();
 	var table = document.getElementById("json-table");
 

@@ -12,6 +12,7 @@ module.exports = app => {
     router.get("/findAll_fornitore/:id", Votazioni.findAll_fornitore);
 
     router.get("/get_media_fornitore/:id", Votazioni.get_media_fornitore);
+    router.get("/get_voto/:id_utente/:id_fornitore", Votazioni.get_voto);
 
     router.put("/cambia_voto/:id/:ID_utente",config.keycloak.protect("realm:cliente"), middleware_check.check_id_param("ID_utente"), Votazioni.update);
 

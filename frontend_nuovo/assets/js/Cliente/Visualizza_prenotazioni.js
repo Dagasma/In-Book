@@ -26,6 +26,9 @@ async function richiedi_prenotazioni(filtro) {
     else if (ex_data[i].ID_servizio_SERVIZI.Tipologia != filtro.Tipologia && filtro.Tipologia != "") {
 
     }
+    else if (ex_data[i].Stato != filtro.Stato && filtro.Stato != "" && filtro.Durata != ',') {
+
+    }
     else {
       let istance = {}
       istance.id = ex_data[i].ID;;
@@ -90,7 +93,7 @@ function generateTable(table, data, index) {
 }
 
 async function Annulla_prenotazione(id_prenotazione) {
-  console.log(id_prenotazione, id_fornitore)
+  console.log(id_prenotazione)
   window.alert("Annullata");
 
   var Annulato = "Annullato"
@@ -118,7 +121,7 @@ async function create_table_prenotazioni(ex_data, en_page = 0) {
   table.innerHTML = "";
 
   if (en_page == 0) {
-    filtro = { "Giorno": "", "Tipologia": "", "Durata": ",", "Numero_clienti": "" };
+    filtro = { "Giorno": "", "Tipologia": "", "Durata": ",", "Numero_clienti": "" ,"Stato":""};
     let ex_data = await richiedi_prenotazioni(filtro);
   }
 
@@ -143,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
     filtro.Tipologia = document.getElementById("Tipologia").value;
     filtro.Durata = document.getElementById("Durata").value;
     filtro.Numero_clienti = document.getElementById("Persone_max").value;
-
+    filtro.Stato = document.getElementById("Stato").value;
     ex_data = await richiedi_prenotazioni(filtro);
   });
 });

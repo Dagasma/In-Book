@@ -199,3 +199,25 @@ exports.get_media_fornitore = (req, res) => {
                   });
                 
 };
+
+exports.get_voto = (req, res) => {
+    const ID_utente = req.params.id_utente;
+    const ID_fornitore = req.params.id_fornitore;
+
+    var condition1 = ID_fornitore ? { ID_fornitore: { [Op.like]: `%${ID_fornitore}%` } } : null;
+    console.log(condition1);
+
+    tab_votazioni
+        .findAll({ where: condition1  })
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message:
+                    err.message ||
+                    "Some error occurred while retrieving votazioni.",
+            });
+        });
+
+};

@@ -1189,7 +1189,7 @@
       "clientId": "nodejs",
       "name": "Node JS Adapter",
       "description": "",
-      "rootUrl": "http://keycloak.inbook.local:4000",
+      "rootUrl": "http://inbook.local",
       "adminUrl": "",
       "baseUrl": "/",
       "surrogateAuthRequired": false,
@@ -1198,7 +1198,7 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu",
       "redirectUris": [
-        "http://keycloak.inbook.local:4000/*"
+        "http://inbook.local/*"
       ],
       "webOrigins": [],
       "notBefore": 0,

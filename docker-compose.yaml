@@ -51,7 +51,9 @@ services:
             - 8080
             - 8443
         networks:
-           - DBNetwork
+           DBNetwork: 
+            aliases:
+                - keycloak
 
     reverseproxy:
         container_name: nginx

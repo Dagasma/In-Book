@@ -49,14 +49,6 @@ async function form_profilo() {
 	Cognome.placeholder = data.Cognome;
 
 
-	var L_Email = document.createElement("label");
-	L_Email.setAttribute("value", "Email");
-	L_Email.innerHTML = "Email: ";
-	var Email = document.createElement("input");
-	Email.type = "email";
-	Email.id = "Email";
-	Email.value = data.Email;
-	Email.placeholder = data.Email;
 
 
 	var L_Data_di_nascita = document.createElement("label");
@@ -88,9 +80,7 @@ async function form_profilo() {
 	form.appendChild(Cognome);
 	form.appendChild(br.cloneNode());
 
-	form.appendChild(L_Email);
-	form.appendChild(Email);
-	form.appendChild(br.cloneNode());
+
 
 	form.appendChild(L_Data_di_nascita);
 	form.appendChild(Data_di_nascita);
@@ -115,7 +105,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		let profilo_up = {}
 		profilo_up.Nome = document.getElementById("Nome").value;
 		profilo_up.Cognome = document.getElementById("Cognome").value;
-		profilo_up.Email = document.getElementById("Email").value;
 		profilo_up.Data_di_nascita = document.getElementById("Data_di_nascita").value;
 		profilo_up.Telefono = document.getElementById("Telefono").value;
 
@@ -129,7 +118,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			},
 			body: JSON.stringify({ "Nome": document.getElementById("Nome").value,
 			'Cognome' : document.getElementById("Cognome").value,
-			'Email' : document.getElementById("Email").value,
 			'Data_di_nascita' : document.getElementById("Data_di_nascita").value,
 			'Telefono' : document.getElementById("Telefono").value})
 		})

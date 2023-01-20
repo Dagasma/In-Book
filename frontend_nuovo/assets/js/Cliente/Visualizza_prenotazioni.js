@@ -2,8 +2,8 @@ let id_cliente = document.cookie.substring(3, 40);
 
 async function richiedi_prenotazioni(filtro) {
   // Dati fornitore
-  console.log(id_fornitore);
-  const response = await fetch('/prenotazioni/api/prenotazioni_filtrate_merge_utente/' + id_fornitore, {
+  console.log(id_cliente);
+  const response = await fetch('/prenotazioni/api/prenotazioni_filtrate_merge_utente/' + id_cliente, {
     method: 'GET',
     headers: {
       "Access-Control-Request-Method": "GET",
@@ -79,6 +79,7 @@ function generateTable(table, data, index) {
       let buttonCell = row.insertCell();
       // Crea un bottone e aggiungilo alla cella
       let button = document.createElement("button");
+
       button.innerHTML = "Annulla";
       button.type = 'submit';
       button.value = element.id;
@@ -90,17 +91,17 @@ function generateTable(table, data, index) {
 
 async function Annulla_prenotazione(id_prenotazione) {
   console.log(id_prenotazione, id_fornitore)
+  window.alert("Annullata");
+
   var Annulato = "Annullato"
-  const response = await fetch('/prenotazioni/api/annulla_prenotazione_cliente/' + id_prenotazione + '/' + id_fornitore, {
+  const response = await fetch('/prenotazioni/api/annulla_prenotazione_cliente/' + id_prenotazione + '/' + id_cliente, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ "Stato": Annulato })
   })
-    .then(response => response.json())
-    .then(data => { console.log(data); })
-    .catch(error => console.error(error));
+  console.log(response);
 
   window.alert("Annullata");
 

@@ -1,3 +1,5 @@
+let id_utente = document.cookie.substring(3, 40);
+
 
 async function richiedi_fornitori(filtro) {
 
@@ -73,10 +75,12 @@ function generateTable(table, data, index) {
     // Aggiungi una nuova cella alla fine della riga
     let buttonCell = row.insertCell();
     // Crea un bottone e aggiungilo alla cella
-    let button = document.createElement("button");
+    let button = document.createElement("SECTION");
+    button.setAttribute("class","input-bottom");
     button.innerHTML = "Visualizza Fornitore";
     button.setAttribute("data-id", element["ID_fornitore"]);
     button.setAttribute("id", element["ID_fornitore"]);
+    button.setAttribute("type", "submit");
     button.onclick = function exe_botton() { vai_dal_fornitore(element["ID_fornitore"]); }
     buttonCell.appendChild(button);
   }
@@ -84,17 +88,12 @@ function generateTable(table, data, index) {
 
 function vai_dal_fornitore(ID_fornitore) {
   console.log(ID_fornitore);
-<<<<<<< HEAD
   window.alert("Vuoi andare alla pagina del fornitore?");
-  let url = "/visualizza_fornitore?id=" + ID_fornitore;
+  let url = "/cliente/visualizza_fornitore?id=" + ID_fornitore;
   window.location.href = url;
   window.alert("Vuoi andare alla pagina del fornitore?");
+
   // window.location.href = `/visualizza_forntiore?id=${ID_fornitore}`;
-=======
-  if(window.confirm("Vuoi andare alla pagina del fornitore?"))
-    window.location = "/cliente/visualizza_fornitore?id="+ID_fornitore;   //DA AGGIUSTARE, non effettua il redirect
-  console.log(window.location.href);
->>>>>>> 7095003ad12aaa8a9df14b22eddd446d297e6e61
 }
 
 let en_page = 0;

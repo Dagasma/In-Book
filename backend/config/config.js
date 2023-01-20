@@ -1,7 +1,7 @@
 
 const config = {};
 require("fix-esm").register();
-config.baseUrl = "http://keycloak:8080";
+config.baseUrl = "http://inbook.local";
 config.express = require("express");
 config.session = require("express-session");
 config.path = require("path");

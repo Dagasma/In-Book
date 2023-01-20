@@ -343,7 +343,7 @@ svg {
 
 table {
     caption-side: bottom;
-    border-collapse: collapse
+    border-collapse: collapse;
 }
 
 caption {
@@ -367,7 +367,7 @@ tr {
     border-color: inherit;
     border-style: solid;
     padding: 10px;
-    border-width: 0
+    border-width: 1px
 }
 
 

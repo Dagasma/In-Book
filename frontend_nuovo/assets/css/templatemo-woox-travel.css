@@ -2137,6 +2137,8 @@ Reservation Page Style
   background-color: #ececec;
   border-bottom-right-radius: 23px;
   border-bottom-left-radius: 23px;
+  border-top-right-radius: 23px;
+  border-top-left-radius: 23px;
 }
 
 .reservation-form #reservation-form label {
@@ -2181,6 +2183,8 @@ Reservation Page Style
 .reservation-form #reservation-form button:hover {
   opacity: 0.8;
 }
+
+
 
 
 
@@ -2327,3 +2331,4 @@ body {
     padding: 0px;
   }
 }
+

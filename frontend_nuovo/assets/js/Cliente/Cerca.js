@@ -58,10 +58,6 @@ function generateTableHead(table, data, columns) {
   let text = document.createTextNode("");
   th.appendChild(text);
   row.appendChild(th);
-  th = document.createElement("th");
-  text = document.createTextNode("");
-  th.appendChild(text);
-  row.appendChild(th);
 }
 
 function generateTable(table, data, index) {
@@ -75,7 +71,7 @@ function generateTable(table, data, index) {
     // Aggiungi una nuova cella alla fine della riga
     let buttonCell = row.insertCell();
     // Crea un bottone e aggiungilo alla cella
-    let button = document.createElement("SECTION");
+    let button = document.createElement("button");
     button.setAttribute("class","input-bottom");
     button.innerHTML = "Visualizza Fornitore";
     button.setAttribute("data-id", element["ID_fornitore"]);

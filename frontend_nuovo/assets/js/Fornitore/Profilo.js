@@ -1,8 +1,8 @@
 let id_fornitore = document.cookie.substring(3, 40);
+let en_create = 1;
 
 async function richiedi_fornitore() {
 	console.log(id_fornitore);
-	console.log(id_fornitore)
 	/* DONE */
 
 	const response = await fetch('/fornitori/api/get_profilo/' + id_fornitore, {
@@ -13,7 +13,30 @@ async function richiedi_fornitore() {
 			'Content-Type': 'application/json;charset-UTF-8'
 		}
 	});
-	let data = await response.json(); //extract JSON from the http response
+	if (response.status == 200) {
+		let data = await response.json(); //extract JSON from the http response
+		data.Data_di_nascita = data.ID_utente_fornitore_UTENTI.Data_di_nascita;
+		data.Email = data.ID_utente_fornitore_UTENTI.Email;
+		data.Cognome = data.ID_utente_fornitore_UTENTI.Cognome;
+		data.Nome = data.ID_utente_fornitore_UTENTI.Nome;
+		en_create = 1;
+	}
+	else {
+		const response1 = await fetch('/cliente/api/get_profilo/' + id_fornitore, {
+			method: 'GET',
+			headers: {
+				"Access-Control-Request-Method": "GET",
+				"Accept": "application/json",
+				'Content-Type': 'application/json;charset-UTF-8'
+			}
+		});
+		const data = await response1.json();
+		data.Nome_Attivita = "vuoto";
+		data.Tipo_Attivita = "vuoto";
+		data.Indirizzo = "vuoto";
+		data.Capienza_massima = "vuoto";
+	}
+
 	console.log(data);
 	return data;
 }
@@ -39,8 +62,8 @@ async function form_profilo() {
 	var Nome = document.createElement("input");
 	Nome.type = "text";
 	Nome.id = "Nome";
-	Nome.value = data.ID_utente_fornitore_UTENTI.Nome;
-	Nome.placeholder = data.ID_utente_fornitore_UTENTI.Nome;
+	Nome.value = data.Nome;
+	Nome.placeholder = data.Nome;
 
 
 	// Create an input element for Full Name
@@ -50,8 +73,8 @@ async function form_profilo() {
 	var Cognome = document.createElement("input");
 	Cognome.type = "text";
 	Cognome.id = "Cognome";
-	Cognome.value = data.ID_utente_fornitore_UTENTI.Cognome;
-	Cognome.placeholder = data.ID_utente_fornitore_UTENTI.Cognome;
+	Cognome.value = data.Cognome;
+	Cognome.placeholder = data.Cognome;
 
 	// Create an input element for Full Name
 	var L_Email = document.createElement("label");
@@ -60,8 +83,8 @@ async function form_profilo() {
 	var Email = document.createElement("input");
 	Email.type = "email";
 	Email.id = "Email";
-	Email.value = data.ID_utente_fornitore_UTENTI.Email;
-	Email.placeholder = data.ID_utente_fornitore_UTENTI.Email;
+	Email.value = data.Email;
+	Email.placeholder = data.Email;
 
 	// Create an input element for Full Name
 	var L_Data_di_nascita = document.createElement("label");
@@ -70,8 +93,8 @@ async function form_profilo() {
 	var Data_di_nascita = document.createElement("input");
 	Data_di_nascita.type = "date";
 	Data_di_nascita.id = "Data_di_nascita";
-	Data_di_nascita.value = data.ID_utente_fornitore_UTENTI.Data_di_nascita;
-	Data_di_nascita.placeholder = data.ID_utente_fornitore_UTENTI.Data_di_nascita;
+	Data_di_nascita.value = data.Data_di_nascita;
+	Data_di_nascita.placeholder = data.Data_di_nascita;
 
 	// Create an input element for Full Name
 	var L_Telefono = document.createElement("label");
@@ -80,8 +103,8 @@ async function form_profilo() {
 	var Telefono = document.createElement("input");
 	Telefono.type = "tel";
 	Telefono.id = "Telefono";
-	Telefono.value = data.ID_utente_fornitore_UTENTI.Telefono;
-	Telefono.placeholder = data.ID_utente_fornitore_UTENTI.Telefono;
+	Telefono.value = data.Telefono;
+	Telefono.placeholder = data.Telefono;
 
 	// Create an input element for Full Name
 	var L_Nome_Attivita = document.createElement("label");
@@ -200,19 +223,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		console.log(profilo_aggiornato);
 
-		/*DONE*/
-		const response = await fetch('/fornitori/api/aggiorna_profilo/' + id_fornitore, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				"Nome_Attivita": profilo_aggiornato.Nome_Attivita,
-				"Tipo_Attivita": profilo_aggiornato.Tipo_Attivita,
-				"Indirizzo": profilo_aggiornato.Indirizzo,
-				"Capienza_massima": profilo_aggiornato.Capienza_massima
+		if (en_create == 0) {
+			const response = await fetch('/fornitori/api/aggiorna_profilo/' + id_fornitore, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					"Nome_Attivita": profilo_aggiornato.Nome_Attivita,
+					"Tipo_Attivita": profilo_aggiornato.Tipo_Attivita,
+					"Indirizzo": profilo_aggiornato.Indirizzo,
+					"Capienza_massima": profilo_aggiornato.Capienza_massima
+				})
 			})
-		})
+			let risposta_fornitore = await response; //extract JSON from the http response
+			console.log(risposta_fornitore)
+			if (risposta_fornitore.status == 200) {
+				window.alert(" Dati inseriti correttamente");
+			}
+			else {
+				window.alert(" Uno dei seguenti dati non è stato inserito correttamente oppure non hai modificato : Nome_Attivita ,Tipo_Attivita ,Indirizzo ,Capienza_massima");
+			}
+		}
+		else {
+			const response = await fetch('/fornitori/api/' + id_fornitore, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					"ID_utente_fornitore" : id_fornitore,
+					"Nome_Attivita": profilo_aggiornato.Nome_Attivita,
+					"Tipo_Attivita": profilo_aggiornato.Tipo_Attivita,
+					"Indirizzo": profilo_aggiornato.Indirizzo,
+					"Capienza_massima": profilo_aggiornato.Capienza_massima
+				})
+			})
+			let risposta_fornitore = await response; //extract JSON from the http response
+			console.log(risposta_fornitore)
+			if (risposta_fornitore.status == 200) {
+				window.alert(" Dati inseriti correttamente");
+			}
+			else {
+				window.alert(" Uno dei seguenti dati non è stato inserito correttamente oppure non hai modificato : Nome_Attivita ,Tipo_Attivita ,Indirizzo ,Capienza_massima");
+			}
+
+		}
 
 		let risposta_fornitore = await response; //extract JSON from the http response
 		console.log(risposta_fornitore)
@@ -351,28 +407,28 @@ function generateTable(table, data, index) {
 }
 
 
-async function elimina_orario (ID){
+async function elimina_orario(ID) {
 	console.log(ID);
 
-		/*  */
-	const response = await fetch('/OrarioAttivita/api/delete_orario/'+ ID, {
-	    method: 'DELETE',
-	    headers: {
-	        "Accept": "application/json",
-	        'Content-Type': 'application/json;charset-UTF-8'
-	    },
-		body: { ID_fornitore :id_fornitore }
+	const response = await fetch('/OrarioAttivita/api/delete_orario/' + ID, {
+		method: 'DELETE',
+		headers: {
+			"Accept": "application/json",
+			'Content-Type': 'application/json;charset-UTF-8'
+		},
+		body: { ID_fornitore: id_fornitore }
 	});
 	const risposta = await response; //extract JSON from the http response
 	// // do something with myJson
 	console.log(risposta)
-	if(risposta.status=200)
-	{
+	if (risposta.status = 200) {
 		window.alert("eliminato correttamente");
 	}
-	else{
+	else {
 		window.alert("Errore");
 	}
+
+
 	location.reload();
 }
 

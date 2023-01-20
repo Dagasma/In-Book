@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		const Descrizione = document.getElementById("Descrizione").value;
 		const Durata = document.getElementById("Durata").value;
 		console.log(Tipologia)
+
+	if(Tipologia.length!=0 && Durata.length !=0 && Descrizione.length!=0 ){
+
 		const response = await fetch('/servizi/api/crea_servizio', {
 			method: 'POST',
 			headers: {
@@ -28,6 +31,10 @@ document.addEventListener("DOMContentLoaded", function () {
 			window.alert("Errore");
 		}
 		location.reload();
+}
+else{
+	window.alert("Inserire tutti i campi");
+}
 
 	});
 });

@@ -1,4 +1,6 @@
-let id_servizio = 12;
+const url = new URL(window.location.href);
+const searchParams = new URLSearchParams(url.search);
+const id_servizio = searchParams.get('id');
 let id_fornitore = document.cookie.substring(3, 40);
 
 async function richiedi_servizi() {
@@ -114,6 +116,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		else {
 			window.alert("Errore");
 		}
+
+		let url = "/fornitore/visualizza_servizi";
+        window.location.href = url;
 
 	});
 });

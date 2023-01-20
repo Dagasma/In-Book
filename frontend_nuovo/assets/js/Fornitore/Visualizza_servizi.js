@@ -70,7 +70,9 @@ function generateTable(table, data, index) {
 function Modifica_func(ID) {
 	console.log(ID);
 	//href
-	window.alert('Sblocca href')
+	window.alert("Vuoi modificare il servizio");
+	let url = "/fornitore/modifica_servizi?id=" + ID;
+	window.location.href = url;
 }
 
 async function Elimina_func(id_servizio) {

@@ -64,7 +64,6 @@ exports.findOne = (req, res) => {
         include: [{
             model: tab_utenti,
             as: "ID_utente_fornitore_UTENTI",
-            
             required : true,
         }]
     })
@@ -112,7 +111,6 @@ exports.findFornitorebyCliente = (req, res) => {
             });
         });
 };
-
 
 
 exports.update = (req, res) => {

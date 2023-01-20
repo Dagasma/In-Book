@@ -10,10 +10,13 @@ module.exports = app => {
     router.post("/", users.create);
   
      //Retrieve a single User by id
-    router.get("/get_profilo/:id", middleware_check.check_id_param,users.findOne);
+    router.get("/get_profilo/:id", middleware_check.check_id_param("id"),users.findOne);
   
     // Update a User with id
-    router.put("/aggiorna_profilo/:id", middleware_check.check_id_param,users.update);
+    router.put("/aggiorna_profilo/:id", middleware_check.check_id_param("id"),users.update);
+
+    // Update a User with id
+    router.put("/aggiorna_profilo_fornitore/:id",users.update);
 
     app.use('/cliente/api', config.keycloak.protect("realm:cliente"), router);
    };

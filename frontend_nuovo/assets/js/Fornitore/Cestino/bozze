@@ -1,0 +1,167 @@
+
+
+function richiedi_orario() {
+	// Dati fornitore
+	let ex_data = [
+		{
+			"ID": 1,
+			"ID_fornitore": "5",
+			"Giorno_della_settimana": "Lunedi",
+			"Orario_apertura": "08:00:00",
+			"Orario_chiusura": "13:00:00"
+		},
+		{
+			"ID": 2,
+			"ID_fornitore": "5",
+			"Giorno_della_settimana": "Mercoledi",
+			"Orario_apertura": "08:00:00",
+			"Orario_chiusura": "13:00:00"
+		},
+		{
+			"ID": 3,
+			"ID_fornitore": "5",
+			"Giorno_della_settimana": "Giovedi",
+			"Orario_apertura": "08:00:00",
+			"Orario_chiusura": "13:00:00"
+		},
+		{
+			"ID": 4,
+			"ID_fornitore": "5",
+			"Giorno_della_settimana": "Venerdi",
+			"Orario_apertura": "08:00:00",
+			"Orario_chiusura": "13:00:00"
+		}
+	];
+
+	console.log("entrato in orario");
+
+	/* DONE */
+	// const response = await fetch('/OrarioAttivita/api/Orario_fornitore/' + id_utente, {
+	//     method: 'GET',
+	//     headers: {
+	//         "Access-Control-Request-Method": "GET",
+	//         "Accept": "application/json",
+	//         'Content-Type': 'application/json;charset-UTF-8'
+	//     }
+	// });
+	// const dati_fornitore = await response.json(); //extract JSON from the http response
+	// // do something with myJson
+	return ex_data;
+}
+
+
+function generateTableHead(table, data, columns) {
+	let thead = table.createTHead();
+	let row = thead.insertRow();
+	for (let key of columns) {
+		let th = document.createElement("th");
+		let text = document.createTextNode(key);
+		th.appendChild(text);
+		row.appendChild(th);
+	}
+	let th = document.createElement("th");
+	let text = document.createTextNode("");
+	th.appendChild(text);
+	row.appendChild(th);
+	th = document.createElement("th");
+	text = document.createTextNode("");
+	th.appendChild(text);
+	row.appendChild(th);
+}
+
+function generateTable(table, data, index) {
+	for (let element of data) {
+		let row = table.insertRow();
+		console.log(element);
+		for (key of index) {
+			let cell = row.insertCell();
+			let text = document.createTextNode(element[key]);
+			cell.appendChild(text);
+		}
+		// Aggiungi una nuova cella alla fine della riga
+		let buttonCell = row.insertCell();
+		// Crea un bottone e aggiungilo alla cella
+		let button = document.createElement("button");
+		button.innerHTML = "Elimina";
+		button.setAttribute("type", "submit");
+		button.setAttribute("data_id", element["ID"]);
+	
+		button.setAttribute("id", "btn_elimina");
+		button.onclick = function exe_botton() { elimina_orario(element["ID"]); }
+		buttonCell.appendChild(button);
+	}
+}
+
+function stampa(a, b) {
+	console.log(a, b);
+}
+
+function create_table_orari() {
+	//let table = document.querySelector("table");// create table
+	let columns = ["Giorno della settimana",
+		"Orario Apertura",
+		"Orario Chiusura"];
+	let keys = ["Giorno_della_settimana",
+		"Orario_apertura", "Orario_chiusura"];
+	var data_ora = richiedi_orario();
+	console.log(data_ora);
+	var table = document.getElementById("json-table");
+	let data = Object.keys(data_ora[0]);//save the keys
+	console.log(data)
+	generateTableHead(table, data, columns);//create header
+	generateTable(table, data_ora, keys);//print table
+}
+
+
+function elimina_orario (ID){
+	console.log(ID);
+
+		/*  */
+	// const response = await fetch('OrarioAttivita/api/delete_orario/'+ ID, {
+	//     method: 'DELETE',
+	//     headers: {
+	//         "Accept": "application/json",
+	//         'Content-Type': 'application/json;charset-UTF-8'
+	//     }
+	// });
+	// const dati_fornitore = await response.json(); //extract JSON from the http response
+	// // do something with myJson
+
+}
+
+//listener bottone prenotazione
+document.addEventListener("DOMContentLoaded", function() {
+	document.getElementById("btn_modifica_profilo").addEventListener("click",function (e){
+		e.preventDefault();
+	
+
+		console.log("FINE : " )
+		// document.getElementById("myForm").style.display = "none";
+
+		const Nome = document.getElementById("Nome").value;
+		const Cognome = document.getElementById("Cognome").value;
+		const Email = document.getElementById("Email").value;
+		const Data_di_nascita = document.getElementById("Data_di_nascita").value;
+		const Telefono = document.getElementById("Telefono").value;
+
+		/*DONE*/
+		// fetch('/cliente/api/aggiorna_profilo/' + id_cliente, {
+		//     method: 'PUT',
+		//     headers: {
+		//         'Content-Type': 'application/json'
+		//     },
+		//     body: JSON.stringify({
+			// "Nome": Nome,
+			// "Cognome": Cognome,
+			// "Email": Email,
+			// "Data_di_nascita": Data_di_nascita,
+			// "Telefono": Telefono
+		//     })
+		// })
+		//     .then(response => response.json())
+		//     .then(data => { console.log(data); })
+		//     .catch(error => console.error(error));
+		//      esempio_slot = response;
+		
+	});
+	});

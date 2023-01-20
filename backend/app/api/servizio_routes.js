@@ -1,13 +1,13 @@
 const config = require("../../config/config.js");
 
-
 module.exports = app => {
     const middleware_check = require("../middleware_check");
     const servizi = require("../controllers/Servizi_controller.js");
     var router = config.express.Router();
     
     // Retrive all servizi from a id_fornitore //vanno messi i config.keycloak.protect()
-    router.get("get_servizi_per_fornitore/:ID_fornitore",config.keycloak.protect('realm:cliente'),servizi.get_servizi_per_fornitore)
+    router.get("/get_servizi_per_fornitore/:ID_fornitore",config.keycloak.protect('realm:cliente'),servizi.get_servizi_per_fornitore)
+    router.get("/get_servizi_by_fornitore/:ID_fornitore",config.keycloak.protect('realm:fornitore'),servizi.get_servizi_per_fornitore)
     router.get("/get_Servizi_e_fornitori",config.keycloak.protect('realm:cliente'),servizi.get_Servizi_e_fornitori) //da rivedere (chi la puo fare, cosa deve tornare ecc.)
     router.get("/get_servizio/:id_servizio",servizi.get_servizio)
 

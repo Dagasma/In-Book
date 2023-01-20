@@ -14,7 +14,7 @@ exports.crea_servizio = (req, res) => {
 
     // Create a Servizio
     const servizi = {
-        ID_fornitore:  req.body.ID_fornitore,
+        ID_fornitore: req.body.ID_fornitore,
         Tipologia: req.body.Tipologia,
         Descrizione: req.body.Descrizione,
         Durata: req.body.Durata,
@@ -59,7 +59,7 @@ exports.get_servizi_per_fornitore = (req, res) => {
 // Retrieve all Servizi
 exports.get_servizio = (req, res) => {
     const id_servizio = req.params.id_servizio;
-    var condition = id_servizio    ? { ID: { [Op.like]: `%${id_servizio}%` } }       : null;
+    var condition = id_servizio ? { ID: { [Op.like]: `%${id_servizio}%` } } : null;
 
     tab_servizi
         .findAll({ where: condition })
@@ -82,7 +82,7 @@ exports.aggiorna_servizio = (req, res) => {
 
     tab_servizi
         .update(req.body, {
-            where: { id: id_servizio, ID_fornitore: id_fornitore},
+            where: { id: id_servizio, ID_fornitore: id_fornitore },
         })
         .then((num) => {
             if (num == 1) {
@@ -109,7 +109,7 @@ exports.delete_servizio = (req, res) => {
 
     tab_servizi
         .destroy({
-            where: { id: id, ID_fornitore: id_fornitore},
+            where: { id: id, ID_fornitore: id_fornitore },
         })
         .then((num) => {
             if (num == 1) {
@@ -162,7 +162,7 @@ exports.get_Servizi_e_fornitori = (req, res) => {
             }]
         })
         .then((data) => {
-             res.send(data);
+            res.send(data);
         })
         .catch((err) => {
             res.status(500).send({

@@ -1,44 +1,35 @@
+let id_fornitore = document.cookie.substring(3, 40);
 
-function richiedi_fornitore() {
-	// Dati fornitore
-	var data = {
-		"Nome_Attivita": "Tutto a 0,09cent",
-		"Tipo_Attivita": "Tozza bancone",
-		"Indirizzo": "Casa tua , 66666, SO",
-		"Capienza_massima": "2022",
-		"Nome": "pepp",
-		"Cognome": "de coglio",
-		"Email": "Casa sua , 66666, SO",
-		"Telefono": "42342342",
-		"Data_di_nascita": "2000-10-01"
-	};
-	console.log("entrato in richiedi");
-
+async function richiedi_fornitore() {
+	console.log(id_fornitore);
+	console.log(id_fornitore)
 	/* DONE */
-	// const response = await fetch('cliente/api/get_profilo/' + id_utente, {
-	//     method: 'GET',
-	//     headers: {
-	//         "Access-Control-Request-Method": "GET",
-	//         "Accept": "application/json",
-	//         'Content-Type': 'application/json;charset-UTF-8'
-	//     }
-	// });
-	// const dati_fornitore = await response.json(); //extract JSON from the http response
-	// // do something with myJson
+
+	const response = await fetch('/fornitori/api/get_profilo/' + id_fornitore, {
+		method: 'GET',
+		headers: {
+			"Access-Control-Request-Method": "GET",
+			"Accept": "application/json",
+			'Content-Type': 'application/json;charset-UTF-8'
+		}
+	});
+	let data = await response.json(); //extract JSON from the http response
+	console.log(data);
 	return data;
 }
 
+
 //document.body.onload = create_table
-function form_profilo() {
-	var down = document.getElementById("GFG_DOWN");
-	let data = richiedi_fornitore();
+async function form_profilo() {
+	console.log("chiamo la funzione")
+	let data = await richiedi_fornitore();
+	console.log("la funzione mi ritorna", data)
+
 	// Create a break line element
 	var br = document.createElement("br");
 
 	// Create a form dynamically
 	var form = document.createElement("form");
-	form.setAttribute("method", "get");
-	form.setAttribute("action", "/");
 
 	// Create an input element for Full Name
 	var L_Nome = document.createElement("label");
@@ -48,8 +39,8 @@ function form_profilo() {
 	var Nome = document.createElement("input");
 	Nome.type = "text";
 	Nome.id = "Nome";
-	Nome.value = data.Nome;
-	Nome.placeholder = data.Nome;
+	Nome.value = data.ID_utente_fornitore_UTENTI.Nome;
+	Nome.placeholder = data.ID_utente_fornitore_UTENTI.Nome;
 
 
 	// Create an input element for Full Name
@@ -59,8 +50,8 @@ function form_profilo() {
 	var Cognome = document.createElement("input");
 	Cognome.type = "text";
 	Cognome.id = "Cognome";
-	Cognome.value = data.Cognome;
-	Cognome.placeholder = data.Cognome;
+	Cognome.value = data.ID_utente_fornitore_UTENTI.Cognome;
+	Cognome.placeholder = data.ID_utente_fornitore_UTENTI.Cognome;
 
 	// Create an input element for Full Name
 	var L_Email = document.createElement("label");
@@ -69,8 +60,8 @@ function form_profilo() {
 	var Email = document.createElement("input");
 	Email.type = "email";
 	Email.id = "Email";
-	Email.value = data.Email;
-	Email.placeholder = data.Email;
+	Email.value = data.ID_utente_fornitore_UTENTI.Email;
+	Email.placeholder = data.ID_utente_fornitore_UTENTI.Email;
 
 	// Create an input element for Full Name
 	var L_Data_di_nascita = document.createElement("label");
@@ -79,8 +70,8 @@ function form_profilo() {
 	var Data_di_nascita = document.createElement("input");
 	Data_di_nascita.type = "date";
 	Data_di_nascita.id = "Data_di_nascita";
-	Data_di_nascita.value = data.Data_di_nascita;
-	Data_di_nascita.placeholder = data.Data_di_nascita;
+	Data_di_nascita.value = data.ID_utente_fornitore_UTENTI.Data_di_nascita;
+	Data_di_nascita.placeholder = data.ID_utente_fornitore_UTENTI.Data_di_nascita;
 
 	// Create an input element for Full Name
 	var L_Telefono = document.createElement("label");
@@ -89,8 +80,8 @@ function form_profilo() {
 	var Telefono = document.createElement("input");
 	Telefono.type = "tel";
 	Telefono.id = "Telefono";
-	Telefono.value = data.Telefono;
-	Telefono.placeholder = data.Telefono;
+	Telefono.value = data.ID_utente_fornitore_UTENTI.Telefono;
+	Telefono.placeholder = data.ID_utente_fornitore_UTENTI.Telefono;
 
 	// Create an input element for Full Name
 	var L_Nome_Attivita = document.createElement("label");
@@ -120,7 +111,7 @@ function form_profilo() {
 	L_indirizzo.innerHTML = "indirizzo: ";
 	var indirizzo = document.createElement("input");
 	indirizzo.type = "text";
-	indirizzo.id = "Tipo_Attivita";
+	indirizzo.id = "Indirizzo";
 	indirizzo.value = data.Indirizzo;
 	indirizzo.placeholder = data.Indirizzo;
 
@@ -134,13 +125,6 @@ function form_profilo() {
 	Capienza_massima.value = data.Capienza_massima;
 	Capienza_massima.placeholder = data.Capienza_massima;
 
-
-	// create a submit button
-	var s = document.createElement("button");
-	s.setAttribute("type", "submit");
-	s.setAttribute("value", "Modifica profilo");
-	s.setAttribute("id", "btn_modifica_profilo");
-	s.innerHTML = "Modifica profilo";
 	// Append the full name input to the form
 	form.appendChild(L_Nome);
 	form.appendChild(Nome);
@@ -189,64 +173,121 @@ function form_profilo() {
 	form.appendChild(Capienza_massima);
 	form.appendChild(br.cloneNode());
 
-
-	// Append the submit button to the form
-	form.appendChild(s);
-
 	document.getElementsByTagName("form")[0].appendChild(form);
 	//document.getElementsByTagName("form").appendChild(form);
 
 }
 
+let profilo_aggiornato = {}
 
-function richiedi_orario() {
-	// Dati fornitore
-	let ex_data = [
-		{
-			"ID": 1,
-			"ID_fornitore": "5",
-			"Giorno_della_settimana": "Lunedi",
-			"Orario_apertura": "08:00:00",
-			"Orario_chiusura": "13:00:00"
-		},
-		{
-			"ID": 2,
-			"ID_fornitore": "5",
-			"Giorno_della_settimana": "Mercoledi",
-			"Orario_apertura": "08:00:00",
-			"Orario_chiusura": "13:00:00"
-		},
-		{
-			"ID": 3,
-			"ID_fornitore": "5",
-			"Giorno_della_settimana": "Giovedi",
-			"Orario_apertura": "08:00:00",
-			"Orario_chiusura": "13:00:00"
-		},
-		{
-			"ID": 4,
-			"ID_fornitore": "5",
-			"Giorno_della_settimana": "Venerdi",
-			"Orario_apertura": "08:00:00",
-			"Orario_chiusura": "13:00:00"
+//listener bottone modifica
+document.addEventListener("DOMContentLoaded", function () {
+	document.getElementById("btn_modifica").addEventListener("click", async function (e) {
+		e.preventDefault();
+
+		console.log("FINE : ")
+		// document.getElementById("myForm").style.display = "none";
+
+		profilo_aggiornato.Nome = document.getElementById("Nome").value;
+		profilo_aggiornato.Cognome = document.getElementById("Cognome").value;
+		profilo_aggiornato.Email = document.getElementById("Email").value;
+		profilo_aggiornato.Data_di_nascita = document.getElementById("Data_di_nascita").value;
+		profilo_aggiornato.Telefono = document.getElementById("Telefono").value;
+		profilo_aggiornato.Nome_Attivita = document.getElementById("Nome_Attivita").value;
+		profilo_aggiornato.Tipo_Attivita = document.getElementById("Tipo_Attivita").value;
+		profilo_aggiornato.indirizzo = document.getElementById("Indirizzo").value;
+		profilo_aggiornato.Capienza_massima = document.getElementById("Capienza_massima").value;
+
+		console.log(profilo_aggiornato);
+
+		/*DONE*/
+		const response = await fetch('/fornitori/api/aggiorna_profilo/' + id_fornitore, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				"Nome_Attivita": profilo_aggiornato.Nome_Attivita,
+				"Tipo_Attivita": profilo_aggiornato.Tipo_Attivita,
+				"Indirizzo": profilo_aggiornato.Indirizzo,
+				"Capienza_massima": profilo_aggiornato.Capienza_massima
+			})
+		})
+
+		let risposta_fornitore = await response; //extract JSON from the http response
+		console.log(risposta_fornitore)
+		if (risposta_fornitore.status == 200) {
+			window.alert(" Dati inseriti correttamente");
 		}
-	];
+		else {
+			window.alert(" Uno dei seguenti dati non è stato inserito correttamente oppure non hai modificato : Nome_Attivita ,Tipo_Attivita ,Indirizzo ,Capienza_massima");
+		}
 
-	console.log("entrato in orario");
+		/*DONE*/
+		const response1 = await fetch('/cliente/api/aggiorna_profilo_fornitore/' + id_fornitore, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				"Nome": profilo_aggiornato.Nome,
+				'Cognome': profilo_aggiornato.Cognome,
+				'Email': profilo_aggiornato.Email,
+				'Data_di_nascita': profilo_aggiornato.Data_di_nascita,
+				'Telefono': profilo_aggiornato.Telefono
+			})
+		})
 
-	/* DONE */
-	// const response = await fetch('/OrarioAttivita/api/Orario_fornitore/' + id_utente, {
-	//     method: 'GET',
-	//     headers: {
-	//         "Access-Control-Request-Method": "GET",
-	//         "Accept": "application/json",
-	//         'Content-Type': 'application/json;charset-UTF-8'
-	//     }
-	// });
-	// const dati_fornitore = await response.json(); //extract JSON from the http response
-	// // do something with myJson
-	return ex_data;
-}
+		const risposta1 = await response1;
+		console.log(risposta1.message);
+		if (risposta1.status == 200) {
+			window.alert("Aggiornato dati");
+		}
+		else {
+			window.alert("Uno dei seguenti dati non è stato inserito correttamente oppure non hai modificato : Nome , Cognome, email, data_di_nascita,Telefono");
+		}
+
+
+
+
+	});
+});
+
+//listener bottone orario
+document.addEventListener("DOMContentLoaded", function () {
+	document.getElementById("btn_new_orario").addEventListener("click", async function (e) {
+		e.preventDefault();
+
+		const Giorno = document.getElementById("Giorno").value;
+		const Orario_I = document.getElementById("Orario_I").value;
+		const Orario_F = document.getElementById("Orario_F").value;
+		console.log("btn_new_orario : ", Giorno, Orario_I, Orario_F);
+
+		/**/
+		const response = await fetch('/OrarioAttivita/api/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				"ID_fornitore": id_fornitore,
+				"Giorno_della_settimana": Giorno,
+				"Orario_apertura": Orario_I,
+				"Orario_chiusura": Orario_F
+			})
+		})
+		const risposta = await response;
+		console.log(risposta.status)
+
+		if (risposta.status == 200) {
+			window.alert('Orario creato');
+		}
+		else {
+			window.alert('Dati inseriti non validi');
+		}
+
+	});
+});
 
 
 function generateTableHead(table, data, columns) {
@@ -268,6 +309,24 @@ function generateTableHead(table, data, columns) {
 	row.appendChild(th);
 }
 
+
+async function richiedi_orario() {
+	/* DONE */
+	const response = await fetch('/OrarioAttivita/api/Orario_fornitore/' + id_fornitore, {
+		method: 'GET',
+		headers: {
+			"Access-Control-Request-Method": "GET",
+			"Accept": "application/json",
+			'Content-Type': 'application/json;charset-UTF-8'
+		}
+	});
+	const orari_tornati = await response.json(); //extract JSON from the http response
+	// // do something with myJson
+	console.log("orari: ", orari_tornati);
+	return orari_tornati;
+}
+
+
 function generateTable(table, data, index) {
 	for (let element of data) {
 		let row = table.insertRow();
@@ -284,116 +343,55 @@ function generateTable(table, data, index) {
 		button.innerHTML = "Elimina";
 		button.setAttribute("type", "submit");
 		button.setAttribute("data_id", element["ID"]);
-	
+
 		button.setAttribute("id", "btn_elimina");
 		button.onclick = function exe_botton() { elimina_orario(element["ID"]); }
 		buttonCell.appendChild(button);
 	}
 }
 
-function stampa(a, b) {
-	console.log(a, b);
+
+async function elimina_orario (ID){
+	console.log(ID);
+
+		/*  */
+	const response = await fetch('/OrarioAttivita/api/delete_orario/'+ ID, {
+	    method: 'DELETE',
+	    headers: {
+	        "Accept": "application/json",
+	        'Content-Type': 'application/json;charset-UTF-8'
+	    },
+		body: { ID_fornitore :id_fornitore }
+	});
+	const risposta = await response; //extract JSON from the http response
+	// // do something with myJson
+	console.log(risposta)
+	if(risposta.status=200)
+	{
+		window.alert("eliminato correttamente");
+	}
+	else{
+		window.alert("Errore");
+	}
+	location.reload();
 }
 
-function create_table_orari() {
+async function create_table_orari() {
 	//let table = document.querySelector("table");// create table
 	let columns = ["Giorno della settimana",
 		"Orario Apertura",
 		"Orario Chiusura"];
 	let keys = ["Giorno_della_settimana",
 		"Orario_apertura", "Orario_chiusura"];
-	var data_ora = richiedi_orario();
-	console.log(data_ora);
-	var table = document.getElementById("json-table");
-	let data = Object.keys(data_ora[0]);//save the keys
-	console.log(data)
-	generateTableHead(table, data, columns);//create header
-	generateTable(table, data_ora, keys);//print table
+
+	console.log("entro in crea tabella")
+	var data_ora = await richiedi_orario();
+	if (data_ora.length > 0) {
+		var table = document.getElementById("json-table");
+		let data = Object.keys(data_ora[0]); //save the keys
+		console.log(data)
+		generateTableHead(table, data, columns); //create header
+		generateTable(table, data_ora, keys); //print table
+	}
+	else { table.innerHTML = "Non è presente nessuna prenotazione..."; }
 }
-
-//listener bottone orario
-document.addEventListener("DOMContentLoaded", function () {
-	document.getElementById("btn_new_orario").addEventListener("click", function (e) {
-		e.preventDefault();
-
-
-		// document.getElementById("myForm").style.display = "none";
-
-		const Giorno = document.getElementById("Giorno").value;
-		const Orario_I = document.getElementById("Orario_I").value;
-		const Orario_F = document.getElementById("Orario_F").value;
-		console.log("btn_new_orario : ", Giorno ,Orario_I);
-
-		/**/
-		// fetch('/cliente/api/aggiorna_profilo' + id_cliente, {
-		//     method: 'PUT',
-		//     headers: {
-		//         'Content-Type': 'application/json'
-		//     },
-		//     body: JSON.stringify({
-			// "ID_fornitore": ? ,
-			// "Giorno_della_settimana": Giorno,
-			// "Orario_apertura": Orario_I,
-			// "Orario_chiusura": Orario_F
-		//     })
-		// })
-		//     .then(response => response.json())
-		//     .then(data => { console.log(data); })
-		//     .catch(error => console.error(error));
-		//      esempio_slot = response;
-
-	});
-});
-
-function elimina_orario (ID){
-	console.log(ID);
-
-		/*  */
-	// const response = await fetch('OrarioAttivita/api/delete_orario/'+ ID, {
-	//     method: 'DELETE',
-	//     headers: {
-	//         "Accept": "application/json",
-	//         'Content-Type': 'application/json;charset-UTF-8'
-	//     }
-	// });
-	// const dati_fornitore = await response.json(); //extract JSON from the http response
-	// // do something with myJson
-
-}
-
-//listener bottone prenotazione
-document.addEventListener("DOMContentLoaded", function() {
-	document.getElementById("btn_modifica_profilo").addEventListener("click",function (e){
-		e.preventDefault();
-	
-
-		console.log("FINE : " )
-		// document.getElementById("myForm").style.display = "none";
-
-		const Nome = document.getElementById("Nome").value;
-		const Cognome = document.getElementById("Cognome").value;
-		const Email = document.getElementById("Email").value;
-		const Data_di_nascita = document.getElementById("Data_di_nascita").value;
-		const Telefono = document.getElementById("Telefono").value;
-
-		/*DONE*/
-		// fetch('/cliente/api/aggiorna_profilo/' + id_cliente, {
-		//     method: 'PUT',
-		//     headers: {
-		//         'Content-Type': 'application/json'
-		//     },
-		//     body: JSON.stringify({
-			// "Nome": Nome,
-			// "Cognome": Cognome,
-			// "Email": Email,
-			// "Data_di_nascita": Data_di_nascita,
-			// "Telefono": Telefono
-		//     })
-		// })
-		//     .then(response => response.json())
-		//     .then(data => { console.log(data); })
-		//     .catch(error => console.error(error));
-		//      esempio_slot = response;
-		
-	});
-	});

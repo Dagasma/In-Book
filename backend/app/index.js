@@ -19,7 +19,6 @@ app.use(
     })
 );
 
-
 app.use(config.keycloak.middleware()); //commentato per testare api
 
 app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
@@ -38,10 +37,11 @@ db.sequelize
         console.log("Failed to sync db: " + err.message);
     });
 
+app.use("/",home);
 app.use("/cliente", config.keycloak.protect("realm:cliente"), middleware_check.send_cookie,cliente);
 app.use("/fornitore", config.keycloak.protect("realm:fornitore"),middleware_check.send_cookie, fornitore);
 app.use("/amministratore",config.keycloak.protect("realm:amministratore"), middleware_check.send_cookie,amministratore);
-app.use("/home",home)
+
 
 
 require("./api/cliente_routes")(app);

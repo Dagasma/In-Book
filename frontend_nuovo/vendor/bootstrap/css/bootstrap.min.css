@@ -366,8 +366,10 @@ thead,
 tr {
     border-color: inherit;
     border-style: solid;
+    padding: 10px;
     border-width: 0
 }
+
 
 label {
     display: inline-block

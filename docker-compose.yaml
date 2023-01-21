@@ -5,69 +5,65 @@ name: "In-Book"
 
 services:
     db:
+        image: inbookreg.azurecr.io/db
         build: ./backend/database/
+        platform: "linux/amd64"
         restart: always
         container_name: db_inbook
         ports:
-            - "3306:3306" #per testare il db lo espongo all'esterno
+            - "3306:3306"
         networks:
             - PHPNetwork
             - DBNetwork
 
-    phpmyadmin_gestore:
-        image: phpmyadmin
-        container_name: phpmyadmin
-        restart: always
-        environment:
-            MYSQL_ROOT_PASSWORD: prova
-        ports:
-            - "9090:80" #per settare porte devo rifare la creazione del compose
-        networks:
-            - PHPNetwork
-
     webserver:
+        image: inbookreg.azurecr.io/backend
         build: ./backend/config/
+        platform: "linux/amd64"
         container_name: backend
         depends_on:
             - db
         environment:
-            - NODE_ENV=production
+            NODE_ENV: production
+            NODE_TLS_REJECT_UNAUTHORIZED: 0 
         expose:
-            - 4000
+            - "4000"
         networks:
             - DBNetwork
         volumes:
-            - ./backend/:/server/backend/
-            - ./frontend_nuovo/:/server/frontend_nuovo/
-            - ./package.json:/server/package.json
-            - ./package-lock.json:/server/package-lock.json
+            - ${WEBAPP_STORAGE_HOME}/backend/:/backend/
+            - ${WEBAPP_STORAGE_HOME}/frontend_nuovo/:/frontend_nuovo/
+            - ${WEBAPP_STORAGE_HOME}/package.json:/package.json
+            - ${WEBAPP_STORAGE_HOME}/package-lock.json:/package-lock.json
+            - ${WEBAPP_STORAGE_HOME}/keycloak.json:/keycloak.json
 
     keycloak:
+        image: inbookreg.azurecr.io/keycloak
         build: ./keycloak/
+        platform: "linux/amd64"
         container_name: keycloak
         depends_on:
             - db
         expose:
-            - 8080
-            - 8443
+            - "8080"
+            - "8443"
         networks:
             - DBNetwork
 
     reverseproxy:
+        image: inbookreg.azurecr.io/nginx
+        hostname: inbook.azurewebsites.net
+        platform: "linux/amd64"
         container_name: nginx
-        hostname: inbook.local
-        image: nginx
+        build: ./nginx/
         depends_on:
           - db
           - webserver
-        command: ["./wait-for-it.sh", "backend:4000","--","nginx", "-g", "daemon off;"]
         ports:
-            - 80:80
-            - 433:433
+            - "80:80"
+            - "433:433"
         volumes:
-            - ./nginx/conf:/etc/nginx
-            - ./nginx/private:/etc/ssl/private
-            - ./nginx/wait-for-it.sh:/wait-for-it.sh
+            - ${WEBAPP_STORAGE_HOME}/nginx/conf:/etc/nginx
         networks:
           - DBNetwork
 

@@ -1,6 +1,6 @@
 {
   "realm": "inbook",
-  "auth-server-url": "http://inbook.local",
+  "auth-server-url": "http://inbook.azurewebsites.net",
   "ssl-required": "none",
   "resource": "nodejs",
   "verify-token-audience": false,

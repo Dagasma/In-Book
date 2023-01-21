@@ -15,7 +15,6 @@ router.get("/login", config.keycloak.protect(), function (request, response) {
                 role = element;
             }
         });
-    console.log("ciao");
     if(role == ""){
         response.redirect("/logout"); 
     } 

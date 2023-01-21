@@ -149,8 +149,9 @@ exports.deleteAll = (req, res) => {
 // Delete a Orario with the specified id in the request
 exports.delete_orario = (req, res) => {
     const id = req.params.id_orario;
-    const ID_fornitore = req.body.ID_fornitore;
+    const ID_fornitore = req.params.ID_fornitore;
 
+    console.log(id , ID_fornitore);
 
     tab_orario
         .destroy({

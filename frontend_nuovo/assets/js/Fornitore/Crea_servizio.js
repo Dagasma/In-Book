@@ -36,5 +36,9 @@ else{
 	window.alert("Inserire tutti i campi");
 }
 
+
+let url = "/fornitore/visualizza_servizi";
+window.location.href = url;
+
 	});
 });

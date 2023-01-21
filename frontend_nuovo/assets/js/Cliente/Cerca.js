@@ -76,7 +76,6 @@ function generateTable(table, data, index) {
     button.innerHTML = "Visualizza Fornitore";
     button.setAttribute("data-id", element["ID_fornitore"]);
     button.setAttribute("id", element["ID_fornitore"]);
-    button.setAttribute("type", "submit");
     button.onclick = function exe_botton() { vai_dal_fornitore(element["ID_fornitore"]); }
     buttonCell.appendChild(button);
   }

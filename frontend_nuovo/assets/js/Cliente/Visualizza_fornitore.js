@@ -152,13 +152,13 @@ function Calc_slot_liberi(slot, capacita, durata) {
     let slot_durata = diff_time_hhmm(slot[1].Orario_inizio, slot[0].Orario_inizio)
     let rapporto = Rapporto_time(durata, slot_durata)
 
-    console.log(rapporto, slot_durata, slot);
+    //console.log(rapporto, slot_durata, slot);
 
     let cnt = 0; // conteggio slot
     for (let i = 0; i < slot.length - rapporto+1; i++) { // scorro tutti gli slot
-        console.log("slot ", i, "orario :", slot[i].Orario_inizio, "slot durata :", slot_durata);
+        //console.log(slot[i + j].Posti_disponibili , capacita)
+        //console.log("slot ", i, "orario :", slot[i].Orario_inizio, "slot durata :", slot_durata);
         for (let j = 0; j < rapporto; j++) { // scorro gli slot successivi che copre la prenotazione
-            console.log(i+j ,slot[i + j].Posti_disponibili)
             if ((j == rapporto-1 && slot[i + j].Posti_disponibili >= capacita)||(i+j>=slot.length)) {
                 cnt++;
                 if (cnt == rapporto) {
@@ -300,10 +300,6 @@ document.addEventListener("DOMContentLoaded", function () { // aspetta il carica
             select.appendChild(optionElement);
         });
         select.setAttribute("dati", form1_prenotazione);
-
-        const url = new URL(window.location.href);
-        const searchParams = new URLSearchParams(url.search);
-        window.history.pushState({}, "", `${url.pathname}}`);
 
     });
 });

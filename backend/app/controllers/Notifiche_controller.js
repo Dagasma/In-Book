@@ -182,7 +182,7 @@ exports.findAllFornitore_unione = (req, res) => {
 
         // mi torna una tabella con ORARIO - DURATA - SUM(PERSONE)
         const tab_notifiche_unione =  db.sequelize.query('SELECT  `FORNITORI`.`ID_utente_fornitore` ,`FORNITORI`.`Nome_Attivita` ,`FORNITORI`.`Tipo_attivita`,`FORNITORI`.`Indirizzo` ,`SERVIZI`.`Tipologia`,`SERVIZI`.`Descrizione`,`PRENOTAZIONI`.`Stato`,`PRENOTAZIONI`.`ID`, `NOTIFICHE`.`Descrizione_notifica`,' +
-        '  `NOTIFICHE`.`Orario` AS Orario_notifica  FROM `PRENOTAZIONI`  RIGHT JOIN `NOTIFICHE` ON `PRENOTAZIONI`.`ID`= `NOTIFICHE`.`ID_prenotazione` LEFT JOIN `SERVIZI` ON`PRENOTAZIONI`.`ID_servizio` = `SERVIZI`.`ID` LEFT JOIN '+
+        '  `NOTIFICHE`.`Orario` AS Orario_notifica , `PRENOTAZIONI`.`Orario_prenotazione_inizio` AS Orario_inizio , `PRENOTAZIONI`.`Numero_clienti`  FROM `PRENOTAZIONI`  RIGHT JOIN `NOTIFICHE` ON `PRENOTAZIONI`.`ID`= `NOTIFICHE`.`ID_prenotazione` LEFT JOIN `SERVIZI` ON`PRENOTAZIONI`.`ID_servizio` = `SERVIZI`.`ID` LEFT JOIN '+
         ' `FORNITORI` ON`FORNITORI`.`ID_utente_fornitore` = `SERVIZI`.`ID_fornitore`     WHERE `FORNITORI`.`ID_utente_fornitore` = ?  ORDER BY `NOTIFICHE`.`Orario` DESC',
         {
             replacements: [id],

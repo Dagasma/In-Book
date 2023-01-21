@@ -3,7 +3,7 @@ let id_fornitore = document.cookie.substring(3, 40);
 async function richiedi_notifiche() {
 
 	/* TODO */
-	const response = await fetch('/notifiche/api/findAllFornitore_unione/' + id_fornitore, {
+	const response = await fetch('/notifiche/api/findAllfornitore_unione/' + id_fornitore, {
 		method: 'GET',
 		headers: {
 			"Access-Control-Request-Method": "GET",
@@ -52,17 +52,16 @@ function generateTable(table, data, index) {
 
 async function create_table_notifiche() {
 	//let table = document.querySelector("table");// create table
-	let columns = ["Servizio", "Descrizione", "Durata", "Giorno", "Descrizione"];
-	let keys = ["Tipologia", "Descrizione", "Durata"];
+	let columns = ["Descrizione notifica", "Orario notifica", "Orario prenotazione","Tipologia", "Indirizzo", "Nome Attivita","Clienti","Stato"];
+	let keys = ["Descrizione_notifica", "Orario_notifica","Orario_inizio", "Tipologia", "Indirizzo", "Nome_Attivita","Numero_clienti","Stato"];
 	let ex_data = await richiedi_notifiche();
 	var table = document.getElementById("json-table");
-	table.innerHTML = "Non è presente nessuna notifica...";
-	if (ex_data.lenght > 0) {
-		table.innerHTML = "";
-		console.log(ex_data)
-		
-		let data = Object.keys(ex_data[0]);//save the keys
-		generateTableHead(table, data, columns);//create header
-		generateTable(table, ex_data, keys);//print table
-	}
+
+	table.innerHTML = "";
+	console.log(ex_data)
+	
+	let data = Object.keys(ex_data[0]);//save the keys
+	generateTableHead(table, data, columns);//create header
+	generateTable(table, ex_data, keys);//print table
+	
 }

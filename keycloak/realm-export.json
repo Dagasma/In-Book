@@ -1189,7 +1189,7 @@
       "clientId": "nodejs",
       "name": "Node JS Adapter",
       "description": "",
-      "rootUrl": "http://inbook.local",
+      "rootUrl": "http://inbook.azurewebsites.net",
       "adminUrl": "",
       "baseUrl": "/",
       "surrogateAuthRequired": false,
@@ -1198,7 +1198,7 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu",
       "redirectUris": [
-        "http://inbook.local/*"
+        "http://inbook.azurewebsites.net/*"
       ],
       "webOrigins": [],
       "notBefore": 0,

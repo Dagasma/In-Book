@@ -20,6 +20,7 @@ services:
         image: inbookreg.azurecr.io/backend
         build: ./backend/config/
         platform: "linux/amd64"
+        restart: always
         container_name: backend
         depends_on:
             - db
@@ -41,6 +42,7 @@ services:
         image: inbookreg.azurecr.io/keycloak
         build: ./keycloak/
         platform: "linux/amd64"
+        restart: always
         container_name: keycloak
         depends_on:
             - db
@@ -54,6 +56,7 @@ services:
         image: inbookreg.azurecr.io/nginx
         hostname: inbook.azurewebsites.net
         platform: "linux/amd64"
+        restart: always
         container_name: nginx
         build: ./nginx/
         depends_on:
@@ -64,6 +67,7 @@ services:
             - "433:433"
         volumes:
             - ${WEBAPP_STORAGE_HOME}/nginx/conf:/etc/nginx
+            - ${WEBAPP_STORAGE_HOME}/nginx/private/:/etc/nginx/ssl/:ro
         networks:
           - DBNetwork
 

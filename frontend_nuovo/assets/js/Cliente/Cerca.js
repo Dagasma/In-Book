@@ -1,6 +1,29 @@
 let id_utente = document.cookie.substring(3, 40);
 
 
+
+
+function showPopup(ID_fornitore) {
+  var popup = document.createElement("div");
+  popup.style.cssText = "position: fixed; top: 20%; left: 10%; width: 80%; background-color: #22b3c1; padding: 20px; z-index: 999; border-radius:10px; text-align:center; font-size:40px; color: white; font-weight:bold;";
+  document.body.appendChild(popup);
+  popup.innerHTML = "Vuoi andare alla pagina del fornitore selezionato?";
+
+  var btn = document.createElement("BUTTON");
+  var t = document.createTextNode("Conferma");
+  btn.appendChild(t);
+  btn.style.cssText = "position: relative; margin: 10px auto; padding: 10px 20px; background-color: #22b3c1; color: white; border-radius:10px; font-size:20px;";
+  btn.onclick = function () {
+    document.body.removeChild(popup);
+    let url = "/cliente/visualizza_fornitore?id=" + ID_fornitore;
+    window.location.href = url;
+  };
+  var linebreak = document.createElement("br");
+  popup.appendChild(linebreak);
+  popup.appendChild(btn);
+  popup.appendChild(btn);
+}
+
 async function richiedi_fornitori(filtro) {
 
   const response = await fetch('/servizi/api/get_Servizi_e_fornitori', {
@@ -71,8 +94,16 @@ function generateTable(table, data, index) {
     // Aggiungi una nuova cella alla fine della riga
     let buttonCell = row.insertCell();
     // Crea un bottone e aggiungilo alla cella
-    let button = document.createElement("button");
-    button.setAttribute("class","input-bottom");
+    let button = document.createElement("section");
+    button.style.backgroundColor = "#22b3c1";
+    button.style.color = "white";
+    button.style.textAlign = "center";
+    button.style.display = "flex";
+    button.style.alignItems = "center";
+    button.style.justifyContent = "center";
+    button.style.borderRadius = "10px";
+    button.style.margin = "0";
+    button.style.padding = "20%";
     button.innerHTML = "Visualizza Fornitore";
     button.setAttribute("data-id", element["ID_fornitore"]);
     button.setAttribute("id", element["ID_fornitore"]);
@@ -83,9 +114,7 @@ function generateTable(table, data, index) {
 
 function vai_dal_fornitore(ID_fornitore) {
   console.log(ID_fornitore);
-  window.alert("Vuoi andare alla pagina del fornitore?");
-  let url = "/cliente/visualizza_fornitore?id=" + ID_fornitore;
-  window.location.href = url;
+  showPopup(ID_fornitore);
   // window.location.href = `/visualizza_forntiore?id=${ID_fornitore}`;
 }
 

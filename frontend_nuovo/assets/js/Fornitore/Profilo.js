@@ -36,7 +36,7 @@ async function richiedi_fornitore() {
 	else {
 		console.log("chiedo al cliente")
 
-		const response1 = await fetch('/fornitori/api/get_profilo_cliente/' + id_fornitore, {
+		const response1 = await fetch('/cliente/api/get_profilo/' + id_fornitore, {
 			method: 'GET',
 			headers: {
 				"Access-Control-Request-Method": "GET",
@@ -44,7 +44,7 @@ async function richiedi_fornitore() {
 				'Content-Type': 'application/json;charset-UTF-8'
 			}
 		});
-
+		console.log(response1);
 		dati_fornitore = await response1.json(); //extract JSON from the http response
 
 		dati_fornitore.Nome_Attivita = "vuoto";

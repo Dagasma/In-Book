@@ -1,5 +1,31 @@
 let id_cliente = document.cookie.substring(3, 40);
 
+
+
+
+function showPopup(Action) {
+  var popup = document.createElement("div");
+  popup.style.cssText = "position: fixed; top: 20%; left: 10%; width: 80%; background-color: #22b3c1; padding: 20px; z-index: 999; border-radius:10px; text-align:center; font-size:40px; color: white; font-weight:bold;";
+  document.body.appendChild(popup);
+  if (Action = "Annulla") {
+    popup.innerHTML = "Prenotazione annullata";
+  }
+  else { popup.innerHTML = "Errore"; }
+
+  var btn = document.createElement("BUTTON");
+  var t = document.createTextNode("Chiudi");
+  btn.appendChild(t);
+  btn.style.cssText = "position: relative; margin: 10px auto; padding: 10px 20px; background-color: #22b3c1; color: white; border-radius:10px; font-size:20px;";
+  btn.onclick = function () {
+    document.body.removeChild(popup);
+    location.reload()
+  };
+  var linebreak = document.createElement("br");
+  popup.appendChild(linebreak);
+  popup.appendChild(btn);
+  popup.appendChild(btn);
+}
+
 async function richiedi_prenotazioni(filtro) {
   // Dati fornitore
   console.log(id_cliente);
@@ -20,8 +46,8 @@ async function richiedi_prenotazioni(filtro) {
     else if ((ex_data[i].Numero_clienti < filtro.Numero_clienti) && (filtro.Numero_clienti != "")) {
 
     }
-    else if (ex_data[i].ID_servizio_SERVIZI.Durata.substring(0, 5) != filtro.Durata && filtro.Durata != '' && filtro.Durata != ',' ) {
-    console.log("qui");
+    else if (ex_data[i].ID_servizio_SERVIZI.Durata.substring(0, 5) != filtro.Durata && filtro.Durata != '' && filtro.Durata != ',') {
+      console.log("qui");
     }
     else if (ex_data[i].ID_servizio_SERVIZI.Tipologia != filtro.Tipologia && filtro.Tipologia != "") {
 
@@ -33,7 +59,7 @@ async function richiedi_prenotazioni(filtro) {
       let istance = {}
       istance.id = ex_data[i].ID;;
       istance.id_utente = ex_data[i].ID_utente;;
-      istance.Giorno = ex_data[i].Orario_prenotazione_inizio.substring(0, 10) +' '+ ex_data[i].Orario_prenotazione_inizio.substring(11, 16) ;      istance.Numero_clienti = ex_data[i].Numero_clienti;
+      istance.Giorno = ex_data[i].Orario_prenotazione_inizio.substring(0, 10) + ' ' + ex_data[i].Orario_prenotazione_inizio.substring(11, 16); istance.Numero_clienti = ex_data[i].Numero_clienti;
       istance.Tipologia = ex_data[i].ID_servizio_SERVIZI.Tipologia;
       istance.Descrizione = ex_data[i].ID_servizio_SERVIZI.Descrizione;
       istance.Durata = ex_data[i].ID_servizio_SERVIZI.Durata;
@@ -62,10 +88,6 @@ function generateTableHead(table, data, columns) {
   let text = document.createTextNode("");
   th.appendChild(text);
   row.appendChild(th);
-  th = document.createElement("th");
-  text = document.createTextNode("");
-  th.appendChild(text);
-  row.appendChild(th);
 }
 
 function generateTable(table, data, index) {
@@ -81,9 +103,17 @@ function generateTable(table, data, index) {
       // Aggiungi una nuova cella alla fine della riga
       let buttonCell = row.insertCell();
       // Crea un bottone e aggiungilo alla cella
-      let button = document.createElement("button");
-
-      button.innerHTML = "Annulla";
+      let button = document.createElement("section");
+      button.style.backgroundColor = "#22b3c1";
+      button.style.color = "white";
+      button.style.textAlign = "center";
+      button.style.display = "flex";
+      button.style.alignItems = "center";
+      button.style.justifyContent = "center";
+      button.style.borderRadius = "10px";
+      button.style.margin = "0";
+      button.style.padding = "10%";
+      button.innerHTML = "-  Annulla  -";
       button.type = 'submit';
       button.value = element.id;
       button.onclick = function exe_botton() { Annulla_prenotazione(button.value); }
@@ -94,7 +124,6 @@ function generateTable(table, data, index) {
 
 async function Annulla_prenotazione(id_prenotazione) {
   console.log(id_prenotazione)
-  window.alert("Annullata");
 
   var Annulato = "Annullato"
   const response = await fetch('/prenotazioni/api/annulla_prenotazione_cliente/' + id_prenotazione + '/' + id_cliente, {
@@ -105,8 +134,14 @@ async function Annulla_prenotazione(id_prenotazione) {
     body: JSON.stringify({ "Stato": Annulato })
   })
   console.log(response);
-
-  window.alert("Annullata");
+  if (response.status == 200) {
+    let Action = "Annulla";
+    showPopup(Action);
+  }
+  else {
+    let Action = "Errore"
+    showPopup(Action);
+  }
 
 }
 
@@ -115,13 +150,13 @@ let en_page = 0;
 async function create_table_prenotazioni(ex_data, en_page = 0) {
 
   //let table = document.querySelector("table");// create table
-  let columns = ["Giorno", "Durata", "Descrizione", "Nome Attivita", "Numeroclienti", "Tipologia", "indirizzo","Stato"];
-  let keys = ["Giorno", "Durata", "Descrizione", "Nome_Attivita", "Numero_clienti", "Tipologia", "indirizzo","Stato"];
+  let columns = ["Giorno", "Durata", "Descrizione", "Nome Attivita", "Numeroclienti", "Tipologia", "indirizzo", "Stato"];
+  let keys = ["Giorno", "Durata", "Descrizione", "Nome_Attivita", "Numero_clienti", "Tipologia", "indirizzo", "Stato"];
   var table = document.getElementById("json-table");
   table.innerHTML = "";
 
   if (en_page == 0) {
-    filtro = { "Giorno": "", "Tipologia": "", "Durata": ",", "Numero_clienti": "" ,"Stato":""};
+    filtro = { "Giorno": "", "Tipologia": "", "Durata": ",", "Numero_clienti": "", "Stato": "" };
     let ex_data = await richiedi_prenotazioni(filtro);
   }
 

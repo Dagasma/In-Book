@@ -29,17 +29,16 @@ async function calcolo_slot_liberi(filtro) {
     // ritorno il giorno della settimana
     const data_target = new Date(filtro.Data_giorno);
     const giorni = [
+        "Domenica",        
         "Lunedi",
         "Martedi",
         "Mercoledi",
         "Giovedi",
         "Venerdi",
         "Sabato",
-        "Domenica",
-
     ];
     console.log(data_target);
-    const giorno_scelto = giorni[data_target.getDay() - 1];
+    const giorno_scelto = giorni[data_target.getDay() ];
 
     // Determino la capienza massima
     const Query_capienza = await db.sequelize.query('SELECT Capienza_massima FROM FORNITORI WHERE ID_utente_fornitore = ?',
@@ -58,7 +57,9 @@ async function calcolo_slot_liberi(filtro) {
             type: db.sequelize.QueryTypes.SELECT
         }
     );
+
     console.log("entro2a");
+
     // mi torna una tabella con ORARIO - DURATA - SUM(PERSONE)
     const Query_prenotazioni = await db.sequelize.query('SELECT Orario_prenotazione_inizio ,Durata , SUM(Numero_clienti) AS CLIENTI ' +
         'FROM `SERVIZI` INNER JOIN `PRENOTAZIONI` ON `SERVIZI`.`ID` = `PRENOTAZIONI`.`ID_servizio` ' +

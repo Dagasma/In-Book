@@ -1,5 +1,35 @@
 let id_cliente = document.cookie.substring(3, 40);
 
+async function showPopup(Action) {
+    console.log(Action == "Prenotazione");
+
+    var popup = document.createElement("div");
+    popup.style.cssText = "position: fixed; top: 20%; left: 10%; width: 80%; background-color: #22b3c1; padding: 20px; z-index: 999; border-radius:10px; text-align:center; font-size:40px; color: white; font-weight:bold;";
+    document.body.appendChild(popup);
+
+    if (Action == "Aggiornato") { popup.innerHTML = "Dati del profilo aggiornati"; }
+    else{ popup.innerHTML = "Errore : Nessun dato è stato modificato oppure numero di telefono gia presente nel database"; }
+
+    var btn = document.createElement("BUTTON");
+    var t = document.createTextNode("Chiudi");
+    btn.appendChild(t);
+    btn.style.cssText = "position: relative; margin: 10px auto; padding: 10px 20px; background-color: #22b3c1; color: white; border-radius:10px; font-size:20px;";
+    btn.onclick = function () {
+        document.body.removeChild(popup);
+
+        if (Action == "Aggiornato") {
+			location.reload()
+        }
+        else { location.reload() }
+
+
+    };
+    var linebreak = document.createElement("br");
+    popup.appendChild(linebreak);
+    popup.appendChild(btn);
+    popup.appendChild(btn);
+}
+
 async function richiedi_utente() {
 	console.log(id_cliente)
 	/* DONE */
@@ -126,12 +156,13 @@ document.addEventListener("DOMContentLoaded", function () {
 		console.log(risposta.message);
 		if(risposta.message=='User was updated successfully.')
 		{
-			window.alert("Aggiornato");
+			let Action = "Aggiornato"
+			showPopup(Action)
 		}
 		else{
-			window.alert("Errore, I campi inseriti non sono validi oppure non hai modificato nessun dato");
+			let Action = "Non Aggiornato"
+			showPopup(Action)
 		}
-		location.reload();
 
 	});
 	});

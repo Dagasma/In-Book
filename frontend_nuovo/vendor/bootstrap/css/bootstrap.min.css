@@ -403,6 +403,25 @@ select {
     cursor: pointer
 }
 
+button {
+    font-size: 14px;
+    color: #fff;
+    background-color: #22b3c1;
+    border: 1px solid #22b3c1;
+    padding: 12px 30px;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    border-radius: 25px;
+    font-weight: 500;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+
 select {
     word-wrap: normal
 }
@@ -4164,7 +4183,7 @@ fieldset:disabled .btn {
     --bs-nav-link-hover-color: var(--bs-link-hover-color);
     --bs-nav-link-disabled-color: #6c757d;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     padding-left: 0;
     margin-bottom: 0;
     list-style: none

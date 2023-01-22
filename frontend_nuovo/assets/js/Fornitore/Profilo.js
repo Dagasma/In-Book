@@ -1,6 +1,9 @@
 let id_fornitore = document.cookie.substring(3, 40);
 let en_create = 1;
 var data_ora
+var erbottone = document.createElement("button");
+erbottone.id = "btn_modifica";
+erbottone.innerHTML = "Modifica";
 
 //DIFF TIME
 function diffTime(time1, time2) {
@@ -164,6 +167,9 @@ async function form_profilo() {
 	Capienza_massima.value = data.Capienza_massima;
 	Capienza_massima.placeholder = data.Capienza_massima;
 
+	
+
+
 	// Append the full name input to the form
 	form.appendChild(L_Nome);
 	form.appendChild(Nome);
@@ -212,6 +218,11 @@ async function form_profilo() {
 	form.appendChild(Capienza_massima);
 	form.appendChild(br.cloneNode());
 
+
+	form.appendChild(erbottone);
+	// Inserting a line break
+	form.appendChild(br.cloneNode());
+
 	document.getElementsByTagName("form")[0].appendChild(form);
 	//document.getElementsByTagName("form").appendChild(form);
 
@@ -221,7 +232,7 @@ let profilo_aggiornato = {}
 
 //listener bottone modifica
 document.addEventListener("DOMContentLoaded", function () {
-	document.getElementById("btn_modifica").addEventListener("click", async function (e) {
+	erbottone.addEventListener("click", async function (e) {
 		e.preventDefault();
 
 		console.log("FINE : ")
@@ -289,7 +300,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		/*DONE*/
-		const response1 = await fetch('/cliente/api/aggiorna_profilo_fornitore/' + id_fornitore, {
+		const response1 = await fetch('/fornitori/api/aggiorna_profilo_cliente_fornitore/' + id_fornitore, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'

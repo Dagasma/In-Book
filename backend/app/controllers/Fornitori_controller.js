@@ -83,6 +83,31 @@ exports.findOne = (req, res) => {
         });
 };
 
+
+exports.findInfo_Fornitore = (req, res) => {
+    const id = req.params.id;
+
+    tab_utenti
+    .findOne( {
+        where: {ID: id}
+    })
+        .then((data) => {
+            if (data) {
+                res.send(data);
+            } else {
+                res.status(404).send({
+                    message: `Cannot find fornitore with id=${id}.`,
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: "Error retrieving fornitore with id=" + id,
+            });
+        });
+};
+
+
 exports.findFornitorebyCliente = (req, res) => {
     const id = req.params.id;
 
@@ -137,6 +162,34 @@ exports.update = (req, res) => {
             });
         });
 };
+
+
+exports.update_info_Cliente = (req, res) => {
+    const id = req.params.id;
+
+    tab_utenti
+        .update(req.body, {
+            where: { ID: id },
+        })
+        .then((num) => {
+            if (num == 1) {
+                res.send({
+                    message: "Fornitore was updated successfully.",
+                });
+            } else {
+                res.send({
+                    message: `Cannot update fornitore with id=${id}. Maybe fornitore was not found or req.body is empty!`,
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: "Error updating fornitore with id=" + id,
+            });
+        });
+};
+
+
 
 // Delete a fornitore with the specified id in the request
 exports.delete = (req, res) => {

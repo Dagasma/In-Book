@@ -1,5 +1,26 @@
 let id_fornitore = document.cookie.substring(3, 40);
 
+async function showPopup() {
+  var popup = document.createElement("div");
+  popup.style.cssText = "position: fixed; top: 20%; left: 10%; width: 80%; background-color: #22b3c1; padding: 20px; z-index: 999; border-radius:10px; text-align:center; font-size:40px; color: white; font-weight:bold;";
+  document.body.appendChild(popup);
+
+  popup.innerHTML = "Prenotazione annullata";
+
+  var btn = document.createElement("BUTTON");
+  var t = document.createTextNode("Chiudi");
+  btn.appendChild(t);
+  btn.style.cssText = "position: relative; margin: 10px auto; padding: 10px 20px; background-color: #22b3c1; color: white; border-radius:10px; font-size:20px;";
+  btn.onclick = function () {
+    document.body.removeChild(popup);
+    window.location.reload()
+  };
+  var linebreak = document.createElement("br");
+  popup.appendChild(linebreak);
+  popup.appendChild(btn);
+  popup.appendChild(btn);
+}
+
 async function richiedi_prenotazioni(filtro) {
   // Dati fornitore
   console.log(id_fornitore);
@@ -30,7 +51,7 @@ async function richiedi_prenotazioni(filtro) {
       let istance = {}
       istance.id = ex_data[i].ID;;
       istance.id_utente = ex_data[i].ID_utente;;
-      istance.Giorno = ex_data[i].Orario_prenotazione_inizio.substring(0, 10) +' '+ ex_data[i].Orario_prenotazione_inizio.substring(11, 16) ;
+      istance.Giorno = ex_data[i].Orario_prenotazione_inizio.substring(0, 10) + ' ' + ex_data[i].Orario_prenotazione_inizio.substring(11, 16);
       istance.Numero_clienti = ex_data[i].Numero_clienti;
       istance.Tipologia = ex_data[i].ID_servizio_SERVIZI.Tipologia;
       istance.Descrizione = ex_data[i].ID_servizio_SERVIZI.Descrizione;
@@ -58,10 +79,6 @@ function generateTableHead(table, data, columns) {
   }
   let th = document.createElement("th");
   let text = document.createTextNode("");
-  th.appendChild(text);
-  row.appendChild(th);
-  th = document.createElement("th");
-  text = document.createTextNode("");
   th.appendChild(text);
   row.appendChild(th);
 }
@@ -99,12 +116,8 @@ async function Annulla_prenotazione(id_prenotazione) {
     },
     body: JSON.stringify({ "Stato": Annulato })
   })
-    .then(response => response.json())
-    .then(data => { console.log(data); })
-    .catch(error => console.error(error));
 
-  window.alert("Annullata");
-
+  showPopup();
 }
 
 let en_page = 0;

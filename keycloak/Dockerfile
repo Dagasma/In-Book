@@ -18,7 +18,7 @@ ENV KC_DB_URL=jdbc:mysql://db_inbook:3306/KEYCLOAK
 ENV KC_DB_USERNAME=administrator
 ENV KC_DB_PASSWORD=prova
 
-ENV KC_HOSTNAME_URL=http://inbook.local
+ENV KC_HOSTNAME_URL=https://inbook.azurewebsites.net
 ENV KC_HTTP_ENABLED=true
 ENV KC_PROXY=passthrough
 ENV KC_HOSTNAME_STRICT=false

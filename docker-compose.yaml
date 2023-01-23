@@ -61,7 +61,6 @@ services:
           - db_inbook
           - backend
         ports:
-            - "80:80"
             - "433:433"
         volumes:
             - ${WEBAPP_STORAGE_HOME}/nginx/conf:/etc/nginx

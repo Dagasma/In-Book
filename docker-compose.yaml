@@ -24,7 +24,6 @@ services:
             - db_inbook
         environment:
             NODE_ENV: production
-            NODE_TLS_REJECT_UNAUTHORIZED: 0 
         expose:
             - "4000"
         networks:
@@ -61,6 +60,7 @@ services:
           - db_inbook
           - backend
         ports:
+            - "80:80"
             - "433:433"
         volumes:
             - ${WEBAPP_STORAGE_HOME}/nginx/conf:/etc/nginx

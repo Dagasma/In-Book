@@ -26,7 +26,7 @@ ENV KC_HOSTNAME_STRICT_BACKCHANNEL=false
 ENV KEYCLOAK_ADMIN_PASSWORD=dagasma10@
 ENV KEYCLOAK_ADMIN=admin
 ADD ./entrypoint.sh ./wait-for-it.sh /
-CMD mkdir /opt/keycloak/data/import
+RUN mkdir /opt/keycloak/data/import
 ADD ./realm-export.json /opt/keycloak/data/import/
 ADD customTheme /opt/keycloak/themes/customTheme
 EXPOSE 8080

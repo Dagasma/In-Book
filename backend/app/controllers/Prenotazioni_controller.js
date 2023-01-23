@@ -63,7 +63,7 @@ async function calcolo_slot_liberi(filtro) {
     // mi torna una tabella con ORARIO - DURATA - SUM(PERSONE)
     const Query_prenotazioni = await db.sequelize.query('SELECT Orario_prenotazione_inizio ,Durata , SUM(Numero_clienti) AS CLIENTI ' +
         'FROM `SERVIZI` INNER JOIN `PRENOTAZIONI` ON `SERVIZI`.`ID` = `PRENOTAZIONI`.`ID_servizio` ' +
-        'WHERE DATE(Orario_prenotazione_inizio) = ? ' +
+        'WHERE DATE(Orario_prenotazione_inizio) = ?  AND `PRENOTAZIONI`.`Stato`="Attivo" ' +
         'GROUP BY `PRENOTAZIONI`.`Orario_prenotazione_inizio` ,`SERVIZI`.`Durata` ' +
         'ORDER BY `PRENOTAZIONI`.`Orario_prenotazione_inizio` ASC;',
         {

@@ -5,8 +5,8 @@ async function showPopup(Action, name, element) {
     popup.style.cssText = "position: fixed; top: 20%; left: 10%; width: 80%; background-color: #22b3c1; padding: 20px; z-index: 999; border-radius:10px; text-align:center; font-size:40px; color: white; font-weight:bold;";
     document.body.appendChild(popup);
 
-    if (Action == "Blocca") { popup.innerHTML = "Vuoi bloccare " + name +" ?"; }
-    else if (Action == "Sblocca") { popup.innerHTML = "Vuoi sbloccare " + name+" ?" }
+    if (Action == "Blocca") { popup.innerHTML = "Hai bloccato " + name +" ?"; }
+    else if (Action == "Sblocca") { popup.innerHTML = "Hai sblocato " + name+" ?" }
     else { popup.innerHTML = "Error"; }
     console.log(element)
     console.log(element.ID)

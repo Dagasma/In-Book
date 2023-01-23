@@ -49,7 +49,7 @@ async function richiedi_prenotazioni(filtro) {
     else if (ex_data[i].ID_servizio_SERVIZI.Durata.substring(0, 5) != filtro.Durata && filtro.Durata != '' && filtro.Durata != ',') {
       console.log("qui");
     }
-    else if (ex_data[i].ID_servizio_SERVIZI.Tipologia != filtro.Tipologia && filtro.Tipologia != "") {
+    else if (((ex_data[i].ID_servizio_SERVIZI.Tipologia).toLowerCase().indexOf(filtro.Tipologia.toLowerCase())==-1)  && filtro.Tipologia != "") {
 
     }
     else if (ex_data[i].Stato != filtro.Stato && filtro.Stato != "" && filtro.Durata != ',') {

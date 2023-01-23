@@ -38,7 +38,7 @@ exports.create = (req, res) => {
 // Retrieve all notifiche from the database.
 exports.findAllFornitore = (req, res) => {
     const id = req.params.id_fornitore
-    var condition = id ? { ID_fornitore: { [Op.like]: `%${id}%` } } : null;
+    var condition = id ? { ID_fornitore: { [Op.like]: `${id}` } } : null;
     tab_notifiche
     .findAll({
         include: [{
@@ -66,7 +66,7 @@ exports.findAllFornitore = (req, res) => {
 
 exports.findAllCliente = (req, res) => {
     const id = req.params.id_cliente
-    var condition = id ? { ID_utente: { [Op.like]: `%${id}%` } } : null;
+    var condition = id ? { ID_utente: { [Op.like]: `${id}` } } : null;
     tab_notifiche
         .findAll({ where: condition })
         .then((data) => {

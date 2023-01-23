@@ -46,10 +46,10 @@ async function richiedi_fornitori(filtro) {
     }
     else if ((ex_data[i].ID_fornitore_FORNITORI.Capienza_massima <= filtro.Capienza_massima) && (filtro.Capienza_massima != "")) {
     }
-    else if ((ex_data[i].Tipologia != filtro.Tipologia) && (filtro.Tipologia != "")) {
+    else if (((ex_data[i].Tipologia).toLowerCase().indexOf(filtro.Tipologia.toLowerCase())==-1) && (filtro.Tipologia != "")) {
 
     }
-    else if ((ex_data[i].ID_fornitore_FORNITORI.Indirizzo != filtro.Indirizzo) && (filtro.Indirizzo != "")) {
+    else if (((ex_data[i].ID_fornitore_FORNITORI.Indirizzo).toLowerCase().indexOf(filtro.Indirizzo.toLowerCase())==-1) && (filtro.Indirizzo != "")) {
     }
     else {
       let istance = {};

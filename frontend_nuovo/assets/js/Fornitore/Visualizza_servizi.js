@@ -163,5 +163,5 @@ async function create_table_prenotazioni(ex_data, en_page = 0) {
 		generateTableHead(table, data, keys);//create header
 		generateTable(table, ex_data, keys);
 	}//print table}
-	else { table.innerHTML = "Non è presente nessuna prenotazione..."; }
+	else { table.innerHTML = "Non è presente nessun servizio ..."; }
 }

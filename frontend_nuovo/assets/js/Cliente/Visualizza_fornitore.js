@@ -197,7 +197,7 @@ function Calc_slot_liberi(slot, capacita, durata) {
     //console.log(rapporto, slot_durata, slot);
     let cnt = 0; // conteggio slot
     for (let i = 0; i < slot.length - rapporto + 1; i++) { // scorro tutti gli slot
-        //console.log(slot[i + j].Posti_disponibili , capacita)
+       // console.log(slot[i + j].Posti_disponibili , capacita)
         //console.log("slot ", i, "orario :", slot[i].Orario_inizio, "slot durata :", slot_durata);
         for (let j = 0; j < rapporto; j++) { // scorro gli slot successivi che copre la prenotazione
             if ((j == rapporto - 1 && slot[i + j].Posti_disponibili >= capacita) || (i + j >= slot.length)) {

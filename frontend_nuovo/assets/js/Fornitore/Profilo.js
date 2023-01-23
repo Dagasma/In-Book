@@ -8,28 +8,28 @@ erbottone.innerHTML = "Modifica";
 
 
 async function showPopup(Action) {
-    var popup = document.createElement("div");
-    popup.style.cssText = "position: fixed; top: 20%; left: 10%; width: 80%; background-color: #22b3c1; padding: 20px; z-index: 999; border-radius:10px; text-align:center; font-size:40px; color: white; font-weight:bold;";
-    document.body.appendChild(popup);
+	var popup = document.createElement("div");
+	popup.style.cssText = "position: fixed; top: 20%; left: 10%; width: 80%; background-color: #22b3c1; padding: 20px; z-index: 999; border-radius:10px; text-align:center; font-size:40px; color: white; font-weight:bold;";
+	document.body.appendChild(popup);
 
-    if (Action == "Aggiornato") { popup.innerHTML = "Dati del profilo aggiornati"; }
-    else if (Action == "New_orario"){popup.innerHTML = "Orario inserito"}
-	else if (Action == "Err_orario"){popup.innerHTML = "Gia aperto in un sotto intervallo temporale"}
-	else if (Action == "Elimina"){popup.innerHTML = "Orario eliminato"}
-	else{ popup.innerHTML = "Error"; }
+	if (Action == "Aggiornato") { popup.innerHTML = "Dati del profilo aggiornati"; }
+	else if (Action == "New_orario") { popup.innerHTML = "Orario inserito" }
+	else if (Action == "Err_orario") { popup.innerHTML = "Gia aperto in un sotto intervallo temporale" }
+	else if (Action == "Elimina") { popup.innerHTML = "Orario eliminato" }
+	else { popup.innerHTML = "Error"; }
 
-    var btn = document.createElement("BUTTON");
-    var t = document.createTextNode("Chiudi");
-    btn.appendChild(t);
-    btn.style.cssText = "position: relative; margin: 10px auto; padding: 10px 20px; background-color: #22b3c1; color: white; border-radius:10px; font-size:20px;";
-    btn.onclick = function () {
-        document.body.removeChild(popup);
-		location.reload() 
-    };
-    var linebreak = document.createElement("br");
-    popup.appendChild(linebreak);
-    popup.appendChild(btn);
-    popup.appendChild(btn);
+	var btn = document.createElement("BUTTON");
+	var t = document.createTextNode("Chiudi");
+	btn.appendChild(t);
+	btn.style.cssText = "position: relative; margin: 10px auto; padding: 10px 20px; background-color: #22b3c1; color: white; border-radius:10px; font-size:20px;";
+	btn.onclick = function () {
+		document.body.removeChild(popup);
+		window.location.reload() 
+	};
+	var linebreak = document.createElement("br");
+	popup.appendChild(linebreak);
+	popup.appendChild(btn);
+	popup.appendChild(btn);
 }
 
 //DIFF TIME
@@ -165,18 +165,18 @@ async function form_profilo() {
 	Tipo_Attivita.placeholder = data.Tipo_Attivita;
 
 
-	var L_indirizzo = document.createElement("label");
-	L_indirizzo.setAttribute("value", "indirizzo");
-	L_indirizzo.innerHTML = "indirizzo: ";
-	var indirizzo = document.createElement("input");
-	indirizzo.type = "text";
-	indirizzo.id = "Indirizzo";
-	indirizzo.value = data.Indirizzo;
-	indirizzo.placeholder = data.Indirizzo;
+	var L_Indirizzo = document.createElement("label");
+	L_Indirizzo.setAttribute("value", "Indirizzo");
+	L_Indirizzo.innerHTML = "Indirizzo: ";
+	var Indirizzo = document.createElement("input");
+	Indirizzo.type = "text";
+	Indirizzo.id = "Indirizzo";
+	Indirizzo.value = data.Indirizzo;
+	Indirizzo.placeholder = data.Indirizzo;
 
 
 	var L_Capienza_massima = document.createElement("label");
-	L_Capienza_massima.setAttribute("value", "indirizzo");
+	L_Capienza_massima.setAttribute("value", "Indirizzo");
 	L_Capienza_massima.innerHTML = "Capienza massima: ";
 	var Capienza_massima = document.createElement("input");
 	Capienza_massima.type = "number";
@@ -217,8 +217,8 @@ async function form_profilo() {
 	form.appendChild(Tipo_Attivita);
 	form.appendChild(br.cloneNode());
 
-	form.appendChild(L_indirizzo);
-	form.appendChild(indirizzo);
+	form.appendChild(L_Indirizzo);
+	form.appendChild(Indirizzo);
 	form.appendChild(br.cloneNode());
 
 	// Append the Password to the form
@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		profilo_aggiornato.Telefono = document.getElementById("Telefono").value;
 		profilo_aggiornato.Nome_Attivita = document.getElementById("Nome_Attivita").value;
 		profilo_aggiornato.Tipo_Attivita = document.getElementById("Tipo_Attivita").value;
-		profilo_aggiornato.indirizzo = document.getElementById("Indirizzo").value;
+		profilo_aggiornato.Indirizzo = document.getElementById("Indirizzo").value;
 		profilo_aggiornato.Capienza_massima = document.getElementById("Capienza_massima").value;
 
 		console.log(profilo_aggiornato);
@@ -265,16 +265,17 @@ document.addEventListener("DOMContentLoaded", function () {
 			},
 			body: JSON.stringify({
 				"Nome": profilo_aggiornato.Nome,
-				'Cognome' : profilo_aggiornato.Cognome,
-				'Data_di_nascita' : profilo_aggiornato.Data_di_nascita,
-				'Telefono' : profilo_aggiornato.Telefono
+				'Cognome': profilo_aggiornato.Cognome,
+				'Data_di_nascita': profilo_aggiornato.Data_di_nascita,
+				'Telefono': profilo_aggiornato.Telefono
 			})
 		})
 		risposta_fornitore = await response; //extract JSON from the http response
-		console.log(risposta_fornitore);
+		console.log(profilo_aggiornato);
 
 		console.log(en_create);
- let risposta_fornitore1;
+		let risposta_fornitore1;
+		console.log(profilo_aggiornato.Indirizzo)
 		if (en_create == 1) {
 			const response = await fetch('/fornitori/api/', {
 				method: 'POST',
@@ -295,8 +296,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 		else {
 			/*DONE*/
-			const response = await fetch('/fornitori/api/aggiorna_profilo_cliente_fornitore/'+id_fornitore, {
-				method: 'POST',
+			const response = await fetch('/fornitori/api/aggiorna_profilo/' + id_fornitore, {
+				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
 				},
@@ -309,15 +310,18 @@ document.addEventListener("DOMContentLoaded", function () {
 				})
 			})
 			risposta_fornitore1 = await response; //extract JSON from the http response
+			console.log(response);
+			console.log(response.status);
+
 		}
 
 
 		if (risposta_fornitore.status == 200 || risposta_fornitore1.status == 200) {
-			let Text="Aggiornato"
+			let Text = "Aggiornato"
 			showPopup(Text);
 		}
 		else {
-			let Text="Non Aggiornato"
+			let Text = "Non Aggiornato"
 			showPopup(Text);
 		}
 
@@ -355,8 +359,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		let risposta;
 		if (disponibilita == 0) {
-			window.alert('In questo slot o un suo sub slot temporale gia sei aperto');
-		}
+			let Text = "Err_orario"
+			showPopup(Text);		}
 		else {
 			if (diffTime(Orario_F, Orario_I) > 0) {
 				/**/
@@ -378,11 +382,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			else { risposta = 500; }
 
 			if (risposta.status == 200) {
-				window.alert('Orario creato');
-				window.onload();
+				let Text = "New_orario"
+				showPopup(Text);	
 			}
 			else {
-				window.alert('Dati inseriti non validi');
+				let Text = "Err_orario"
+				showPopup(Text);;
 			}
 		}
 
@@ -460,15 +465,15 @@ async function elimina_orario(ID) {
 	const risposta = await response; //extract JSON from the http response
 	// // do something with myJson
 	console.log(risposta)
-	if (risposta.status = 200) {
-		window.alert("eliminato correttamente");
+	if (risposta.status == 200) {
+		let Text = "Elimina"
+		showPopup(Text);
 	}
 	else {
-		window.alert("Errore");
+		let Text = "Err"
+		showPopup(Text);
 	}
 
-
-	location.reload();
 }
 
 async function create_table_orari() {

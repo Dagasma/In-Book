@@ -40,6 +40,7 @@ async function richiedi_fornitori(filtro) {
   var cont = 0;
   console.log("filtro è: ", filtro);
   let dati_filtrati = [];
+  
   for (let i = ex_data.length - 1; i >= 0; i--) {
     if ((ex_data[i].Durata.substring(0, 5)) != filtro.Durata && filtro.Durata != "") {
     }

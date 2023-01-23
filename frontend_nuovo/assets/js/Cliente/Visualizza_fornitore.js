@@ -195,7 +195,6 @@ function Calc_slot_liberi(slot, capacita, durata) {
     let rapporto = Rapporto_time(durata, slot_durata)
 
     //console.log(rapporto, slot_durata, slot);
-
     let cnt = 0; // conteggio slot
     for (let i = 0; i < slot.length - rapporto + 1; i++) { // scorro tutti gli slot
         //console.log(slot[i + j].Posti_disponibili , capacita)
@@ -229,7 +228,7 @@ async function get_voto() {
         }
     });
     const servizi_fornitore_ex = await response.json(); //extract JSON from the http response
-
+    console.log(servizi_fornitore_ex)
     var h4Element = document.getElementById("Testo_Voto");
     var btn_voto = document.getElementById("btn_voto");
     if (servizi_fornitore_ex.length >= 1) {

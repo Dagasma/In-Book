@@ -1,7 +1,7 @@
 
 const config = {};
 require("fix-esm").register();
-config.baseUrl = "http://inbook.azurewebsites.net";
+config.baseUrl = "https://inbook.azurewebsites.net";
 config.express = require("express");
 config.session = require("express-session");
 config.path = require("path");

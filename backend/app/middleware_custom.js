@@ -35,6 +35,17 @@ async function Assign_Roles_to_users(token_sub) {
         return true;
 }
 
+async function Update_user(enable_body,id_user) {
+
+    await config.kcAdminClient.auth(config.credentials);    
+    var payload = {enabled: enable_body};
+
+    const user = await config.kcAdminClient.users.update({ id: id_user, realm: "inbook"}, payload);
+    
+    return true;
+}
+
+
 delete config.keycloak['authenticated'];
  
 config.keycloak.authenticated = function(req){
@@ -50,3 +61,4 @@ config.keycloak.accessDenied = function(req,res){
 module.exports = config.keycloak;
 
 module.exports.Assign_Roles_to_users = Assign_Roles_to_users;
+module.exports.Update_user = Update_user;

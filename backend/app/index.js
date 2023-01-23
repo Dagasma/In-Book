@@ -51,6 +51,7 @@ require("./api/orario_attivita_routes")(app);
 require("./api/prenotazioni_routes")(app);
 require("./api/servizio_routes")(app);
 require("./api/votazione_routes")(app);
+require("./api/amministratore_routes")(app);
 
 
 app.listen(config.PORT, () => {

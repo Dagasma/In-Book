@@ -1,3 +1,4 @@
+const { Update_user } = require("../middleware_custom");
 const db = require("../models");
 const tab_utenti = db.models.UTENTI;
 const Op = db.Sequelize.Op;
@@ -79,6 +80,10 @@ exports.findOne = (req, res) => {
 
 exports.update = (req, res) => {
     const id = req.params.id;
+    const enable = !req.body.Bloccato;
+
+    Update_user(enable,id);
+
     tab_utenti
         .update(req.body, {
             where: { id: id },

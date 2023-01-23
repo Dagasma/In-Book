@@ -11,6 +11,15 @@ CREATE TRIGGER `INBOOK`.`crea_notifica_ANNULLATA` AFTER UPDATE ON `INBOOK`.`PREN
   END;
 $$
 
+DELIMITER $$
+CREATE TRIGGER tr_cancel_bookings
+AFTER DELETE ON SERVIZI
+FOR EACH ROW
+BEGIN
+    UPDATE PRENOTAZIONI SET Stato='Annullato' WHERE Stato='Attivo' AND ID_servizio = OLD.ID;
+END;
+$$
+
 
 DELIMITER $$
 CREATE EVENT aggiorna_stato_prenotazioni

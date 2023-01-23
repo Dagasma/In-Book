@@ -1,4 +1,5 @@
 FROM quay.io/keycloak/keycloak:latest as builder
+LABEL MAINTEINER="Dagasma"
 
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=true

@@ -1,10 +1,8 @@
-#docker compose up -d
-
 version: "3.9"
 name: "In-Book"
 
 services:
-    db:
+    db_inbook:
         image: inbookreg.azurecr.io/db
         build: ./backend/database/
         platform: "linux/amd64"
@@ -16,14 +14,14 @@ services:
             - PHPNetwork
             - DBNetwork
 
-    webserver:
+    backend:
         image: inbookreg.azurecr.io/backend
         build: ./backend/config/
         platform: "linux/amd64"
         restart: always
         container_name: backend
         depends_on:
-            - db
+            - db_inbook
         environment:
             NODE_ENV: production
             NODE_TLS_REJECT_UNAUTHORIZED: 0 
@@ -45,14 +43,14 @@ services:
         restart: always
         container_name: keycloak
         depends_on:
-            - db
+            - db_inbook
         expose:
             - "8080"
             - "8443"
         networks:
             - DBNetwork
 
-    reverseproxy:
+    nginx:
         image: inbookreg.azurecr.io/nginx
         hostname: inbook.azurewebsites.net
         platform: "linux/amd64"
@@ -60,14 +58,14 @@ services:
         container_name: nginx
         build: ./nginx/
         depends_on:
-          - db
-          - webserver
+          - db_inbook
+          - backend
         ports:
             - "80:80"
             - "433:433"
         volumes:
             - ${WEBAPP_STORAGE_HOME}/nginx/conf:/etc/nginx
-            - ${WEBAPP_STORAGE_HOME}/nginx/private/:/etc/nginx/ssl/:ro
+            - ${WEBAPP_STORAGE_HOME}/nginx/ssl:/etc/nginx/ssl
         networks:
           - DBNetwork
 

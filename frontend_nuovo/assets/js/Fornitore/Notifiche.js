@@ -30,10 +30,7 @@ function generateTableHead(table, data, columns) {
 	let text = document.createTextNode("");
 	th.appendChild(text);
 	row.appendChild(th);
-	th = document.createElement("th");
-	text = document.createTextNode("");
-	th.appendChild(text);
-	row.appendChild(th);
+
 }
 
 

@@ -38,7 +38,7 @@ services:
             - DBNetwork
         volumes:
             - ./backend/:/server/backend/
-            - ./frontend_nuovo/:/server/frontend_nuovo/
+            - ./frontend/:/server/frontend/
             - ./package.json:/server/package.json
             - ./package-lock.json:/server/package-lock.json
 

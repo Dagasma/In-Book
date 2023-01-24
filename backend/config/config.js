@@ -19,7 +19,7 @@ config.kcAdminClient.setConfig({ realmName: "inbook",
 
 config.memoryStore = new config.session.MemoryStore();
 config.keycloak = new config.Keycloak({ store: config.memoryStore,onLoad: 'login-required', checkLoginIframe: false });
-config.frontend_path = config.path.normalize(process.cwd() + "/frontend_nuovo/"); 
+config.frontend_path = config.path.normalize(process.cwd() + "/frontend/"); 
 config.db_path = config.path.normalize(process.cwd() + "/backend/database/"); 
 
 require("dotenv").config({

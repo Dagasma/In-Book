@@ -7,9 +7,10 @@ function showPopup(Action) {
   var popup = document.createElement("div");
   popup.style.cssText = "position: fixed; top: 20%; left: 10%; width: 80%; background-color: #22b3c1; padding: 20px; z-index: 999; border-radius:10px; text-align:center; font-size:40px; color: white; font-weight:bold;";
   document.body.appendChild(popup);
-  if (Action = "Annulla") {
+  if (Action == "Annulla") {
     popup.innerHTML = "Prenotazione annullata";
   }
+  else if(Action == "Non_Annulla") { popup.innerHTML = "Non puoi annullare la prenotazione 4 ore prima"; }
   else { popup.innerHTML = "Errore"; }
 
   var btn = document.createElement("BUTTON");
@@ -49,7 +50,7 @@ async function richiedi_prenotazioni(filtro) {
     else if (ex_data[i].ID_servizio_SERVIZI.Durata.substring(0, 5) != filtro.Durata && filtro.Durata != '' && filtro.Durata != ',') {
       console.log("qui");
     }
-    else if (((ex_data[i].ID_servizio_SERVIZI.Tipologia).toLowerCase().indexOf(filtro.Tipologia.toLowerCase())==-1)  && filtro.Tipologia != "") {
+    else if (((ex_data[i].ID_servizio_SERVIZI.Tipologia).toLowerCase().indexOf(filtro.Tipologia.toLowerCase()) == -1) && filtro.Tipologia != "") {
 
     }
     else if (ex_data[i].Stato != filtro.Stato && filtro.Stato != "" && filtro.Durata != ',') {
@@ -116,30 +117,44 @@ function generateTable(table, data, index) {
       button.innerHTML = "-  Annulla  -";
       button.type = 'submit';
       button.value = element.id;
-      button.onclick = function exe_botton() { Annulla_prenotazione(button.value); }
+      button.onclick = function exe_botton() { Annulla_prenotazione(element); }
       buttonCell.appendChild(button);
     }
   }
 }
 
-async function Annulla_prenotazione(id_prenotazione) {
-  console.log(id_prenotazione)
+async function Annulla_prenotazione(element) {
 
-  var Annulato = "Annullato"
-  const response = await fetch('/prenotazioni/api/annulla_prenotazione_cliente/' + id_prenotazione + '/' + id_cliente, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ "Stato": Annulato })
-  })
-  console.log(response);
-  if (response.status == 200) {
-    let Action = "Annulla";
-    showPopup(Action);
+  // Crea oggetti data per l'orario selezionato e per l'orario attuale
+  const selectedTime = new Date(element.Giorno);
+  const currentTime = new Date();
+  // Calcola la differenza tra gli orari in ms e quindi la converte in ore
+  const timeDifference = (selectedTime - currentTime ) / (1000 * 60 * 60);
+  // Verifica se la differenza è maggiore di 4 ore
+  if (timeDifference > 4) {
+    console.log("L'orario selezionato è a più di 4 ore di distanza dall'orario attuale.");
+
+
+    var Annulato = "Annullato"
+    const response = await fetch('/prenotazioni/api/annulla_prenotazione_cliente/' + element.id + '/' + id_cliente, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ "Stato": Annulato })
+    })
+    console.log(response);
+    if (response.status == 200) {
+      let Action = "Annulla";
+      showPopup(Action);
+    }
+    else {
+      let Action = "Errore"
+      showPopup(Action);
+    }
   }
-  else {
-    let Action = "Errore"
+else {
+    let Action = "Non_Annulla"
     showPopup(Action);
   }
 

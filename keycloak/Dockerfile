@@ -1,5 +1,4 @@
 FROM quay.io/keycloak/keycloak:latest as builder
-LABEL MAINTEINER="Dagasma"
 
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=true
@@ -18,15 +17,15 @@ ENV KC_DB_URL=jdbc:mysql://db_inbook:3306/KEYCLOAK
 ENV KC_DB_USERNAME=administrator
 ENV KC_DB_PASSWORD=prova
 
-ENV KC_HOSTNAME=inbook.azurewebsites.net
+ENV KC_HOSTNAME_URL=http://inbook.local
 ENV KC_HTTP_ENABLED=true
 ENV KC_PROXY=passthrough
 ENV KC_HOSTNAME_STRICT=false
-ENV KC_HOSTNAME_STRICT_BACKCHANNEL=true
+ENV KC_HOSTNAME_STRICT_BACKCHANNEL=false
 ENV KEYCLOAK_ADMIN_PASSWORD=dagasma10@
 ENV KEYCLOAK_ADMIN=admin
 ADD ./entrypoint.sh ./wait-for-it.sh /
-RUN mkdir /opt/keycloak/data/import
+CMD mkdir /opt/keycloak/data/import
 ADD ./realm-export.json /opt/keycloak/data/import/
 ADD customTheme /opt/keycloak/themes/customTheme
 EXPOSE 8080

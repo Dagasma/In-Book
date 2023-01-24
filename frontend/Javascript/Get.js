@@ -7,7 +7,7 @@ var myBody = {
     console.log("sono entrato");
     console.log("dati entrati:", myBody);
   
-    const response = await fetch('http://127.0.0.1:4000//servizi/api/get_servizi_per_fornitore/5', {
+    const response = await fetch('http://127.0.0.1:4000//servizi/api/get_servizi_dal_cliente/5', {
       method: 'GET',
       headers: {
         "Access-Control-Request-Method": "GET",

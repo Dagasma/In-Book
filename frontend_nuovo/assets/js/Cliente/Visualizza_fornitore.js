@@ -141,7 +141,7 @@ async function calcolo_media() {
 // INSERT SERVICE IN THE FORME
 async function inserisci_servizi_form() {
 
-    const response = await fetch('/servizi/api/get_servizi_per_fornitore/' + id_fornitore, {
+    const response = await fetch('/servizi/api/get_servizi_dal_cliente/' + id_fornitore, {
         method: 'GET',
         headers: {
             "Access-Control-Request-Method": "GET",

@@ -34,7 +34,7 @@ async function showPopup(Action,name,id) {
 async function richiedi_servizi() {
 	/* DONE */
 	console.log("richiedi servizio")
-	const response = await fetch('/servizi/api/get_servizi_by_fornitore/' + id_fornitore, {
+	const response = await fetch('/servizi/api/get_servizi_dal_fornitore/' + id_fornitore, {
 		method: 'GET',
 		headers: {
 			"Access-Control-Request-Method": "GET",

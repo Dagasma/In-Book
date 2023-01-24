@@ -1151,7 +1151,10 @@
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
-      "redirectUris": [],
+      "redirectUris": [
+        "https://inbook.azurewebsites.net/*",
+        "http://inbook.azurewebsites.net/*"
+      ],
       "webOrigins": [],
       "notBefore": 0,
       "bearerOnly": true,
@@ -1346,11 +1349,10 @@
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/admin/master/console/*"
+        "https://inbook.azurewebsites.net/admin/master/console/*",
+        "http://inbook.azurewebsites.net/admin/master/console/*"
       ],
-      "webOrigins": [
-        "+"
-      ],
+      "webOrigins": [],
       "notBefore": 0,
       "bearerOnly": false,
       "consentRequired": false,

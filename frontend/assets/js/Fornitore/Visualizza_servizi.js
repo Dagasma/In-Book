@@ -1,40 +1,9 @@
 let id_fornitore = document.cookie.substring(3, 40);
 
-async function showPopup(Action,name,id) {
-    var popup = document.createElement("div");
-    popup.style.cssText = "position: fixed; top: 20%; left: 10%; width: 80%; background-color: #22b3c1; padding: 20px; z-index: 999; border-radius:10px; text-align:center; font-size:40px; color: white; font-weight:bold;";
-    document.body.appendChild(popup);
-
-    if (Action == "Modifica") { popup.innerHTML = "Vuoi modificare il servizio "+name; }
-    else if (Action == "Elimina"){popup.innerHTML = "Vuoi eliminare il servizio "+name}
-	else{ popup.innerHTML = "Error"; }
-
-    var btn = document.createElement("BUTTON");
-    var t = document.createTextNode("Chiudi");
-    btn.appendChild(t);
-    btn.style.cssText = "position: relative; margin: 10px auto; padding: 10px 20px; background-color: #22b3c1; color: white; border-radius:10px; font-size:20px;";
-    btn.onclick = function () {
-		if (Action == "Modifica") { 
-			let url = "/fornitore/modifica_servizi?id=" + id;
-		window.location.href = url;
-		 }
-		else if (Action == "Elimina"){
-			Elimina_func(id);
-			window.location.reload();
-		}
-		
-        document.body.removeChild(popup);
-    };
-    var linebreak = document.createElement("br");
-    popup.appendChild(linebreak);
-    popup.appendChild(btn);
-    popup.appendChild(btn);
-}
-
 async function richiedi_servizi() {
 	/* DONE */
 	console.log("richiedi servizio")
-	const response = await fetch('/servizi/api/get_servizi_dal_fornitore/' + id_fornitore, {
+	const response = await fetch('/servizi/api/get_servizi_by_fornitore/' + id_fornitore, {
 		method: 'GET',
 		headers: {
 			"Access-Control-Request-Method": "GET",
@@ -78,45 +47,21 @@ function generateTable(table, data, index) {
 		}
 		let buttonCell = row.insertCell();
 		// Crea un bottone e aggiungilo alla cella
-		let button = document.createElement("section");
-		button.style.backgroundColor = "#22b3c1";
-		button.style.color = "white";
-		button.style.textAlign = "center";
-		button.style.display = "flex";
-		button.style.alignItems = "center";
-		button.style.justifyContent = "center";
-		button.style.borderRadius = "10px";
-		button.style.margin = "0";
-		button.style.padding = "10%";
-		button.innerHTML = "  Modifica  ";
-		button.type = 'submit';
-		button.value = element.ID;
-		button.onclick = function exe_botton() { 
-			let text="Modifica"
-			showPopup(text,element.Tipologia,element.ID)
-		 }
+		let button = document.createElement("button");
+		button.innerHTML = "Modifica";
+		button.setAttribute("data-id", element["ID"]);
+		button.setAttribute("data-column", "Modifica");
+		button.onclick = function exe_botton() { Modifica_func(element["ID"]); }
 		buttonCell.appendChild(button);
 
 		// Aggiungi una nuova cella alla fine della riga
 		buttonCell = row.insertCell();
-		let button1 = document.createElement("section");
-		button1.style.backgroundColor = "#22b3c1";
-		button1.style.color = "white";
-		button1.style.textAlign = "center";
-		button1.style.display = "flex";
-		button1.style.alignItems = "center";
-		button1.style.justifyContent = "center";
-		button1.style.borderRadius = "10px";
-		button1.style.margin = "0";
-		button1.style.padding = "10%";
-		button1.innerHTML = "  Elimina  ";
-		button1.type = 'submit';
-		button1.value = element.ID;
-		console.log(element)
-		button1.onclick = function exe_botton() { 
-			let text="Elimina"
-			showPopup(text,element.Tipologia,element.ID)
-			 }
+		// Crea un bottone e aggiungilo alla cella
+		button1 = document.createElement("button");
+		button1.innerHTML = "Elimina";
+		button1.setAttribute("data-id", element["name"]);
+		button1.setAttribute("data-column", "Elimina");
+		button1.onclick = function exe_botton() { Elimina_func(element["ID"]); }
 		buttonCell.appendChild(button1);
 
 	}
@@ -125,6 +70,7 @@ function generateTable(table, data, index) {
 function Modifica_func(ID) {
 	console.log(ID);
 	//href
+	window.alert("Vuoi modificare il servizio");
 	let url = "/fornitore/modifica_servizi?id=" + ID;
 	window.location.href = url;
 }
@@ -139,7 +85,15 @@ async function Elimina_func(id_servizio) {
 		}
 	})
 
-	console.log("servizio eliminato")
+	const risposta= await response;
+	if(response.status==200){
+		window.alert('Eliminata con successo');
+	}
+	else{
+		window.alert('C e un errore');
+	}
+
+	window.alert("eliminato");
 }
 
 
@@ -163,5 +117,5 @@ async function create_table_prenotazioni(ex_data, en_page = 0) {
 		generateTableHead(table, data, keys);//create header
 		generateTable(table, ex_data, keys);
 	}//print table}
-	else { table.innerHTML = "Non è presente nessun servizio ..."; }
+	else { table.innerHTML = "Non è presente nessuna prenotazione..."; }
 }

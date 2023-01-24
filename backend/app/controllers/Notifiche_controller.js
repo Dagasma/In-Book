@@ -38,7 +38,7 @@ exports.create = (req, res) => {
 // Retrieve all notifiche from the database.
 exports.findAllFornitore = (req, res) => {
     const id = req.params.id_fornitore
-    var condition = id ? { ID_fornitore: { [Op.like]: `%${id}%` } } : null;
+    var condition = id ? { ID_fornitore: { [Op.like]: `${id}` } } : null;
     tab_notifiche
     .findAll({
         include: [{
@@ -66,7 +66,7 @@ exports.findAllFornitore = (req, res) => {
 
 exports.findAllCliente = (req, res) => {
     const id = req.params.id_cliente
-    var condition = id ? { ID_utente: { [Op.like]: `%${id}%` } } : null;
+    var condition = id ? { ID_utente: { [Op.like]: `${id}` } } : null;
     tab_notifiche
         .findAll({ where: condition })
         .then((data) => {
@@ -182,7 +182,7 @@ exports.findAllFornitore_unione = (req, res) => {
 
         // mi torna una tabella con ORARIO - DURATA - SUM(PERSONE)
         const tab_notifiche_unione =  db.sequelize.query('SELECT  `FORNITORI`.`ID_utente_fornitore` ,`FORNITORI`.`Nome_Attivita` ,`FORNITORI`.`Tipo_attivita`,`FORNITORI`.`Indirizzo` ,`SERVIZI`.`Tipologia`,`SERVIZI`.`Descrizione`,`PRENOTAZIONI`.`Stato`,`PRENOTAZIONI`.`ID`, `NOTIFICHE`.`Descrizione_notifica`,' +
-        '  `NOTIFICHE`.`Orario` AS Orario_notifica  FROM `PRENOTAZIONI`  RIGHT JOIN `NOTIFICHE` ON `PRENOTAZIONI`.`ID`= `NOTIFICHE`.`ID_prenotazione` LEFT JOIN `SERVIZI` ON`PRENOTAZIONI`.`ID_servizio` = `SERVIZI`.`ID` LEFT JOIN '+
+        '  `NOTIFICHE`.`Orario` AS Orario_notifica , `PRENOTAZIONI`.`Orario_prenotazione_inizio` AS Orario_inizio , `PRENOTAZIONI`.`Numero_clienti`  FROM `PRENOTAZIONI`  RIGHT JOIN `NOTIFICHE` ON `PRENOTAZIONI`.`ID`= `NOTIFICHE`.`ID_prenotazione` LEFT JOIN `SERVIZI` ON`PRENOTAZIONI`.`ID_servizio` = `SERVIZI`.`ID` LEFT JOIN '+
         ' `FORNITORI` ON`FORNITORI`.`ID_utente_fornitore` = `SERVIZI`.`ID_fornitore`     WHERE `FORNITORI`.`ID_utente_fornitore` = ?  ORDER BY `NOTIFICHE`.`Orario` DESC',
         {
             replacements: [id],

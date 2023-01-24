@@ -25,19 +25,20 @@ function addtime(orario, durata_minima_minutes) {
 
 async function calcolo_slot_liberi(filtro) {
     var output = {};
-
+    console.log("entrato0 ")
     // ritorno il giorno della settimana
     const data_target = new Date(filtro.Data_giorno);
     const giorni = [
+        "Domenica",        
         "Lunedi",
         "Martedi",
         "Mercoledi",
         "Giovedi",
         "Venerdi",
         "Sabato",
-        "Domenica",
     ];
-    const giorno_scelto = giorni[data_target.getDay()];
+    console.log(data_target);
+    const giorno_scelto = giorni[data_target.getDay() ];
 
     // Determino la capienza massima
     const Query_capienza = await db.sequelize.query('SELECT Capienza_massima FROM FORNITORI WHERE ID_utente_fornitore = ?',
@@ -46,7 +47,7 @@ async function calcolo_slot_liberi(filtro) {
             type: db.sequelize.QueryTypes.SELECT
         }
     );
-
+    console.log("entro2");
     // Determino l'orario in cui apre e chiude quel giorno
     const Orari_fornitori = await db.sequelize.query('SELECT Orario_apertura , Orario_chiusura ' +
         'FROM ORARI_ATTIVITA ' +
@@ -57,10 +58,12 @@ async function calcolo_slot_liberi(filtro) {
         }
     );
 
+    console.log("entro2a");
+
     // mi torna una tabella con ORARIO - DURATA - SUM(PERSONE)
-    const Query_prenotazioni = await db.sequelize.query('SELECT Orario_prenotazione_inizio ,Durata , SUM(Numero_clienti) ' +
-        'FROM `SERVIZI` INNER JOIN `PRENOTAZIONI` ON`SERVIZI`.`ID` = `PRENOTAZIONI`.`ID_servizio` ' +
-        'WHERE DATE(Orario_prenotazione_inizio) = ? ' +
+    const Query_prenotazioni = await db.sequelize.query('SELECT Orario_prenotazione_inizio ,Durata , SUM(Numero_clienti) AS CLIENTI ' +
+        'FROM `SERVIZI` INNER JOIN `PRENOTAZIONI` ON `SERVIZI`.`ID` = `PRENOTAZIONI`.`ID_servizio` ' +
+        'WHERE DATE(Orario_prenotazione_inizio) = ?  AND `PRENOTAZIONI`.`Stato`="Attivo" ' +
         'GROUP BY `PRENOTAZIONI`.`Orario_prenotazione_inizio` ,`SERVIZI`.`Durata` ' +
         'ORDER BY `PRENOTAZIONI`.`Orario_prenotazione_inizio` ASC;',
         {
@@ -68,23 +71,35 @@ async function calcolo_slot_liberi(filtro) {
             type: db.sequelize.QueryTypes.SELECT
         }
     );
-    console.log(Query_prenotazioni)
+
+    console.log("Query_prenotazioni stampa :", Query_prenotazioni)
+    console.log("quer_orari stampa :", Orari_fornitori)
     //Calcolo il numero di SLOT
+
+
     durata_minima = '00:15:00';
     durata_minima_minutes = minutesFromTime(durata_minima);
     var orari_00 = minutesFromTime((Orari_fornitori[0]).Orario_apertura);
     var orari_01 = minutesFromTime((Orari_fornitori[0]).Orario_chiusura);
-
-    var orari_10 = minutesFromTime((Orari_fornitori[1]).Orario_apertura);
-    var orari_11 = minutesFromTime((Orari_fornitori[1]).Orario_chiusura);
-
     const Number_slot_mattina = (orari_01 - orari_00) / (durata_minima_minutes);
-    const Number_slot_pomeriggio = (orari_11 - orari_10) / (durata_minima_minutes);
-    const Number_slot = Number_slot_mattina + Number_slot_pomeriggio;
+   
+    let Number_slot;
+    if (Orari_fornitori.length > 1) {
+        var orari_10 = minutesFromTime((Orari_fornitori[1]).Orario_apertura);
+        var orari_11 = minutesFromTime((Orari_fornitori[1]).Orario_chiusura);
+        const Number_slot_pomeriggio = (orari_11 - orari_10) / (durata_minima_minutes);
+        Number_slot = Number_slot_mattina + Number_slot_pomeriggio;
+
+    }
+    else {
+        Number_slot = Number_slot_mattina;
+    }
+
 
     Capienza_max = Query_capienza[0].Capienza_massima;
-    let Array_disponibilita = new Array();
 
+    let Array_disponibilita = new Array();
+ console.log(Orari_fornitori.length);
     //Inserisco nella prima colonna l'ora di inizio mentre nella seconda la capienza massima
     for (var i = 0; i < Number_slot; i++) {
         if (i == 0) {
@@ -98,23 +113,24 @@ async function calcolo_slot_liberi(filtro) {
 
         }
     }
-    console.log(Array_disponibilita)
+
+    console.log(Array_disponibilita);
+
     //Inserisco nella prima colonna l'ora di inizio mentre nella seconda la capienza massima
     for (var i = 0; i < Query_prenotazioni.length; i++) {  // per ogni prenotazione
-        let orar_table = addtime(String(Query_prenotazioni[i].Orario_prenotazione_inizio).substring(16, 21), -60);
+        let orar_table = String(Query_prenotazioni[i].Orario_prenotazione_inizio).substring(16, 21);
         let index = Array_disponibilita.findIndex(function (element) { return element.Orario_inizio == orar_table; });
+        console.log(index, orar_table, Query_prenotazioni[i].CLIENTI)
         if (index != -1) {
-            console.log("entro");
-            console.log(Query_prenotazioni[i].Durata, orar_table);
-            console.log(Array_disponibilita[index], i, index, Array_disponibilita[index + j]);
             if (Query_prenotazioni[i].Durata == durata_minima) {
-                console.log("entro1");
-                Array_disponibilita[index].Posti_disponibili -= Query_prenotazioni[i]['SUM(Numero_clienti)'];
+                console.log("entro1", Array_disponibilita[index].Posti_disponibili, Query_prenotazioni[i].CLIENTI);
+                Array_disponibilita[index].Posti_disponibili = Array_disponibilita[index].Posti_disponibili - Query_prenotazioni[i].CLIENTI;
 
             }
             else {
+                console.log("entro1", Array_disponibilita[index].Posti_disponibili, Query_prenotazioni[i].CLIENTI);
                 for (var j = 0; j < minutesFromTime(Query_prenotazioni[i].Durata) / minutesFromTime(durata_minima); j++) {
-                    Array_disponibilita[index + j].Posti_disponibili -= Query_prenotazioni[i]['SUM(Numero_clienti)'];
+                    Array_disponibilita[index + j].Posti_disponibili = Array_disponibilita[index + j].Posti_disponibili - Query_prenotazioni[i].CLIENTI;
 
                 }
             }

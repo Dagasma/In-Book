@@ -37,7 +37,7 @@ exports.create = (req, res) => {
 // Retrieve all votazioni from the database.
 exports.findAll_utente = (req, res) => {
     const ID_utente = req.params.id;
-    var condition = ID_utente ? { ID_utente: { [Op.like]: `%${ID_utente}%` } } : null;
+    var condition = ID_utente ? { ID_utente: { [Op.like]: `${ID_utente}` } } : null;
 
     tab_votazioni
         .findAll({ where: condition })
@@ -56,7 +56,7 @@ exports.findAll_utente = (req, res) => {
 exports.findAll_fornitore = (req, res) => {
     const ID_fornitore = req.params.id;
     
-    var condition = ID_fornitore ? { ID_fornitore: { [Op.like]: `%${ID_fornitore}%` } } : null;
+    var condition = ID_fornitore ? { ID_fornitore: { [Op.like]: `${ID_fornitore}` } } : null;
 
     tab_votazioni
         .findAll({ where: condition })
@@ -204,11 +204,12 @@ exports.get_voto = (req, res) => {
     const ID_utente = req.params.id_utente;
     const ID_fornitore = req.params.id_fornitore;
 
-    var condition1 = ID_fornitore ? { ID_fornitore: { [Op.like]: `%${ID_fornitore}%` } } : null;
+    var condition1 = ID_fornitore ? { ID_fornitore: { [Op.like]: `${ID_fornitore}` } } : false;
+    var condition2 = ID_utente ? { ID_utente: { [Op.like]: `${ID_utente}` } } : false;
     console.log(condition1);
 
     tab_votazioni
-        .findAll({ where: condition1  })
+        .findAll({ where: {[Op.and]: [condition1, condition2]}})
         .then((data) => {
             res.send(data);
         })

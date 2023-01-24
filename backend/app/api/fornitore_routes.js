@@ -14,8 +14,15 @@ module.exports = app => {
      //Retrieve a single User by id
     router.get("/get_profilo/:id",config.keycloak.protect("realm:fornitore"), middleware_check.check_id_param("id"),fornitori.findOne);
   
+    //retrieve cliente info of fornitore
+    router.get("/get_profilo_cliente/:id",config.keycloak.protect("realm:fornitore"), middleware_check.check_id_param("id"),fornitori.findInfo_Fornitore);
+
+
     // Update a User with id
     router.put("/aggiorna_profilo/:id", config.keycloak.protect("realm:fornitore"), middleware_check.check_id_param("id"),fornitori.update);
+
+    router.put("/aggiorna_profilo_cliente_fornitore/:id", config.keycloak.protect("realm:fornitore"), middleware_check.check_id_param("id"),fornitori.update_info_Cliente);
+
 
     app.use('/fornitori/api',router);
    };

@@ -10,9 +10,9 @@ INSERT INTO `INBOOK`.`UTENTI`(ID,Nome,Cognome,Email,Data_di_nascita,Telefono,Tip
 
 
 
-INSERT INTO `INBOOK`.`FORNITORI`(ID_utente_fornitore,Nome_Attivita,Tipo_Attivita,Indirizzo,Capienza_massima) VALUES (5,'Gym','GymLuca','Via marina , 42011',70);
-INSERT INTO `INBOOK`.`FORNITORI`(ID_utente_fornitore,Nome_Attivita,Tipo_Attivita,Indirizzo,Capienza_massima) VALUES (6,'Barbiere','BarbiereLuca','via enrico , 12084',10);
-INSERT INTO `INBOOK`.`FORNITORI`(ID_utente_fornitore,Nome_Attivita,Tipo_Attivita,Indirizzo,Capienza_massima) VALUES (8,'Dentista','DentistaLuca','C.so michelangelo, 13202',4);
+INSERT INTO `INBOOK`.`FORNITORI`(ID_utente_fornitore,Tipo_Attivita,Nome_Attivita,Indirizzo,Capienza_massima) VALUES (5,'Gym','GymLuca','Via marina , 42011',70);
+INSERT INTO `INBOOK`.`FORNITORI`(ID_utente_fornitore,Tipo_Attivita,Nome_Attivita,Indirizzo,Capienza_massima) VALUES (6,'Barbiere','BarbiereLuca','via enrico , 12084',10);
+INSERT INTO `INBOOK`.`FORNITORI`(ID_utente_fornitore,Tipo_Attivita,Nome_Attivita,Indirizzo,Capienza_massima) VALUES (8,'Dentista','DentistaLuca','C.so michelangelo, 13202',4);
 
 
 INSERT INTO `INBOOK`.`ORARI_ATTIVITA`(ID,ID_fornitore,Giorno_della_settimana,Orario_apertura,Orario_chiusura) VALUES (1,5,'Martedi','8:00','13:00');

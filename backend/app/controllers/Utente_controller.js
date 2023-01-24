@@ -1,3 +1,4 @@
+const { Update_user } = require("../middleware_custom");
 const db = require("../models");
 const tab_utenti = db.models.UTENTI;
 const Op = db.Sequelize.Op;
@@ -14,8 +15,8 @@ exports.create = async (req, res) => {
 
     // Create a user
     const utente = {
-        Nome : req.body.nome,
-        Cognome : req.body.cognome,
+        Nome: req.body.nome,
+        Cognome: req.body.cognome,
         Email: req.body.email,
         Data_di_nascita: req.body.Data_di_nascita,
         Telefono: req.body.Telefono,
@@ -79,6 +80,15 @@ exports.findOne = (req, res) => {
 
 exports.update = (req, res) => {
     const id = req.params.id;
+    const enable = !req.body.Bloccato;
+    console.log(id,enable)
+    if (req.kauth.grant.access_token.content.realm_access.roles.includes("amministratore")) {
+        Update_user(enable, id).catch(() => {
+
+        });
+    }
+    console.log("superato");
+
     tab_utenti
         .update(req.body, {
             where: { id: id },

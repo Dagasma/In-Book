@@ -12,6 +12,7 @@ CREATE TRIGGER `INBOOK`.`crea_notifica_ANNULLATA` AFTER UPDATE ON `INBOOK`.`PREN
 $$
 
 
+
 DELIMITER $$
 CREATE EVENT aggiorna_stato_prenotazioni
     ON schedule

@@ -10,10 +10,10 @@ module.exports = app => {
     router.post("/", OrarioAttivita.create);
   
     //Lista orari del fornitore
-    router.get("/Orario_fornitore/:ID_fornitore", OrarioAttivita.findAll);
+    router.get("/Orario_fornitore/:ID_fornitore", config.keycloak.protect("realm:fornitore"), OrarioAttivita.findAll);
 
     //Delete (NEL BODY PASSO ANCHE ID_FORNITORE)
-    router.delete("/delete_orario/:id_orario", OrarioAttivita.delete_orario);
+    router.delete("/delete_orario/:id_orario/:ID_fornitore", config.keycloak.protect("realm:fornitore"), OrarioAttivita.delete_orario);
 
     app.use('/OrarioAttivita/api',router);
    };

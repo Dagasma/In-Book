@@ -11,6 +11,48 @@ let form1_prenotazione = {};
 let en_voto_fatto = 1;
 let id_voto = 0;
 
+
+
+
+async function showPopup(Action) {
+    console.log(Action == "Prenotazione");
+
+    var popup = document.createElement("div");
+    popup.style.cssText = "position: fixed; top: 20%; left: 10%; width: 80%; background-color: #22b3c1; padding: 20px; z-index: 999; border-radius:10px; text-align:center; font-size:40px; color: white; font-weight:bold;";
+    document.body.appendChild(popup);
+
+    if (Action == "Prenotazione") { popup.innerHTML = "Prenotazione effettuata"; }
+    else if (Action == "Errore") { popup.innerHTML = "Errore qualcosa è andato storto"; }
+    else if (Action == "Voto1") { popup.innerHTML = "Voto Salvato"; }
+    else if (Action == "Voto2") { popup.innerHTML = "Voto Aggiornato"; }
+    else if (Action == "Nessuna Disponibilita") { popup.innerHTML = "Non è presente nessun orario"; }
+    else if (Action == "Giorno passato") { popup.innerHTML = "Hai selezionato un giorno gia passato"; }
+
+    var btn = document.createElement("BUTTON");
+    var t = document.createTextNode("Chiudi");
+    btn.appendChild(t);
+    btn.style.cssText = "position: relative; margin: 10px auto; padding: 10px 20px; background-color: #22b3c1; color: white; border-radius:10px; font-size:20px;";
+    btn.onclick = function () {
+        document.body.removeChild(popup);
+
+        if (Action == "Prenotazione") {
+            let url = "/cliente/visualizza_prenotazioni";
+            window.location.href = url;
+        }
+        else if (Action == "Errore") { location.reload() }
+        else if (Action == "Voto1") { location.reload() }
+        else if (Action == "Voto2") { location.reload() }
+        else if (Action == "Nessuna Disponibilita") { location.reload() }
+        else { location.reload() }
+
+    };
+    var linebreak = document.createElement("br");
+    popup.appendChild(linebreak);
+    popup.appendChild(btn);
+    popup.appendChild(btn);
+}
+
+
 // DIFF TIME
 function diff_time_hhmm(time1, time2) {
     const [hours1, minutes1] = time1.split(':').map(Number);
@@ -99,7 +141,7 @@ async function calcolo_media() {
 // INSERT SERVICE IN THE FORME
 async function inserisci_servizi_form() {
 
-    const response = await fetch('/servizi/api/get_servizi_per_fornitore/' + id_fornitore, {
+    const response = await fetch('/servizi/api/get_servizi_dal_cliente/' + id_fornitore, {
         method: 'GET',
         headers: {
             "Access-Control-Request-Method": "GET",
@@ -118,7 +160,7 @@ async function inserisci_servizi_form() {
         const optionElement = document.createElement("option");
         optionElement.value = servizi_fornitore_ex[i].ID;
         Durata_servizi[servizi_fornitore_ex[i].ID] = servizi_fornitore_ex[i].Durata;
-        optionElement.text = servizi_fornitore_ex[i].Tipologia + " - "+ servizi_fornitore_ex[i].Durata.substring(0,5);
+        optionElement.text = servizi_fornitore_ex[i].Tipologia + " - " + servizi_fornitore_ex[i].Durata.substring(0, 5);
         select.appendChild(optionElement);
     }
 
@@ -152,14 +194,13 @@ function Calc_slot_liberi(slot, capacita, durata) {
     let slot_durata = diff_time_hhmm(slot[1].Orario_inizio, slot[0].Orario_inizio)
     let rapporto = Rapporto_time(durata, slot_durata)
 
-    console.log(rapporto, slot_durata, slot);
-
+    //console.log(rapporto, slot_durata, slot);
     let cnt = 0; // conteggio slot
-    for (let i = 0; i < slot.length - rapporto+1; i++) { // scorro tutti gli slot
-        console.log("slot ", i, "orario :", slot[i].Orario_inizio, "slot durata :", slot_durata);
+    for (let i = 0; i < slot.length - rapporto + 1; i++) { // scorro tutti gli slot
+       // console.log(slot[i + j].Posti_disponibili , capacita)
+        //console.log("slot ", i, "orario :", slot[i].Orario_inizio, "slot durata :", slot_durata);
         for (let j = 0; j < rapporto; j++) { // scorro gli slot successivi che copre la prenotazione
-            console.log(i+j ,slot[i + j].Posti_disponibili)
-            if ((j == rapporto-1 && slot[i + j].Posti_disponibili >= capacita)||(i+j>=slot.length)) {
+            if ((j == rapporto - 1 && slot[i + j].Posti_disponibili >= capacita) || (i + j >= slot.length)) {
                 cnt++;
                 if (cnt == rapporto) {
                     orari_disponibili.push(slot[i].Orario_inizio);
@@ -187,14 +228,14 @@ async function get_voto() {
         }
     });
     const servizi_fornitore_ex = await response.json(); //extract JSON from the http response
-
+    console.log(servizi_fornitore_ex)
     var h4Element = document.getElementById("Testo_Voto");
     var btn_voto = document.getElementById("btn_voto");
     if (servizi_fornitore_ex.length >= 1) {
         h4Element.innerHTML = "Hai gia effettuato la votazione : " + servizi_fornitore_ex[0].Voto + ". Completa il form per modificare il voto.";
         en_voto_fatto = 1;
         btn_voto.innerHTML = "Aggiorna Voto";
-        id_voto=servizi_fornitore_ex[0].ID
+        id_voto = servizi_fornitore_ex[0].ID
     }
     else {
         //h4Element.innerHTML = "Vota il fornitore";
@@ -213,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const voto = document.getElementById("Voto").value;
         let risposta;
-
+        let Action = "Voto1";
         if (en_voto_fatto != 1) {
             /*DONE*/
             const response1 = await fetch('/Votazioni/api/', {
@@ -231,7 +272,8 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(risposta);
         }
         else {
-            const response1 = await fetch('/Votazioni/api/cambia_voto/'+id_voto+'/'+id_cliente, {
+            Action = "Voto2";
+            const response1 = await fetch('/Votazioni/api/cambia_voto/' + id_voto + '/' + id_cliente, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -245,17 +287,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (risposta == 200) {
-            window.alert("voto salvato");
+            console.log(Action);
+            showPopup(Action);
         }
         else {
-            window.alert("Hai gia votato questo fornitore");
+            let Action = "Errore"
+            showPopup(Action);
         }
-        const url = new URL(window.location.href);
-        const searchParams = new URLSearchParams(url.search);
-        searchParams.set("newparam", voto);
-        window.history.pushState({}, "", `${url.pathname}?${searchParams.toString()}`);
-
-        location.reload()
 
     });
 });
@@ -273,6 +311,24 @@ document.addEventListener("DOMContentLoaded", function () { // aspetta il carica
         form1_prenotazione.id_servizio = document.getElementById("Select_Servizio").value;
         console.log("prima della get");
 
+        // data attuale
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+        const day = ('0' + currentDate.getDate()).slice(-2);
+
+        let today = new Date(`${year}-${month}-${day}`);
+        let selectedDate = new Date(form1_prenotazione.Data_disponibilita)
+
+        // calcola la differenza in millisecondi
+        var diffInHours = (today.getTime() - selectedDate.getTime()) / (1000 * 3600);
+        console.log(diffInHours, today.getTime(), selectedDate.getTime())
+        // converti in giorni
+        if (diffInHours > 0) {
+            let Action = "Giorno passato"
+            showPopup(Action)
+        }
+
         const response = await fetch('/prenotazioni/api/get_slot_liberi/' + form1_prenotazione.Data_disponibilita + '/' + id_fornitore, {
             method: 'GET',
             headers: {
@@ -286,7 +342,8 @@ document.addEventListener("DOMContentLoaded", function () { // aspetta il carica
         console.log("dopo della get");
         console.log(slot_orari);
         if (response.status != 200) {
-            window.alert("Nessun orario disponibile");
+            let Action = "Nessuna Disponibilita";
+            showPopup(Action);
         }
         const select = document.getElementById("Select_orario");
 
@@ -301,16 +358,12 @@ document.addEventListener("DOMContentLoaded", function () { // aspetta il carica
         });
         select.setAttribute("dati", form1_prenotazione);
 
-        const url = new URL(window.location.href);
-        const searchParams = new URLSearchParams(url.search);
-        window.history.pushState({}, "", `${url.pathname}}`);
-
     });
 });
 
 //POST PRENOTAZIONE
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("btn_prenota").addEventListener("click", function (e) {
+    document.getElementById("btn_prenota").addEventListener("click", async function (e) {
         e.preventDefault();
 
         form1_prenotazione.orario = document.getElementById("Select_orario").value;
@@ -327,7 +380,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(Valori_inviati);
 
         /*DONE*/
-        const response = fetch('/prenotazioni/api/effettua_prenotazione', {
+        const response = await fetch('/prenotazioni/api/effettua_prenotazione', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -342,8 +395,17 @@ document.addEventListener("DOMContentLoaded", function () {
             })
         })
 
-        window.alert("prenotato");
-        let url = "/cliente/visualizza_prenotazioni";
-        window.location.href = url;
+        risposta = await response.status;
+        console.log(risposta);
+
+        if (risposta == 200) {
+            let Action = "Prenotazione";
+            showPopup(Action);
+        }
+        else {
+            let Action = "Errore"
+            showPopup(Action);
+        }
+
     });
 });

@@ -46,6 +46,8 @@ services:
         expose:
             - "8080"
             - "8443"
+        volumes:
+            - ${WEBAPP_STORAGE_HOME}/nginx/ssl:/etc/x509/https
         networks:
             - DBNetwork
 

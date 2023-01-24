@@ -1198,7 +1198,8 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu",
       "redirectUris": [
-        "https://inbook.azurewebsites.net/*"
+        "https://inbook.azurewebsites.net/*",
+        "http://inbook.azurewebsites.net/*"
       ],
       "webOrigins": [],
       "notBefore": 0,

@@ -1155,7 +1155,7 @@
         "https://inbook.azurewebsites.net/*",
         "http://inbook.azurewebsites.net/*"
       ],
-      "webOrigins": [],
+      "webOrigins": ["*"],
       "notBefore": 0,
       "bearerOnly": true,
       "consentRequired": false,
@@ -1192,7 +1192,7 @@
       "clientId": "nodejs",
       "name": "Node JS Adapter",
       "description": "",
-      "rootUrl": "http://inbook.local",
+      "rootUrl": "https://inbook.azurewebsites.net",
       "adminUrl": "",
       "baseUrl": "/",
       "surrogateAuthRequired": false,
@@ -1201,7 +1201,8 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu",
       "redirectUris": [
-        "http://inbook.local/*"
+        "https://inbook.azurewebsites.net/*",
+        "http://inbook.azurewebsites.net/*"
       ],
       "webOrigins": [],
       "notBefore": 0,
@@ -1351,7 +1352,7 @@
         "https://inbook.azurewebsites.net/admin/master/console/*",
         "http://inbook.azurewebsites.net/admin/master/console/*"
       ],
-      "webOrigins": ["*"],
+      "webOrigins": [],
       "notBefore": 0,
       "bearerOnly": false,
       "consentRequired": false,
@@ -1951,8 +1952,8 @@
     "starttls": "true",
     "auth": "true",
     "envelopeFrom": "",
-    "ssl": "false",
-    "password": "**********",
+    "ssl": "true",
+    "password": "lcggjnbmktoznzru",
     "port": "25",
     "host": "smtp.gmail.com",
     "replyTo": "dagasmainbook@gmail.com",

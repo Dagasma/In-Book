@@ -15,13 +15,14 @@ let id_voto = 0;
 
 
 async function showPopup(Action) {
-    console.log(Action == "Prenotazione");
 
     var popup = document.createElement("div");
     popup.style.cssText = "position: fixed; top: 20%; left: 10%; width: 80%; background-color: #22b3c1; padding: 20px; z-index: 999; border-radius:10px; text-align:center; font-size:40px; color: white; font-weight:bold;";
     document.body.appendChild(popup);
 
     if (Action == "Prenotazione") { popup.innerHTML = "Prenotazione effettuata"; }
+    else if(Action == "Non_Annulla") { popup.innerHTML = "Non puoi annullare la prenotazione 4 ore prima"; }
+
     else if (Action == "Errore") { popup.innerHTML = "Errore qualcosa è andato storto"; }
     else if (Action == "Voto1") { popup.innerHTML = "Voto Salvato"; }
     else if (Action == "Voto2") { popup.innerHTML = "Voto Aggiornato"; }
@@ -79,7 +80,6 @@ function sumTime(time1, time2) {
 
 //DIV TIME
 function Rapporto_time(time1, time2) {
-    console.log(time1, time2)
     const [hours1, minutes1] = time1.split(':').map(Number);
     const [hours2, minutes2] = time2.split(':').map(Number);
 
@@ -91,7 +91,6 @@ function Rapporto_time(time1, time2) {
 //GET ELEMENT FORNITORE
 async function richiedi_fornitore() {
     // Dati fornitore
-    console.log("richiesta ..")
 
     const response = await fetch('/fornitori/api/cliente_get_profilo_fornitore/' + id_fornitore, {
         method: 'GET',
@@ -102,7 +101,6 @@ async function richiedi_fornitore() {
         }
     });
     const dati_fornitore = await response.json(); //extract JSON from the http response
-    console.log(dati_fornitore);
     dati_fornitore.Email = dati_fornitore.ID_utente_fornitore_UTENTI.Email
     dati_fornitore.Telefono = dati_fornitore.ID_utente_fornitore_UTENTI.Telefono
 
@@ -134,7 +132,6 @@ async function calcolo_media() {
         }
     });
     const media = await response.json(); //extract JSON from the http response
-    console.log(media);
     return media;
 }
 
@@ -151,7 +148,6 @@ async function inserisci_servizi_form() {
     });
     const servizi_fornitore_ex = await response.json(); //extract JSON from the http response
 
-    console.log(servizi_fornitore_ex);
 
     const select = document.getElementById("Select_Servizio");
     select.innerHTML = "Inserisci il servizio";
@@ -189,16 +185,12 @@ async function Aggiorna_Table() {
 // CALCULATE TIME AVAILABLE
 function Calc_slot_liberi(slot, capacita, durata) {
     let orari_disponibili = []
-    console.log(durata)
 
     let slot_durata = diff_time_hhmm(slot[1].Orario_inizio, slot[0].Orario_inizio)
     let rapporto = Rapporto_time(durata, slot_durata)
 
-    //console.log(rapporto, slot_durata, slot);
     let cnt = 0; // conteggio slot
     for (let i = 0; i < slot.length - rapporto + 1; i++) { // scorro tutti gli slot
-       // console.log(slot[i + j].Posti_disponibili , capacita)
-        //console.log("slot ", i, "orario :", slot[i].Orario_inizio, "slot durata :", slot_durata);
         for (let j = 0; j < rapporto; j++) { // scorro gli slot successivi che copre la prenotazione
             if ((j == rapporto - 1 && slot[i + j].Posti_disponibili >= capacita) || (i + j >= slot.length)) {
                 cnt++;
@@ -213,7 +205,6 @@ function Calc_slot_liberi(slot, capacita, durata) {
         }
         cnt = 0;
     }
-    console.log(orari_disponibili)
     return orari_disponibili;
 }
 
@@ -228,7 +219,6 @@ async function get_voto() {
         }
     });
     const servizi_fornitore_ex = await response.json(); //extract JSON from the http response
-    console.log(servizi_fornitore_ex)
     var h4Element = document.getElementById("Testo_Voto");
     var btn_voto = document.getElementById("btn_voto");
     if (servizi_fornitore_ex.length >= 1) {
@@ -242,7 +232,6 @@ async function get_voto() {
         en_voto_fatto = 0;
     }
 
-    console.log("voto", servizi_fornitore_ex[0].Voto);
 }
 
 get_voto();
@@ -269,7 +258,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 })
             })
             risposta = await response1.status;
-            console.log(risposta);
         }
         else {
             Action = "Voto2";
@@ -283,7 +271,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 })
             })
             risposta = await response1.status;
-            console.log(risposta);
         }
 
         if (risposta == 200) {

@@ -5,7 +5,7 @@ BEGIN
   DECLARE data_nascita DATE;
   DECLARE tipo VARCHAR(255);
   DECLARE presente VARCHAR(255);
-  
+
   set telefono_utente := (SELECT VALUE FROM KEYCLOAK.USER_ATTRIBUTE WHERE USER_ID = ID_u AND NAME='mobile');
   set data_nascita := (SELECT STR_TO_DATE(VALUE,'%Y-%m-%d') FROM KEYCLOAK.USER_ATTRIBUTE WHERE USER_ID = ID_u AND NAME='dob');
   set tipo := (SELECT VALUE FROM KEYCLOAK.USER_ATTRIBUTE WHERE USER_ID = ID_u AND NAME='tipo');
@@ -13,6 +13,9 @@ BEGIN
   IF EMAIL_u is NOT NULL AND telefono_utente IS NOT NULL AND data_nascita IS NOT NULL THEN
     IF presente is NULL THEN
       INSERT INTO INBOOK.UTENTI (ID,Nome,Cognome,Email,Telefono,Data_di_nascita,Tipo) VALUES (ID_u ,FIRST_NAME_u ,LAST_NAME_u ,EMAIL_u, telefono_utente, data_nascita,tipo);
+      IF tipo = "Fornitore" THEN
+        INSERT INTO INBOOK.FORNITORI (ID_utente_fornitore,Nome_Attivita,Tipo_Attivita,Indirizzo,Capienza_massima) VALUES (ID_u ,'vuoto' ,'vuoto' ,'vuoto', 1);
+      END IF;
     ELSE
       UPDATE INBOOK.UTENTI SET Nome = FIRST_NAME_u, Cognome = LAST_NAME_u, Email = EMAIL_u, Telefono = telefono_utente, Data_di_nascita = data_nascita WHERE ID = ID_u;
     END IF;
@@ -21,5 +24,5 @@ END;
 $$
 DELIMITER ;
 
-CREATE TRIGGER `pippozzo_trigger` AFTER UPDATE ON KEYCLOAK.`USER_ENTITY`
+CREATE TRIGGER pippozzo_trigger AFTER UPDATE ON KEYCLOAK.USER_ENTITY
   FOR EACH ROW call procedura_bella(NEW.ID, NEW.FIRST_NAME ,NEW.LAST_NAME ,NEW.EMAIL);

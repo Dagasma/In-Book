@@ -81,13 +81,11 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
     const id = req.params.id;
     const enable = !req.body.Bloccato;
-    console.log(id,enable)
     if (req.kauth.grant.access_token.content.realm_access.roles.includes("amministratore")) {
         Update_user(enable, id).catch(() => {
 
         });
     }
-    console.log("superato");
 
     tab_utenti
         .update(req.body, {

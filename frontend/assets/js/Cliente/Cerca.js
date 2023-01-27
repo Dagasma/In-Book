@@ -35,10 +35,8 @@ async function richiedi_fornitori(filtro) {
     }
   });
   const ex_data = await response.json(); //extract JSON from the http response
-  console.log(ex_data);
 
   var cont = 0;
-  console.log("filtro è: ", filtro);
   let dati_filtrati = [];
   
   for (let i = ex_data.length - 1; i >= 0; i--) {
@@ -65,7 +63,6 @@ async function richiedi_fornitori(filtro) {
     }
   }
 
-  console.log("dati filtrati :", dati_filtrati);
   return dati_filtrati;
 }
 
@@ -114,14 +111,12 @@ function generateTable(table, data, index) {
 }
 
 function vai_dal_fornitore(ID_fornitore) {
-  console.log(ID_fornitore);
   showPopup(ID_fornitore);
   // window.location.href = `/visualizza_forntiore?id=${ID_fornitore}`;
 }
 
 let en_page = 0;
 async function create_table_prenotazioni(ex_data, en_page = 0) {
-  console.log("creo la tab:");
   //let table = document.querySelector("table");// create table
   let columns = ["Nome Attivita", "Tipologia",
     "Durata", "Descrizione", "indirizzo",];
@@ -156,7 +151,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("btn_cerca").addEventListener("click", async function (e) {
     e.preventDefault();
     en_page = 1
-    console.log("il bottone cerca è stato premuto : ")
 
     let ex_data = []
 

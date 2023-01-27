@@ -42,7 +42,6 @@ function diffTime(time1, time2) {
 }
 
 async function richiedi_fornitore() {
-	console.log(id_fornitore);
 
 	// DATI UTENTE
 	let dati_fornitore;
@@ -81,8 +80,7 @@ async function richiedi_fornitore() {
 		dati_fornitore.Capienza_massima = "vuoto";
 		en_create = 1;
 	}
-	console.log(dati_fornitore);
-	console.log(en_create);
+
 
 
 	return dati_fornitore;
@@ -91,7 +89,6 @@ async function richiedi_fornitore() {
 //document.body.onload = create_table
 async function form_profilo() {
 	let data = await richiedi_fornitore();
-	console.log("la funzione mi ritorna", data)
 
 	// Create a break line element
 	var br = document.createElement("br");
@@ -243,7 +240,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	erbottone.addEventListener("click", async function (e) {
 		e.preventDefault();
 
-		console.log("FINE : ")
 		// document.getElementById("myForm").style.display = "none";
 
 		profilo_aggiornato.Nome = document.getElementById("Nome").value;
@@ -255,7 +251,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		profilo_aggiornato.Indirizzo = document.getElementById("Indirizzo").value;
 		profilo_aggiornato.Capienza_massima = document.getElementById("Capienza_massima").value;
 
-		console.log(profilo_aggiornato);
 		let risposta_fornitore;
 
 		const response = await fetch('/fornitori/api/aggiorna_profilo_cliente_fornitore/' + id_fornitore, {
@@ -271,11 +266,9 @@ document.addEventListener("DOMContentLoaded", function () {
 			})
 		})
 		risposta_fornitore = await response; //extract JSON from the http response
-		console.log(profilo_aggiornato);
 
-		console.log(en_create);
 		let risposta_fornitore1;
-		console.log(profilo_aggiornato.Indirizzo)
+
 		if (en_create == 1) {
 			const response = await fetch('/fornitori/api/', {
 				method: 'POST',
@@ -291,7 +284,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				})
 			})
 			risposta_fornitore1 = await response; //extract JSON from the http response
-			console.log(risposta_fornitore1)
 			en_create = 0;
 		}
 		else {
@@ -310,8 +302,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				})
 			})
 			risposta_fornitore1 = await response; //extract JSON from the http response
-			console.log(response);
-			console.log(response.status);
+
 
 		}
 
@@ -337,15 +328,13 @@ document.addEventListener("DOMContentLoaded", function () {
 		const Giorno = document.getElementById("Giorno").value;
 		const Orario_I = document.getElementById("Orario_I").value;
 		const Orario_F = document.getElementById("Orario_F").value;
-		console.log("btn_new_orario : ", Giorno, Orario_I, Orario_F);
-		console.log(diffTime(Orario_F, Orario_I))
+
 		let disponibilita = 1;
 
 
 		for (let element of data_ora) {
 			if (element.Giorno_della_settimana == Giorno) {
-				console.log(Orario_I, element.Orario_chiusura, Orario_F, element.Orario_apertura)
-				console.log(diffTime(Orario_I, element.Orario_chiusura), diffTime(Orario_F, element.Orario_apertura))
+
 				if (diffTime(Orario_I, element.Orario_chiusura) > 0) { // DOPO
 
 				}
@@ -377,7 +366,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					})
 				})
 				risposta = await response;
-				console.log(risposta.status)
+	
 			}
 			else { risposta = 500; }
 
@@ -423,7 +412,6 @@ async function richiedi_orario() {
 	});
 	const orari_tornati = await response.json(); //extract JSON from the http response
 	// // do something with myJson
-	console.log("orari: ", orari_tornati);
 	return orari_tornati;
 }
 
@@ -452,7 +440,6 @@ function generateTable(table, data, index) {
 
 
 async function elimina_orario(ID) {
-	console.log(ID);
 
 	const response = await fetch('/OrarioAttivita/api/delete_orario/' + ID + '/' + id_fornitore, {
 		method: 'DELETE',
@@ -464,7 +451,6 @@ async function elimina_orario(ID) {
 	});
 	const risposta = await response; //extract JSON from the http response
 	// // do something with myJson
-	console.log(risposta)
 	if (risposta.status == 200) {
 		let Text = "Elimina"
 		showPopup(Text);
@@ -484,9 +470,8 @@ async function create_table_orari() {
 	let keys = ["Giorno_della_settimana",
 		"Orario_apertura", "Orario_chiusura"];
 
-	console.log("entro in crea tabella")
 	data_ora = await richiedi_orario();
-	console.log(data_ora);
+
 	data_ora = data_ora.sort(function (a, b) {
 		return a.Giorno_della_settimana.localeCompare(b.Giorno_della_settimana);
 	});
@@ -495,7 +480,6 @@ async function create_table_orari() {
 		var table = document.getElementById("json-table");
 		table.innerHTML = ""
 		let data = Object.keys(data_ora[0]); //save the keys
-		console.log(data)
 		generateTableHead(table, data, columns); //create header
 		generateTable(table, data_ora, keys); //print table
 	}

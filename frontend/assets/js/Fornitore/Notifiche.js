@@ -13,7 +13,6 @@ async function richiedi_notifiche() {
 	});
 	const notifiche = await response.json(); //extract JSON from the http response
 	// // do something with myJson
-	console.log(notifiche)
 	return notifiche;
 }
 
@@ -37,7 +36,6 @@ function generateTableHead(table, data, columns) {
 function generateTable(table, data, index) {
 	for (let element of data) {
 		let row = table.insertRow();
-		console.log(element);
 		for (key of index) {
 			let cell = row.insertCell();
 			let text = document.createTextNode(element[key]);
@@ -55,7 +53,6 @@ async function create_table_notifiche() {
 	var table = document.getElementById("json-table");
 
 	table.innerHTML = "";
-	console.log(ex_data)
 	
 	let data = Object.keys(ex_data[0]);//save the keys
 	generateTableHead(table, data, columns);//create header

@@ -8,7 +8,6 @@ async function showPopup(Action, name, element) {
     if (Action == "Blocca") { popup.innerHTML = "Hai bloccato " + name + " ?"; }
     else if (Action == "Sblocca") { popup.innerHTML = "Hai sblocato " + name + " ?" }
     else { popup.innerHTML = "Error"; }
-    console.log(element)
     var btn = document.createElement("BUTTON");
     var t = document.createTextNode("Chiudi");
     btn.appendChild(t);
@@ -51,7 +50,6 @@ async function showPopup(Action, name, element) {
 
 async function richiedi_utenti() {
     /* DONE */
-    console.log("richiedi utenti")
     const response = await fetch('/amministratore/api/get_utenti', {
         method: 'GET',
         headers: {
@@ -169,7 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
         filtro.Cognome = document.getElementById("Cognome").value;
         let dati_filtrati = []
 
-        console.log(filtro)
 
         ex_data = await richiedi_utenti(filtro);
         for (let element of ex_data) {
@@ -180,12 +177,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             }
             else {
-                console.log(element)
                 dati_filtrati.push(element)
             }
         }
         let en_page = 1;
-        console.log(dati_filtrati);
         create_table(dati_filtrati, en_page);
     });
 });

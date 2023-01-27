@@ -33,7 +33,6 @@ async function showPopup(Action,name,id) {
 
 async function richiedi_servizi() {
 	/* DONE */
-	console.log("richiedi servizio")
 	const response = await fetch('/servizi/api/get_servizi_dal_fornitore/' + id_fornitore, {
 		method: 'GET',
 		headers: {
@@ -44,7 +43,6 @@ async function richiedi_servizi() {
 	});
 	const servizi = await response.json(); //extract JSON from the http response
 	// // do something with myJson
-	console.log(servizi)
 	return servizi;
 }
 
@@ -70,7 +68,6 @@ function generateTableHead(table, data, columns) {
 function generateTable(table, data, index) {
 	for (let element of data) {
 		let row = table.insertRow();
-		console.log(element);
 		for (key of index) {
 			let cell = row.insertCell();
 			let text = document.createTextNode(element[key]);
@@ -112,7 +109,6 @@ function generateTable(table, data, index) {
 		button1.innerHTML = "  Elimina  ";
 		button1.type = 'submit';
 		button1.value = element.ID;
-		console.log(element)
 		button1.onclick = function exe_botton() { 
 			let text="Elimina"
 			showPopup(text,element.Tipologia,element.ID)
@@ -123,14 +119,12 @@ function generateTable(table, data, index) {
 }
 
 function Modifica_func(ID) {
-	console.log(ID);
 	//href
 	let url = "/fornitore/modifica_servizi?id=" + ID;
 	window.location.href = url;
 }
 
 async function Elimina_func(id_servizio) {
-	console.log(id_servizio);
 
 	const response = await fetch('/servizi/api/delete_servizio/' + id_servizio+'/'+id_fornitore, {
 		method: 'DELETE',
@@ -139,7 +133,6 @@ async function Elimina_func(id_servizio) {
 		}
 	})
 
-	console.log("servizio eliminato")
 }
 
 
@@ -149,7 +142,6 @@ async function create_table_prenotazioni(ex_data, en_page = 0) {
 	let keys = ["Tipologia", "Descrizione", "Durata"];
 
 	if (en_page == 0) {
-		console.log("entro")
 		ex_data = await richiedi_servizi();
 	}
 	else { ex_data }
@@ -158,7 +150,6 @@ async function create_table_prenotazioni(ex_data, en_page = 0) {
 	table.innerHTML = "";
 
 	if (ex_data.length > 0) {
-		console.log(ex_data);
 		let data = Object.keys(ex_data[0]);//save the keys
 		generateTableHead(table, data, keys);//create header
 		generateTable(table, ex_data, keys);

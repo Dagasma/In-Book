@@ -25,7 +25,6 @@ function addtime(orario, durata_minima_minutes) {
 
 async function calcolo_slot_liberi(filtro) {
     var output = {};
-    console.log("entrato0 ")
     // ritorno il giorno della settimana
     const data_target = new Date(filtro.Data_giorno);
     const giorni = [
@@ -37,7 +36,6 @@ async function calcolo_slot_liberi(filtro) {
         "Venerdi",
         "Sabato",
     ];
-    console.log(data_target);
     const giorno_scelto = giorni[data_target.getDay() ];
 
     // Determino la capienza massima
@@ -47,7 +45,6 @@ async function calcolo_slot_liberi(filtro) {
             type: db.sequelize.QueryTypes.SELECT
         }
     );
-    console.log("entro2");
     // Determino l'orario in cui apre e chiude quel giorno
     const Orari_fornitori = await db.sequelize.query('SELECT Orario_apertura , Orario_chiusura ' +
         'FROM ORARI_ATTIVITA ' +
@@ -58,7 +55,6 @@ async function calcolo_slot_liberi(filtro) {
         }
     );
 
-    console.log("entro2a");
 
     // mi torna una tabella con ORARIO - DURATA - SUM(PERSONE)
     const Query_prenotazioni = await db.sequelize.query('SELECT Orario_prenotazione_inizio ,Durata , SUM(Numero_clienti) AS CLIENTI ' +
@@ -72,8 +68,7 @@ async function calcolo_slot_liberi(filtro) {
         }
     );
 
-    console.log("Query_prenotazioni stampa :", Query_prenotazioni)
-    console.log("quer_orari stampa :", Orari_fornitori)
+
     //Calcolo il numero di SLOT
 
 
@@ -99,7 +94,6 @@ async function calcolo_slot_liberi(filtro) {
     Capienza_max = Query_capienza[0].Capienza_massima;
 
     let Array_disponibilita = new Array();
- console.log(Orari_fornitori.length);
     //Inserisco nella prima colonna l'ora di inizio mentre nella seconda la capienza massima
     for (var i = 0; i < Number_slot; i++) {
         if (i == 0) {
@@ -114,21 +108,17 @@ async function calcolo_slot_liberi(filtro) {
         }
     }
 
-    console.log(Array_disponibilita);
 
     //Inserisco nella prima colonna l'ora di inizio mentre nella seconda la capienza massima
     for (var i = 0; i < Query_prenotazioni.length; i++) {  // per ogni prenotazione
         let orar_table = String(Query_prenotazioni[i].Orario_prenotazione_inizio).substring(16, 21);
         let index = Array_disponibilita.findIndex(function (element) { return element.Orario_inizio == orar_table; });
-        console.log(index, orar_table, Query_prenotazioni[i].CLIENTI)
         if (index != -1) {
             if (Query_prenotazioni[i].Durata == durata_minima) {
-                console.log("entro1", Array_disponibilita[index].Posti_disponibili, Query_prenotazioni[i].CLIENTI);
                 Array_disponibilita[index].Posti_disponibili = Array_disponibilita[index].Posti_disponibili - Query_prenotazioni[i].CLIENTI;
 
             }
             else {
-                console.log("entro1", Array_disponibilita[index].Posti_disponibili, Query_prenotazioni[i].CLIENTI);
                 for (var j = 0; j < minutesFromTime(Query_prenotazioni[i].Durata) / minutesFromTime(durata_minima); j++) {
                     Array_disponibilita[index + j].Posti_disponibili = Array_disponibilita[index + j].Posti_disponibili - Query_prenotazioni[i].CLIENTI;
 
@@ -136,7 +126,6 @@ async function calcolo_slot_liberi(filtro) {
             }
         }
     }
-    console.log("array 2: ", Array_disponibilita);
 
     return Array_disponibilita;
 };
@@ -162,7 +151,6 @@ exports.effettua_prenotazione = (req, res) => {
         Stato: "Attivo",
         Numero_clienti: req.body.Numero_clienti,
     };
-    console.log(prenotazioni)
     // Save Prenotazione in the database
     tab_prenotazioni
         .create(prenotazioni)
@@ -237,7 +225,6 @@ exports.get_slot_liberi = (req, res) => {
         ID_fornitore: req.params.ID_fornitore
     };
 
-    console.log(filtro);
     //var condition_time = db.sequelize.fn('date', sequelize.col('Orario_prenotazione_inizio'), Op.like, filtro.Data_giorno);
     calcolo_slot_liberi(filtro).then(data => {
         res.send(JSON.stringify(data));
@@ -254,7 +241,6 @@ exports.get_slot_liberi = (req, res) => {
 exports.annulla_prenotazione_cliente = (req, res) => {
     const id = req.params.id_prenotazione;
     //const ID_utente = req.params.ID_utente;
-    console.log("ciao", req.body);
     tab_prenotazioni
         .update(req.body, {
             where: { id: id },

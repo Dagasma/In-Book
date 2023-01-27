@@ -1,7 +1,6 @@
 let id_cliente = document.cookie.substring(3, 40);
 
 async function showPopup(Action) {
-    console.log(Action == "Prenotazione");
 
     var popup = document.createElement("div");
     popup.style.cssText = "position: fixed; top: 20%; left: 10%; width: 80%; background-color: #22b3c1; padding: 20px; z-index: 999; border-radius:10px; text-align:center; font-size:40px; color: white; font-weight:bold;";
@@ -31,7 +30,6 @@ async function showPopup(Action) {
 }
 
 async function richiedi_utente() {
-	console.log(id_cliente)
 	/* DONE */
 	const response = await fetch('/cliente/api/get_profilo/' + id_cliente, {
 		method: 'GET',
@@ -42,7 +40,6 @@ async function richiedi_utente() {
 		}
 	});
 	let data = await response.json(); //extract JSON from the http response
-	console.log(data);
 	return data;
 }
 
@@ -50,7 +47,6 @@ async function richiedi_utente() {
 async function form_profilo() {
 
 	let data =  await richiedi_utente();
-	console.log("form_Data", data);
 
 	// Create a break line element
 	var br = document.createElement("br");
@@ -130,7 +126,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	document.getElementById("btn_modifica").addEventListener("click",  async function (e) {
 		e.preventDefault();
 		
-		console.log("FINE : ")
 
 		let profilo_up = {}
 		profilo_up.Nome = document.getElementById("Nome").value;
@@ -138,7 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		profilo_up.Data_di_nascita = document.getElementById("Data_di_nascita").value;
 		profilo_up.Telefono = document.getElementById("Telefono").value;
 
-		console.log(profilo_up);
 
 		/*DONE*/
 		const response = await fetch('/cliente/api/aggiorna_profilo/' + id_cliente, {
@@ -153,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		})
 		
 		const risposta =await response.json();
-		console.log(risposta.message);
 		if(risposta.message=='User was updated successfully.')
 		{
 			let Action = "Aggiornato"

@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		const Tipologia = document.getElementById("Tipologia").value;
 		const Descrizione = document.getElementById("Descrizione").value;
 		const Durata = document.getElementById("Durata").value;
-		console.log(Tipologia)
 
 		if (Tipologia.length != 0 && Durata.length != 0 && Descrizione.length != 0) {
 

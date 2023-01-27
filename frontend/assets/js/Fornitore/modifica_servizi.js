@@ -55,7 +55,6 @@ async function form_modifica() {
 	var br = document.createElement("br");
 
 	let data = await richiedi_servizi();
-	console.log(data[0].ID);
 	// Create a form dynamically
 	var form = document.createElement("form");
 
@@ -130,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	document.getElementById("btn_modifica_servizi").addEventListener("click", async function (e) {
 		e.preventDefault();
 
-		console.log("FINE : ")
 
 		const Tipologia = document.getElementById("Tipologia").value;
 		const Descrizione = document.getElementById("Descrizione").value;

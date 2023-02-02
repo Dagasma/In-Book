@@ -8,21 +8,21 @@ const app = config.express();
 const middleware_custom = require("./middleware_custom");
 const middleware_check = require("./middleware_check");
 
+
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
+
+app.use(config.keycloak.middleware()); //commentato per testare api
+
+app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
 app.use(
     config.session({
-        secret: "ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu",
+        secret: config.SECRET,
         resave: false,
         saveUninitialized: true,
         store: config.memoryStore,
     })
 );
-
-app.use(config.keycloak.middleware()); //commentato per testare api
-
-app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
-
 var sql_views = config.fs.readFileSync(config.db_path + "views.sql", "utf8");
 
 

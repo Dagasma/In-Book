@@ -1204,7 +1204,7 @@
         "https://inbook.azurewebsites.net/*",
         "http://inbook.azurewebsites.net/*"
       ],
-      "webOrigins": [],
+      "webOrigins": ["+"],
       "notBefore": 0,
       "bearerOnly": false,
       "consentRequired": false,
@@ -1219,7 +1219,7 @@
       "attributes": {
         "client.secret.creation.time": "1672844908",
         "login_theme": "customTheme",
-        "post.logout.redirect.uris": "/",
+        "post.logout.redirect.uris": "+",
         "oauth2.device.authorization.grant.enabled": "false",
         "use.jwks.url": "false",
         "backchannel.logout.revoke.offline.tokens": "false",
@@ -1350,9 +1350,10 @@
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
         "https://inbook.azurewebsites.net/admin/master/console/*",
-        "http://inbook.azurewebsites.net/admin/master/console/*"
+        "http://inbook.azurewebsites.net/admin/master/console/*",
+        "/admin/master/console/*"
       ],
-      "webOrigins": [],
+      "webOrigins": ["+"],
       "notBefore": 0,
       "bearerOnly": false,
       "consentRequired": false,

@@ -18,11 +18,13 @@ ENV KC_DB_URL=jdbc:mysql://db_inbook:3306/KEYCLOAK
 ENV KC_DB_USERNAME=administrator
 ENV KC_DB_PASSWORD=prova
 
+ENV PROXY_ADDRESS_FORWARDING=true
 ENV KC_HOSTNAME=inbook.azurewebsites.net
 ENV KC_HTTP_ENABLED=true
 ENV KC_PROXY=passthrough
 ENV KC_HOSTNAME_STRICT=false
 ENV KC_HOSTNAME_STRICT_BACKCHANNEL=true
+ENV KC_HOSTNAME_ADMIN_URL=https://inbook.azurewebsites.net/keycloak
 ENV KEYCLOAK_ADMIN_PASSWORD=dagasma10@
 ENV KEYCLOAK_ADMIN=admin
 ADD ./entrypoint.sh ./wait-for-it.sh /

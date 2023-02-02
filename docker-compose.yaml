@@ -71,6 +71,19 @@ services:
         networks:
           - DBNetwork
 
+    vault:
+        build: ./hashicorp_vault/
+        container_name: vault
+        hostname: vault
+        cap_add:
+            - IPC_LOCK
+        volumes:
+            - ./hashicorp_vault/data:/data
+        ports:
+            - 8200:8200
+        networks:
+            - DBNetwork
+
 networks:
     DBNetwork:
         driver: bridge

@@ -12,7 +12,7 @@ app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
 app.use(
     config.session({
-        secret: "ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu",
+        secret: config.SECRET,
         resave: false,
         saveUninitialized: true,
         store: config.memoryStore,

@@ -41,6 +41,7 @@
     "fix-esm": "^1.0.1",
     "keycloak-connect": "^20.0.2",
     "mysql2": "^2.3.3",
+    "node-vault": "^0.9.22",
     "sequelize": "^6.28.0",
     "sequelize-auto": "^0.8.8"
   },

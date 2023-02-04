@@ -1,0 +1,5 @@
+DB_PORT = Porta del db
+DB_HOST = Host del db
+DB_NAME = Nome database
+ROLE_ID = ID role of Hashicorp Vault 
+SECRET_ID = ID secret of Hashicorp Vault

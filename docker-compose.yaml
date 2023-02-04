@@ -44,6 +44,7 @@ services:
             - ${WEBAPP_STORAGE_HOME}/package.json:/package.json
             - ${WEBAPP_STORAGE_HOME}/package-lock.json:/package-lock.json
             - ${WEBAPP_STORAGE_HOME}/keycloak.json:/keycloak.json
+            - ${WEBAPP_STORAGE_HOME}/.env:/.env
 
     keycloak:
         image: inbookreg.azurecr.io/keycloak

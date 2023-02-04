@@ -78,7 +78,7 @@ services:
         cap_add:
             - IPC_LOCK
         volumes:
-            - ./hashicorp_vault/data:/data
+            - ./hashicorp_vault/vault/data:/vault/data
         ports:
             - 8200:8200
         networks:

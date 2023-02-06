@@ -37,6 +37,7 @@ async function attesa(){
     })
     .catch((err) => {
     console.log(config.DB_USER,config.DB_PASSWORD);
+    console.log(db.sequelize)
     console.log("Failed to sync db: " + err.message);
     });
 }

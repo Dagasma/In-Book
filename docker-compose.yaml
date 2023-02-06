@@ -32,6 +32,7 @@ services:
             - db
         environment:
             - NODE_ENV=production
+            #- NODE_OPTIONS=--require "./backend/config/config.js"
         expose:
             - "4000"
         networks:
@@ -41,7 +42,7 @@ services:
             - ./frontend/:/server/frontend/
             - ./package.json:/server/package.json
             - ./package-lock.json:/server/package-lock.json
-            - ./.env:/.env
+            - ./.env:/server/.env
 
     keycloak:
         build: ./keycloak/
@@ -80,7 +81,7 @@ services:
             - IPC_LOCK
         volumes:
             - ./hashicorp_vault/vault/data:/vault/data
-            - ./.env:/.env
+            - ./.env:/vault/.env
         expose:
             - "8200:8200"
         networks:

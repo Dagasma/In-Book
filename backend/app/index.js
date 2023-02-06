@@ -6,6 +6,7 @@ const home = require("./routes_web_pages/home");
 const app = config.express();
 const middleware_custom = require("./middleware_custom");
 const middleware_check = require("./middleware_check");
+const db = require("./models");
 
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
@@ -23,26 +24,14 @@ app.use(config.keycloak.middleware());
 
 var sql_views = config.fs.readFileSync(config.db_path + "views.sql", "utf8");
 
-var db = {};
 //connessione al db con sequelize per facilitare operazioni CRUD
-async function attesa(){
-    await config.funzione();
-    db = require("./models");
-    db.sequelize
-    .sync()
-    .then(() => {
-    console.log(config.DB_USER,config.DB_PASSWORD);
-    console.log("Database connected successfully");
-    db.sequelize.query(sql_views);
+db.sequelize.sync().then(() => {
+        console.log("Database connected successfully");
+        db.sequelize.query(sql_views);
     })
     .catch((err) => {
-    console.log(config.DB_USER,config.DB_PASSWORD);
-    console.log(db.sequelize)
-    console.log("Failed to sync db: " + err.message);
+        console.log("Failed to sync db: " + err.message);
     });
-}
-
-attesa();
 
 
 app.use("/",home);

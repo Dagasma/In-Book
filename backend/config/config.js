@@ -1,7 +1,6 @@
 
 const config = {};
 require("fix-esm").register();
-
 config.baseUrl = "http://inbook.local";
 config.express = require("express");
 config.session = require("cookie-session");
@@ -26,6 +25,7 @@ do{
   path: config.path.normalize("/.env"),
   override: true
   });
+
 }while(process.env.ROLE_ID === undefined ||  process.env.SECRET_ID === undefined);
 
 
@@ -38,7 +38,7 @@ var options = {
 // get new instance of the client
 var vault = require("node-vault")(options);
 
-config.funzione = async () =>{
+config.funzione  = async () => {
   const result = await vault.approleLogin({
       role_id: process.env.ROLE_ID,
       secret_id: process.env.SECRET_ID,

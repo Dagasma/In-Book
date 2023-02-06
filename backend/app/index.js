@@ -1,5 +1,4 @@
 const config = require("../config/config");
-const db = require("./models");
 const cliente = require("./routes_web_pages/cliente");
 const fornitore = require("./routes_web_pages/fornitore");
 const amministratore = require("./routes_web_pages/amministratore");
@@ -11,8 +10,6 @@ const middleware_check = require("./middleware_check");
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
 app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
-
-config.funzione(() => console.log("finito"));
 
 app.use(
     config.session({
@@ -26,19 +23,25 @@ app.use(config.keycloak.middleware());
 
 var sql_views = config.fs.readFileSync(config.db_path + "views.sql", "utf8");
 
+var db = {};
 //connessione al db con sequelize per facilitare operazioni CRUD
-db.sequelize
-.sync()
-.then(() => {
+async function attesa(){
+    await config.funzione();
+    db = require("./models");
+    db.sequelize
+    .sync()
+    .then(() => {
     console.log(config.DB_USER,config.DB_PASSWORD);
     console.log("Database connected successfully");
     db.sequelize.query(sql_views);
-})
-.catch((err) => {
+    })
+    .catch((err) => {
     console.log(config.DB_USER,config.DB_PASSWORD);
     console.log("Failed to sync db: " + err.message);
-});
+    });
+}
 
+attesa();
 
 
 app.use("/",home);

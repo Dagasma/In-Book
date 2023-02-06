@@ -1,7 +1,9 @@
 const config = require("../../config/config");
 const initModels = require("./init-models");
 
-sequelize = new config.Sequelize(config.DB_NAME, config.DB_USER, config.DB_PASSWORD, {
+
+
+  sequelize = new config.Sequelize(config.DB_NAME, config.DB_USER, config.DB_PASSWORD, {
     host: config.DB_HOST,
     port: config.DB_PORT,
     dialect: "mysql",
@@ -16,6 +18,7 @@ sequelize = new config.Sequelize(config.DB_NAME, config.DB_USER, config.DB_PASSW
       timestamps: true
     }
   });
+
 
 const db = {};
 

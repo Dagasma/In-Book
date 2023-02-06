@@ -4,7 +4,7 @@ require("fix-esm").register();
 
 config.baseUrl = "http://inbook.local";
 config.express = require("express");
-config.session = require("express-session");
+config.session = require("cookie-session");
 config.path = require("path");
 config.cookieParser = require("cookie-parser");
 config.bodyParser = require("body-parser");
@@ -17,18 +17,49 @@ config.kcAdminClient = new config.KcAdminClient();
 config.kcAdminClient.setConfig({ realmName: "inbook",
                                  baseUrl: config.baseUrl});
 
-config.memoryStore = new config.session.MemoryStore();
-config.keycloak = new config.Keycloak({ store: config.memoryStore,onLoad: 'login-required', checkLoginIframe: false });
+config.keycloak = new config.Keycloak({onLoad: 'login-required', checkLoginIframe: false });
 config.frontend_path = config.path.normalize(process.cwd() + "/frontend/"); 
 config.db_path = config.path.normalize(process.cwd() + "/backend/database/"); 
 
-require("dotenv").config({
-  path: config.path.normalize(process.cwd() + "/backend/config/.env"),
-});
+do{
+  require("dotenv").config({
+  path: config.path.normalize("/.env"),
+  override: true
+  });
+}while(process.env.ROLE_ID === undefined ||  process.env.SECRET_ID === undefined);
+
+
+var options = {
+  apiVersion: "v1", // default
+  endpoint: "http://vault:8200",
+  // optional client token; can be fetched after valid initialization of the server
+};
+
+// get new instance of the client
+var vault = require("node-vault")(options);
+
+config.funzione = async () =>{
+  const result = await vault.approleLogin({
+      role_id: process.env.ROLE_ID,
+      secret_id: process.env.SECRET_ID,
+  })
+
+  vault.token = result.auth.client_token;
+
+  await vault.read("kv_inbook/user").then((res) => {
+          config.DB_PASSWORD = res.data.password;
+          config.DB_USER = res.data.user;
+      });
+  await vault.read("kv_inbook/keycloak").then((res) => {
+          config.SECRET = res.data.secret;
+  });
+
+  console.log(config.DB_USER,config.DB_PASSWORD," prese le cred")
+
+}
 
 
 config.DB_HOST = process.env.DB_HOST;
-config.DB_USER = process.env.DB_USER;
 config.DB_NAME = process.env.DB_NAME;
 config.DB_PORT = process.env.DB_PORT;
 config.PORT = 4000; 

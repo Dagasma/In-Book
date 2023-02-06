@@ -33,7 +33,7 @@ services:
         environment:
             - NODE_ENV=production
         expose:
-            - 4000
+            - "4000"
         networks:
             - DBNetwork
         volumes:
@@ -41,6 +41,7 @@ services:
             - ./frontend/:/server/frontend/
             - ./package.json:/server/package.json
             - ./package-lock.json:/server/package-lock.json
+            - ./.env:/.env
 
     keycloak:
         build: ./keycloak/
@@ -48,8 +49,8 @@ services:
         depends_on:
             - db
         expose:
-            - 8080
-            - 8443
+            - "8080"
+            - "8443"
         networks:
             - DBNetwork
 
@@ -60,10 +61,10 @@ services:
         depends_on:
           - db
           - webserver
-        command: ["./wait-for-it.sh", "backend:4000","--","nginx", "-g", "daemon off;"]
+        command: ["./wait-for-it.sh", "backend:4000","-t","0","--","nginx", "-g", "daemon off;"]
         ports:
-            - 80:80
-            - 433:433
+            - "80:80"
+            - "433:433"
         volumes:
             - ./nginx/conf:/etc/nginx
             - ./nginx/private:/etc/ssl/private
@@ -79,9 +80,9 @@ services:
             - IPC_LOCK
         volumes:
             - ./hashicorp_vault/vault/data:/vault/data
-            - ./hashicorp_vault/.env:/.env
-        ports:
-            - 8200:8200
+            - ./.env:/.env
+        expose:
+            - "8200:8200"
         networks:
             - DBNetwork
 

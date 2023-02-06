@@ -10,32 +10,36 @@ const middleware_check = require("./middleware_check");
 
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
+app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
+
+config.funzione(() => console.log("finito"));
+
 app.use(
     config.session({
-        secret: config.SECRET,
-        resave: false,
-        saveUninitialized: true,
-        store: config.memoryStore,
+        secret: config.SECRET ||  "pippozzo_logga",
+        secureProxy: true
     })
 );
 
-app.use(config.keycloak.middleware()); //commentato per testare api
+app.use(config.keycloak.middleware()); 
 
-app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
 
 var sql_views = config.fs.readFileSync(config.db_path + "views.sql", "utf8");
 
-
 //connessione al db con sequelize per facilitare operazioni CRUD
 db.sequelize
-    .sync()
-    .then(() => {
-        console.log("Database connected successfully");
-        db.sequelize.query(sql_views);
-    })
-    .catch((err) => {
-        console.log("Failed to sync db: " + err.message);
-    });
+.sync()
+.then(() => {
+    console.log(config.DB_USER,config.DB_PASSWORD);
+    console.log("Database connected successfully");
+    db.sequelize.query(sql_views);
+})
+.catch((err) => {
+    console.log(config.DB_USER,config.DB_PASSWORD);
+    console.log("Failed to sync db: " + err.message);
+});
+
+
 
 app.use("/",home);
 app.use("/cliente", config.keycloak.protect("realm:cliente"), middleware_check.send_cookie,cliente);

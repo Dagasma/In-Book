@@ -1,5 +1,4 @@
 const config = require("../config/config");
-const db = require("./models");
 const cliente = require("./routes_web_pages/cliente");
 const fornitore = require("./routes_web_pages/fornitore");
 const amministratore = require("./routes_web_pages/amministratore");
@@ -7,11 +6,11 @@ const home = require("./routes_web_pages/home");
 const app = config.express();
 const middleware_custom = require("./middleware_custom");
 const middleware_check = require("./middleware_check");
+const db = require("./models");
 
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
-
-app.use(config.keycloak.middleware()); //commentato per testare api
+app.use(config.keycloak.middleware()); 
 
 app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
 app.use(
@@ -30,28 +29,16 @@ db.sequelize
         db.sequelize.query(sql_views);
     })
     .catch((err) => {
-        console.log("Failed to sync db: " + err.message);
+    console.log("Failed to sync db: " + err.message);
     });
 
-app.use("/", home);
-app.use(
-    "/cliente",
-    config.keycloak.protect("realm:cliente"),
-    middleware_check.send_cookie,
-    cliente
-);
-app.use(
-    "/fornitore",
-    config.keycloak.protect("realm:fornitore"),
-    middleware_check.send_cookie,
-    fornitore
-);
-app.use(
-    "/amministratore",
-    config.keycloak.protect("realm:amministratore"),
-    middleware_check.send_cookie,
-    amministratore
-);
+
+app.use("/",home);
+app.use("/cliente", config.keycloak.protect("realm:cliente"), middleware_check.send_cookie,cliente);
+app.use("/fornitore", config.keycloak.protect("realm:fornitore"),middleware_check.send_cookie, fornitore);
+app.use("/amministratore",config.keycloak.protect("realm:amministratore"), middleware_check.send_cookie,amministratore);
+
+
 
 require("./api/cliente_routes")(app);
 require("./api/fornitore_routes")(app);

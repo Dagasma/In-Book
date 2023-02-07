@@ -1,0 +1,43 @@
+ENTRYPOINT [ "/entrypoint.sh"]
+CMD ["vault","server", "-config=/vault/config/vault.hcl"]
+
+
+
+#comando per inizializzare il vault -> 1 sola chiave, threshold 1, inserisco le credenziali in un JSON
+vault operator init -format=json -key-shares 1 -key-threshold 1 > /vault/data/vault_creds.json
+
+vault operator unseal $VAULT_TOKEN
+vault login $VAULT_DEV_ROOT_TOKEN_ID
+#creo engine di tipo key-value, e metto i segreti di tipo key-value con le put
+vault secrets enable -path=kv_inbook  kv
+vault kv put kv_inbook/user user=administrator password=prova
+vault kv put kv_inbook/keycloak secret=ad5jmaHyrx8amCnPLfQ1VcFvXfZTWGIu
+
+
+
+#creazione policy
+
+vault policy write inbook_policy - << EOF
+path "kv_inbook/user" {
+    capabilities = ["read"]
+  }
+  
+path "kv_inbook/keycloak" {
+capabilities = ["read"]
+}
+  
+EOF
+
+#creazione approle login
+
+vault auth enable approle
+
+vault write auth/approle/role/my-role \
+    secret_id_ttl=10m \
+    token_num_uses=10 \
+    token_ttl=20m \
+    token_max_ttl=30m \
+    secret_id_num_uses=40
+
+echo "ROLE_ID" $(vault read -field=role_id auth/approle/role/my-role/role-id) >> .env
+echo "SECRET_ID" $(vault write -field=secret_id -f  auth/approle/role/my-role/secret-id) >> .env

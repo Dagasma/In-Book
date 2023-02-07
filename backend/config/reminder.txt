@@ -1,0 +1,5 @@
+creare file .env
+
+DB_PORT = 3306 
+DB_HOST = db_inbook
+DB_NAME = INBOOK

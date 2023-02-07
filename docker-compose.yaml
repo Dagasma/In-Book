@@ -33,18 +33,21 @@ services:
         restart: always
         container_name: backend
         depends_on:
-            - db_inbook
+            - db
+        environment:
+            - NODE_ENV=production
+            #- NODE_OPTIONS=--require "./backend/config/config.js"
         expose:
             - "4000"
         networks:
             - DBNetwork
         volumes:
-            - ${WEBAPP_STORAGE_HOME}/backend/:/backend/
-            - ${WEBAPP_STORAGE_HOME}/frontend/:/frontend/
-            - ${WEBAPP_STORAGE_HOME}/package.json:/package.json
-            - ${WEBAPP_STORAGE_HOME}/package-lock.json:/package-lock.json
-            - ${WEBAPP_STORAGE_HOME}/keycloak.json:/keycloak.json
-            - ${WEBAPP_STORAGE_HOME}/.env:/.env
+            - ${WEBAPP_STORAGE_HOME}/backend/:/server/backend/
+            - ${WEBAPP_STORAGE_HOME}/frontend/:/server/frontend/
+            - ${WEBAPP_STORAGE_HOME}/package.json:/server/package.json
+            - ${WEBAPP_STORAGE_HOME}/package-lock.json:/server/package-lock.json
+            - ${WEBAPP_STORAGE_HOME}/keycloak.json:/server/keycloak.json
+            - ${WEBAPP_STORAGE_HOME}/.env:/server/.env
 
     keycloak:
         image: inbookreg.azurecr.io/keycloak
@@ -57,8 +60,6 @@ services:
         expose:
             - "8080"
             - "8443"
-        volumes:
-            - ${WEBAPP_STORAGE_HOME}/nginx/ssl:/etc/x509/https
         networks:
             - DBNetwork
 
@@ -79,6 +80,20 @@ services:
             - ${WEBAPP_STORAGE_HOME}/nginx/ssl:/etc/nginx/ssl
         networks:
           - DBNetwork
+
+    vault:
+        build: ./hashicorp_vault/
+        container_name: vault
+        hostname: vault
+        cap_add:
+            - IPC_LOCK
+        volumes:
+            - ./hashicorp_vault/vault/data:/vault/data
+            - ./.env:/vault/.env
+        expose:
+            - "8200:8200"
+        networks:
+            - DBNetwork
 
 networks:
     DBNetwork:

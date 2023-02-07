@@ -24,13 +24,14 @@ app.use(config.keycloak.middleware());
 
 var sql_views = config.fs.readFileSync(config.db_path + "views.sql", "utf8");
 
-//connessione al db con sequelize per facilitare operazioni CRUD
-db.sequelize.sync().then(() => {
-        console.log("Database connected successfully");
-        db.sequelize.query(sql_views);
+ //connessione al db con sequelize per facilitare operazioni CRUD
+ db.sequelize.sync().then(() => {
+    console.log("Database connected successfully");
+    db.sequelize.query(sql_views);
     })
     .catch((err) => {
-        console.log("Failed to sync db: " + err.message);
+    console.log("CIAO2",config.SECRET,config.DB_PASSWORD,config.DB_USER)
+    console.log("Failed to sync db: " + err.message);
     });
 
 

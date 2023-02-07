@@ -20,8 +20,8 @@ vault write auth/approle/role/my-role \
     token_max_ttl=30m \
     secret_id_num_uses=40 \
     token_policies=inbook_policy
-echo "DB_PORT = 3306" > /vault/.env
-echo "DB_HOST = db_inbook" >> /vault/.env
-echo "DB_NAME = INBOOK" >> /vault/.env
-echo "ROLE_ID =" $(vault read -field=role_id auth/approle/role/my-role/role-id) >> /vault/.env
-echo "SECRET_ID =" $(vault write -field=secret_id -f  auth/approle/role/my-role/secret-id) >> /vault/.env
+echo "DB_PORT=3306" > /vault/.env
+echo "DB_HOST=db_inbook" >> /vault/.env
+echo "DB_NAME=INBOOK" >> /vault/.env
+echo "ROLE_ID="$(vault read -field=role_id auth/approle/role/my-role/role-id) >> /vault/.env
+echo "SECRET_ID="$(vault write -field=secret_id -f  auth/approle/role/my-role/secret-id) >> /vault/.env

@@ -20,19 +20,18 @@ config.keycloak = new config.Keycloak({onLoad: 'login-required', checkLoginIfram
 config.frontend_path = config.path.normalize(process.cwd() + "/frontend/"); 
 config.db_path = config.path.normalize(process.cwd() + "/backend/database/"); 
 
-do{
-  require("dotenv").config({
+require("dotenv").config({
   path: config.path.normalize("/server/.env"),
   override: true
   });
 
-}while(process.env.ROLE_ID === undefined ||  process.env.SECRET_ID === undefined);
 
-var options = {
-  apiVersion: "v1", // default
-  endpoint: "http://vault:8200",
-  // optional client token; can be fetched after valid initialization of the server
-};
+let rawdata = config.fs.readFileSync("./backend/config/segreti.json");
+const dati_vault = JSON.parse(rawdata);
+config.SECRET = dati_vault.SECRET;
+config.DB_PASSWORD = dati_vault.DB_PASSWORD;
+config.DB_USER = dati_vault.DB_USER;
+
 config.DB_HOST = process.env.DB_HOST;
 config.DB_NAME = process.env.DB_NAME;
 config.DB_PORT = process.env.DB_PORT;
@@ -43,31 +42,15 @@ config.apiLimiter = {
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 };
+
+
 config.credentials = {
   grantType: 'client_credentials',
   clientId:'nodejs',
   clientSecret: config.SECRET,
   offlineToken: true
 };
-// get new instance of the client
-var vault = require("node-vault")(options);
 
-vault.approleLogin({
-  role_id: process.env.ROLE_ID,
-  secret_id: process.env.SECRET_ID,
-})
-.then((result) => {
-  vault.token = result.auth.client_token;
-  vault.read("kv_inbook/user").then((res) => {
-      config.DB_PASSWORD = res.data.password;
-      config.DB_USER = res.data.user;
-  });
-  vault.read("kv_inbook/keycloak").then((res) => {
-      config.SECRET = res.data.secret;
-  });
-  console.log("Taken var:",config.DB_USER,config.DB_PASSWORD)
-})
-.catch(console.error);
 
 module.exports = config;
 

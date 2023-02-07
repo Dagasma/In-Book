@@ -33,10 +33,9 @@ services:
         restart: always
         container_name: backend
         depends_on:
-            - db
+            - db_inbook
         environment:
             - NODE_ENV=production
-            #- NODE_OPTIONS=--require "./backend/config/config.js"
         expose:
             - "4000"
         networks:
@@ -85,6 +84,7 @@ services:
         build: ./hashicorp_vault/
         container_name: vault
         hostname: vault
+        platform: "linux/amd64"
         cap_add:
             - IPC_LOCK
         volumes:

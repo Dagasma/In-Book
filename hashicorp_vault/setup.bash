@@ -23,5 +23,6 @@ vault write auth/approle/role/my-role \
 echo "DB_PORT=3306" > /vault/.env
 echo "DB_HOST=db_inbook" >> /vault/.env
 echo "DB_NAME=INBOOK" >> /vault/.env
+echo "WEBAPP_STORAGE_HOME=." >> /vault/.env
 echo "ROLE_ID="$(vault read -field=role_id auth/approle/role/my-role/role-id) >> /vault/.env
 echo "SECRET_ID="$(vault write -field=secret_id -f  auth/approle/role/my-role/secret-id) >> /vault/.env

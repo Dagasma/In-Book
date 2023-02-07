@@ -42,7 +42,7 @@ do{
      
     console.log("sto facnedo")
     let data = JSON.stringify(segreti);
-    config.fs.writeFileSync('./backend/config/segreti.json', data);
+    config.fs.writeFileSync('segreti.json', data);
 
   })
   .catch(console.error);

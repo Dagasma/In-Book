@@ -16,7 +16,6 @@ app.use(config.express.static(config.frontend_path)); //per rilevare tutti i fil
 app.use(
     config.session({
         secret: config.SECRET,
-        secureProxy: true,
     })
 );
 var sql_views = config.fs.readFileSync(config.db_path + "views.sql", "utf8");

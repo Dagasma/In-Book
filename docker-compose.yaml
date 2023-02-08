@@ -81,17 +81,18 @@ services:
           - DBNetwork
 
     vault:
+        image: inbookreg.azurecr.io/vault
         build: ./hashicorp_vault/
+        platform: "linux/amd64"
         container_name: vault
         hostname: vault
-        platform: "linux/amd64"
         cap_add:
             - IPC_LOCK
         volumes:
-            - ./hashicorp_vault/vault/data:/vault/data
-            - ./.env:/vault/.env
+            - ${WEBAPP_STORAGE_HOME}/hashicorp_vault/vault/data:/vault/data
+            - ${WEBAPP_STORAGE_HOME}/.env:/vault/.env
         expose:
-            - "8200:8200"
+            - "8200"
         networks:
             - DBNetwork
 

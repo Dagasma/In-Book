@@ -16,8 +16,8 @@ config.kcAdminClient.setConfig({ realmName: "inbook",
                                  baseUrl: config.baseUrl});
 
 config.keycloak = new config.Keycloak({onLoad: 'login-required', checkLoginIframe: false });
-config.frontend_path = config.path.normalize(process.cwd() + "/frontend/"); 
-config.db_path = config.path.normalize(process.cwd() + "/backend/database/"); 
+config.frontend_path = config.path.normalize(process.cwd() + "/server/frontend/"); 
+config.db_path = config.path.normalize(process.cwd() + "/server/backend/database/"); 
 
 require("dotenv").config({
   path: config.path.normalize("/server/.env"),

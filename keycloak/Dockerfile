@@ -1,4 +1,4 @@
-FROM quay.io/keycloak/keycloak:latest as builder
+FROM keycloak/keycloak:20.0.3 as builder
 LABEL MAINTEINER="Dagasma"
 
 # Enable health and metrics support
@@ -10,10 +10,9 @@ ENV KC_DB=mysql
 RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=keycloak" -alias keycloak -ext "SAN:c=DNS:keycloak,IP:127.0.0.1" -keystore /opt/keycloak/conf/server.keystore
 RUN /opt/keycloak/bin/kc.sh build
 
-FROM quay.io/keycloak/keycloak:latest
-COPY --from=builder /opt/keycloak/ /opt/keycloak/
+FROM keycloak/keycloak:20.0.3
+COPY --from=builder /opt/keycloak/ /opt/keycloak/ 
 
-ENV KC_DB=mysql
 ENV KC_DB_URL=jdbc:mysql://db_inbook:3306/KEYCLOAK
 ENV KC_DB_USERNAME=administrator
 ENV KC_DB_PASSWORD=prova

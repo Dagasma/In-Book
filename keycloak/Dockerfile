@@ -15,8 +15,8 @@ COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 ENV KC_DB_URL=jdbc:mysql://db_inbook:3306/KEYCLOAK
 ENV KC_DB_URL_PORT=3306
-ENV KC_DB_USERNAME=administrator
-ENV KC_DB_PASSWORD=prova
+ENV KC_DB_USERNAME=administrator_keycloak
+ENV KC_DB_PASSWORD=dagasma11@
 
 ENV PROXY_ADDRESS_FORWARDING=true
 ENV KC_HOSTNAME=inbook.azurewebsites.net

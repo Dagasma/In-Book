@@ -39,8 +39,6 @@ do{
         DB_USER: db_user, 
         SECRET: secret
     };
-     
-    console.log("sto facnedo")
     let data = JSON.stringify(segreti);
     config.fs.writeFileSync('segreti.json', data);
 

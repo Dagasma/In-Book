@@ -11,6 +11,7 @@ const db = require("./models");
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
 app.use(config.keycloak.middleware()); 
+app.use(config.cookieParser(config.SECRET));
 
 app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
 app.use(

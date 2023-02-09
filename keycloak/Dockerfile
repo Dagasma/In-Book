@@ -14,8 +14,8 @@ COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 ENV KC_DB=mysql
 ENV KC_DB_URL=jdbc:mysql://db_inbook:3306/KEYCLOAK
-ENV KC_DB_USERNAME=administrator
-ENV KC_DB_PASSWORD=prova
+ENV KC_DB_USERNAME=administrator_keycloak
+ENV KC_DB_PASSWORD=dagasma11@
 
 ENV KC_HOSTNAME_URL=http://inbook.local
 ENV KC_HTTP_ENABLED=true

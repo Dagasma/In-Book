@@ -82,7 +82,7 @@ services:
         volumes:
             - ./hashicorp_vault/vault/data:/vault/data
             - ./.env:/vault/.env
-        expose:
+        ports:
             - "8200:8200"
         networks:
             - DBNetwork

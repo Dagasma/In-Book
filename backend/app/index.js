@@ -10,15 +10,12 @@ const db = require("./models");
 
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
-app.use(config.keycloak.middleware()); 
+app.use(config.session({secret: config.SECRET,}));
 app.use(config.cookieParser(config.SECRET));
+app.use(config.keycloak.middleware()); 
 
 app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
-app.use(
-    config.session({
-        secret: config.SECRET,
-    })
-);
+
 var sql_views = config.fs.readFileSync(config.db_path + "views.sql", "utf8");
 
 //connessione al db con sequelize per facilitare operazioni CRUD

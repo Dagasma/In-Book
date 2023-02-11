@@ -16,7 +16,12 @@ config.kcAdminClient = new config.KcAdminClient();
 config.kcAdminClient.setConfig({ realmName: "inbook",
                                  baseUrl: config.baseUrl});
 
-config.keycloak = new config.Keycloak({onLoad: 'login-required', checkLoginIframe: false });
+
+config.session = require("cookie-session");
+config.cookieParser = require("cookie-parser");
+config.Keycloak = require('keycloak-connect');
+config.keycloak = new config.Keycloak({onLoad: 'login-required', checkLoginIframe: false , cookies: true});
+
 config.frontend_path = config.path.normalize(process.cwd() + "/frontend/"); 
 config.db_path = config.path.normalize(process.cwd() + "/backend/database/"); 
 

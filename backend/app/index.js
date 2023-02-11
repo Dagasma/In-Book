@@ -12,10 +12,10 @@ app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
 app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
 
+app.use(config.cookieParser(config.SECRET));
 app.use(
     config.session({
-        secret: config.SECRET ||  "pippozzo_logga",
-        secureProxy: true
+        secret: config.SECRET
     })
 );
 

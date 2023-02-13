@@ -1207,7 +1207,8 @@
         "https://inbook.azurewebsites.net/*"
       ],
       "webOrigins": [
-        "+"
+        "+",
+        "https://google.com"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -1229,7 +1230,7 @@
         "backchannel.logout.revoke.offline.tokens": "false",
         "use.refresh.tokens": "true",
         "tls-client-certificate-bound-access-tokens": "false",
-        "oidc.ciba.grant.enabled": "false",
+        "oidc.ciba.grant.enabled": "true",
         "backchannel.logout.session.required": "true",
         "client_credentials.use_refresh_token": "false",
         "acr.loa.map": "{}",

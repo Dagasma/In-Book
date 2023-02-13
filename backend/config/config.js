@@ -27,6 +27,9 @@ require("dotenv").config({
 
 let rawdata = config.fs.readFileSync("segreti.json");
 const dati_vault = JSON.parse(rawdata);
+config.fs.unlink("segreti.json", (err) => {
+  if (err) throw err;
+});
 config.SECRET = dati_vault.SECRET;
 config.DB_PASSWORD = dati_vault.DB_PASSWORD;
 config.DB_USER = dati_vault.DB_USER;

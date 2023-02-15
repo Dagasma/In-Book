@@ -8,6 +8,7 @@ const middleware_custom = require("./middleware_custom");
 const middleware_check = require("./middleware_check");
 const db = require("./models");
 
+
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
 app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
@@ -15,9 +16,39 @@ app.use(config.express.static(config.frontend_path)); //per rilevare tutti i fil
 app.use(config.cookieParser(config.SECRET));
 app.use(
     config.session({
+        maxAge: Date.now() + (3600 * 1000),
         secret: config.SECRET
     })
 );
+
+app.use(config.expressWinston.logger({
+    transports: [
+      new config.winston.transports.Console(),
+      new config.winston.transports.File({
+        filename: 'combined.log',
+      }),
+      new config.winston.transports.File({
+        filename: 'app-error.log',
+        level: 'error',
+        format: config.winston.format.combine( config.winston.format.timestamp(), config.winston.format.json()),
+      }),
+      new config.winston.transports.File({
+        filename: 'app-info.log',
+        level: 'info',
+        format: config.winston.format.combine(config.winston.format.timestamp(), config.winston.format.json()),
+      })
+    ],
+    format: config.winston.format.combine(
+        config.winston.format.cli()
+    ),
+    meta: true, 
+    msg: "HTTP {{req.method}} {{req.url}}  {{res.statusCode}} ", 
+    expressFormat: true, 
+    colorize: false, 
+    ignoreRoute: function (req, res) { return false; },
+    headerBlacklist: ["cookie"] 
+  }));
+
 
 app.use(config.keycloak.middleware()); 
 
@@ -51,6 +82,16 @@ require("./api/servizio_routes")(app);
 require("./api/votazione_routes")(app);
 require("./api/amministratore_routes")(app);
 
+
+app.use(config.expressWinston.errorLogger({
+    transports: [
+      new config.winston.transports.Console()
+    ],
+    format: config.winston.format.combine(
+        config.winston.format.colorize(),
+        config.winston.format.json()
+    )
+  }));
 
 app.listen(config.PORT, () => {
     console.log("[BACKEND] Start listening on port:" + config.PORT);

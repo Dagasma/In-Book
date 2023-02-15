@@ -3,7 +3,11 @@
 const url = new URL(window.location.href);
 const searchParams = new URLSearchParams(url.search);
 const id_fornitore = searchParams.get('id');
-let id_cliente = document.cookie.substring(3, 40);
+let id_cliente = document.cookie.split('; ').reduce((prev, current) => {
+    const [name, ...value] = current.split('=');
+    prev[name] = value.join('=');
+    return prev;
+  }, {}).id;;
 
 // GLOBAL VARIABLE 
 let Durata_servizi = {};

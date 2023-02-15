@@ -60,6 +60,7 @@ config.keycloak.authenticated = function (req) {
 
 delete config.keycloak["accessDenied"];
 config.keycloak.accessDenied = function (req, res) {
+  console.log(Date.now()," TENTATIVO DI ACCESSO A RISORSA NON AUTORIZZATA ID USER: ", req.kauth.grant.access_token.content.sub);
   res.redirect("/?Accesso_non_consentito_rieffettua_login");
 };
 

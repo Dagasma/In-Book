@@ -14,7 +14,8 @@ sequelize = new config.Sequelize(config.DB_NAME, config.DB_USER, config.DB_PASSW
     },
     define: {
       timestamps: true
-    }
+    },
+   // logging: false
   });
 
 

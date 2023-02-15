@@ -36,11 +36,13 @@ app.use(config.expressWinston.logger({
         filename: 'app-info.log',
         level: 'info',
         format: config.winston.format.combine(config.winston.format.timestamp(), config.winston.format.json()),
+      }),
+      new config.winston.transports.File({
+        filename: 'app-warn.log',
+        level: 'warn',
+        format: config.winston.format.combine(config.winston.format.timestamp(), config.winston.format.json()),
       })
     ],
-    format: config.winston.format.combine(
-        config.winston.format.cli()
-    ),
     meta: true, 
     msg: "HTTP {{req.method}} {{req.url}}  {{res.statusCode}} ", 
     expressFormat: true, 

@@ -85,6 +85,10 @@ exports.update = (req, res) => {
         Update_user(enable, id).catch(() => {
 
         });
+        if(enable == 1)
+             console.log("Utente: ", id, "è stato bloccato da ", req.kauth.grant.access_token.content.sub)
+         else
+             console.log("Utente: ", id, "è stato sbloccato da ", req.kauth.grant.access_token.content.sub)
     }
 
     tab_utenti

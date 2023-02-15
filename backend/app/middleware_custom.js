@@ -41,7 +41,7 @@ async function Update_user(enable_body,id_user) {
     var payload = {enabled: enable_body};
 
     const user = await config.kcAdminClient.users.update({ id: id_user, realm: "inbook"}, payload);
-    
+    console.log(`${id_user} got blocked by: ID_AMM`);
     return true;
 }
 

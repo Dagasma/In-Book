@@ -2737,16 +2737,7 @@
       }
     },
     {
-      "id": "636cbf8f-4159-4a2d-ba8f-f0c953d9dba6",
-      "alias": "inbook",
-      "config": {
-        "useRecaptchaNet": "false",
-        "secret": "6LdlgmwkAAAAAJfMdCcMNAOFuM9gXTkFZkpJ97WT",
-        "site.key": "6LdlgmwkAAAAACibXoDG_Fa_xjA1GuXAeCe9M8li"
-      }
-    },
-    {
-      "id": "55963b0a-267f-4903-add9-e61e816ce310",
+      "id": "5d7a7b50-9b5f-4efb-9b7d-8fa0c7e5090d",
       "alias": "review profile config",
       "config": {
         "update.profile.on.first.login": "missing"

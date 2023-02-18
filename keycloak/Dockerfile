@@ -14,7 +14,6 @@ FROM quay.io/keycloak/keycloak:20.0.3
 COPY --from=builder /opt/keycloak/ /opt/keycloak/ 
 
 ENV KC_DB_URL=jdbc:mysql://db_inbook:3306/KEYCLOAK
-ENV KC_DB_URL_PORT=3306
 ENV KC_DB_USERNAME=administrator_keycloak
 ENV KC_DB_PASSWORD=dagasma11@
 

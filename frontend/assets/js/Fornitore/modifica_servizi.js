@@ -1,7 +1,11 @@
 const url = new URL(window.location.href);
 const searchParams = new URLSearchParams(url.search);
 const id_servizio = searchParams.get('id');
-let id_fornitore = document.cookie.substring(3, 40);
+let id_fornitore = document.cookie.split('; ').reduce((prev, current) => {
+    const [name, ...value] = current.split('=');
+    prev[name] = value.join('=');
+    return prev;
+  }, {}).id;;
 
 async function showPopup(Action, name) {
 	var popup = document.createElement("div");
@@ -55,6 +59,7 @@ async function form_modifica() {
 	var br = document.createElement("br");
 
 	let data = await richiedi_servizi();
+	console.log(data[0].ID);
 	// Create a form dynamically
 	var form = document.createElement("form");
 
@@ -129,6 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	document.getElementById("btn_modifica_servizi").addEventListener("click", async function (e) {
 		e.preventDefault();
 
+		console.log("FINE : ")
 
 		const Tipologia = document.getElementById("Tipologia").value;
 		const Descrizione = document.getElementById("Descrizione").value;

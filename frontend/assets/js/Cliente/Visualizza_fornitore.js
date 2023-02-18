@@ -3,7 +3,11 @@
 const url = new URL(window.location.href);
 const searchParams = new URLSearchParams(url.search);
 const id_fornitore = searchParams.get('id');
-let id_cliente = document.cookie.substring(3, 40);
+let id_cliente = document.cookie.split('; ').reduce((prev, current) => {
+    const [name, ...value] = current.split('=');
+    prev[name] = value.join('=');
+    return prev;
+  }, {}).id;;
 
 // GLOBAL VARIABLE 
 let Durata_servizi = {};
@@ -274,6 +278,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (risposta == 200) {
+            console.log(Action);
             showPopup(Action);
         }
         else {
@@ -295,6 +300,7 @@ document.addEventListener("DOMContentLoaded", function () { // aspetta il carica
         form1_prenotazione.numero_persone = document.getElementById("Numero_persone").value;
         form1_prenotazione.Data_disponibilita = document.getElementById("Data").value;
         form1_prenotazione.id_servizio = document.getElementById("Select_Servizio").value;
+        console.log("prima della get");
 
         // data attuale
         const currentDate = new Date();
@@ -307,6 +313,7 @@ document.addEventListener("DOMContentLoaded", function () { // aspetta il carica
 
         // calcola la differenza in millisecondi
         var diffInHours = (today.getTime() - selectedDate.getTime()) / (1000 * 3600);
+        console.log(diffInHours, today.getTime(), selectedDate.getTime())
         // converti in giorni
         if (diffInHours > 0) {
             let Action = "Giorno passato"
@@ -323,7 +330,8 @@ document.addEventListener("DOMContentLoaded", function () { // aspetta il carica
         });
 
         const slot_orari = await response.json();
-
+        console.log("dopo della get");
+        console.log(slot_orari);
         if (response.status != 200) {
             let Action = "Nessuna Disponibilita";
             showPopup(Action);
@@ -350,6 +358,7 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
 
         form1_prenotazione.orario = document.getElementById("Select_orario").value;
+        console.log(form1_prenotazione);
 
         Valori_inviati = {
             "ID_utente": id_cliente,
@@ -359,7 +368,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Orario_prenotazione_fine": form1_prenotazione.Data_disponibilita + ' ' + sumTime(form1_prenotazione.orario, Durata_servizi[form1_prenotazione.id_servizio]),
             "Numero_clienti": form1_prenotazione.numero_persone
         };
-
+        console.log(Valori_inviati);
 
         /*DONE*/
         const response = await fetch('/prenotazioni/api/effettua_prenotazione', {
@@ -378,6 +387,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
 
         risposta = await response.status;
+        console.log(risposta);
 
         if (risposta == 200) {
             let Action = "Prenotazione";

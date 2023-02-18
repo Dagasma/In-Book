@@ -8,13 +8,13 @@ config.cookieParser = require("cookie-parser");
 config.bodyParser = require("body-parser");
 config.rateLimit = require("express-rate-limit");
 config.Sequelize = require("sequelize");
+config.winston = require("winston")
+config.expressWinston = require("express-winston");
 config.Keycloak = require('keycloak-connect');
 config.fs = require("node:fs");
 config.KcAdminClient= require("@keycloak/keycloak-admin-client").default;
 config.kcAdminClient = new config.KcAdminClient();
-config.kcAdminClient.setConfig({ realmName: "inbook",
-                                 baseUrl: config.baseUrl});
-
+config.kcAdminClient.setConfig({ realmName: "inbook", baseUrl: config.baseUrl});
 config.keycloak = new config.Keycloak({onLoad: 'login-required', checkLoginIframe: false , cookies: true });
 config.frontend_path = config.path.normalize(process.cwd() + "/frontend/"); 
 config.db_path = config.path.normalize(process.cwd() + "/backend/database/"); 

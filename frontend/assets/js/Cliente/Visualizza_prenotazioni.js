@@ -1,4 +1,8 @@
-let id_cliente = document.cookie.substring(3, 40);
+let id_cliente = document.cookie.split('; ').reduce((prev, current) => {
+    const [name, ...value] = current.split('=');
+    prev[name] = value.join('=');
+    return prev;
+  }, {}).id;;
 
 
 
@@ -29,6 +33,7 @@ function showPopup(Action) {
 
 async function richiedi_prenotazioni(filtro) {
   // Dati fornitore
+  console.log(id_cliente);
   const response = await fetch('/prenotazioni/api/prenotazioni_filtrate_merge_utente/' + id_cliente, {
     method: 'GET',
     headers: {
@@ -47,7 +52,7 @@ async function richiedi_prenotazioni(filtro) {
 
     }
     else if (ex_data[i].ID_servizio_SERVIZI.Durata.substring(0, 5) != filtro.Durata && filtro.Durata != '' && filtro.Durata != ',') {
-
+      console.log("qui");
     }
     else if (((ex_data[i].ID_servizio_SERVIZI.Tipologia).toLowerCase().indexOf(filtro.Tipologia.toLowerCase()) == -1) && filtro.Tipologia != "") {
 
@@ -70,6 +75,7 @@ async function richiedi_prenotazioni(filtro) {
       dati_filtrati.push(istance)
     }
   }
+  console.log(dati_filtrati);
   create_table_prenotazioni(dati_filtrati, 1);
 
 }
@@ -92,6 +98,7 @@ function generateTableHead(table, data, columns) {
 function generateTable(table, data, index) {
   for (let element of data) {
     let row = table.insertRow();
+    //console.log(element);
     for (key of index) {
       let cell = row.insertCell();
       let text = document.createTextNode(element[key]);
@@ -129,6 +136,7 @@ async function Annulla_prenotazione(element) {
   const timeDifference = (selectedTime - currentTime ) / (1000 * 60 * 60);
   // Verifica se la differenza è maggiore di 4 ore
   if (timeDifference > 4) {
+    console.log("L'orario selezionato è a più di 4 ore di distanza dall'orario attuale.");
 
 
     var Annulato = "Annullato"
@@ -139,6 +147,7 @@ async function Annulla_prenotazione(element) {
       },
       body: JSON.stringify({ "Stato": Annulato })
     })
+    console.log(response);
     if (response.status == 200) {
       let Action = "Annulla";
       showPopup(Action);
@@ -183,6 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("btn_prenotazioni_filtro").addEventListener("click", async function (e) {
     e.preventDefault();
     en_page = 1
+    console.log("premuto btn : ")
 
 
     let filtro = {}

@@ -8,10 +8,45 @@ const middleware_custom = require("./middleware_custom");
 const middleware_check = require("./middleware_check");
 const db = require("./models");
 
+
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
-app.use(config.session({secret: config.SECRET,}));
+app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
+
 app.use(config.cookieParser(config.SECRET));
+app.use(config.session({maxAge: Date.now() + (3600 * 1000),secret: config.SECRET}));
+
+app.use(config.expressWinston.logger({
+    transports: [
+      new config.winston.transports.Console(),
+      new config.winston.transports.File({
+        filename: 'combined.log',
+      }),
+      new config.winston.transports.File({
+        filename: 'app-error.log',
+        level: 'error',
+        format: config.winston.format.combine( config.winston.format.timestamp(), config.winston.format.json()),
+      }),
+      new config.winston.transports.File({
+        filename: 'app-info.log',
+        level: 'info',
+        format: config.winston.format.combine(config.winston.format.timestamp(), config.winston.format.json()),
+      }),
+      new config.winston.transports.File({
+        filename: 'app-warn.log',
+        level: 'warn',
+        format: config.winston.format.combine(config.winston.format.timestamp(), config.winston.format.json()),
+      })
+    ],
+    meta: true, 
+    msg: "HTTPS {{req.method}} {{req.url}}  {{res.statusCode}} ", 
+    expressFormat: true, 
+    colorize: false, 
+    ignoreRoute: function (req, res) { return false; },
+    headerBlacklist: [] 
+  }));
+
+
 app.use(config.keycloak.middleware()); 
 
 app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend

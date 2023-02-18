@@ -1,4 +1,8 @@
-let id_fornitore = document.cookie.substring(3, 40);
+let id_fornitore = document.cookie.split('; ').reduce((prev, current) => {
+    const [name, ...value] = current.split('=');
+    prev[name] = value.join('=');
+    return prev;
+  }, {}).id;;
 
 async function showPopup(Action, name) {
 	var popup = document.createElement("div");
@@ -36,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		const Tipologia = document.getElementById("Tipologia").value;
 		const Descrizione = document.getElementById("Descrizione").value;
 		const Durata = document.getElementById("Durata").value;
+		console.log(Tipologia)
 
 		if (Tipologia.length != 0 && Durata.length != 0 && Descrizione.length != 0) {
 

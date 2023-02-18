@@ -1,7 +1,5 @@
-export VAULT_DEV_ROOT_TOKEN_ID="hvs.gSxZ0VYMqpkxbFLxqLqCGO7U"
-export VAULT_TOKEN_CUSTOM="ZXub76kXmW/FId+Rxss+0iL54q8RyiuZ5xlk5hAbnu0="
-vault operator unseal $VAULT_TOKEN_CUSTOM
-vault login $VAULT_DEV_ROOT_TOKEN_ID
+vault operator unseal ZXub76kXmW/FId+Rxss+0iL54q8RyiuZ5xlk5hAbnu0=
+vault login hvs.gSxZ0VYMqpkxbFLxqLqCGO7U
 vault policy write inbook_policy - << EOF
 path "kv_inbook/user" {
     capabilities = ["read"]

@@ -21,6 +21,25 @@ app.use(
     })
 );
 
+// function customRequestFilter(req, propName) {
+//   if(propName !== "headers") return req[propName];
+
+//   const headers = req.headers;
+
+//   if("cookie" in headers){
+//     var show_cookie = headers.cookie.split('; ').reduce((prev, current) => {
+//       const [name, ...value] = current.split('=');
+//       prev[name] = value.join('=');
+//       return prev;
+//     }, {}).id;
+
+//     headers.cookie = show_cookie;
+//   }
+
+//   return headers;
+// }
+
+
 app.use(config.expressWinston.logger({
     transports: [
       new config.winston.transports.Console(),
@@ -43,12 +62,13 @@ app.use(config.expressWinston.logger({
         format: config.winston.format.combine(config.winston.format.timestamp(), config.winston.format.json()),
       })
     ],
+//    requestFilter: customRequestFilter,
     meta: true, 
-    msg: "HTTP {{req.method}} {{req.url}}  {{res.statusCode}} ", 
+    msg: "HTTPS {{req.method}} {{req.url}}  {{res.statusCode}} ", 
     expressFormat: true, 
     colorize: false, 
     ignoreRoute: function (req, res) { return false; },
-    headerBlacklist: ["cookie"] 
+    headerBlacklist: [] 
   }));
 
 

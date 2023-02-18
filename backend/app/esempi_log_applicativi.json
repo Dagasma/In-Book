@@ -1,0 +1,178 @@
+{
+  "level": "info",
+  "message": "GET /notifiche/api/findAllcliente_unione/c347a77a-e3d8-41b0-a86e-04585fb9cb7c 200 13ms",
+  "meta": {
+    "req": {
+      "headers": {
+        "accept": "application/json",
+        "accept-encoding": "gzip, deflate",
+        "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6",
+        "connection": "upgrade",
+        "content-type": "application/json;charset-UTF-8",
+        "cookie": "session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2subG9jYWwvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=Na5cN2FRDvdGylHKqMyuxWiOf4M; keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SjJJazI5V0kyczdCQUFBLUJpVGhPWE9aZGpEclNaZzJYUXVaVmg1Z0NRIn0.eyJleHAiOjE2NzY3MTQ4ODAsImlhdCI6MTY3NjcxNDgyMCwiYXV0aF90aW1lIjoxNjc2NzE0ODIwLCJqdGkiOiJlOTQwYzU5Mi01OWI5LTQ4ZjAtOGZkYS1hZTA5YzE0MGM5MjgiLCJpc3MiOiJodHRwOi8vaW5ib29rLmxvY2FsL3JlYWxtcy9pbmJvb2siLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYzM0N2E3N2EtZTNkOC00MWIwLWE4NmUtMDQ1ODVmYjljYjdjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6ImJlMzJmNjc4LTk3MDAtNDQ1MS05ZTI1LWYxODMxMDVhMzRmNCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY2xpZW50ZSIsImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJDaHJpc3RpYW4gTWFyZXNjYWxjbyBNYXJlc2NhbGNvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibWFyZXNjYWxjb2NAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6IkNocmlzdGlhbiBNYXJlc2NhbGNvIiwiZmFtaWx5X25hbWUiOiJNYXJlc2NhbGNvIiwiZW1haWwiOiJtYXJlc2NhbGNvY0BnbWFpbC5jb20ifQ.WVS1YF6-hx39Rt9OhjQoG7HiSJwkTUX7OaObj5CM8iTWVFGsjq1F_NmlKNRd9mQrAUB37V-59STVR_n0QfkdrjgVuROIZ0hVnii9xm1_EhLjHXiB0ERghzG-vOABx2EnNty33ituR4ufXkWCnPBh3SlEC9BLATfjWWY6SLYh-AKMZwLpn53OlWAU8EC9YZ7SvgWbFjuMJGE8-hS2wELvbZ5F3LoLXxAysNNC4jo1WrHh5nZ14rSDthYmufCNSDCkSbTzvLmw-3arsGuTCuk4vKkK8aD77QdiRCl6pNfbJFRcb5LpPdDYX6GRDM_8mWze6cfGU1wGpu1m3zuBiRsKOQ%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI3YjBjMzVhOS1hZGFkLTRmNjUtYmE4NC1kODQ4YzY4NWZiZGEifQ.eyJleHAiOjE2NzY3MTY2MjAsImlhdCI6MTY3NjcxNDgyMCwianRpIjoiZWM1YzhlNDMtZTExOC00ZTE3LThlNGEtZTk4MGFhN2EzZTEwIiwiaXNzIjoiaHR0cDovL2luYm9vay5sb2NhbC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiaHR0cDovL2luYm9vay5sb2NhbC9yZWFsbXMvaW5ib29rIiwic3ViIjoiYzM0N2E3N2EtZTNkOC00MWIwLWE4NmUtMDQ1ODVmYjljYjdjIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJzY29wZSI6InByb2ZpbGUgb3BlbmlkIGVtYWlsIiwic2lkIjoiYmUzMmY2NzgtOTcwMC00NDUxLTllMjUtZjE4MzEwNWEzNGY0In0.L712jPhnpECvU1WMA5cWGj-xByRSS1dGlV7qOi6N6ZA%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SjJJazI5V0kyczdCQUFBLUJpVGhPWE9aZGpEclNaZzJYUXVaVmg1Z0NRIn0.eyJleHAiOjE2NzY3MTQ4ODAsImlhdCI6MTY3NjcxNDgyMCwiYXV0aF90aW1lIjoxNjc2NzE0ODIwLCJqdGkiOiI1YjlkMzg1ZS0yYWU0LTRjZmQtYjZkMi1hYjkzZDNiNzBhMGEiLCJpc3MiOiJodHRwOi8vaW5ib29rLmxvY2FsL3JlYWxtcy9pbmJvb2siLCJhdWQiOiJub2RlanMiLCJzdWIiOiJjMzQ3YTc3YS1lM2Q4LTQxYjAtYTg2ZS0wNDU4NWZiOWNiN2MiLCJ0eXAiOiJJRCIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJhdF9oYXNoIjoiTEMzTVVFckhwanBaQXAxTWJzT3k0ZyIsImFjciI6IjEiLCJzaWQiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJDaHJpc3RpYW4gTWFyZXNjYWxjbyBNYXJlc2NhbGNvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibWFyZXNjYWxjb2NAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6IkNocmlzdGlhbiBNYXJlc2NhbGNvIiwiZmFtaWx5X25hbWUiOiJNYXJlc2NhbGNvIiwiZW1haWwiOiJtYXJlc2NhbGNvY0BnbWFpbC5jb20ifQ.PTnHIVIxcVRdbiPyejJsrSJsN_WJ-zx2xQRP9Vf-cWYyvgoCLdCB7BTUZxqalTw4O68TxqA1Z1ArCiu3oMVn57OiUotEMOFiSkdP9vj9VAi7rE9Ks6tcupIhavGXyHd5ybpHZe5unrDq5791veeC9ChgqCtNW8HFAliyXhmI8yBx4v4zI4fkcNo4Sxh2loV6xJjoOrd4tNxazbKegzYnAAnTZhQWTcS0wyVADgp991BOfGyNsEgIN3uMADN0y9MLAIClnMQ5NXKCbKOrnh_IDJTZ8d6RVD_Hr2pLcIa4vDL3pAJZSBRboQCBEuzYnMmIAQiu2wZzUtXmym_qMuU9BQ%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22be32f678-9700-4451-9e25-f183105a34f4%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D; id=c347a77a-e3d8-41b0-a86e-04585fb9cb7c",
+        "host": "inbook.local",
+        "referer": "http://inbook.local/cliente/notifiche",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+        "x-forwarded-for": "172.19.0.1",
+        "x-forwarded-host": "inbook.local",
+        "x-forwarded-port": "80",
+        "x-forwarded-proto": "http",
+        "x-real-ip": "172.19.0.1"
+      },
+      "httpVersion": "1.1",
+      "method": "GET",
+      "originalUrl": "/notifiche/api/findAllcliente_unione/c347a77a-e3d8-41b0-a86e-04585fb9cb7c",
+      "query": {},
+      "url": "/notifiche/api/findAllcliente_unione/c347a77a-e3d8-41b0-a86e-04585fb9cb7c"
+    },
+    "res": { "statusCode": 200 },
+    "responseTime": 13
+  }
+}
+
+{
+    "level": "info",
+    "message": "GET /servizi/api/get_servizi_dal_cliente/8 200 5ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "application/json",
+                "accept-encoding": "gzip, deflate",
+                "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6",
+                "connection": "upgrade",
+                "content-type": "application/json;charset-UTF-8",
+                "cookie": "session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2subG9jYWwvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=Na5cN2FRDvdGylHKqMyuxWiOf4M; id=c347a77a-e3d8-41b0-a86e-04585fb9cb7c; keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SjJJazI5V0kyczdCQUFBLUJpVGhPWE9aZGpEclNaZzJYUXVaVmg1Z0NRIn0.eyJleHAiOjE2NzY3MTUxMDcsImlhdCI6MTY3NjcxNTA0NywiYXV0aF90aW1lIjoxNjc2NzE0ODIwLCJqdGkiOiI2Y2FhZGVmYi1kNTVlLTRiMzgtODRjZi01NDUyY2JiYTRlZTMiLCJpc3MiOiJodHRwOi8vaW5ib29rLmxvY2FsL3JlYWxtcy9pbmJvb2siLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYzM0N2E3N2EtZTNkOC00MWIwLWE4NmUtMDQ1ODVmYjljYjdjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6ImJlMzJmNjc4LTk3MDAtNDQ1MS05ZTI1LWYxODMxMDVhMzRmNCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY2xpZW50ZSIsImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJDaHJpc3RpYW4gTWFyZXNjYWxjbyBNYXJlc2NhbGNvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibWFyZXNjYWxjb2NAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6IkNocmlzdGlhbiBNYXJlc2NhbGNvIiwiZmFtaWx5X25hbWUiOiJNYXJlc2NhbGNvIiwiZW1haWwiOiJtYXJlc2NhbGNvY0BnbWFpbC5jb20ifQ.lNB6iu8vDdLdWahXdLQZmiuR7HnuzAeXrBgd2fpjI9LdMTMHJKAVo3s5Cj7Gbsx5OT2TpIJizy1LbRWO0V-MYtSt4I9DuIaTB4SCN-b6_9ZUkyUGGrpkCPku3FFxCpI0zvVwxqd2Fj1xZ29scIX27NQDQ1Kb6WJ2BKKrjBqp6l5hMV6aAnCr_FZKx-5x4J8KeV1BK3ZYI5EFCbJ1zBwKGwWYSMWWp5czE0T3TclsVjgnoxjeOqtU5VC82HknyoGoCJAM1-rVKpcwDIl2lJ7knQE6TKuezXrqIrXbFifkGSVXqpD_-i8AO4NrsnIULAQgtvWs1eBCIEtagp9bDFEFtw%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI3YjBjMzVhOS1hZGFkLTRmNjUtYmE4NC1kODQ4YzY4NWZiZGEifQ.eyJleHAiOjE2NzY3MTY4NDcsImlhdCI6MTY3NjcxNTA0NywianRpIjoiODE1MDY1YzUtMzA1Yy00NDBlLTlmNGQtNjY3NjJhODI3ZTI2IiwiaXNzIjoiaHR0cDovL2luYm9vay5sb2NhbC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiaHR0cDovL2luYm9vay5sb2NhbC9yZWFsbXMvaW5ib29rIiwic3ViIjoiYzM0N2E3N2EtZTNkOC00MWIwLWE4NmUtMDQ1ODVmYjljYjdjIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJzY29wZSI6InByb2ZpbGUgb3BlbmlkIGVtYWlsIiwic2lkIjoiYmUzMmY2NzgtOTcwMC00NDUxLTllMjUtZjE4MzEwNWEzNGY0In0._tgAbGAV6r8i7Kllz6Wp_b5LyPmpvK_B3yBgQYY45Bo%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SjJJazI5V0kyczdCQUFBLUJpVGhPWE9aZGpEclNaZzJYUXVaVmg1Z0NRIn0.eyJleHAiOjE2NzY3MTUxMDcsImlhdCI6MTY3NjcxNTA0NywiYXV0aF90aW1lIjoxNjc2NzE0ODIwLCJqdGkiOiIyOTE1NGZmNC03MjA4LTRlN2QtYWQ5Yi0zMDJlOWZkOGU0YzAiLCJpc3MiOiJodHRwOi8vaW5ib29rLmxvY2FsL3JlYWxtcy9pbmJvb2siLCJhdWQiOiJub2RlanMiLCJzdWIiOiJjMzQ3YTc3YS1lM2Q4LTQxYjAtYTg2ZS0wNDU4NWZiOWNiN2MiLCJ0eXAiOiJJRCIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJhdF9oYXNoIjoiU1BTZGloWXhRdHdTdWpva1RKdVVuUSIsImFjciI6IjEiLCJzaWQiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJDaHJpc3RpYW4gTWFyZXNjYWxjbyBNYXJlc2NhbGNvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibWFyZXNjYWxjb2NAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6IkNocmlzdGlhbiBNYXJlc2NhbGNvIiwiZmFtaWx5X25hbWUiOiJNYXJlc2NhbGNvIiwiZW1haWwiOiJtYXJlc2NhbGNvY0BnbWFpbC5jb20ifQ.XEfkoPercXwio27zAPwZ9cE0RUaWM9GnFqEV2LGxaPa9aMMRr_hODhBJZ5lTyRnwjpSLeGFaN1pJa6VknF684G2ldXML8G0S1WhdbeqTMLwfUo3hI091OZgJu--t4K3q7NL8d31K6WGOyvzWRBxHrQI4c-_M8kKDbPfZTqhK87-5Md25ggtOuo3t7lOjP1ZwPfUwa6GJIqEBudhlhgqZ1xkicGr3ro40VccyNU9CmPrvly3ZMkhghNx8N3GpjgBYEzOkt4SDixrGahmt7UeyZ1iUe8fOzEL7G2K1YdoEfz2awD5ZfPkWyIK6c2Jem34pF99K5yjRkc4ts-HJWPVIKg%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22be32f678-9700-4451-9e25-f183105a34f4%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D",
+                "host": "inbook.local",
+                "referer": "http://inbook.local/cliente/visualizza_fornitore?id=8",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+                "x-forwarded-for": "172.19.0.1",
+                "x-forwarded-host": "inbook.local",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-real-ip": "172.19.0.1"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/servizi/api/get_servizi_dal_cliente/8",
+            "query": {},
+            "url": "/servizi/api/get_servizi_dal_cliente/8"
+        },
+        "res": {
+            "statusCode": 200
+        },
+        "responseTime": 5
+    }
+}
+
+
+{
+    "level": "info",
+    "message": "GET /cliente 304 5ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "accept-encoding": "gzip, deflate",
+                "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6",
+                "cache-control": "max-age=0",
+                "connection": "upgrade",
+                "cookie": "c347a77a-e3d8-41b0-a86e-04585fb9cb7c",
+                "host": "inbook.local",
+                "if-modified-since": "Thu, 02 Feb 2023 09:25:38 GMT",
+                "if-none-match": "W/\"10a4-18611722567\"",
+                "upgrade-insecure-requests": "1",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+                "x-forwarded-for": "172.24.0.1",
+                "x-forwarded-host": "inbook.local",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-real-ip": "172.24.0.1"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/cliente",
+            "query": {},
+            "url": "/cliente"
+        },
+        "res": {
+            "statusCode": 304
+        },
+        "responseTime": 5
+    }
+}
+
+
+
+
+{
+    "level": "info",
+    "message": "GET /notifiche/api/findAllcliente_unione/78ec57c4-9d80-4084-919d-d1e493a56594 200 4ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "application/json",
+                "accept-encoding": "gzip, deflate",
+                "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6",
+                "cache-control": "no-cache",
+                "connection": "upgrade",
+                "content-type": "application/json;charset-UTF-8",
+                "cookie": "78ec57c4-9d80-4084-919d-d1e493a56594",
+                "host": "inbook.local",
+                "pragma": "no-cache",
+                "referer": "http://inbook.local/cliente/notifiche",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+                "x-forwarded-for": "172.25.0.1",
+                "x-forwarded-host": "inbook.local",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-real-ip": "172.25.0.1"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/notifiche/api/findAllcliente_unione/78ec57c4-9d80-4084-919d-d1e493a56594",
+            "query": {},
+            "url": "/notifiche/api/findAllcliente_unione/78ec57c4-9d80-4084-919d-d1e493a56594"
+        },
+        "res": {
+            "statusCode": 200
+        },
+        "responseTime": 4
+    }
+}
+
+
+{
+    "level": "info",
+    "message": "GET /cliente/notifiche 200 5ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "accept-encoding": "gzip, deflate",
+                "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6",
+                "cache-control": "no-cache",
+                "connection": "upgrade",
+                "cookie": "pippozzo1",
+                "host": "inbook.local",
+                "pragma": "no-cache",
+                "referer": "http://inbook.local/cliente",
+                "upgrade-insecure-requests": "1",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+                "x-forwarded-for": "172.25.0.1",
+                "x-forwarded-host": "inbook.local",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-real-ip": "172.25.0.1"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/cliente/notifiche",
+            "query": {},
+            "url": "/cliente/notifiche"
+        },
+        "res": {
+            "statusCode": 200
+        },
+        "responseTime": 5
+    }
+}

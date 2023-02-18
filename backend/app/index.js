@@ -50,7 +50,7 @@ app.use(config.expressWinston.logger({
 app.use(config.keycloak.middleware()); 
 
 app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
-
+app.set('trust proxy', 1)
 var sql_views = config.fs.readFileSync(config.db_path + "views.sql", "utf8");
 
 //connessione al db con sequelize per facilitare operazioni CRUD
@@ -64,7 +64,7 @@ db.sequelize
     console.log("Failed to sync db: " + err.message);
     });
 
-
+app.get("/ip",(request, response) => response.send(request.ip));
 app.use("/",home);
 app.use("/cliente", config.keycloak.protect("realm:cliente"), middleware_check.send_cookie,cliente);
 app.use("/fornitore", config.keycloak.protect("realm:fornitore"),middleware_check.send_cookie, fornitore);

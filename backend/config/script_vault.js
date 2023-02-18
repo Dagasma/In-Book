@@ -40,7 +40,7 @@ do{
         SECRET: secret
     };
      
-    console.log("sto facnedo")
+    console.log("sto facendo")
     let data = JSON.stringify(segreti);
     config.fs.writeFileSync('segreti.json', data);
 

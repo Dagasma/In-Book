@@ -4,10 +4,16 @@ const fornitore = require("./routes_web_pages/fornitore");
 const amministratore = require("./routes_web_pages/amministratore");
 const home = require("./routes_web_pages/home");
 const app = config.express();
-const middleware_custom = require("./middleware_custom");
+require("./middleware_custom");
 const middleware_check = require("./middleware_check");
 const db = require("./models");
 
+const errorResponder = (error, request, response, next) => {
+  response.header("Content-Type", 'text/plain');
+  const status = error.status || 500;
+  console.log(error.message);
+  response.status(status).send("An unexpected error occured, please go back again.");
+}
 
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
@@ -18,7 +24,6 @@ app.use(config.session({maxAge: Date.now() + (3600 * 1000),secret: config.SECRET
 
 app.use(config.expressWinston.logger({
     transports: [
-      new config.winston.transports.Console(),
       new config.winston.transports.File({
         filename: 'combined.log',
       }),
@@ -41,16 +46,15 @@ app.use(config.expressWinston.logger({
     meta: true, 
     msg: "HTTPS {{req.method}} {{req.url}}  {{res.statusCode}} ", 
     expressFormat: true, 
-    colorize: false, 
+    colorize: true, 
     ignoreRoute: function (req, res) { return false; },
     headerBlacklist: [] 
   }));
 
 
 app.use(config.keycloak.middleware()); 
-
 app.use(config.express.static(config.frontend_path)); //per rilevare tutti i file statici nel frontend
-app.set('trust proxy', 1)
+app.set('trust proxy', true);
 var sql_views = config.fs.readFileSync(config.db_path + "views.sql", "utf8");
 
 //connessione al db con sequelize per facilitare operazioni CRUD
@@ -64,7 +68,6 @@ db.sequelize
     console.log("Failed to sync db: " + err.message);
     });
 
-app.get("/ip",(request, response) => response.send(request.ip));
 app.use("/",home);
 app.use("/cliente", config.keycloak.protect("realm:cliente"), middleware_check.send_cookie,cliente);
 app.use("/fornitore", config.keycloak.protect("realm:fornitore"),middleware_check.send_cookie, fornitore);
@@ -80,7 +83,7 @@ require("./api/prenotazioni_routes")(app);
 require("./api/servizio_routes")(app);
 require("./api/votazione_routes")(app);
 require("./api/amministratore_routes")(app);
-
+app.use(errorResponder);
 app.listen(config.PORT, () => {
     console.log("[BACKEND] Start listening on port:" + config.PORT);
 });

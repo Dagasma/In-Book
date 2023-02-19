@@ -19,6 +19,7 @@ config.keycloak = new config.Keycloak({onLoad: 'login-required', checkLoginIfram
 config.frontend_path = config.path.normalize(process.cwd() + "/frontend/"); 
 config.db_path = config.path.normalize(process.cwd() + "/backend/database/"); 
 
+
 require("dotenv").config({
   path: config.path.normalize("/server/.env"),
   override: true

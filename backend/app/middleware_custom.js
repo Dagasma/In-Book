@@ -24,18 +24,22 @@ async function Assign_Roles_to_users(token_sub) {
       name: "Cliente",
     });
     payload.push({ id: cliente.id, name: "cliente" });
+    await config.kcAdminClient.users
+    .addRealmRoleMappings({ id: token_sub, roles: payload })
+    .catch((err) => {
+      console.log(err.message);
+    });
   } else if (user.attributes.tipo[0] == "Fornitore") {
     const fornitore = await config.kcAdminClient.roles.findOneByName({
       name: "Fornitore",
     });
     payload.push({ id: fornitore.id, name: "fornitore" });
-  }
-  await config.kcAdminClient.users
+    await config.kcAdminClient.users
     .addRealmRoleMappings({ id: token_sub, roles: payload })
     .catch((err) => {
       console.log(err.message);
     });
-
+  }
   return true;
 }
 

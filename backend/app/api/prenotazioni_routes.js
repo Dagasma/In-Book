@@ -22,7 +22,6 @@ module.exports = app => {
     
     router.get("/prenotazioni_filtrate_merge_utente/:ID_utente",config.keycloak.protect("realm:cliente"), middleware_check.check_id_param('ID_utente'),prenotazioni.prenotazioni_filtrate_utente);
 
-    //DA RIVEDERE CHI PUO FARE COSA; altro problema -> UN UTENTE DIFFERENTE POTREBBE FARE ANNULLA PRENOTAZIONE SE SFRUTTO SOLO id_prenotazione
     //aggiorna stato prenotazione (o aggiorna prenotazione in generale) 
     router.put("/annulla_prenotazione_cliente/:id_prenotazione/:ID_utente", config.keycloak.protect("realm:cliente"), middleware_check.check_id_param('ID_utente'), prenotazioni.annulla_prenotazione_cliente);
 

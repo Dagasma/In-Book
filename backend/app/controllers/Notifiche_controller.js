@@ -189,7 +189,6 @@ exports.findAllFornitore_unione = (req, res) => {
             type: db.sequelize.QueryTypes.SELECT
         }
     );
-        console.log(tab_notifiche_unione)
         tab_notifiche_unione.then(data => {
             res.send(JSON.stringify(data));})
             .catch (err => {
@@ -213,7 +212,6 @@ exports.findAllcliente_unione = (req, res) => {
             type: db.sequelize.QueryTypes.SELECT
         }
     );
-        console.log(tab_notifiche_unione)
         tab_notifiche_unione.then(data => {
             res.send(JSON.stringify(data));})
             .catch (err => {

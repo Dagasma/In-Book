@@ -187,7 +187,6 @@ exports.get_media_fornitore = (req, res) => {
     //var condition = ID_fornitore ? { ID_fornitore: { [Op.like]: `%${ID_fornitore}%` } } : null;
     var filtro = req.params.id;
 
-    console.log("Media ", req.params.id)
     //var condition_time = db.sequelize.fn('date', sequelize.col('Orario_prenotazione_inizio'), Op.like, filtro.Data_giorno);
     Media_voto(filtro).then(data => {
         res.send(JSON.stringify(data));})
@@ -206,7 +205,6 @@ exports.get_voto = (req, res) => {
 
     var condition1 = ID_fornitore ? { ID_fornitore: { [Op.like]: `${ID_fornitore}` } } : false;
     var condition2 = ID_utente ? { ID_utente: { [Op.like]: `${ID_utente}` } } : false;
-    console.log(condition1);
 
     tab_votazioni
         .findAll({ where: {[Op.and]: [condition1, condition2]}})

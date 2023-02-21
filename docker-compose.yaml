@@ -21,7 +21,7 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: prova
         ports:
-            - "9090:80" #per settare porte devo rifare la creazione del compose
+            - "9000:80" #per settare porte devo rifare la creazione del compose
         networks:
             - PHPNetwork
 

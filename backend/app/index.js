@@ -8,6 +8,13 @@ const middleware_custom = require("./middleware_custom");
 const middleware_check = require("./middleware_check");
 const db = require("./models");
 
+const errorResponder = (error, request, response, next) => {
+  response.header("Content-Type", 'text/plain');
+  const status = error.status || 500;
+  console.log(error.message);
+  response.status(status).send("An unexpected error occured, please go back again.");
+}
+
 
 app.use(config.rateLimit(config.apiLimiter));
 app.use(config.express.json());
@@ -20,6 +27,8 @@ app.use(
         secret: config.SECRET
     })
 );
+app.use(config.keycloak.middleware()); 
+
 
 // function customRequestFilter(req, propName) {
 //   if(propName !== "headers") return req[propName];
@@ -42,22 +51,21 @@ app.use(
 
 app.use(config.expressWinston.logger({
     transports: [
-      new config.winston.transports.Console(),
       new config.winston.transports.File({
-        filename: 'combined.log',
+        filename: 'backend/logs/combined.log',
       }),
       new config.winston.transports.File({
-        filename: 'app-error.log',
+        filename: 'backend/logs/app-error.log',
         level: 'error',
         format: config.winston.format.combine( config.winston.format.timestamp(), config.winston.format.json()),
       }),
       new config.winston.transports.File({
-        filename: 'app-info.log',
+        filename: 'backend/logs/app-info.log',
         level: 'info',
         format: config.winston.format.combine(config.winston.format.timestamp(), config.winston.format.json()),
       }),
       new config.winston.transports.File({
-        filename: 'app-warn.log',
+        filename: 'backend/logs/app-warn.log',
         level: 'warn',
         format: config.winston.format.combine(config.winston.format.timestamp(), config.winston.format.json()),
       })
@@ -72,7 +80,6 @@ app.use(config.expressWinston.logger({
   }));
 
 
-app.use(config.keycloak.middleware()); 
 
 
 var sql_views = config.fs.readFileSync(config.db_path + "views.sql", "utf8");
@@ -105,15 +112,7 @@ require("./api/votazione_routes")(app);
 require("./api/amministratore_routes")(app);
 
 
-app.use(config.expressWinston.errorLogger({
-    transports: [
-      new config.winston.transports.Console()
-    ],
-    format: config.winston.format.combine(
-        config.winston.format.colorize(),
-        config.winston.format.json()
-    )
-  }));
+app.use(errorResponder);
 
 app.listen(config.PORT, () => {
     console.log("[BACKEND] Start listening on port:" + config.PORT);

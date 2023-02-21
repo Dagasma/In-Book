@@ -25,20 +25,20 @@ app.use(config.session({maxAge: Date.now() + (3600 * 1000),secret: config.SECRET
 app.use(config.expressWinston.logger({
     transports: [
       new config.winston.transports.File({
-        filename: 'combined.log',
+        filename: 'backend/logs/combined.log',
       }),
       new config.winston.transports.File({
-        filename: 'app-error.log',
+        filename: 'backend/logs/app-error.log',
         level: 'error',
         format: config.winston.format.combine( config.winston.format.timestamp(), config.winston.format.json()),
       }),
       new config.winston.transports.File({
-        filename: 'app-info.log',
+        filename: 'backend/logs/app-info.log',
         level: 'info',
         format: config.winston.format.combine(config.winston.format.timestamp(), config.winston.format.json()),
       }),
       new config.winston.transports.File({
-        filename: 'app-warn.log',
+        filename: 'backend/logs/app-warn.log',
         level: 'warn',
         format: config.winston.format.combine(config.winston.format.timestamp(), config.winston.format.json()),
       })

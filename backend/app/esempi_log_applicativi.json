@@ -1,92 +1,520 @@
 {
-  "level": "info",
-  "message": "GET /notifiche/api/findAllcliente_unione/c347a77a-e3d8-41b0-a86e-04585fb9cb7c 200 13ms",
-  "meta": {
-    "req": {
-      "headers": {
-        "accept": "application/json",
-        "accept-encoding": "gzip, deflate",
-        "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6",
-        "connection": "upgrade",
-        "content-type": "application/json;charset-UTF-8",
-        "cookie": "session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2subG9jYWwvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=Na5cN2FRDvdGylHKqMyuxWiOf4M; keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SjJJazI5V0kyczdCQUFBLUJpVGhPWE9aZGpEclNaZzJYUXVaVmg1Z0NRIn0.eyJleHAiOjE2NzY3MTQ4ODAsImlhdCI6MTY3NjcxNDgyMCwiYXV0aF90aW1lIjoxNjc2NzE0ODIwLCJqdGkiOiJlOTQwYzU5Mi01OWI5LTQ4ZjAtOGZkYS1hZTA5YzE0MGM5MjgiLCJpc3MiOiJodHRwOi8vaW5ib29rLmxvY2FsL3JlYWxtcy9pbmJvb2siLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYzM0N2E3N2EtZTNkOC00MWIwLWE4NmUtMDQ1ODVmYjljYjdjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6ImJlMzJmNjc4LTk3MDAtNDQ1MS05ZTI1LWYxODMxMDVhMzRmNCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY2xpZW50ZSIsImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJDaHJpc3RpYW4gTWFyZXNjYWxjbyBNYXJlc2NhbGNvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibWFyZXNjYWxjb2NAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6IkNocmlzdGlhbiBNYXJlc2NhbGNvIiwiZmFtaWx5X25hbWUiOiJNYXJlc2NhbGNvIiwiZW1haWwiOiJtYXJlc2NhbGNvY0BnbWFpbC5jb20ifQ.WVS1YF6-hx39Rt9OhjQoG7HiSJwkTUX7OaObj5CM8iTWVFGsjq1F_NmlKNRd9mQrAUB37V-59STVR_n0QfkdrjgVuROIZ0hVnii9xm1_EhLjHXiB0ERghzG-vOABx2EnNty33ituR4ufXkWCnPBh3SlEC9BLATfjWWY6SLYh-AKMZwLpn53OlWAU8EC9YZ7SvgWbFjuMJGE8-hS2wELvbZ5F3LoLXxAysNNC4jo1WrHh5nZ14rSDthYmufCNSDCkSbTzvLmw-3arsGuTCuk4vKkK8aD77QdiRCl6pNfbJFRcb5LpPdDYX6GRDM_8mWze6cfGU1wGpu1m3zuBiRsKOQ%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI3YjBjMzVhOS1hZGFkLTRmNjUtYmE4NC1kODQ4YzY4NWZiZGEifQ.eyJleHAiOjE2NzY3MTY2MjAsImlhdCI6MTY3NjcxNDgyMCwianRpIjoiZWM1YzhlNDMtZTExOC00ZTE3LThlNGEtZTk4MGFhN2EzZTEwIiwiaXNzIjoiaHR0cDovL2luYm9vay5sb2NhbC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiaHR0cDovL2luYm9vay5sb2NhbC9yZWFsbXMvaW5ib29rIiwic3ViIjoiYzM0N2E3N2EtZTNkOC00MWIwLWE4NmUtMDQ1ODVmYjljYjdjIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJzY29wZSI6InByb2ZpbGUgb3BlbmlkIGVtYWlsIiwic2lkIjoiYmUzMmY2NzgtOTcwMC00NDUxLTllMjUtZjE4MzEwNWEzNGY0In0.L712jPhnpECvU1WMA5cWGj-xByRSS1dGlV7qOi6N6ZA%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SjJJazI5V0kyczdCQUFBLUJpVGhPWE9aZGpEclNaZzJYUXVaVmg1Z0NRIn0.eyJleHAiOjE2NzY3MTQ4ODAsImlhdCI6MTY3NjcxNDgyMCwiYXV0aF90aW1lIjoxNjc2NzE0ODIwLCJqdGkiOiI1YjlkMzg1ZS0yYWU0LTRjZmQtYjZkMi1hYjkzZDNiNzBhMGEiLCJpc3MiOiJodHRwOi8vaW5ib29rLmxvY2FsL3JlYWxtcy9pbmJvb2siLCJhdWQiOiJub2RlanMiLCJzdWIiOiJjMzQ3YTc3YS1lM2Q4LTQxYjAtYTg2ZS0wNDU4NWZiOWNiN2MiLCJ0eXAiOiJJRCIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJhdF9oYXNoIjoiTEMzTVVFckhwanBaQXAxTWJzT3k0ZyIsImFjciI6IjEiLCJzaWQiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJDaHJpc3RpYW4gTWFyZXNjYWxjbyBNYXJlc2NhbGNvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibWFyZXNjYWxjb2NAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6IkNocmlzdGlhbiBNYXJlc2NhbGNvIiwiZmFtaWx5X25hbWUiOiJNYXJlc2NhbGNvIiwiZW1haWwiOiJtYXJlc2NhbGNvY0BnbWFpbC5jb20ifQ.PTnHIVIxcVRdbiPyejJsrSJsN_WJ-zx2xQRP9Vf-cWYyvgoCLdCB7BTUZxqalTw4O68TxqA1Z1ArCiu3oMVn57OiUotEMOFiSkdP9vj9VAi7rE9Ks6tcupIhavGXyHd5ybpHZe5unrDq5791veeC9ChgqCtNW8HFAliyXhmI8yBx4v4zI4fkcNo4Sxh2loV6xJjoOrd4tNxazbKegzYnAAnTZhQWTcS0wyVADgp991BOfGyNsEgIN3uMADN0y9MLAIClnMQ5NXKCbKOrnh_IDJTZ8d6RVD_Hr2pLcIa4vDL3pAJZSBRboQCBEuzYnMmIAQiu2wZzUtXmym_qMuU9BQ%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22be32f678-9700-4451-9e25-f183105a34f4%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D; id=c347a77a-e3d8-41b0-a86e-04585fb9cb7c",
-        "host": "inbook.local",
-        "referer": "http://inbook.local/cliente/notifiche",
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
-        "x-forwarded-for": "172.19.0.1",
-        "x-forwarded-host": "inbook.local",
-        "x-forwarded-port": "80",
-        "x-forwarded-proto": "http",
-        "x-real-ip": "172.19.0.1"
-      },
-      "httpVersion": "1.1",
-      "method": "GET",
-      "originalUrl": "/notifiche/api/findAllcliente_unione/c347a77a-e3d8-41b0-a86e-04585fb9cb7c",
-      "query": {},
-      "url": "/notifiche/api/findAllcliente_unione/c347a77a-e3d8-41b0-a86e-04585fb9cb7c"
-    },
-    "res": { "statusCode": 200 },
-    "responseTime": 13
-  }
-}
-
-{
     "level": "info",
-    "message": "GET /servizi/api/get_servizi_dal_cliente/8 200 5ms",
+    "message": "GET /login 302 30ms",
     "meta": {
         "req": {
             "headers": {
-                "accept": "application/json",
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                 "accept-encoding": "gzip, deflate",
-                "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6",
+                "accept-language": "it-IT,it;q=0.9",
                 "connection": "upgrade",
-                "content-type": "application/json;charset-UTF-8",
-                "cookie": "session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2subG9jYWwvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=Na5cN2FRDvdGylHKqMyuxWiOf4M; id=c347a77a-e3d8-41b0-a86e-04585fb9cb7c; keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SjJJazI5V0kyczdCQUFBLUJpVGhPWE9aZGpEclNaZzJYUXVaVmg1Z0NRIn0.eyJleHAiOjE2NzY3MTUxMDcsImlhdCI6MTY3NjcxNTA0NywiYXV0aF90aW1lIjoxNjc2NzE0ODIwLCJqdGkiOiI2Y2FhZGVmYi1kNTVlLTRiMzgtODRjZi01NDUyY2JiYTRlZTMiLCJpc3MiOiJodHRwOi8vaW5ib29rLmxvY2FsL3JlYWxtcy9pbmJvb2siLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYzM0N2E3N2EtZTNkOC00MWIwLWE4NmUtMDQ1ODVmYjljYjdjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6ImJlMzJmNjc4LTk3MDAtNDQ1MS05ZTI1LWYxODMxMDVhMzRmNCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY2xpZW50ZSIsImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJDaHJpc3RpYW4gTWFyZXNjYWxjbyBNYXJlc2NhbGNvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibWFyZXNjYWxjb2NAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6IkNocmlzdGlhbiBNYXJlc2NhbGNvIiwiZmFtaWx5X25hbWUiOiJNYXJlc2NhbGNvIiwiZW1haWwiOiJtYXJlc2NhbGNvY0BnbWFpbC5jb20ifQ.lNB6iu8vDdLdWahXdLQZmiuR7HnuzAeXrBgd2fpjI9LdMTMHJKAVo3s5Cj7Gbsx5OT2TpIJizy1LbRWO0V-MYtSt4I9DuIaTB4SCN-b6_9ZUkyUGGrpkCPku3FFxCpI0zvVwxqd2Fj1xZ29scIX27NQDQ1Kb6WJ2BKKrjBqp6l5hMV6aAnCr_FZKx-5x4J8KeV1BK3ZYI5EFCbJ1zBwKGwWYSMWWp5czE0T3TclsVjgnoxjeOqtU5VC82HknyoGoCJAM1-rVKpcwDIl2lJ7knQE6TKuezXrqIrXbFifkGSVXqpD_-i8AO4NrsnIULAQgtvWs1eBCIEtagp9bDFEFtw%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI3YjBjMzVhOS1hZGFkLTRmNjUtYmE4NC1kODQ4YzY4NWZiZGEifQ.eyJleHAiOjE2NzY3MTY4NDcsImlhdCI6MTY3NjcxNTA0NywianRpIjoiODE1MDY1YzUtMzA1Yy00NDBlLTlmNGQtNjY3NjJhODI3ZTI2IiwiaXNzIjoiaHR0cDovL2luYm9vay5sb2NhbC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiaHR0cDovL2luYm9vay5sb2NhbC9yZWFsbXMvaW5ib29rIiwic3ViIjoiYzM0N2E3N2EtZTNkOC00MWIwLWE4NmUtMDQ1ODVmYjljYjdjIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJzY29wZSI6InByb2ZpbGUgb3BlbmlkIGVtYWlsIiwic2lkIjoiYmUzMmY2NzgtOTcwMC00NDUxLTllMjUtZjE4MzEwNWEzNGY0In0._tgAbGAV6r8i7Kllz6Wp_b5LyPmpvK_B3yBgQYY45Bo%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0SjJJazI5V0kyczdCQUFBLUJpVGhPWE9aZGpEclNaZzJYUXVaVmg1Z0NRIn0.eyJleHAiOjE2NzY3MTUxMDcsImlhdCI6MTY3NjcxNTA0NywiYXV0aF90aW1lIjoxNjc2NzE0ODIwLCJqdGkiOiIyOTE1NGZmNC03MjA4LTRlN2QtYWQ5Yi0zMDJlOWZkOGU0YzAiLCJpc3MiOiJodHRwOi8vaW5ib29rLmxvY2FsL3JlYWxtcy9pbmJvb2siLCJhdWQiOiJub2RlanMiLCJzdWIiOiJjMzQ3YTc3YS1lM2Q4LTQxYjAtYTg2ZS0wNDU4NWZiOWNiN2MiLCJ0eXAiOiJJRCIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJhdF9oYXNoIjoiU1BTZGloWXhRdHdTdWpva1RKdVVuUSIsImFjciI6IjEiLCJzaWQiOiJiZTMyZjY3OC05NzAwLTQ0NTEtOWUyNS1mMTgzMTA1YTM0ZjQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJDaHJpc3RpYW4gTWFyZXNjYWxjbyBNYXJlc2NhbGNvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibWFyZXNjYWxjb2NAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6IkNocmlzdGlhbiBNYXJlc2NhbGNvIiwiZmFtaWx5X25hbWUiOiJNYXJlc2NhbGNvIiwiZW1haWwiOiJtYXJlc2NhbGNvY0BnbWFpbC5jb20ifQ.XEfkoPercXwio27zAPwZ9cE0RUaWM9GnFqEV2LGxaPa9aMMRr_hODhBJZ5lTyRnwjpSLeGFaN1pJa6VknF684G2ldXML8G0S1WhdbeqTMLwfUo3hI091OZgJu--t4K3q7NL8d31K6WGOyvzWRBxHrQI4c-_M8kKDbPfZTqhK87-5Md25ggtOuo3t7lOjP1ZwPfUwa6GJIqEBudhlhgqZ1xkicGr3ro40VccyNU9CmPrvly3ZMkhghNx8N3GpjgBYEzOkt4SDixrGahmt7UeyZ1iUe8fOzEL7G2K1YdoEfz2awD5ZfPkWyIK6c2Jem34pF99K5yjRkc4ts-HJWPVIKg%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22be32f678-9700-4451-9e25-f183105a34f4%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D",
-                "host": "inbook.local",
-                "referer": "http://inbook.local/cliente/visualizza_fornitore?id=8",
-                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
-                "x-forwarded-for": "172.19.0.1",
-                "x-forwarded-host": "inbook.local",
+                "cookie": "session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9sb2NhbGhvc3QvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=ol6fHdhabJXNu3oLsWLSNYLgSWU",
+                "host": "localhost",
+                "referer": "http://localhost/",
+                "upgrade-insecure-requests": "1",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "x-forwarded-for": "172.22.0.1",
+                "x-forwarded-host": "localhost",
                 "x-forwarded-port": "80",
-                "x-forwarded-proto": "http",
-                "x-real-ip": "172.19.0.1"
+                "x-forwarded-proto": "http"
             },
             "httpVersion": "1.1",
             "method": "GET",
-            "originalUrl": "/servizi/api/get_servizi_dal_cliente/8",
+            "originalUrl": "/login",
             "query": {},
-            "url": "/servizi/api/get_servizi_dal_cliente/8"
+            "url": "/login"
         },
         "res": {
-            "statusCode": 200
+            "statusCode": 302
         },
-        "responseTime": 5
-    }
+        "responseTime": 30
+    },
+    "timestamp": "2023-02-19T11:53:12.270Z"
 }
-
-
 {
     "level": "info",
-    "message": "GET /cliente 304 5ms",
+    "message": "GET /robots1234.txt 404 27ms",
     "meta": {
         "req": {
             "headers": {
-                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                "accept-encoding": "gzip, deflate",
-                "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6",
-                "cache-control": "max-age=0",
                 "connection": "upgrade",
-                "cookie": "c347a77a-e3d8-41b0-a86e-04585fb9cb7c",
-                "host": "inbook.local",
-                "if-modified-since": "Thu, 02 Feb 2023 09:25:38 GMT",
-                "if-none-match": "W/\"10a4-18611722567\"",
-                "upgrade-insecure-requests": "1",
-                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
-                "x-forwarded-for": "172.24.0.1",
-                "x-forwarded-host": "inbook.local",
+                "host": "127.0.0.1",
+                "user-agent": "HealthCheck/1.0",
+                "x-forwarded-for": "172.17.18.1",
+                "x-forwarded-host": "127.0.0.1",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/robots1234.txt",
+            "query": {},
+            "url": "/robots1234.txt"
+        },
+        "res": {
+            "statusCode": 404
+        },
+        "responseTime": 27
+    },
+    "timestamp": "2023-02-19T12:58:25.113Z"
+}
+{
+    "level": "info",
+    "message": "GET /robots933456.txt 404 1ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "connection": "upgrade",
+                "host": "127.0.0.1",
+                "user-agent": "HealthCheck/1.0",
+                "x-forwarded-for": "172.17.18.1",
+                "x-forwarded-host": "127.0.0.1",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/robots933456.txt",
+            "query": {},
+            "url": "/robots933456.txt"
+        },
+        "res": {
+            "statusCode": 404
+        },
+        "responseTime": 1
+    },
+    "timestamp": "2023-02-19T12:58:25.124Z"
+}
+{
+    "level": "info",
+    "message": "GET /login 302 12ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:52740",
+                "connection": "upgrade",
+                "cookie": "ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "referer": "https://inbook.azurewebsites.net/",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "5a29d685-a9e6-4548-87ba-e114be9f2973",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "52740",
+                "x-forwarded-for": "79.30.13.58:52740, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
                 "x-forwarded-port": "80",
                 "x-forwarded-proto": "http",
-                "x-real-ip": "172.24.0.1"
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/login",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/login"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/login",
+            "query": {},
+            "url": "/login"
+        },
+        "res": {
+            "statusCode": 302
+        },
+        "responseTime": 12
+    },
+    "timestamp": "2023-02-19T13:31:59.664Z"
+}
+{
+    "level": "info",
+    "message": "GET /login 302 1ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:52740",
+                "connection": "upgrade",
+                "cookie": "ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "referer": "https://inbook.azurewebsites.net/",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "322d0939-0424-4981-aa27-ceebae0a8ac5",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "52740",
+                "x-forwarded-for": "79.30.13.58:52740, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/login",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/login"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/login",
+            "query": {},
+            "url": "/login"
+        },
+        "res": {
+            "statusCode": 302
+        },
+        "responseTime": 1
+    },
+    "timestamp": "2023-02-19T13:34:15.025Z"
+}
+{
+    "level": "info",
+    "message": "GET /login 302 7ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
+                "connection": "upgrade",
+                "cookie": "ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "referer": "https://inbook.azurewebsites.net/",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "47f28d16-d81c-48db-8997-41cd5add91ff",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/login",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/login"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/login",
+            "query": {},
+            "url": "/login"
+        },
+        "res": {
+            "statusCode": 302
+        },
+        "responseTime": 7
+    },
+    "timestamp": "2023-02-19T14:01:00.952Z"
+}
+{
+    "level": "info",
+    "message": "GET /login?auth_callback=1&state=75f96ed8-041d-4e8f-8d04-a731a9da9bce&session_state=ef6c1663-ac9d-4b18-8026-1f65110b5d24&code=655f757c-393c-4651-b774-4f74c749d37e.ef6c1663-ac9d-4b18-8026-1f65110b5d24.4799738e-f323-4d1b-8fdf-4fbc6f8d9af1 302 598ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
+                "connection": "upgrade",
+                "cookie": "ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "ac639fde-cf7c-4756-bedf-64fdd686b53c",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/login?auth_callback=1&state=75f96ed8-041d-4e8f-8d04-a731a9da9bce&session_state=ef6c1663-ac9d-4b18-8026-1f65110b5d24&code=655f757c-393c-4651-b774-4f74c749d37e.ef6c1663-ac9d-4b18-8026-1f65110b5d24.4799738e-f323-4d1b-8fdf-4fbc6f8d9af1",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/login?auth_callback=1&state=75f96ed8-041d-4e8f-8d04-a731a9da9bce&session_state=ef6c1663-ac9d-4b18-8026-1f65110b5d24&code=655f757c-393c-4651-b774-4f74c749d37e.ef6c1663-ac9d-4b18-8026-1f65110b5d24.4799738e-f323-4d1b-8fdf-4fbc6f8d9af1"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/login?auth_callback=1&state=75f96ed8-041d-4e8f-8d04-a731a9da9bce&session_state=ef6c1663-ac9d-4b18-8026-1f65110b5d24&code=655f757c-393c-4651-b774-4f74c749d37e.ef6c1663-ac9d-4b18-8026-1f65110b5d24.4799738e-f323-4d1b-8fdf-4fbc6f8d9af1",
+            "query": {},
+            "url": "/login?auth_callback=1&state=75f96ed8-041d-4e8f-8d04-a731a9da9bce&session_state=ef6c1663-ac9d-4b18-8026-1f65110b5d24&code=655f757c-393c-4651-b774-4f74c749d37e.ef6c1663-ac9d-4b18-8026-1f65110b5d24.4799738e-f323-4d1b-8fdf-4fbc6f8d9af1"
+        },
+        "res": {
+            "statusCode": 302
+        },
+        "responseTime": 598
+    },
+    "timestamp": "2023-02-19T14:01:23.149Z"
+}
+{
+    "level": "info",
+    "message": "GET /login 302 2ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
+                "connection": "upgrade",
+                "cookie": "keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNDIsImlhdCI6MTY3NjgxNTI4MiwiYXV0aF90aW1lIjoxNjc2ODE1MjgyLCJqdGkiOiI1Zjc5Njc3NS01MmY1LTQ1YjItODRmMy0yMzBjZTBlOWNkZWQiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImY1NTU4MzA1LWI0YTgtNDdiYS1hN2JkLTE3Yjk5NWUzNzQ5OSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiJlZjZjMTY2My1hYzlkLTRiMTgtODAyNi0xZjY1MTEwYjVkMjQiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vZ29vZ2xlLmNvbSIsImh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQiLCJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1tYXN0ZXIiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIG9wZW5pZCBlbWFpbCIsInNpZCI6ImVmNmMxNjYzLWFjOWQtNGIxOC04MDI2LTFmNjUxMTBiNWQyNCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiQW50b25pbyBBdm9saW8iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhbnRvbmlvYXZvbGlvMThAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6IkFudG9uaW8iLCJmYW1pbHlfbmFtZSI6IkF2b2xpbyIsImVtYWlsIjoiYW50b25pb2F2b2xpbzE4QGdtYWlsLmNvbSJ9.Cohx7NzZJfX6VZ9YYWSdfj-K7Cv0MmCx99Y1JM8oyAcUGeijSl5-pioH8gySMUH0W479KPOMlf13HwYGv1RvXGaSY7QjZDevlwXIikhkcbhrFbUfJpSFlYvSTA7EQi3ubZRskK5qpdLu7CAf_0QkmoR1PuY-97rNsc3nanHdOzknFs3P98ixGUUsv2_VojphIDF9vegZZ107mxJ5pVNFfZJTIODdUEN564Zl_17lICFo9ZMKpDcC3zRIWLMkVtthtDOTMIAB11dOoVKkWE4dPz-jWCfeVkTmOoJ3RyxhT33VXTRJaKzlaR0wlhrFNxGsq6yMF3hGjyOvBxzP8ovoPw%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzNDdjZDkyNi02ZjcwLTQwZDAtODkxMy0zM2FlZmJlY2I3Y2UifQ.eyJleHAiOjE2NzY4MTcwODIsImlhdCI6MTY3NjgxNTI4MiwianRpIjoiNmYwNzg0MTYtYzMxZi00MjkyLTk5YzItZmEzZmE0OGYwNWRjIiwiaXNzIjoiaHR0cHM6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvcmVhbG1zL2luYm9vayIsImF1ZCI6Imh0dHBzOi8vaW5ib29rLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJvb2siLCJzdWIiOiJmNTU1ODMwNS1iNGE4LTQ3YmEtYTdiZC0xN2I5OTVlMzc0OTkiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6ImVmNmMxNjYzLWFjOWQtNGIxOC04MDI2LTFmNjUxMTBiNWQyNCIsInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiJlZjZjMTY2My1hYzlkLTRiMTgtODAyNi0xZjY1MTEwYjVkMjQifQ.qmT8LBMAOZbQ7HKKq49O-AKnqZCFLgF5gACVRZaXBjg%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNDIsImlhdCI6MTY3NjgxNTI4MiwiYXV0aF90aW1lIjoxNjc2ODE1MjgyLCJqdGkiOiJhMDQ3Y2M4MS0xY2Q1LTRjMDctYjYyYy05ZjdkODMyNWJmMTUiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoibm9kZWpzIiwic3ViIjoiZjU1NTgzMDUtYjRhOC00N2JhLWE3YmQtMTdiOTk1ZTM3NDk5IiwidHlwIjoiSUQiLCJhenAiOiJub2RlanMiLCJzZXNzaW9uX3N0YXRlIjoiZWY2YzE2NjMtYWM5ZC00YjE4LTgwMjYtMWY2NTExMGI1ZDI0IiwiYXRfaGFzaCI6IlNpU1VMczJJdFN1VjJGclh6by1WcmciLCJhY3IiOiIxIiwic2lkIjoiZWY2YzE2NjMtYWM5ZC00YjE4LTgwMjYtMWY2NTExMGI1ZDI0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJBbnRvbmlvIEF2b2xpbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiQW50b25pbyIsImZhbWlseV9uYW1lIjoiQXZvbGlvIiwiZW1haWwiOiJhbnRvbmlvYXZvbGlvMThAZ21haWwuY29tIn0.Lq7QLgJp9d71CTIBCsncit_prjlHudLRw46L-lkSYhDeXdoe-vXI2sLX09Hsn3DhqLZ39IhEOgkzQwydyMGKrjUetyvQgBVe8ImVXnGAfC-aqNLLxvLE5TxAwbIPqZTwfjutmtZCsgq9bRRKWSUCcyuhhOPJyRigG3Me0Z33tRlEoKjH7sCFe9JJF8Li0P0Pa6T71DYleiPORvDW5wXKGzdJZyBkC8ptkc3wryueY_HPJQp4PcqVtmhcLttqDWbJ40BjAG0md8Y_qYI1LtqAYS8nMRzZnq4BVVI2zvXucTDpO2T9eKjhPZ86coH1x-ZyjrdMCZPAJorIMvDJOr4nsg%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22ef6c1663-ac9d-4b18-8026-1f65110b5d24%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D; ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "a5edc851-4164-44f9-8e23-c0be0e3e62c7",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/login",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/login"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/login",
+            "query": {},
+            "url": "/login"
+        },
+        "res": {
+            "statusCode": 302
+        },
+        "responseTime": 2
+    },
+    "timestamp": "2023-02-19T14:01:23.987Z"
+}
+{
+    "level": "info",
+    "message": "GET /logout 302 10ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
+                "connection": "upgrade",
+                "cookie": "keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNDIsImlhdCI6MTY3NjgxNTI4MiwiYXV0aF90aW1lIjoxNjc2ODE1MjgyLCJqdGkiOiI1Zjc5Njc3NS01MmY1LTQ1YjItODRmMy0yMzBjZTBlOWNkZWQiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImY1NTU4MzA1LWI0YTgtNDdiYS1hN2JkLTE3Yjk5NWUzNzQ5OSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiJlZjZjMTY2My1hYzlkLTRiMTgtODAyNi0xZjY1MTEwYjVkMjQiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vZ29vZ2xlLmNvbSIsImh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQiLCJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1tYXN0ZXIiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIG9wZW5pZCBlbWFpbCIsInNpZCI6ImVmNmMxNjYzLWFjOWQtNGIxOC04MDI2LTFmNjUxMTBiNWQyNCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiQW50b25pbyBBdm9saW8iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhbnRvbmlvYXZvbGlvMThAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6IkFudG9uaW8iLCJmYW1pbHlfbmFtZSI6IkF2b2xpbyIsImVtYWlsIjoiYW50b25pb2F2b2xpbzE4QGdtYWlsLmNvbSJ9.Cohx7NzZJfX6VZ9YYWSdfj-K7Cv0MmCx99Y1JM8oyAcUGeijSl5-pioH8gySMUH0W479KPOMlf13HwYGv1RvXGaSY7QjZDevlwXIikhkcbhrFbUfJpSFlYvSTA7EQi3ubZRskK5qpdLu7CAf_0QkmoR1PuY-97rNsc3nanHdOzknFs3P98ixGUUsv2_VojphIDF9vegZZ107mxJ5pVNFfZJTIODdUEN564Zl_17lICFo9ZMKpDcC3zRIWLMkVtthtDOTMIAB11dOoVKkWE4dPz-jWCfeVkTmOoJ3RyxhT33VXTRJaKzlaR0wlhrFNxGsq6yMF3hGjyOvBxzP8ovoPw%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzNDdjZDkyNi02ZjcwLTQwZDAtODkxMy0zM2FlZmJlY2I3Y2UifQ.eyJleHAiOjE2NzY4MTcwODIsImlhdCI6MTY3NjgxNTI4MiwianRpIjoiNmYwNzg0MTYtYzMxZi00MjkyLTk5YzItZmEzZmE0OGYwNWRjIiwiaXNzIjoiaHR0cHM6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvcmVhbG1zL2luYm9vayIsImF1ZCI6Imh0dHBzOi8vaW5ib29rLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJvb2siLCJzdWIiOiJmNTU1ODMwNS1iNGE4LTQ3YmEtYTdiZC0xN2I5OTVlMzc0OTkiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6ImVmNmMxNjYzLWFjOWQtNGIxOC04MDI2LTFmNjUxMTBiNWQyNCIsInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiJlZjZjMTY2My1hYzlkLTRiMTgtODAyNi0xZjY1MTEwYjVkMjQifQ.qmT8LBMAOZbQ7HKKq49O-AKnqZCFLgF5gACVRZaXBjg%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNDIsImlhdCI6MTY3NjgxNTI4MiwiYXV0aF90aW1lIjoxNjc2ODE1MjgyLCJqdGkiOiJhMDQ3Y2M4MS0xY2Q1LTRjMDctYjYyYy05ZjdkODMyNWJmMTUiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoibm9kZWpzIiwic3ViIjoiZjU1NTgzMDUtYjRhOC00N2JhLWE3YmQtMTdiOTk1ZTM3NDk5IiwidHlwIjoiSUQiLCJhenAiOiJub2RlanMiLCJzZXNzaW9uX3N0YXRlIjoiZWY2YzE2NjMtYWM5ZC00YjE4LTgwMjYtMWY2NTExMGI1ZDI0IiwiYXRfaGFzaCI6IlNpU1VMczJJdFN1VjJGclh6by1WcmciLCJhY3IiOiIxIiwic2lkIjoiZWY2YzE2NjMtYWM5ZC00YjE4LTgwMjYtMWY2NTExMGI1ZDI0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJBbnRvbmlvIEF2b2xpbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiQW50b25pbyIsImZhbWlseV9uYW1lIjoiQXZvbGlvIiwiZW1haWwiOiJhbnRvbmlvYXZvbGlvMThAZ21haWwuY29tIn0.Lq7QLgJp9d71CTIBCsncit_prjlHudLRw46L-lkSYhDeXdoe-vXI2sLX09Hsn3DhqLZ39IhEOgkzQwydyMGKrjUetyvQgBVe8ImVXnGAfC-aqNLLxvLE5TxAwbIPqZTwfjutmtZCsgq9bRRKWSUCcyuhhOPJyRigG3Me0Z33tRlEoKjH7sCFe9JJF8Li0P0Pa6T71DYleiPORvDW5wXKGzdJZyBkC8ptkc3wryueY_HPJQp4PcqVtmhcLttqDWbJ40BjAG0md8Y_qYI1LtqAYS8nMRzZnq4BVVI2zvXucTDpO2T9eKjhPZ86coH1x-ZyjrdMCZPAJorIMvDJOr4nsg%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22ef6c1663-ac9d-4b18-8026-1f65110b5d24%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D; ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "fd6ab35f-b7e7-458c-9ae5-e3e8348a4e36",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/logout",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/logout"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/logout",
+            "query": {},
+            "url": "/logout"
+        },
+        "res": {
+            "statusCode": 302
+        },
+        "responseTime": 10
+    },
+    "timestamp": "2023-02-19T14:01:24.057Z"
+}
+{
+    "level": "info",
+    "message": "GET /login 302 0ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
+                "connection": "upgrade",
+                "cookie": "ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "referer": "https://inbook.azurewebsites.net/",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "4a0bbefe-c6b2-44ee-88fc-98182ce162c3",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/login",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/login"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/login",
+            "query": {},
+            "url": "/login"
+        },
+        "res": {
+            "statusCode": 302
+        },
+        "responseTime": 0
+    },
+    "timestamp": "2023-02-19T14:01:29.174Z"
+}
+{
+    "level": "info",
+    "message": "GET /login?auth_callback=1&state=63928662-63e9-4d98-8722-83b4336f6a5d&session_state=745e2220-457a-4a78-983b-88869124fd16&code=a364bd94-2ffd-44da-a7b2-e1363d8cddb7.745e2220-457a-4a78-983b-88869124fd16.4799738e-f323-4d1b-8fdf-4fbc6f8d9af1 302 151ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
+                "connection": "upgrade",
+                "cookie": "ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "c35d4880-1afc-4f81-ad79-101dbe58151c",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/login?auth_callback=1&state=63928662-63e9-4d98-8722-83b4336f6a5d&session_state=745e2220-457a-4a78-983b-88869124fd16&code=a364bd94-2ffd-44da-a7b2-e1363d8cddb7.745e2220-457a-4a78-983b-88869124fd16.4799738e-f323-4d1b-8fdf-4fbc6f8d9af1",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/login?auth_callback=1&state=63928662-63e9-4d98-8722-83b4336f6a5d&session_state=745e2220-457a-4a78-983b-88869124fd16&code=a364bd94-2ffd-44da-a7b2-e1363d8cddb7.745e2220-457a-4a78-983b-88869124fd16.4799738e-f323-4d1b-8fdf-4fbc6f8d9af1"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/login?auth_callback=1&state=63928662-63e9-4d98-8722-83b4336f6a5d&session_state=745e2220-457a-4a78-983b-88869124fd16&code=a364bd94-2ffd-44da-a7b2-e1363d8cddb7.745e2220-457a-4a78-983b-88869124fd16.4799738e-f323-4d1b-8fdf-4fbc6f8d9af1",
+            "query": {},
+            "url": "/login?auth_callback=1&state=63928662-63e9-4d98-8722-83b4336f6a5d&session_state=745e2220-457a-4a78-983b-88869124fd16&code=a364bd94-2ffd-44da-a7b2-e1363d8cddb7.745e2220-457a-4a78-983b-88869124fd16.4799738e-f323-4d1b-8fdf-4fbc6f8d9af1"
+        },
+        "res": {
+            "statusCode": 302
+        },
+        "responseTime": 151
+    },
+    "timestamp": "2023-02-19T14:01:52.710Z"
+}
+{
+    "level": "info",
+    "message": "GET /login 302 11ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
+                "connection": "upgrade",
+                "cookie": "keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIyN2IxMGQxNy02ODc0LTQ0MmMtODc5MC04MjE1YThmMzU1MTEiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImY1NTU4MzA1LWI0YTgtNDdiYS1hN2JkLTE3Yjk5NWUzNzQ5OSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vZ29vZ2xlLmNvbSIsImh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQiLCJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY2xpZW50ZSIsImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFudG9uaW8gQXZvbGlvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYW50b25pb2F2b2xpbzE4QGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJBbnRvbmlvIiwiZmFtaWx5X25hbWUiOiJBdm9saW8iLCJlbWFpbCI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20ifQ.g_hIxE8JwuBGVYq--gm6KDmJOjcqf2aieZUNHjLAGg_QW9MjAv9yFUUBiKGB6gC9Sjc7bcgqZ9cQ77qeMqVCUTAO1B-1GEd-D0sD5oZzORbeMijOCZ9FxSmUKF8BrRuPoPG5bJuqP7iNdpbJIlmXajx9SEdIDBz74taqpUEnkUWw01oF7pi0SimOS7Z3HuUlbB2HMJvQoObEtQ3_R7Sn5vNaPrXHFh09qV5MVFrMTtlPDaZi7lC2WkNsBBASOr1nsSluG3Ok4Aj4U8zcu1Ne6IFOA4IQbxtcaMsCTGj8aTQWVNm4RX_PPHFYcmbz_479MMQYPMHz9NvNucyzLILy1Q%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzNDdjZDkyNi02ZjcwLTQwZDAtODkxMy0zM2FlZmJlY2I3Y2UifQ.eyJleHAiOjE2NzY4MTcxMTIsImlhdCI6MTY3NjgxNTMxMiwianRpIjoiNTBiNGM3ZTctYTIwZC00ZGNlLTllZDMtMzVlNmFhMjdjYzljIiwiaXNzIjoiaHR0cHM6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvcmVhbG1zL2luYm9vayIsImF1ZCI6Imh0dHBzOi8vaW5ib29rLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJvb2siLCJzdWIiOiJmNTU1ODMwNS1iNGE4LTQ3YmEtYTdiZC0xN2I5OTVlMzc0OTkiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6Ijc0NWUyMjIwLTQ1N2EtNGE3OC05ODNiLTg4ODY5MTI0ZmQxNiIsInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYifQ.uofPwpfyvRwuu8ybaORDkiHdkH-ZjgKMoRMdtp4XNg0%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIzYjI1YThiZC02OGZjLTRkYWYtODI2Mi0yMzQ5MjE4MDQyY2QiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoibm9kZWpzIiwic3ViIjoiZjU1NTgzMDUtYjRhOC00N2JhLWE3YmQtMTdiOTk1ZTM3NDk5IiwidHlwIjoiSUQiLCJhenAiOiJub2RlanMiLCJzZXNzaW9uX3N0YXRlIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiYXRfaGFzaCI6IkJJZFJwcUEzVW83RnRmM0lnZU40V2ciLCJhY3IiOiIxIiwic2lkIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJBbnRvbmlvIEF2b2xpbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiQW50b25pbyIsImZhbWlseV9uYW1lIjoiQXZvbGlvIiwiZW1haWwiOiJhbnRvbmlvYXZvbGlvMThAZ21haWwuY29tIn0.fzXUmX3yAToIfBK878dEtYmMBmR0kxKGGWYAqGN5PyLqoVtAxb6Qc98wTsXurDbyLm-qsYdMsP-6WbwmRbPdCUOH_VmDNESupB_jtQoqEwK5ELEhUx9qE8CzzTH6HkpRYWfW0rLZTfzQb0gPjAFuDQqxoEK4cWo4WooYFlk7CBP3PP7zGwuoRFbAsG1icukHJBS6yN0htRY0qVCsx7a18Y1q7Usgc8hQqrKG_juohug-pV4t1xgSe6OuUpsEOWJCpUn1YShPeMZrGmdcQAEAAwenmOl5QiRgJfONi7fq6xHLfHix8bFrSqakmQN2mv38A4FB4Puw1jGDkRhexHiEDA%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22745e2220-457a-4a78-983b-88869124fd16%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D; ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "7e2fac40-7da4-43d0-8277-b6b26a4ca2b1",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/login",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/login"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/login",
+            "query": {},
+            "url": "/login"
+        },
+        "res": {
+            "statusCode": 302
+        },
+        "responseTime": 11
+    },
+    "timestamp": "2023-02-19T14:01:52.782Z"
+}
+{
+    "level": "info",
+    "message": "GET /cliente 200 131ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
+                "connection": "upgrade",
+                "cookie": "keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIyN2IxMGQxNy02ODc0LTQ0MmMtODc5MC04MjE1YThmMzU1MTEiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImY1NTU4MzA1LWI0YTgtNDdiYS1hN2JkLTE3Yjk5NWUzNzQ5OSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vZ29vZ2xlLmNvbSIsImh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQiLCJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY2xpZW50ZSIsImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFudG9uaW8gQXZvbGlvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYW50b25pb2F2b2xpbzE4QGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJBbnRvbmlvIiwiZmFtaWx5X25hbWUiOiJBdm9saW8iLCJlbWFpbCI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20ifQ.g_hIxE8JwuBGVYq--gm6KDmJOjcqf2aieZUNHjLAGg_QW9MjAv9yFUUBiKGB6gC9Sjc7bcgqZ9cQ77qeMqVCUTAO1B-1GEd-D0sD5oZzORbeMijOCZ9FxSmUKF8BrRuPoPG5bJuqP7iNdpbJIlmXajx9SEdIDBz74taqpUEnkUWw01oF7pi0SimOS7Z3HuUlbB2HMJvQoObEtQ3_R7Sn5vNaPrXHFh09qV5MVFrMTtlPDaZi7lC2WkNsBBASOr1nsSluG3Ok4Aj4U8zcu1Ne6IFOA4IQbxtcaMsCTGj8aTQWVNm4RX_PPHFYcmbz_479MMQYPMHz9NvNucyzLILy1Q%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzNDdjZDkyNi02ZjcwLTQwZDAtODkxMy0zM2FlZmJlY2I3Y2UifQ.eyJleHAiOjE2NzY4MTcxMTIsImlhdCI6MTY3NjgxNTMxMiwianRpIjoiNTBiNGM3ZTctYTIwZC00ZGNlLTllZDMtMzVlNmFhMjdjYzljIiwiaXNzIjoiaHR0cHM6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvcmVhbG1zL2luYm9vayIsImF1ZCI6Imh0dHBzOi8vaW5ib29rLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJvb2siLCJzdWIiOiJmNTU1ODMwNS1iNGE4LTQ3YmEtYTdiZC0xN2I5OTVlMzc0OTkiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6Ijc0NWUyMjIwLTQ1N2EtNGE3OC05ODNiLTg4ODY5MTI0ZmQxNiIsInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYifQ.uofPwpfyvRwuu8ybaORDkiHdkH-ZjgKMoRMdtp4XNg0%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIzYjI1YThiZC02OGZjLTRkYWYtODI2Mi0yMzQ5MjE4MDQyY2QiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoibm9kZWpzIiwic3ViIjoiZjU1NTgzMDUtYjRhOC00N2JhLWE3YmQtMTdiOTk1ZTM3NDk5IiwidHlwIjoiSUQiLCJhenAiOiJub2RlanMiLCJzZXNzaW9uX3N0YXRlIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiYXRfaGFzaCI6IkJJZFJwcUEzVW83RnRmM0lnZU40V2ciLCJhY3IiOiIxIiwic2lkIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJBbnRvbmlvIEF2b2xpbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiQW50b25pbyIsImZhbWlseV9uYW1lIjoiQXZvbGlvIiwiZW1haWwiOiJhbnRvbmlvYXZvbGlvMThAZ21haWwuY29tIn0.fzXUmX3yAToIfBK878dEtYmMBmR0kxKGGWYAqGN5PyLqoVtAxb6Qc98wTsXurDbyLm-qsYdMsP-6WbwmRbPdCUOH_VmDNESupB_jtQoqEwK5ELEhUx9qE8CzzTH6HkpRYWfW0rLZTfzQb0gPjAFuDQqxoEK4cWo4WooYFlk7CBP3PP7zGwuoRFbAsG1icukHJBS6yN0htRY0qVCsx7a18Y1q7Usgc8hQqrKG_juohug-pV4t1xgSe6OuUpsEOWJCpUn1YShPeMZrGmdcQAEAAwenmOl5QiRgJfONi7fq6xHLfHix8bFrSqakmQN2mv38A4FB4Puw1jGDkRhexHiEDA%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22745e2220-457a-4a78-983b-88869124fd16%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D; ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "0b719506-81ff-497b-a34e-6118dece0b33",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/cliente",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/cliente"
             },
             "httpVersion": "1.1",
             "method": "GET",
@@ -95,74 +523,43 @@
             "url": "/cliente"
         },
         "res": {
-            "statusCode": 304
-        },
-        "responseTime": 5
-    }
-}
-
-
-
-
-{
-    "level": "info",
-    "message": "GET /notifiche/api/findAllcliente_unione/78ec57c4-9d80-4084-919d-d1e493a56594 200 4ms",
-    "meta": {
-        "req": {
-            "headers": {
-                "accept": "application/json",
-                "accept-encoding": "gzip, deflate",
-                "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6",
-                "cache-control": "no-cache",
-                "connection": "upgrade",
-                "content-type": "application/json;charset-UTF-8",
-                "cookie": "78ec57c4-9d80-4084-919d-d1e493a56594",
-                "host": "inbook.local",
-                "pragma": "no-cache",
-                "referer": "http://inbook.local/cliente/notifiche",
-                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
-                "x-forwarded-for": "172.25.0.1",
-                "x-forwarded-host": "inbook.local",
-                "x-forwarded-port": "80",
-                "x-forwarded-proto": "http",
-                "x-real-ip": "172.25.0.1"
-            },
-            "httpVersion": "1.1",
-            "method": "GET",
-            "originalUrl": "/notifiche/api/findAllcliente_unione/78ec57c4-9d80-4084-919d-d1e493a56594",
-            "query": {},
-            "url": "/notifiche/api/findAllcliente_unione/78ec57c4-9d80-4084-919d-d1e493a56594"
-        },
-        "res": {
             "statusCode": 200
         },
-        "responseTime": 4
-    }
+        "responseTime": 131
+    },
+    "timestamp": "2023-02-19T14:01:52.993Z"
 }
-
-
 {
     "level": "info",
-    "message": "GET /cliente/notifiche 200 5ms",
+    "message": "GET /cliente/notifiche 200 104ms",
     "meta": {
         "req": {
             "headers": {
-                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                "accept-encoding": "gzip, deflate",
-                "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6",
-                "cache-control": "no-cache",
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
                 "connection": "upgrade",
-                "cookie": "pippozzo1",
-                "host": "inbook.local",
-                "pragma": "no-cache",
-                "referer": "http://inbook.local/cliente",
-                "upgrade-insecure-requests": "1",
-                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
-                "x-forwarded-for": "172.25.0.1",
-                "x-forwarded-host": "inbook.local",
+                "cookie": "id=f5558305-b4a8-47ba-a7bd-17b995e37499; keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIyN2IxMGQxNy02ODc0LTQ0MmMtODc5MC04MjE1YThmMzU1MTEiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImY1NTU4MzA1LWI0YTgtNDdiYS1hN2JkLTE3Yjk5NWUzNzQ5OSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vZ29vZ2xlLmNvbSIsImh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQiLCJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY2xpZW50ZSIsImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFudG9uaW8gQXZvbGlvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYW50b25pb2F2b2xpbzE4QGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJBbnRvbmlvIiwiZmFtaWx5X25hbWUiOiJBdm9saW8iLCJlbWFpbCI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20ifQ.g_hIxE8JwuBGVYq--gm6KDmJOjcqf2aieZUNHjLAGg_QW9MjAv9yFUUBiKGB6gC9Sjc7bcgqZ9cQ77qeMqVCUTAO1B-1GEd-D0sD5oZzORbeMijOCZ9FxSmUKF8BrRuPoPG5bJuqP7iNdpbJIlmXajx9SEdIDBz74taqpUEnkUWw01oF7pi0SimOS7Z3HuUlbB2HMJvQoObEtQ3_R7Sn5vNaPrXHFh09qV5MVFrMTtlPDaZi7lC2WkNsBBASOr1nsSluG3Ok4Aj4U8zcu1Ne6IFOA4IQbxtcaMsCTGj8aTQWVNm4RX_PPHFYcmbz_479MMQYPMHz9NvNucyzLILy1Q%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzNDdjZDkyNi02ZjcwLTQwZDAtODkxMy0zM2FlZmJlY2I3Y2UifQ.eyJleHAiOjE2NzY4MTcxMTIsImlhdCI6MTY3NjgxNTMxMiwianRpIjoiNTBiNGM3ZTctYTIwZC00ZGNlLTllZDMtMzVlNmFhMjdjYzljIiwiaXNzIjoiaHR0cHM6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvcmVhbG1zL2luYm9vayIsImF1ZCI6Imh0dHBzOi8vaW5ib29rLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJvb2siLCJzdWIiOiJmNTU1ODMwNS1iNGE4LTQ3YmEtYTdiZC0xN2I5OTVlMzc0OTkiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6Ijc0NWUyMjIwLTQ1N2EtNGE3OC05ODNiLTg4ODY5MTI0ZmQxNiIsInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYifQ.uofPwpfyvRwuu8ybaORDkiHdkH-ZjgKMoRMdtp4XNg0%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIzYjI1YThiZC02OGZjLTRkYWYtODI2Mi0yMzQ5MjE4MDQyY2QiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoibm9kZWpzIiwic3ViIjoiZjU1NTgzMDUtYjRhOC00N2JhLWE3YmQtMTdiOTk1ZTM3NDk5IiwidHlwIjoiSUQiLCJhenAiOiJub2RlanMiLCJzZXNzaW9uX3N0YXRlIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiYXRfaGFzaCI6IkJJZFJwcUEzVW83RnRmM0lnZU40V2ciLCJhY3IiOiIxIiwic2lkIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJBbnRvbmlvIEF2b2xpbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiQW50b25pbyIsImZhbWlseV9uYW1lIjoiQXZvbGlvIiwiZW1haWwiOiJhbnRvbmlvYXZvbGlvMThAZ21haWwuY29tIn0.fzXUmX3yAToIfBK878dEtYmMBmR0kxKGGWYAqGN5PyLqoVtAxb6Qc98wTsXurDbyLm-qsYdMsP-6WbwmRbPdCUOH_VmDNESupB_jtQoqEwK5ELEhUx9qE8CzzTH6HkpRYWfW0rLZTfzQb0gPjAFuDQqxoEK4cWo4WooYFlk7CBP3PP7zGwuoRFbAsG1icukHJBS6yN0htRY0qVCsx7a18Y1q7Usgc8hQqrKG_juohug-pV4t1xgSe6OuUpsEOWJCpUn1YShPeMZrGmdcQAEAAwenmOl5QiRgJfONi7fq6xHLfHix8bFrSqakmQN2mv38A4FB4Puw1jGDkRhexHiEDA%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22745e2220-457a-4a78-983b-88869124fd16%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D; ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "referer": "https://inbook.azurewebsites.net/cliente",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "8165ff0a-284d-49ec-bd93-95afcaeb4e3a",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
                 "x-forwarded-port": "80",
                 "x-forwarded-proto": "http",
-                "x-real-ip": "172.25.0.1"
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/cliente/notifiche",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/cliente/notifiche"
             },
             "httpVersion": "1.1",
             "method": "GET",
@@ -173,6 +570,238 @@
         "res": {
             "statusCode": 200
         },
-        "responseTime": 5
-    }
+        "responseTime": 104
+    },
+    "timestamp": "2023-02-19T14:01:56.497Z"
+}
+{
+    "level": "info",
+    "message": "GET /notifiche/api/findAllcliente_unione/f5558305-b4a8-47ba-a7bd-17b995e37499 200 30ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "application/json",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
+                "connection": "upgrade",
+                "content-length": "0",
+                "content-type": "application/json;charset-UTF-8",
+                "cookie": "id=f5558305-b4a8-47ba-a7bd-17b995e37499; keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIyN2IxMGQxNy02ODc0LTQ0MmMtODc5MC04MjE1YThmMzU1MTEiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImY1NTU4MzA1LWI0YTgtNDdiYS1hN2JkLTE3Yjk5NWUzNzQ5OSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vZ29vZ2xlLmNvbSIsImh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQiLCJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY2xpZW50ZSIsImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFudG9uaW8gQXZvbGlvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYW50b25pb2F2b2xpbzE4QGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJBbnRvbmlvIiwiZmFtaWx5X25hbWUiOiJBdm9saW8iLCJlbWFpbCI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20ifQ.g_hIxE8JwuBGVYq--gm6KDmJOjcqf2aieZUNHjLAGg_QW9MjAv9yFUUBiKGB6gC9Sjc7bcgqZ9cQ77qeMqVCUTAO1B-1GEd-D0sD5oZzORbeMijOCZ9FxSmUKF8BrRuPoPG5bJuqP7iNdpbJIlmXajx9SEdIDBz74taqpUEnkUWw01oF7pi0SimOS7Z3HuUlbB2HMJvQoObEtQ3_R7Sn5vNaPrXHFh09qV5MVFrMTtlPDaZi7lC2WkNsBBASOr1nsSluG3Ok4Aj4U8zcu1Ne6IFOA4IQbxtcaMsCTGj8aTQWVNm4RX_PPHFYcmbz_479MMQYPMHz9NvNucyzLILy1Q%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzNDdjZDkyNi02ZjcwLTQwZDAtODkxMy0zM2FlZmJlY2I3Y2UifQ.eyJleHAiOjE2NzY4MTcxMTIsImlhdCI6MTY3NjgxNTMxMiwianRpIjoiNTBiNGM3ZTctYTIwZC00ZGNlLTllZDMtMzVlNmFhMjdjYzljIiwiaXNzIjoiaHR0cHM6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvcmVhbG1zL2luYm9vayIsImF1ZCI6Imh0dHBzOi8vaW5ib29rLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJvb2siLCJzdWIiOiJmNTU1ODMwNS1iNGE4LTQ3YmEtYTdiZC0xN2I5OTVlMzc0OTkiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6Ijc0NWUyMjIwLTQ1N2EtNGE3OC05ODNiLTg4ODY5MTI0ZmQxNiIsInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYifQ.uofPwpfyvRwuu8ybaORDkiHdkH-ZjgKMoRMdtp4XNg0%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIzYjI1YThiZC02OGZjLTRkYWYtODI2Mi0yMzQ5MjE4MDQyY2QiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoibm9kZWpzIiwic3ViIjoiZjU1NTgzMDUtYjRhOC00N2JhLWE3YmQtMTdiOTk1ZTM3NDk5IiwidHlwIjoiSUQiLCJhenAiOiJub2RlanMiLCJzZXNzaW9uX3N0YXRlIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiYXRfaGFzaCI6IkJJZFJwcUEzVW83RnRmM0lnZU40V2ciLCJhY3IiOiIxIiwic2lkIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJBbnRvbmlvIEF2b2xpbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiQW50b25pbyIsImZhbWlseV9uYW1lIjoiQXZvbGlvIiwiZW1haWwiOiJhbnRvbmlvYXZvbGlvMThAZ21haWwuY29tIn0.fzXUmX3yAToIfBK878dEtYmMBmR0kxKGGWYAqGN5PyLqoVtAxb6Qc98wTsXurDbyLm-qsYdMsP-6WbwmRbPdCUOH_VmDNESupB_jtQoqEwK5ELEhUx9qE8CzzTH6HkpRYWfW0rLZTfzQb0gPjAFuDQqxoEK4cWo4WooYFlk7CBP3PP7zGwuoRFbAsG1icukHJBS6yN0htRY0qVCsx7a18Y1q7Usgc8hQqrKG_juohug-pV4t1xgSe6OuUpsEOWJCpUn1YShPeMZrGmdcQAEAAwenmOl5QiRgJfONi7fq6xHLfHix8bFrSqakmQN2mv38A4FB4Puw1jGDkRhexHiEDA%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22745e2220-457a-4a78-983b-88869124fd16%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D; ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "referer": "https://inbook.azurewebsites.net/cliente/notifiche",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "f2122481-ef92-4fee-a824-dfee222062b7",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/notifiche/api/findAllcliente_unione/f5558305-b4a8-47ba-a7bd-17b995e37499",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/notifiche/api/findAllcliente_unione/f5558305-b4a8-47ba-a7bd-17b995e37499"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/notifiche/api/findAllcliente_unione/f5558305-b4a8-47ba-a7bd-17b995e37499",
+            "query": {},
+            "url": "/notifiche/api/findAllcliente_unione/f5558305-b4a8-47ba-a7bd-17b995e37499"
+        },
+        "res": {
+            "statusCode": 200
+        },
+        "responseTime": 30
+    },
+    "timestamp": "2023-02-19T14:01:56.778Z"
+}
+{
+    "level": "info",
+    "message": "GET /cliente/visualizza_prenotazioni 200 70ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
+                "connection": "upgrade",
+                "cookie": "id=f5558305-b4a8-47ba-a7bd-17b995e37499; keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIyN2IxMGQxNy02ODc0LTQ0MmMtODc5MC04MjE1YThmMzU1MTEiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImY1NTU4MzA1LWI0YTgtNDdiYS1hN2JkLTE3Yjk5NWUzNzQ5OSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vZ29vZ2xlLmNvbSIsImh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQiLCJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY2xpZW50ZSIsImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFudG9uaW8gQXZvbGlvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYW50b25pb2F2b2xpbzE4QGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJBbnRvbmlvIiwiZmFtaWx5X25hbWUiOiJBdm9saW8iLCJlbWFpbCI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20ifQ.g_hIxE8JwuBGVYq--gm6KDmJOjcqf2aieZUNHjLAGg_QW9MjAv9yFUUBiKGB6gC9Sjc7bcgqZ9cQ77qeMqVCUTAO1B-1GEd-D0sD5oZzORbeMijOCZ9FxSmUKF8BrRuPoPG5bJuqP7iNdpbJIlmXajx9SEdIDBz74taqpUEnkUWw01oF7pi0SimOS7Z3HuUlbB2HMJvQoObEtQ3_R7Sn5vNaPrXHFh09qV5MVFrMTtlPDaZi7lC2WkNsBBASOr1nsSluG3Ok4Aj4U8zcu1Ne6IFOA4IQbxtcaMsCTGj8aTQWVNm4RX_PPHFYcmbz_479MMQYPMHz9NvNucyzLILy1Q%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzNDdjZDkyNi02ZjcwLTQwZDAtODkxMy0zM2FlZmJlY2I3Y2UifQ.eyJleHAiOjE2NzY4MTcxMTIsImlhdCI6MTY3NjgxNTMxMiwianRpIjoiNTBiNGM3ZTctYTIwZC00ZGNlLTllZDMtMzVlNmFhMjdjYzljIiwiaXNzIjoiaHR0cHM6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvcmVhbG1zL2luYm9vayIsImF1ZCI6Imh0dHBzOi8vaW5ib29rLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJvb2siLCJzdWIiOiJmNTU1ODMwNS1iNGE4LTQ3YmEtYTdiZC0xN2I5OTVlMzc0OTkiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6Ijc0NWUyMjIwLTQ1N2EtNGE3OC05ODNiLTg4ODY5MTI0ZmQxNiIsInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYifQ.uofPwpfyvRwuu8ybaORDkiHdkH-ZjgKMoRMdtp4XNg0%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIzYjI1YThiZC02OGZjLTRkYWYtODI2Mi0yMzQ5MjE4MDQyY2QiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoibm9kZWpzIiwic3ViIjoiZjU1NTgzMDUtYjRhOC00N2JhLWE3YmQtMTdiOTk1ZTM3NDk5IiwidHlwIjoiSUQiLCJhenAiOiJub2RlanMiLCJzZXNzaW9uX3N0YXRlIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiYXRfaGFzaCI6IkJJZFJwcUEzVW83RnRmM0lnZU40V2ciLCJhY3IiOiIxIiwic2lkIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJBbnRvbmlvIEF2b2xpbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiQW50b25pbyIsImZhbWlseV9uYW1lIjoiQXZvbGlvIiwiZW1haWwiOiJhbnRvbmlvYXZvbGlvMThAZ21haWwuY29tIn0.fzXUmX3yAToIfBK878dEtYmMBmR0kxKGGWYAqGN5PyLqoVtAxb6Qc98wTsXurDbyLm-qsYdMsP-6WbwmRbPdCUOH_VmDNESupB_jtQoqEwK5ELEhUx9qE8CzzTH6HkpRYWfW0rLZTfzQb0gPjAFuDQqxoEK4cWo4WooYFlk7CBP3PP7zGwuoRFbAsG1icukHJBS6yN0htRY0qVCsx7a18Y1q7Usgc8hQqrKG_juohug-pV4t1xgSe6OuUpsEOWJCpUn1YShPeMZrGmdcQAEAAwenmOl5QiRgJfONi7fq6xHLfHix8bFrSqakmQN2mv38A4FB4Puw1jGDkRhexHiEDA%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22745e2220-457a-4a78-983b-88869124fd16%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D; ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "referer": "https://inbook.azurewebsites.net/cliente/notifiche",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "d290d1ed-95ee-4de1-aa67-4e22bc6f4a80",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/cliente/visualizza_prenotazioni",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/cliente/visualizza_prenotazioni"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/cliente/visualizza_prenotazioni",
+            "query": {},
+            "url": "/cliente/visualizza_prenotazioni"
+        },
+        "res": {
+            "statusCode": 200
+        },
+        "responseTime": 70
+    },
+    "timestamp": "2023-02-19T14:01:57.538Z"
+}
+{
+    "level": "info",
+    "message": "GET /prenotazioni/api/prenotazioni_filtrate_merge_utente/f5558305-b4a8-47ba-a7bd-17b995e37499 200 22ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "application/json",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
+                "connection": "upgrade",
+                "content-length": "0",
+                "content-type": "application/json;charset-UTF-8",
+                "cookie": "id=f5558305-b4a8-47ba-a7bd-17b995e37499; keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIyN2IxMGQxNy02ODc0LTQ0MmMtODc5MC04MjE1YThmMzU1MTEiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImY1NTU4MzA1LWI0YTgtNDdiYS1hN2JkLTE3Yjk5NWUzNzQ5OSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vZ29vZ2xlLmNvbSIsImh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQiLCJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY2xpZW50ZSIsImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFudG9uaW8gQXZvbGlvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYW50b25pb2F2b2xpbzE4QGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJBbnRvbmlvIiwiZmFtaWx5X25hbWUiOiJBdm9saW8iLCJlbWFpbCI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20ifQ.g_hIxE8JwuBGVYq--gm6KDmJOjcqf2aieZUNHjLAGg_QW9MjAv9yFUUBiKGB6gC9Sjc7bcgqZ9cQ77qeMqVCUTAO1B-1GEd-D0sD5oZzORbeMijOCZ9FxSmUKF8BrRuPoPG5bJuqP7iNdpbJIlmXajx9SEdIDBz74taqpUEnkUWw01oF7pi0SimOS7Z3HuUlbB2HMJvQoObEtQ3_R7Sn5vNaPrXHFh09qV5MVFrMTtlPDaZi7lC2WkNsBBASOr1nsSluG3Ok4Aj4U8zcu1Ne6IFOA4IQbxtcaMsCTGj8aTQWVNm4RX_PPHFYcmbz_479MMQYPMHz9NvNucyzLILy1Q%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzNDdjZDkyNi02ZjcwLTQwZDAtODkxMy0zM2FlZmJlY2I3Y2UifQ.eyJleHAiOjE2NzY4MTcxMTIsImlhdCI6MTY3NjgxNTMxMiwianRpIjoiNTBiNGM3ZTctYTIwZC00ZGNlLTllZDMtMzVlNmFhMjdjYzljIiwiaXNzIjoiaHR0cHM6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvcmVhbG1zL2luYm9vayIsImF1ZCI6Imh0dHBzOi8vaW5ib29rLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJvb2siLCJzdWIiOiJmNTU1ODMwNS1iNGE4LTQ3YmEtYTdiZC0xN2I5OTVlMzc0OTkiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6Ijc0NWUyMjIwLTQ1N2EtNGE3OC05ODNiLTg4ODY5MTI0ZmQxNiIsInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYifQ.uofPwpfyvRwuu8ybaORDkiHdkH-ZjgKMoRMdtp4XNg0%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIzYjI1YThiZC02OGZjLTRkYWYtODI2Mi0yMzQ5MjE4MDQyY2QiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoibm9kZWpzIiwic3ViIjoiZjU1NTgzMDUtYjRhOC00N2JhLWE3YmQtMTdiOTk1ZTM3NDk5IiwidHlwIjoiSUQiLCJhenAiOiJub2RlanMiLCJzZXNzaW9uX3N0YXRlIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiYXRfaGFzaCI6IkJJZFJwcUEzVW83RnRmM0lnZU40V2ciLCJhY3IiOiIxIiwic2lkIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJBbnRvbmlvIEF2b2xpbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiQW50b25pbyIsImZhbWlseV9uYW1lIjoiQXZvbGlvIiwiZW1haWwiOiJhbnRvbmlvYXZvbGlvMThAZ21haWwuY29tIn0.fzXUmX3yAToIfBK878dEtYmMBmR0kxKGGWYAqGN5PyLqoVtAxb6Qc98wTsXurDbyLm-qsYdMsP-6WbwmRbPdCUOH_VmDNESupB_jtQoqEwK5ELEhUx9qE8CzzTH6HkpRYWfW0rLZTfzQb0gPjAFuDQqxoEK4cWo4WooYFlk7CBP3PP7zGwuoRFbAsG1icukHJBS6yN0htRY0qVCsx7a18Y1q7Usgc8hQqrKG_juohug-pV4t1xgSe6OuUpsEOWJCpUn1YShPeMZrGmdcQAEAAwenmOl5QiRgJfONi7fq6xHLfHix8bFrSqakmQN2mv38A4FB4Puw1jGDkRhexHiEDA%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22745e2220-457a-4a78-983b-88869124fd16%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D; ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "referer": "https://inbook.azurewebsites.net/cliente/visualizza_prenotazioni",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "538ac665-90b2-42ca-a418-490a88d899a3",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/prenotazioni/api/prenotazioni_filtrate_merge_utente/f5558305-b4a8-47ba-a7bd-17b995e37499",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/prenotazioni/api/prenotazioni_filtrate_merge_utente/f5558305-b4a8-47ba-a7bd-17b995e37499"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/prenotazioni/api/prenotazioni_filtrate_merge_utente/f5558305-b4a8-47ba-a7bd-17b995e37499",
+            "query": {},
+            "url": "/prenotazioni/api/prenotazioni_filtrate_merge_utente/f5558305-b4a8-47ba-a7bd-17b995e37499"
+        },
+        "res": {
+            "statusCode": 200
+        },
+        "responseTime": 22
+    },
+    "timestamp": "2023-02-19T14:01:57.826Z"
+}
+{
+    "level": "info",
+    "message": "GET /cliente/profilo 200 17ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
+                "connection": "upgrade",
+                "cookie": "id=f5558305-b4a8-47ba-a7bd-17b995e37499; keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIyN2IxMGQxNy02ODc0LTQ0MmMtODc5MC04MjE1YThmMzU1MTEiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImY1NTU4MzA1LWI0YTgtNDdiYS1hN2JkLTE3Yjk5NWUzNzQ5OSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vZ29vZ2xlLmNvbSIsImh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQiLCJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY2xpZW50ZSIsImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFudG9uaW8gQXZvbGlvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYW50b25pb2F2b2xpbzE4QGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJBbnRvbmlvIiwiZmFtaWx5X25hbWUiOiJBdm9saW8iLCJlbWFpbCI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20ifQ.g_hIxE8JwuBGVYq--gm6KDmJOjcqf2aieZUNHjLAGg_QW9MjAv9yFUUBiKGB6gC9Sjc7bcgqZ9cQ77qeMqVCUTAO1B-1GEd-D0sD5oZzORbeMijOCZ9FxSmUKF8BrRuPoPG5bJuqP7iNdpbJIlmXajx9SEdIDBz74taqpUEnkUWw01oF7pi0SimOS7Z3HuUlbB2HMJvQoObEtQ3_R7Sn5vNaPrXHFh09qV5MVFrMTtlPDaZi7lC2WkNsBBASOr1nsSluG3Ok4Aj4U8zcu1Ne6IFOA4IQbxtcaMsCTGj8aTQWVNm4RX_PPHFYcmbz_479MMQYPMHz9NvNucyzLILy1Q%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzNDdjZDkyNi02ZjcwLTQwZDAtODkxMy0zM2FlZmJlY2I3Y2UifQ.eyJleHAiOjE2NzY4MTcxMTIsImlhdCI6MTY3NjgxNTMxMiwianRpIjoiNTBiNGM3ZTctYTIwZC00ZGNlLTllZDMtMzVlNmFhMjdjYzljIiwiaXNzIjoiaHR0cHM6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvcmVhbG1zL2luYm9vayIsImF1ZCI6Imh0dHBzOi8vaW5ib29rLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJvb2siLCJzdWIiOiJmNTU1ODMwNS1iNGE4LTQ3YmEtYTdiZC0xN2I5OTVlMzc0OTkiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6Ijc0NWUyMjIwLTQ1N2EtNGE3OC05ODNiLTg4ODY5MTI0ZmQxNiIsInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYifQ.uofPwpfyvRwuu8ybaORDkiHdkH-ZjgKMoRMdtp4XNg0%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIzYjI1YThiZC02OGZjLTRkYWYtODI2Mi0yMzQ5MjE4MDQyY2QiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoibm9kZWpzIiwic3ViIjoiZjU1NTgzMDUtYjRhOC00N2JhLWE3YmQtMTdiOTk1ZTM3NDk5IiwidHlwIjoiSUQiLCJhenAiOiJub2RlanMiLCJzZXNzaW9uX3N0YXRlIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiYXRfaGFzaCI6IkJJZFJwcUEzVW83RnRmM0lnZU40V2ciLCJhY3IiOiIxIiwic2lkIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJBbnRvbmlvIEF2b2xpbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiQW50b25pbyIsImZhbWlseV9uYW1lIjoiQXZvbGlvIiwiZW1haWwiOiJhbnRvbmlvYXZvbGlvMThAZ21haWwuY29tIn0.fzXUmX3yAToIfBK878dEtYmMBmR0kxKGGWYAqGN5PyLqoVtAxb6Qc98wTsXurDbyLm-qsYdMsP-6WbwmRbPdCUOH_VmDNESupB_jtQoqEwK5ELEhUx9qE8CzzTH6HkpRYWfW0rLZTfzQb0gPjAFuDQqxoEK4cWo4WooYFlk7CBP3PP7zGwuoRFbAsG1icukHJBS6yN0htRY0qVCsx7a18Y1q7Usgc8hQqrKG_juohug-pV4t1xgSe6OuUpsEOWJCpUn1YShPeMZrGmdcQAEAAwenmOl5QiRgJfONi7fq6xHLfHix8bFrSqakmQN2mv38A4FB4Puw1jGDkRhexHiEDA%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22745e2220-457a-4a78-983b-88869124fd16%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D; ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "referer": "https://inbook.azurewebsites.net/cliente/visualizza_prenotazioni",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "bd83287b-2a91-4ad6-879d-df2b274db258",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/cliente/profilo",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/cliente/profilo"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/cliente/profilo",
+            "query": {},
+            "url": "/cliente/profilo"
+        },
+        "res": {
+            "statusCode": 200
+        },
+        "responseTime": 17
+    },
+    "timestamp": "2023-02-19T14:01:58.708Z"
+}
+{
+    "level": "info",
+    "message": "GET /cliente/api/get_profilo/f5558305-b4a8-47ba-a7bd-17b995e37499 404 10ms",
+    "meta": {
+        "req": {
+            "headers": {
+                "accept": "application/json",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "it-IT,it;q=0.9",
+                "client-ip": "79.30.13.58:53092",
+                "connection": "upgrade",
+                "content-length": "0",
+                "content-type": "application/json;charset-UTF-8",
+                "cookie": "id=f5558305-b4a8-47ba-a7bd-17b995e37499; keycloak-token=%7B%22access_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIyN2IxMGQxNy02ODc0LTQ0MmMtODc5MC04MjE1YThmMzU1MTEiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImY1NTU4MzA1LWI0YTgtNDdiYS1hN2JkLTE3Yjk5NWUzNzQ5OSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5vZGVqcyIsInNlc3Npb25fc3RhdGUiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vZ29vZ2xlLmNvbSIsImh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQiLCJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY2xpZW50ZSIsImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFudG9uaW8gQXZvbGlvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYW50b25pb2F2b2xpbzE4QGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJBbnRvbmlvIiwiZmFtaWx5X25hbWUiOiJBdm9saW8iLCJlbWFpbCI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20ifQ.g_hIxE8JwuBGVYq--gm6KDmJOjcqf2aieZUNHjLAGg_QW9MjAv9yFUUBiKGB6gC9Sjc7bcgqZ9cQ77qeMqVCUTAO1B-1GEd-D0sD5oZzORbeMijOCZ9FxSmUKF8BrRuPoPG5bJuqP7iNdpbJIlmXajx9SEdIDBz74taqpUEnkUWw01oF7pi0SimOS7Z3HuUlbB2HMJvQoObEtQ3_R7Sn5vNaPrXHFh09qV5MVFrMTtlPDaZi7lC2WkNsBBASOr1nsSluG3Ok4Aj4U8zcu1Ne6IFOA4IQbxtcaMsCTGj8aTQWVNm4RX_PPHFYcmbz_479MMQYPMHz9NvNucyzLILy1Q%22%2C%22expires_in%22%3A60%2C%22refresh_expires_in%22%3A1800%2C%22refresh_token%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzNDdjZDkyNi02ZjcwLTQwZDAtODkxMy0zM2FlZmJlY2I3Y2UifQ.eyJleHAiOjE2NzY4MTcxMTIsImlhdCI6MTY3NjgxNTMxMiwianRpIjoiNTBiNGM3ZTctYTIwZC00ZGNlLTllZDMtMzVlNmFhMjdjYzljIiwiaXNzIjoiaHR0cHM6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvcmVhbG1zL2luYm9vayIsImF1ZCI6Imh0dHBzOi8vaW5ib29rLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJvb2siLCJzdWIiOiJmNTU1ODMwNS1iNGE4LTQ3YmEtYTdiZC0xN2I5OTVlMzc0OTkiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoibm9kZWpzIiwic2Vzc2lvbl9zdGF0ZSI6Ijc0NWUyMjIwLTQ1N2EtNGE3OC05ODNiLTg4ODY5MTI0ZmQxNiIsInNjb3BlIjoicHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWQiOiI3NDVlMjIyMC00NTdhLTRhNzgtOTgzYi04ODg2OTEyNGZkMTYifQ.uofPwpfyvRwuu8ybaORDkiHdkH-ZjgKMoRMdtp4XNg0%22%2C%22token_type%22%3A%22Bearer%22%2C%22id_token%22%3A%22eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrUmxvb3ZEZnZxT3drREtjMTR6M21FT1VhdkJyQ1BwZTlQUnNGSUVuV2NrIn0.eyJleHAiOjE2NzY4MTUzNzIsImlhdCI6MTY3NjgxNTMxMiwiYXV0aF90aW1lIjoxNjc2ODE1MzEyLCJqdGkiOiIzYjI1YThiZC02OGZjLTRkYWYtODI2Mi0yMzQ5MjE4MDQyY2QiLCJpc3MiOiJodHRwczovL2luYm9vay5henVyZXdlYnNpdGVzLm5ldC9yZWFsbXMvaW5ib29rIiwiYXVkIjoibm9kZWpzIiwic3ViIjoiZjU1NTgzMDUtYjRhOC00N2JhLWE3YmQtMTdiOTk1ZTM3NDk5IiwidHlwIjoiSUQiLCJhenAiOiJub2RlanMiLCJzZXNzaW9uX3N0YXRlIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiYXRfaGFzaCI6IkJJZFJwcUEzVW83RnRmM0lnZU40V2ciLCJhY3IiOiIxIiwic2lkIjoiNzQ1ZTIyMjAtNDU3YS00YTc4LTk4M2ItODg4NjkxMjRmZDE2IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJBbnRvbmlvIEF2b2xpbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImFudG9uaW9hdm9saW8xOEBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiQW50b25pbyIsImZhbWlseV9uYW1lIjoiQXZvbGlvIiwiZW1haWwiOiJhbnRvbmlvYXZvbGlvMThAZ21haWwuY29tIn0.fzXUmX3yAToIfBK878dEtYmMBmR0kxKGGWYAqGN5PyLqoVtAxb6Qc98wTsXurDbyLm-qsYdMsP-6WbwmRbPdCUOH_VmDNESupB_jtQoqEwK5ELEhUx9qE8CzzTH6HkpRYWfW0rLZTfzQb0gPjAFuDQqxoEK4cWo4WooYFlk7CBP3PP7zGwuoRFbAsG1icukHJBS6yN0htRY0qVCsx7a18Y1q7Usgc8hQqrKG_juohug-pV4t1xgSe6OuUpsEOWJCpUn1YShPeMZrGmdcQAEAAwenmOl5QiRgJfONi7fq6xHLfHix8bFrSqakmQN2mv38A4FB4Puw1jGDkRhexHiEDA%22%2C%22not-before-policy%22%3A0%2C%22session_state%22%3A%22745e2220-457a-4a78-983b-88869124fd16%22%2C%22scope%22%3A%22profile%20openid%20email%22%7D; ARRAffinity=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; ARRAffinitySameSite=46f902326bcb9b92a5b5e609be779909604a2afd00d6b3f034fcc6bb463d118e; session=eyJhdXRoX3JlZGlyZWN0X3VyaSI6Imh0dHA6Ly9pbmJvb2suYXp1cmV3ZWJzaXRlcy5uZXQvbG9naW4/YXV0aF9jYWxsYmFjaz0xIn0=; session.sig=FMgj2XOLoP7uYcp5yQSCFUXjgBw; pma_lang=it",
+                "disguised-host": "inbook.azurewebsites.net",
+                "host": "inbook.azurewebsites.net",
+                "max-forwards": "10",
+                "referer": "https://inbook.azurewebsites.net/cliente/profilo",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+                "was-default-hostname": "inbook.azurewebsites.net",
+                "x-appservice-proto": "https",
+                "x-arr-log-id": "cf0732a3-e6a7-4efe-b705-be11b913a372",
+                "x-arr-ssl": "2048|256|CN=Microsoft Azure TLS Issuing CA 05, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "x-client-ip": "79.30.13.58",
+                "x-client-port": "53092",
+                "x-forwarded-for": "79.30.13.58:53092, 172.17.18.1",
+                "x-forwarded-host": "inbook.azurewebsites.net",
+                "x-forwarded-port": "80",
+                "x-forwarded-proto": "http",
+                "x-forwarded-tlsversion": "1.2",
+                "x-original-url": "/cliente/api/get_profilo/f5558305-b4a8-47ba-a7bd-17b995e37499",
+                "x-site-deployment-id": "inbook",
+                "x-waws-unencoded-url": "/cliente/api/get_profilo/f5558305-b4a8-47ba-a7bd-17b995e37499"
+            },
+            "httpVersion": "1.1",
+            "method": "GET",
+            "originalUrl": "/cliente/api/get_profilo/f5558305-b4a8-47ba-a7bd-17b995e37499",
+            "query": {},
+            "url": "/cliente/api/get_profilo/f5558305-b4a8-47ba-a7bd-17b995e37499"
+        },
+        "res": {
+            "statusCode": 404
+        },
+        "responseTime": 10
+    },
+    "timestamp": "2023-02-19T14:01:58.941Z"
 }

@@ -1951,7 +1951,7 @@
     "xContentTypeOptions": "nosniff",
     "xRobotsTag": "none",
     "xFrameOptions": "SAMEORIGIN",
-    "contentSecurityPolicy": "frame-src 'self' https: www.google.com; frame-ancestors 'self' https: www.google.com; object-src 'none'; ",
+    "contentSecurityPolicy": "frame-src 'self'; frame-ancestors 'self'; object-src 'none'; ",
     "xXSSProtection": "1; mode=block",
     "strictTransportSecurity": "max-age=31536000; includeSubDomains"
   },
@@ -1961,7 +1961,7 @@
     "auth": "true",
     "envelopeFrom": "",
     "ssl": "false",
-    "password": "lcggjnbmktoznzruq",
+    "password": "rcwecmybuhynxydv",
     "port": "25",
     "host": "smtp.gmail.com",
     "replyTo": "dagasmainbook@gmail.com",
